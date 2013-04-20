@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>viewport</title>
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.0" />
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.1/normalize.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    win_size();
+    function win_size() {
+        //var h=window.innerHeight;
+        //var w=window.innerWidth;
+        //ie6-8 can't use
+    var h=window.document.documentElement.clientHeight;
+    var w=window.document.documentElement.clientWidth;
+        $("#h").html(h);
+        $("#w").html(w);
+    }
+    $(window).resize(function()
+    {
+        win_size();
+    });
+});
+</script>
+<style type="text/css">
+    li {
+        font-size: 36px;
+    }
+    body {
+    }
+    .hd {
+        width: 1280px;
+        height: 720px;
+    }
+    .fhd {
+        width: 1920px;
+        height: 1080px;
+    }
+    .fw {
+        width: 1570px;
+    }
+    .pw {
+        width: 80%;
+    }
+    #hd {
+        height: 140px;
+        background: #333;
+        padding: 50px 0 0 0;
+        margin: 10px 0 0 0;
+    }
+    #bd {
+        background: #eee;
+        margin: 0 auto;
+    }
+    #list {
+    }
+</style>
+</head>
+<body class="">
+    <div id="hd">
+        <h1>TITLE</h1>
+    </div>
+    <div id="bd" class="fw">
+        <div id="list">
+            <div id="mod-content">
+                <div class="bd">
+                    <ul>
+                        <li>TEST1</li>
+                        <li id="w"></li>
+                        <li id="h"></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li><a href="">TEST</a></li>
+                        <li>TESTEND</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

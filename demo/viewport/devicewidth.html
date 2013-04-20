@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Device_Width</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.1/normalize.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        win_size();
+        function win_size() {
+            var h=window.document.documentElement.clientHeight;
+            var w=window.document.documentElement.clientWidth;
+            $("#h").html(h);
+            $("#w").html(w);
+        };
+        $(window).resize(function() {
+        win_size();
+        });
+    });
+</script>
+</head>
+<body>
+    w
+    <div id="w"></div>
+    h
+    <div id="h"></div>
+</body>
+</html>
