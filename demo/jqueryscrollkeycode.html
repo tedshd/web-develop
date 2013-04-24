@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scrollbar_keycode</title>
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.0" />
+<!-- <link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.1/normalize.css"> -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.9.1/build/cssreset/cssreset-min.css">
+<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>
+<link href="" rel="stylesheet">
+<style>
+    #bg {
+        width: 800px;
+        height: 400px;
+        overflow: auto;
+        background: #ccc;
+    }
+    #box {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    li {
+        width: 600px;
+        height: 100px;
+        background: #eee;
+        border: solid 5px #0088ff;
+        box-sizing: border-box;
+    }
+    .focus {
+        background: red;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        //create li list
+        for (var i = 0; 40 >= i; i++) {
+            $("ul").append("<li>" + i + "</li>");
+        };
+        $("li:eq(0)").addClass("focus");
+        //keycode event
+        document.onkeydown = function(e) {
+            e.preventDefault();
+            if (e.keyCode == "38") {
+                var p = $(".focus").index() - 3;
+                $(".focus").removeClass("focus");
+                $("li:eq(" + p + ")").addClass("focus");
+                var movep = ($(".focus").index()) * 100;
+                $("#box").stop().animate({scrollTop:"" + movep + "px"});
+            }
+            if (e.keyCode == "40") {
+                var n = $(".focus").index() + 3;
+                $(".focus").removeClass("focus");
+                $("li:eq(" + n + ")").addClass("focus");
+                var moven = ($(".focus").index()) * 100;
+                $("#box").stop().animate({scrollTop:"" + moven + "px"});
+            }
+        };
+        $('li').click(function() {
+            var move = ($(this).index()) * 100;
+            $("#box").animate({scrollTop:"" + move + "px"});
+            console.log("index:" + $(this).index());
+            console.log("scrolltop:" + $(this).attr("scrollTop"));
+        });
+    });
+</script>
+</head>
+<body>
+    <div id="bg">
+        <div id="box">
+            <ul>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Keyboard</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style type="text/css">
+    table {
+        margin: 0 auto;
+        width: 1260px;
+        height: 360px;
+        background: #efefef;
+        border: solid;
+        border-width: 2px;
+    }
+    td {
+        width: 50px;
+        height: 50px;
+        background: #dfdfdf;
+        text-align: center;
+        word-wrap: break-word;
+    }
+    tr .blank {
+        background: transparent;
+        border: transparent;
+    }
+    tr .keydown {
+        background: #0088ff;
+    }
+</style>
+<script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
+<script>
+    YUI().use('node', function (Y) {
+        document.onkeydown = function(e) {
+            e.preventDefault();
+            var key = Y.one("#code_" + e.keyCode + ""),
+                keys  = Y.all(".code_" + e.keyCode + "");
+            (key) ? key.addClass("keydown") : keys.addClass("keydown");
+            console.log("KeyCode :" + e.keyCode);
+        };
+        document.onkeyup = function(e) {
+            var key = Y.one("#code_" + e.keyCode + ""),
+                keys  = Y.all(".code_" + e.keyCode + "");
+            (key) ? key.removeClass("keydown") : keys.removeClass("keydown");
+        };
+    });
+</script>
+</head>
+<body>
+    <table border="">
+        <tr id="h6">
+            <td id="code_27">Esc</td>
+            <td class="blank"></td>
+            <td id="code_112">F1</td>
+            <td id="code_113">F2</td>
+            <td id="code_114">F3</td>
+            <td id="code_115">F4</td>
+            <td id="code_116">F5</td>
+            <td id="code_117">F6</td>
+            <td id="code_118">F7</td>
+            <td id="code_119">F8</td>
+            <td id="code_120">F9</td>
+            <td id="code_121">F10</td>
+            <td id="code_122">F11</td>
+            <td id="code_123">F12</td>
+            <td id="code_44">Print Screen</td>
+            <td id="code_145">Scroll Lock</td>
+            <td id="code_19">Pause Break</td>
+            <td class="blank" id="code_183">Keys</td>
+            <td class="blank" id="code_182">Test</td>
+            <td class="blank" id="code_182"></td>
+            <td class="blank"></td>
+        </tr>
+        <tr id="h5">
+            <td id="code_192">~</td>
+            <td id="code_49">1</td>
+            <td id="code_50">2</td>
+            <td id="code_51">3</td>
+            <td id="code_52">4</td>
+            <td id="code_53">5</td>
+            <td id="code_54">6</td>
+            <td id="code_55">7</td>
+            <td id="code_56">8</td>
+            <td id="code_57">9</td>
+            <td id="code_48">0</td>
+            <td id="code_189">-</td>
+            <td id="code_187">=</td>
+            <td id="code_8">Back Space</td>
+            <td id="code_45">Insert</td>
+            <td id="code_36">Home</td>
+            <td id="code_33">Page Up</td>
+            <td id="code_144">Num Lock</td>
+            <td id="code_111">/</td>
+            <td id="code_106">*</td>
+            <td id="code_109">-</td>
+        </tr>
+        <tr id="h4">
+            <td id="code_9">Tab</td>
+            <td id="code_81">Q</td>
+            <td id="code_87">W</td>
+            <td id="code_69">E</td>
+            <td id="code_82">R</td>
+            <td id="code_84">T</td>
+            <td id="code_89">Y</td>
+            <td id="code_85">U</td>
+            <td id="code_73">I</td>
+            <td id="code_79">O</td>
+            <td id="code_80">P</td>
+            <td id="code_219">[</td>
+            <td id="code_221">]</td>
+            <td id="code_220">\</td>
+            <td id="code_46">Delete</td>
+            <td id="code_35">End</td>
+            <td id="code_34">Page Down</td>
+            <td id="code_103">7</td>
+            <td id="code_104">8</td>
+            <td id="code_105">9</td>
+            <td id="code_107" rowspan="2">+</td>
+        </tr>
+        <tr id="h3">
+            <td id="code_20">Caps Lock</td>
+            <td id="code_65">A</td>
+            <td id="code_83">S</td>
+            <td id="code_68">D</td>
+            <td id="code_70">F</td>
+            <td id="code_71">G</td>
+            <td id="code_72">H</td>
+            <td id="code_74">J</td>
+            <td id="code_75">K</td>
+            <td id="code_76">L</td>
+            <td id="code_186">;</td>
+            <td id="code_222">'</td>
+            <td class="code_13" colspan="2">Enter</td>
+            <td class="blank"></td>
+            <td class="blank"></td>
+            <td class="blank"></td>
+            <td id="code_100">4</td>
+            <td id="code_101">5</td>
+            <td id="code_102">6</td>
+        </tr>
+        <tr id="h2">
+            <td class="code_16" colspan="2">Shift</td>
+            <td id="code_90">Z</td>
+            <td id="code_88">X</td>
+            <td id="code_67">C</td>
+            <td id="code_86">V</td>
+            <td id="code_66">B</td>
+            <td id="code_78">N</td>
+            <td id="code_77">M</td>
+            <td id="code_188">,</td>
+            <td id="code_190">.</td>
+            <td id="code_191">/</td>
+            <td class="code_16" colspan="2">Shift</td>
+            <td class="blank"></td>
+            <td id="code_38">Up</td>
+            <td class="blank"></td>
+            <td id="code_97">1</td>
+            <td id="code_98">2</td>
+            <td id="code_99">3</td>
+            <td class="code_13" rowspan="2">Enter</td>
+        </tr>
+        <tr id="h1">
+            <td class="code_17">Ctrl</td>
+            <td class="code_91">Win</td>
+            <td class="code_18">Alt</td>
+            <td id="code_32" colspan="7">Spacebar</td>
+            <td class="code_18">Alt</td>
+            <td class="code_92">Win</td>
+            <td id="code_93">Menu</td>
+            <td class="code_17">Ctrl</td>
+            <td id="code_37">Left</td>
+            <td id="code_40">Down</td>
+            <td id="code_39">Right</td>
+            <td id="code_96" colspan="2">0</td>
+            <td id="code_110">.</td>
+        </tr>
+    </table>
+</body>
+</html>
