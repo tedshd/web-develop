@@ -12,9 +12,14 @@
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
     #bg {
         width: 800px;
-        height: 400px;
+        height: 500px;
         overflow: hidden;
         background: #ccc;
     }
@@ -25,7 +30,7 @@
     }
     li {
         width: 600px;
-        height: 100px;
+        height: 250px;
         background: #eee;
     }
     a  {
@@ -33,6 +38,7 @@
         display: inline-block;
         width: 100%;
         height: 100%;
+        padding: 10px;
         border: solid 5px #0088ff;
         box-sizing: border-box;
     }
@@ -40,12 +46,26 @@
         border: solid 5px red;
         outline: 0;
     }
+    .info {
+        float: left;
+    }
 </style>
 <script>
     $(document).ready(function(){
         //create li list
         for (var i = 0; 40 >= i; i++) {
-            $("ul").append("<li><a href='#''>" + i + "</a></li>");
+            $("ul").append(
+                "<li>" +
+                    "<a href='javascript:void(0);'>" +
+                        "<span class='img'>" +
+                            "<img src='http://fc09.deviantart.net/fs71/i/2010/055/3/f/Comic_of_Action_Icon_ico_png_by_Forecaster71.png'>" +
+                        "</span>" +
+                        "<span class='info'>" +
+                            "<span class='title'>title</span>" +
+                            "<p class='desc'>test content</p>" +
+                        "</span>" +
+                    "</a>" +
+                "</li>");
         };
         $("li:eq(0)").addClass("focus");
         //keycode event
@@ -56,12 +76,13 @@
             console.log("offsetheight:" + $("#box").get(0).offsetHeight);
             console.log("ThisoffsetTop:" + $(this).get(0).offsetTop);
             console.log($(this));
-            var nodeheigh = $(this).get(0).offsetTop;
+            var nodeheigh = $(this).get(0).offsetTop,
                 fixheigh  = $("#box").get(0).offsetHeight;
-            if (nodeheigh >= $("#box").get(0).offsetHeight) {
+            if (nodeheigh >= fixheigh || nodeheigh%fixheigh !== 0) {
                 var n = $(this).get(0).offsetTop / $("#box").get(0).offsetHeight;
                 console.log(Math.floor(n));
-                var m = Math.floor(n)*$("#box").get(0).offsetHeight;
+                var floorn = Math.floor(n);
+                var m = floorn*$("#box").get(0).offsetHeight;
                  $("#box").stop().animate({scrollTop:"" + m + "px"});
             };
         });
@@ -84,8 +105,7 @@
 <body>
     <div id="bg">
         <div id="box">
-            <ul>
-            </ul>
+            <ul></ul>
         </div>
     </div>
 </body>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS_Table</title>
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.1/normalize.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://yui.yahooapis.com/3.9.1/build/yui/yui-min.js"></script>
+<link href="" rel="stylesheet">
+<style>
+* {
+    border: solid 1px red;
+    box-sizing: border-box;
+}
+#box {
+    display: table;
+}
+a {
+    text-decoration: none;
+    color: #666;
+}
+.thumb, .info {
+    display: table-cell;
+}
+.thumb {
+    height: 200px;
+    width: 200px;
+}
+</style>
+</head>
+<body>
+    <div id="list">
+        <ul>
+            <li>
+                <div id="box">
+                    <a href="">
+                        <span class="thumb">
+                            <img src="" alt="">
+                        </span>
+                        <span class="info">
+                            <span class="title">Title~</span>
+                            <p class="desc">content</p>
+                        </span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
