@@ -27,6 +27,11 @@
         border: solid 5px #0088ff;
         box-sizing: border-box;
     }
+    a  {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
     .focus {
         background: red;
     }
@@ -35,12 +40,11 @@
     $(document).ready(function(){
         //create li list
         for (var i = 0; 40 >= i; i++) {
-            $("ul").append("<li>" + i + "</li>");
+            $("ul").append("<li><a href='#''>" + i + "</a></li>");
         };
         $("li:eq(0)").addClass("focus");
         //keycode event
         document.onkeydown = function(e) {
-            e.preventDefault();
             if (e.keyCode == "38") {
                 var p = $(".focus").index() - 3;
                 $(".focus").removeClass("focus");
@@ -60,7 +64,7 @@
             var move = ($(this).index()) * 100;
             $("#box").animate({scrollTop:"" + move + "px"});
             console.log("index:" + $(this).index());
-            console.log("scrolltop:" + $(this).attr("scrollTop"));
+            console.log("scrolltop:" + $("#box").get(0).scrollTop);
         });
     });
 </script>
