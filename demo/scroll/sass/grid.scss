@@ -1,0 +1,88 @@
+@import "compass";
+@import "compass/reset";
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+}
+#doc {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#bd {
+    height: 100%;
+}
+#doc-main {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+}
+/*--focus--*/
+.shiny-focus {
+    position: relative;
+    display: block;
+    margin: 10px;
+    padding: 20px;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    &:focus:after {
+        content: "";
+        display: inline-block;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: solid 6px #eee;
+        border-radius: 5px;
+        box-shadow: inset 0 0 10px 4px #0099dd, 0 0 10px 4px #0099dd, 0 40px 20px 0 rgba(0,0,0,0.7);
+        box-sizing: border-box;
+    }
+}
+.simple-focus {
+    position: relative;
+    display: block;
+    margin: 10px;
+    padding: 20px;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    &:focus:after {
+        content: "";
+        display: inline-block;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: solid 6px red;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+}
+li {
+    float: left;
+    .box {
+        display: table;
+    }
+    .thumb, .info {
+        display: table-cell;
+        vertical-align: top;
+    }
+    .thumb {
+        width: 100px;
+        height: 100px;
+        padding: 0 10px;
+        img {
+            overflow: hidden;
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+    }
+}

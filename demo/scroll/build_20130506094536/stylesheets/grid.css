@@ -1,0 +1,169 @@
+/* line 17, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 4, ../sass/grid.scss */
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+}
+
+/* line 9, ../sass/grid.scss */
+#doc {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 15, ../sass/grid.scss */
+#bd {
+  height: 100%;
+}
+
+/* line 18, ../sass/grid.scss */
+#doc-main {
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
+  overflow: auto;
+}
+
+/*--focus--*/
+/* line 25, ../sass/grid.scss */
+.shiny-focus {
+  position: relative;
+  display: block;
+  margin: 10px;
+  padding: 20px;
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* line 32, ../sass/grid.scss */
+.shiny-focus:focus:after {
+  content: "";
+  display: inline-block;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: solid 6px #eee;
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px 4px #0099dd, 0 0 10px 4px #0099dd, 0 40px 20px 0 rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+
+/* line 47, ../sass/grid.scss */
+.simple-focus {
+  position: relative;
+  display: block;
+  margin: 10px;
+  padding: 20px;
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* line 54, ../sass/grid.scss */
+.simple-focus:focus:after {
+  content: "";
+  display: inline-block;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: solid 6px red;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* line 68, ../sass/grid.scss */
+li {
+  float: left;
+}
+/* line 70, ../sass/grid.scss */
+li .box {
+  display: table;
+}
+/* line 73, ../sass/grid.scss */
+li .thumb, li .info {
+  display: table-cell;
+  vertical-align: top;
+}
+/* line 77, ../sass/grid.scss */
+li .thumb {
+  width: 100px;
+  height: 100px;
+  padding: 0 10px;
+}
+/* line 81, ../sass/grid.scss */
+li .thumb img {
+  overflow: hidden;
+  display: block;
+  width: 100px;
+  height: 100px;
+}
