@@ -1,7 +1,6 @@
 <html>
 <body>
-<h1>Apache works!</h1>
-<div>Directory is /Library/WebServer/Documents</div>
-<div>Directory is ~/Library/WebServer/Documents</div>
+    <h1>Apache works!</h1>
+
 </body>
 </html>
