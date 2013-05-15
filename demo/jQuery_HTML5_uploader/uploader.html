@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery_HTML5_uploader</title>
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.1/normalize.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="javascripts/jquery-html5-uploader/jquery.html5uploader.js"></script>
+<style>
+    #dropbox {
+        width: 800px;
+        height: 400px;
+        background: gray;
+    }
+</style>
+<script type="text/javascript">
+$(function() {
+    $("#dropbox, #multiple").html5Uploader({
+        name: "foo",
+        postUrl: "bar.aspx"
+    });
+});
+</script>
+</head>
+<body>
+    <div id="dropbox"></div>
+    <input id="multiple" type="file" multiple>
+</body>
+</html>
