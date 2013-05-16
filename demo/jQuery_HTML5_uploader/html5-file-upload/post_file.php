@@ -5,7 +5,7 @@
 
 $demo_mode = false;
 $upload_dir = 'uploads/';
-$allowed_ext = array('jpg','jpeg','png','gif');
+$allowed_ext = array('jpg','jpeg','png','gif', 'pdf', 'pptx', 'docx');
 
 
 if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){

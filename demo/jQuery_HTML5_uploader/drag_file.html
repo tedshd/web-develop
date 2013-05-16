@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Drag_File</title>
+<style type="text/css">
+    #dropbox {
+        width: 320px;
+        height: 240px;
+        background: #eee;
+    }
+</style>
+<script>
+    function updateSize() {
+        var nBytes = 0,
+            // get upload file(s)
+            oFiles = document.getElementById("uploadInput").files,
+            // oFiles = document.getElementById("fileElem").files,
+            // get file quantity
+            nFiles = oFiles.length;
+        for (var nFileId = 0; nFileId < nFiles; nFileId++) {
+            // get file size
+            nBytes += oFiles[nFileId].size;
+        }
+        var sOutput = nBytes + " bytes";
+        // optional code for multiples approximation
+        for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+            sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
+        }
+        // end of optional code
+        document.getElementById("fileNum").innerHTML = nFiles;
+        document.getElementById("fileSize").innerHTML = sOutput;
+
+        // set input type file on customize style
+        var fileSelect = document.getElementById("fileSelect"), // customize style
+            fileElem = document.getElementById("fileElem"); // input type file
+
+        fileSelect.addEventListener("click", function (e) {
+            e.preventDefault(); // prevent navigation to "#"
+            if (fileElem) {
+                fileElem.click();
+            }
+        }, false);
+
+        // drag file
+        var dropbox;
+
+        dropbox = document.getElementById("dropbox");
+        dropbox.addEventListener("dragenter", dragenter, false);
+        dropbox.addEventListener("dragover", dragover, false);
+        dropbox.addEventListener("drop", drop, false);
+
+        function dragenter(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        function dragover(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        function drop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            var dt = e.dataTransfer;
+            var files = dt.files;
+
+            handleFiles(files);
+        }
+
+    }
+
+    function handleFiles(files) {
+      var d = document.getElementById("fileList");
+      if (!files.length) {
+        d.innerHTML = "<p>No files selected!</p>";
+      } else {
+        var list = document.createElement("ul");
+        d.appendChild(list);
+        for (var i=0; i < files.length; i++) {
+          var li = document.createElement("li");
+          list.appendChild(li);
+
+          var img = document.createElement("img");
+          img.src = window.URL.createObjectURL(files[i]);;
+          img.height = 60;
+          img.onload = function() {
+            window.URL.revokeObjectURL(this.src);
+          }
+          li.appendChild(img);
+
+          var info = document.createElement("span");
+          if (files[i].size > (1000*1000)) {
+            info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/(1000*1000)) + " mbytes";
+          } else {
+            info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/1000) + " kbytes";
+          }
+          // info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
+          li.appendChild(info);
+        }
+      }
+    }
+</script>
+</head>
+
+<body onload="updateSize();">
+<form name="uploadForm">
+    <p>
+        <input id="uploadInput" type="file" name="myFiles" onchange="updateSize();" multiple>
+        selected files:
+        <span id="fileNum">
+            0
+        </span>
+            ; total size:
+        <span id="fileSize">
+            0
+        </span>
+    </p>
+    <p>
+        <input type="submit" value="Send file">
+    </p>
+    <input type="file" id="fileElem" multiple style="display:none" onchange="handleFiles(this.files)">
+    <a href="#" id="fileSelect">Select some files</a>
+    <div id="dropbox">
+        <div id="fileList">
+            <p>Drag file here!</p>
+        </div>
+    </div>
+</form>
+</body>
+</html>
