@@ -4,11 +4,21 @@
 <meta charset="UTF-8">
 <title>Drag_File</title>
 <style type="text/css">
-    #dropbox {
+    /*make body full*/
+    html {
+        width: 100%;
+        height: 100%;
+        background: #ccc;
+    }
+    body {
+        width: 100%;
+        height: 100%;
+    }
+/*    #dropbox {
         width: 320px;
         height: 240px;
         background: #eee;
-    }
+    }*/
 </style>
 <script>
     function updateSize() {
@@ -110,7 +120,7 @@
 </script>
 </head>
 
-<body onload="updateSize();">
+<body onload="updateSize();" id="dropbox">
 <form name="uploadForm">
     <p>
         <input id="uploadInput" type="file" name="myFiles" onchange="updateSize();" multiple>
@@ -128,11 +138,11 @@
     </p>
     <input type="file" id="fileElem" multiple style="display:none" onchange="handleFiles(this.files)">
     <a href="#" id="fileSelect">Select some files</a>
-    <div id="dropbox">
+    <!-- <div id="dropbox"> -->
         <div id="fileList">
             <p>Drag file here!</p>
         </div>
-    </div>
+    <!-- </div> -->
 </form>
 </body>
 </html>
