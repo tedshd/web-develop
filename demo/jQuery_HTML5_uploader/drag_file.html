@@ -50,11 +50,13 @@
         dropbox.addEventListener("dragover", dragover, false);
         dropbox.addEventListener("drop", drop, false);
 
+        // stop default event
         function dragenter(e) {
             e.stopPropagation();
             e.preventDefault();
         }
 
+        // stop default event
         function dragover(e) {
             e.stopPropagation();
             e.preventDefault();
@@ -72,35 +74,38 @@
 
     }
 
+    // handle file
     function handleFiles(files) {
-      var d = document.getElementById("fileList");
-      if (!files.length) {
-        d.innerHTML = "<p>No files selected!</p>";
-      } else {
-        var list = document.createElement("ul");
-        d.appendChild(list);
-        for (var i=0; i < files.length; i++) {
-          var li = document.createElement("li");
-          list.appendChild(li);
+        var d = document.getElementById("fileList");
+        if (!files.length) {
+            d.innerHTML = "<p>No files selected!</p>";
+        } else {
+            var list = document.createElement("ul");
+            d.appendChild(list);
+            for (var i=0; i < files.length; i++) {
+                var li = document.createElement("li");
+                list.appendChild(li);
 
-          var img = document.createElement("img");
-          img.src = window.URL.createObjectURL(files[i]);;
-          img.height = 60;
-          img.onload = function() {
-            window.URL.revokeObjectURL(this.src);
-          }
-          li.appendChild(img);
+                // show image,can set document type default icon.ex:if type is ppt,show ppt icon
+                var img = document.createElement("img");
+                // create file's object url
+                img.src = window.URL.createObjectURL(files[i]);;
+                img.height = 60;
+                img.onload = function() {
+                    window.URL.revokeObjectURL(this.src);
+                }
+                li.appendChild(img);
 
-          var info = document.createElement("span");
-          if (files[i].size > (1000*1000)) {
-            info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/(1000*1000)) + " mbytes";
-          } else {
-            info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/1000) + " kbytes";
-          }
-          // info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
-          li.appendChild(info);
+                // show name, type, size
+                var info = document.createElement("span");
+                if (files[i].size > (1000*1000)) {
+                    info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/(1000*1000)) + " mbytes";
+                } else {
+                    info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/1000) + " kbytes";
+                }
+                li.appendChild(info);
+            }
         }
-      }
     }
 </script>
 </head>
