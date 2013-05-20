@@ -1,7 +1,7 @@
 <?php
 header("content-type:text/html; charset=utf-8");
 //定義存放上傳檔案的目錄
-$upload_dir='./upload/';
+$upload_dir='upload/';
 //如果錯誤代碼為 UPLOAD_ERR_OK, 表示上傳成功
 if( $_FILES['UpFile']['error'] == UPLOAD_ERR_OK ) {
   //將暫存檔搬移到上傳目錄下, 並且改回原始檔名
