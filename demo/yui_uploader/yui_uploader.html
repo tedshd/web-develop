@@ -79,14 +79,22 @@ table, th, td, tr {
                                             withCredentials: false
                                           });
             // handle not drag area
-            var uploaderout = new Y.Uploader();
+            var uploaderOut = new Y.Uploader({
+                width: "0",
+                height: "0"
+            });
 
             var uploadDone = false;
 
             if (Y.Uploader.TYPE == "html5") {
                 // drag area
                 uploader.set("dragAndDropArea", ".upload");
-                uploaderout.set("dragAndDropArea", "body");
+                uploaderOut.set("dragAndDropArea", "body");
+
+                // handle area not drag
+                Y.one("body").append("<span class='hiddenUploaderOut'></span>");
+                var NotDropArea = Y.one(".hiddenUploaderOut");
+                uploaderOut.set("selectFilesButton", NotDropArea);
 
                 Y.one(".upload").append("<strong class='drop-message'>Files detected, drop them here!</strong>");
 
@@ -109,7 +117,7 @@ table, th, td, tr {
             }
 
             uploader.render(".upload");
-            uploaderout.render("body");
+            uploaderOut.render("body");
 
             uploader.after("fileselect", function (e) {
                 var fileList = e.fileList;

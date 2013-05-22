@@ -67,48 +67,57 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 html {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
-/* line 6, ../sass/yui_uploader.scss */
+/* line 8, ../sass/yui_uploader.scss */
 html body {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* line 11, ../sass/yui_uploader.scss */
+/* line 15, ../sass/yui_uploader.scss */
 .message-box {
   width: 500px;
   margin: 0 auto;
   border: solid #000 1px;
 }
-/* line 15, ../sass/yui_uploader.scss */
+/* line 19, ../sass/yui_uploader.scss */
 .message-box .message {
   max-width: 492px;
   border: 0;
 }
 
-/* line 20, ../sass/yui_uploader.scss */
+/* line 24, ../sass/yui_uploader.scss */
 .attachment {
   display: table;
   width: 100%;
   height: 100px;
   border: solid #000 1px;
 }
-/* line 25, ../sass/yui_uploader.scss */
+/* line 29, ../sass/yui_uploader.scss */
 .attachment .upload, .attachment .from {
   display: table-cell;
   text-align: center;
 }
-/* line 29, ../sass/yui_uploader.scss */
+/* line 33, ../sass/yui_uploader.scss */
 .attachment .upload {
   border-right: solid #000 1px;
 }
 
-/* line 33, ../sass/yui_uploader.scss */
+/* line 37, ../sass/yui_uploader.scss */
+.yui3-uploader {
+  overflow: hidden;
+}
+
+/* line 40, ../sass/yui_uploader.scss */
 .blueBackground {
   background: #0099ff;
 }
 
-/* line 36, ../sass/yui_uploader.scss */
+/* line 43, ../sass/yui_uploader.scss */
 .drop-message {
   visibility: hidden;
 }

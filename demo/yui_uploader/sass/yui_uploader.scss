@@ -3,9 +3,13 @@
 html {
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
     body {
         width: 100%;
         height: 100%;
+        margin: 0;
+        padding: 0;
     }
 }
 .message-box {
@@ -29,6 +33,9 @@ html {
     .upload {
         border-right: solid #000 1px;
     }
+}
+.yui3-uploader {
+    overflow: hidden;
 }
 .blueBackground {
     background: #0099ff;
