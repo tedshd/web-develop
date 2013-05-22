@@ -78,16 +78,19 @@ table, th, td, tr {
                                             simLimit: 5, // upload files number 2~5
                                             withCredentials: false
                                           });
+            // handle not drag area
+            var uploaderout = new Y.Uploader();
+
             var uploadDone = false;
 
             if (Y.Uploader.TYPE == "html5") {
                 // drag area
-                uploader.set("dragAndDropArea", "body");
+                uploader.set("dragAndDropArea", ".upload");
+                uploaderout.set("dragAndDropArea", "body");
 
-                Y.one("#ddmessage").setHTML("<strong>Drag and drop files here.</strong>");
                 Y.one(".upload").append("<strong class='drop-message'>Files detected, drop them here!</strong>");
 
-                uploader.on(["dragenter", "dragover"], function (event) {
+                uploader.on(["dragenter", "dragover"], function (e) {
                     var ddmessage = Y.one(".upload");
                         if (ddmessage) {
                             Y.one("strong").removeClass("drop-message");
@@ -95,7 +98,7 @@ table, th, td, tr {
                         }
                 });
 
-                uploader.on(["dragleave", "drop"], function (event) {
+                uploader.on(["dragleave", "drop"], function (e) {
                     var ddmessage = Y.one(".upload");
                     if (ddmessage) {
                         Y.one("strong").addClass("drop-message");
@@ -103,16 +106,13 @@ table, th, td, tr {
                     }
                 });
 
-                uploader.on("drop", function (event) {
-                    Y.one("body").removeClass("blueBackground");
-                });
-
             }
 
             uploader.render(".upload");
+            uploaderout.render("body");
 
-            uploader.after("fileselect", function (event) {
-                var fileList = event.fileList;
+            uploader.after("fileselect", function (e) {
+                var fileList = e.fileList;
                 var fileTable = Y.one("#filenames tbody");
                 if (fileList.length > 0 && Y.one("#nofiles")) {
                     Y.one("#nofiles").remove();
@@ -131,29 +131,29 @@ table, th, td, tr {
                 });
             });
 
-            uploader.on("uploadprogress", function (event) {
-                var fileRow = Y.one("#" + event.file.get("id") + "_row");
-                fileRow.one(".percentdone").set("text", event.percentLoaded + "%");
+            uploader.on("uploadprogress", function (e) {
+                var fileRow = Y.one("#" + e.file.get("id") + "_row");
+                fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
             });
 
-            uploader.on("uploadstart", function (event) {
+            uploader.on("uploadstart", function (e) {
                 uploader.set("enabled", false);
                 Y.one("#uploadFilesButton").addClass("yui3-button-disabled");
                 Y.one("#uploadFilesButton").detach("click");
             });
 
-            uploader.on("uploadcomplete", function (event) {
-                var fileRow = Y.one("#" + event.file.get("id") + "_row");
+            uploader.on("uploadcomplete", function (e) {
+                var fileRow = Y.one("#" + e.file.get("id") + "_row");
                 fileRow.one(".percentdone").set("text", "Finished!");
             });
 
-            uploader.on("totaluploadprogress", function (event) {
+            uploader.on("totaluploadprogress", function (e) {
                 Y.one("#overallProgress").setHTML("Total uploaded: <strong>" +
-                event.percentLoaded + "%" +
+                e.percentLoaded + "%" +
                 "</strong>");
             });
 
-            uploader.on("alluploadscomplete", function (event) {
+            uploader.on("alluploadscomplete", function (e) {
                 uploader.set("enabled", true);
                 uploader.set("fileList", []);
                 Y.one("#uploadFilesButton").removeClass("yui3-button-disabled");
