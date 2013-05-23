@@ -161,25 +161,36 @@ table, th, td, tr {
                 Y.one("#uploadFilesButton").addClass("yui3-button-disabled");
                 Y.one("#uploadFilesButton").detach("click");
                 startTime = new Date().getTime();
-                console.log("As:" + startTime + "ms");
+                console.log("ClickUploadStart:" + startTime + "ms");
             });
 
-            // test
-            var startTime, endTime, total;
+            // test upload time
+            var startTime, endTime, total, sum;
             uploader.on("uploadcomplete", function (e) {
-                console.log("Bs:" + startTime + "ms");
+                console.log("FinishStart:" + startTime + "ms");
                 endTime = new Date().getTime();
-                console.log("Be:" + endTime + "ms");
+                console.log("FinishEnd:" + endTime + "ms");
                 total = endTime - startTime;
                 console.log("TotalTime:" + total + "ms");
+                console.log("sum:" + sum + "bit");
+                speed = (sum/1000)/(total/1000);
+                console.log("Speed:" + speed + "kb/s");
                 var fileRow = Y.one("#" + e.file.get("id") + "_row");
                 fileRow.one(".percentdone").set("text", "Finished!");
             });
 
             uploader.on("totaluploadprogress", function (e) {
                 Y.one("#overallProgress").setHTML("Total uploaded: <strong>" +
-                e.percentLoaded + "%" +
+                e.bytesTotal + "Bit" +
+                //e.percentLoaded + "%" +
                 "</strong>");
+                sum = e.bytesTotal;
+                endTime = new Date().getTime();
+                console.log("sum:" + sum + "bit");
+                total = endTime - startTime;
+                console.log("T:" + total + "ms");
+                speed = (sum/1000)/(total/1000);
+                console.log("uploadSpeed:" + speed + "kb/s");
             });
 
             uploader.on("alluploadscomplete", function (e) {
@@ -191,7 +202,7 @@ table, th, td, tr {
                         uploader.uploadAll();
                     }
                 });
-                Y.one("#overallProgress").set("text", "Uploads complete!");
+                //Y.one("#overallProgress").set("text", "Uploads complete!");
                 uploadDone = true;
             });
 
