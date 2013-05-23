@@ -30,11 +30,11 @@ table, th, td, tr {
         <textarea class="message" rows="10" cols="68" name="message" placeholder="new message"></textarea>
         <div class="attachment">
             <span class="upload">
-                Drag or <a class="select-files" href="javascript:void()">upload</a>
+                Drag or
             </span>
             <span class="from">from file box</span>
         </div>
-        <div class="">
+        <div class="upload-status">
         </div>
     </div>
     <div id="exampleContainer">
@@ -66,18 +66,17 @@ table, th, td, tr {
 
 <script>
     YUI({filter:"raw"}).use("uploader", function(Y) {
-        Y.one(".select-files");
         if (Y.Uploader.TYPE != "none" && !Y.UA.ios) {
             var uploader = new Y.Uploader({
-                                            width: "250px",
-                                            height: "35px",
-                                            multipleFiles: true,
-                                            fileFieldName: "pic", //A String specifying what should be the POST field name for the file content in the upload request.(Default:"Filedata")
-                                            swfURL: "http://yui.yahooapis.com/3.10.1/build/uploader/assets/flashuploader.swf?t=" + Math.random(),
-                                            uploadURL: "html5-file-upload/post_file.php", // The URL to which file upload requested are POSTed. Only used if a different url is not passed to the upload method call.
-                                            simLimit: 5, // upload files number 2~5
-                                            withCredentials: false
-                                          });
+                width: "150px",
+                selectButtonLabel: "Upload",
+                multipleFiles: true,
+                fileFieldName: "pic", //A String specifying what should be the POST field name for the file content in the upload request.(Default:"Filedata")
+                swfURL: "http://yui.yahooapis.com/3.10.1/build/uploader/assets/flashuploader.swf?t=" + Math.random(),
+                uploadURL: "post_file.php", // The URL to which file upload requested are POSTed. Only used if a different url is not passed to the upload method call.
+                simLimit: 5, // upload files number 2~5
+                withCredentials: false
+            });
             // handle not drag area
             var uploaderOut = new Y.Uploader({
                 width: "0",
@@ -85,8 +84,12 @@ table, th, td, tr {
             });
 
             var uploadDone = false;
+            // drag message
+            Y.one(".upload").append("<div><strong class='drop-message'>Drop here!</strong></div>");
 
             if (Y.Uploader.TYPE == "html5") {
+                var ddmessage = Y.one(".upload"),
+                    nodeMessage = Y.one("strong");
                 // drag area
                 uploader.set("dragAndDropArea", ".upload");
                 uploaderOut.set("dragAndDropArea", "body");
@@ -96,21 +99,29 @@ table, th, td, tr {
                 var NotDropArea = Y.one(".hiddenUploaderOut");
                 uploaderOut.set("selectFilesButton", NotDropArea);
 
-                Y.one(".upload").append("<strong class='drop-message'>Files detected, drop them here!</strong>");
-
                 uploader.on(["dragenter", "dragover"], function (e) {
-                    var ddmessage = Y.one(".upload");
                         if (ddmessage) {
-                            Y.one("strong").removeClass("drop-message");
+                            nodeMessage.removeClass("drop-message");
                             ddmessage.addClass("blueBackground");
                         }
                 });
 
                 uploader.on(["dragleave", "drop"], function (e) {
-                    var ddmessage = Y.one(".upload");
                     if (ddmessage) {
-                        Y.one("strong").addClass("drop-message");
+                        nodeMessage.addClass("drop-message");
                         ddmessage.removeClass("blueBackground");
+                    }
+                });
+
+                uploaderOut.on(["dragenter", "dragover"], function (e) {
+                        if (ddmessage) {
+                            nodeMessage.removeClass("drop-message");
+                        }
+                });
+
+                uploaderOut.on(["dragleave", "drop"], function (e) {
+                    if (ddmessage) {
+                        nodeMessage.addClass("drop-message");
                     }
                 });
 
@@ -118,6 +129,7 @@ table, th, td, tr {
 
             uploader.render(".upload");
             uploaderOut.render("body");
+
 
             uploader.after("fileselect", function (e) {
                 var fileList = e.fileList;
@@ -148,9 +160,18 @@ table, th, td, tr {
                 uploader.set("enabled", false);
                 Y.one("#uploadFilesButton").addClass("yui3-button-disabled");
                 Y.one("#uploadFilesButton").detach("click");
+                startTime = new Date().getTime();
+                console.log("As:" + startTime + "ms");
             });
 
+            // test
+            var startTime, endTime, total;
             uploader.on("uploadcomplete", function (e) {
+                console.log("Bs:" + startTime + "ms");
+                endTime = new Date().getTime();
+                console.log("Be:" + endTime + "ms");
+                total = endTime - startTime;
+                console.log("TotalTime:" + total + "ms");
                 var fileRow = Y.one("#" + e.file.get("id") + "_row");
                 fileRow.one(".percentdone").set("text", "Finished!");
             });

@@ -28,9 +28,13 @@ html {
     border: solid #000 1px;
     .upload, .from {
         display: table-cell;
+        width: 50%;
         text-align: center;
     }
     .upload {
+        * {
+            margin: 0 auto;
+        }
         border-right: solid #000 1px;
     }
 }

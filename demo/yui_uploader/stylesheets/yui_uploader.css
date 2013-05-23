@@ -100,24 +100,29 @@ html body {
 /* line 29, ../sass/yui_uploader.scss */
 .attachment .upload, .attachment .from {
   display: table-cell;
+  width: 50%;
   text-align: center;
 }
-/* line 33, ../sass/yui_uploader.scss */
+/* line 34, ../sass/yui_uploader.scss */
 .attachment .upload {
   border-right: solid #000 1px;
 }
+/* line 35, ../sass/yui_uploader.scss */
+.attachment .upload * {
+  margin: 0 auto;
+}
 
-/* line 37, ../sass/yui_uploader.scss */
+/* line 41, ../sass/yui_uploader.scss */
 .yui3-uploader {
   overflow: hidden;
 }
 
-/* line 40, ../sass/yui_uploader.scss */
+/* line 44, ../sass/yui_uploader.scss */
 .blueBackground {
   background: #0099ff;
 }
 
-/* line 43, ../sass/yui_uploader.scss */
+/* line 47, ../sass/yui_uploader.scss */
 .drop-message {
   visibility: hidden;
 }
