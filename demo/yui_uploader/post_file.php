@@ -5,13 +5,12 @@
 
 $demo_mode = false;
 $upload_dir = 'uploads/';
-$allowed_ext = array('jpg','jpeg','png','gif', 'pdf', 'docx', 'pptx', 'xlsx', 'zip');
+$allowed_ext = array('jpg','jpeg','png','gif', 'pdf', 'docx', 'pptx', 'xlsx', 'zip', 'mp4', 'mkv', 'mp3');
 
 
 if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 	exit_status('Error! Wrong HTTP method!');
 }
-
 
 if(array_key_exists('pic',$_FILES) && $_FILES['pic']['error'] == 0 ){
 
