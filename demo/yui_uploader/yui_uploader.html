@@ -42,7 +42,6 @@ table, th, td, tr {
             <div id="selectFilesButtonContainer">
             </div>
             <div id="uploadFilesButtonContainer">
-              <button type="button" id="uploadFilesButton" class="yui3-button" style="width:250px; height:35px;">Upload Files</button>
             </div>
             <div id="overallProgress">
             </div>
@@ -143,6 +142,10 @@ table, th, td, tr {
                     fileTable.setHTML("");
                 }
 
+                if (!uploadDone && uploader.get("fileList").length > 0) {
+                    uploader.uploadAll();
+                }
+
                 Y.each(fileList, function (fileInstance) {
                     fileStatus.append("<tr id='" + fileInstance.get("id") + "_row" + "'>" +
                     "<td class='filename'>" + fileInstance.get("name") + "</td>" +
@@ -164,8 +167,6 @@ table, th, td, tr {
 
             uploader.on("uploadstart", function (e) {
                 uploader.set("enabled", false);
-                Y.one("#uploadFilesButton").addClass("yui3-button-disabled");
-                Y.one("#uploadFilesButton").detach("click");
                 startTime = new Date().getTime();
                 console.log("ClickUploadStart:" + startTime + "ms");
             });
@@ -181,7 +182,7 @@ table, th, td, tr {
                 console.log("Speed:" + speed + "kb/s");
                 var fileRow = Y.one("#" + e.file.get("id") + "_row");
                 fileRow.one(".percentdone").set("text", "Finished!");
-                var finishLog = Y.one("#filenames tbody");
+                var finishLog = Y.one("#filelist");
                 finishLog.append("<div>" + "total: " + total + "s" +"</div>" +
                     "<div>" + "Speed: " + speed + "kb/s" + "</div>");
             });
@@ -199,28 +200,17 @@ table, th, td, tr {
                 console.log("T:" + total + "ms");
                 speed = (sum/1000)/(total/1000);
                 console.log("uploadSpeed:" + speed + "kb/s");
-                var uploadLog = Y.one("#filenames tbody");
+                var uploadLog = Y.one("#filelist");
                 uploadLog.append("<div>" + speed + "kb/s" +"</div>");
             });
 
             uploader.on("alluploadscomplete", function (e) {
                 uploader.set("enabled", true);
                 uploader.set("fileList", []);
-                Y.one("#uploadFilesButton").removeClass("yui3-button-disabled");
-                Y.one("#uploadFilesButton").on("click", function () {
-                    if (!uploadDone && uploader.get("fileList").length > 0) {
-                        uploader.uploadAll();
-                    }
-                });
                 //Y.one("#overallProgress").set("text", "Uploads complete!");
                 uploadDone = true;
             });
 
-            Y.one("#uploadFilesButton").on("click", function () {
-                if (!uploadDone && uploader.get("fileList").length > 0) {
-                    uploader.uploadAll();
-                }
-            });
         } else {
             Y.one("#uploaderContainer").set("text", "We are sorry, but to use the uploader, you either need a browser that support HTML5 or have the Flash player installed on your computer.");
         }
