@@ -38,6 +38,19 @@ html {
         border-right: solid #000 1px;
     }
 }
+.progress-bar, .total-progress-bar {
+    position: relative;
+    span {
+        position: absolute;
+        top: 0;
+        left: 10px;
+    }
+    button {
+        position: absolute;
+        top: -2px;
+        right: 10px;
+    }
+}
 .yui3-uploader {
     overflow: hidden;
 }

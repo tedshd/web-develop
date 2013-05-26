@@ -4,7 +4,6 @@
 <title>yui_uploader</title>
 <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
 <link href="stylesheets/yui_uploader.css" rel="stylesheet">
-<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 table, th, td, tr {
     border: solid #000 1px;
@@ -43,6 +42,7 @@ table, th, td, tr {
             <div id="selectFilesButtonContainer">
             </div>
             <div id="uploadFilesButtonContainer">
+              <button type="button" id="uploadFilesButton" class="yui3-button" style="width:250px; height:35px;">Upload Files</button>
             </div>
             <div id="overallProgress">
             </div>
@@ -130,12 +130,10 @@ table, th, td, tr {
             uploader.render(".upload");
             uploaderOut.render("body");
 
-            var fileStatus = Y.one(".upload-status");
-
-
             uploader.after("fileselect", function (e) {
                 var fileList = e.fileList;
                 var fileTable = Y.one("#filenames tbody");
+                var fileStatus = Y.one(".upload-status");
                 if (fileList.length > 0 && Y.one("#nofiles")) {
                     Y.one("#nofiles").remove();
                 }
@@ -145,58 +143,20 @@ table, th, td, tr {
                     fileTable.setHTML("");
                 }
 
-                if (!uploadDone && uploader.get("fileList").length > 0) {
-                    uploader.uploadAll();
-                }
-
-                Y.log(fileList);
-
                 Y.each(fileList, function (fileInstance) {
-                    fileStatus.append("<div id='" + fileInstance.get("id") + "' class='progress-bar'>" +
-                                          "<div class='progress'>" +
-                                              "<div class='bar'></div>" +
-                                          "</div>" +
-                                          "<span>" +
-                                              fileInstance.get("name") +
-                                          "</span>" +
-                                          "<button type='button' class='close'>&times;</button>" +
-                                      "</div>");
-
+                    fileStatus.append("<tr id='" + fileInstance.get("id") + "_row" + "'>" +
+                    "<td class='filename'>" + fileInstance.get("name") + "</td>" +
+                    "<td class='percentdone'>Hasn't started yet</td>");
                     fileTable.append("<tr id='" + fileInstance.get("id") + "_row" + "'>" +
                     "<td class='filename'>" + fileInstance.get("name") + "</td>" +
                     "<td class='filesize'>" + fileInstance.get("size") + "</td>" +
                     "<td class='percentdone'>Hasn't started yet</td>");
                 });
-                fileStatus.append("<div class='total-progress-bar'>" +
-                                      "<div class='progress'>" +
-                                          "<div class='bar'></div>" +
-                                      "</div>" +
-                                      "<span></span>" +
-                                  "</div>");
-
-                // handle cancel uploade
-                fileStatus.all(".close").on("click", function (e) {
-                    e.preventDefault();
-                    var offset = fileStatus.all(".close");
-                    Y.log(offset.indexOf(e.currentTarget));
-                    Y.log(fileList[offset.indexOf(e.currentTarget)]);
-                    fileList.splice(offset.indexOf(e.currentTarget),1);
-                    Y.log(fileList);
-                    Y.log(fileStatus.all(".progress-bar")._nodes[offset.indexOf(e.currentTarget)]);
-                    fileStatus.all(".progress-bar")._nodes[offset.indexOf(e.currentTarget)].remove();
-                    Y.log(fileStatus.all(".progress-bar"));
-                    Y.log(offset);
-                })
-
-                return fileListlength = fileList.length;
             });
 
             uploader.on("uploadprogress", function (e) {
                 var fileRow = Y.one("#" + e.file.get("id") + "_row");
-                var statusList = Y.one("#" + e.file.get("id") + "");
                 fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
-                statusList.one(".progress .bar").setStyle("width", e.percentLoaded + "%");
-                fileStatus.one(".total-progress-bar").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
             });
 
             // test upload time
@@ -204,6 +164,8 @@ table, th, td, tr {
 
             uploader.on("uploadstart", function (e) {
                 uploader.set("enabled", false);
+                Y.one("#uploadFilesButton").addClass("yui3-button-disabled");
+                Y.one("#uploadFilesButton").detach("click");
                 startTime = new Date().getTime();
             });
 
@@ -223,10 +185,6 @@ table, th, td, tr {
                 e.bytesTotal + "Bytes" +
                 //e.percentLoaded + "%" +
                 "</strong>");
-
-
-                fileStatus.one(".total-progress-bar span").setHTML("Number: " + fileListlength + " Total: " + e.bytesTotal + "Bytes");
-
                 sum = e.bytesTotal;
                 var uploadStartTime = endTime;
                 endTime = new Date().getTime();
@@ -239,11 +197,21 @@ table, th, td, tr {
             uploader.on("alluploadscomplete", function (e) {
                 uploader.set("enabled", true);
                 uploader.set("fileList", []);
+                Y.one("#uploadFilesButton").removeClass("yui3-button-disabled");
+                Y.one("#uploadFilesButton").on("click", function () {
+                    if (!uploadDone && uploader.get("fileList").length > 0) {
+                        uploader.uploadAll();
+                    }
+                });
+                //Y.one("#overallProgress").set("text", "Uploads complete!");
                 uploadDone = true;
             });
 
-
-
+            Y.one("#uploadFilesButton").on("click", function () {
+                if (!uploadDone && uploader.get("fileList").length > 0) {
+                    uploader.uploadAll();
+                }
+            });
         } else {
             Y.one("#uploaderContainer").set("text", "We are sorry, but to use the uploader, you either need a browser that support HTML5 or have the Flash player installed on your computer.");
         }
