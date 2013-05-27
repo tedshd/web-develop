@@ -66,6 +66,7 @@ table, th, td, tr {
 
 <script>
     YUI({filter:"raw"}).use("uploader", function(Y) {
+            window.Y = Y;
         if (Y.Uploader.TYPE != "none" && !Y.UA.ios) {
             var uploader = new Y.Uploader({
                 width: "150px",
@@ -152,14 +153,14 @@ table, th, td, tr {
                 }
 
                 Y.each(fileList, function (fileInstance) {
-                    fileStatus.append("<div id='" + fileInstance.get("id") + "' class='progress-bar'>" +
+                    fileStatus.append("<div id='" + fileInstance.get("id") + "' class='progress-bar cancel'>" +
                                           "<div class='progress'>" +
                                               "<div class='bar'></div>" +
                                           "</div>" +
                                           "<span>" +
                                               fileInstance.get("name") +
                                           "</span>" +
-                                          "<button type='button' class='close'>&times;</button>" +
+                                          "<button type='button' class='close cancel-close'>&times;</button>" +
                                       "</div>");
 
                     fileTable.append("<tr id='" + fileInstance.get("id") + "_row" + "'>" +
@@ -179,19 +180,18 @@ table, th, td, tr {
                 // handle cancel uploade
                 fileStatus.all(".close").on("click", function (e) {
                     e.preventDefault();
-                    var offset = fileStatus.all(".close");
+                    var offset = fileStatus.all(".cancel-close");
                     fileList[offset.indexOf(e.currentTarget)].cancelUpload();
+                    Y.log("cancel...");
+                    Y.log(fileList);
                     // Y.log(offset.indexOf(e.currentTarget));
                     // Y.log(fileList[offset.indexOf(e.currentTarget)]);
-                    fileList.splice(offset.indexOf(e.currentTarget),1);
+                    //fileList.splice(offset.indexOf(e.currentTarget),1);
                     uploader.set("enabled", true);
-                    // if (uploadDone) {
-                    //     uploadDone = false;
-                    // }
                     uploadDone = true;
-                    // Y.log(fileList);
+                    Y.log(fileList);
                     // Y.log(fileStatus.all(".progress-bar")._nodes[offset.indexOf(e.currentTarget)]);
-                    fileStatus.all(".progress-bar")._nodes[offset.indexOf(e.currentTarget)].remove();
+                    fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
                     Y.log(fileStatus.all(".progress-bar").size());
                     // Y.log(offset);
                 });
@@ -206,6 +206,10 @@ table, th, td, tr {
                 var statusList = Y.one("#" + e.file.get("id") + "");
                 fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
                 statusList.one(".progress .bar").setStyle("width", e.percentLoaded + "%");
+                if (e.percentLoaded === 100) {
+                    statusList.removeClass("cancel");
+                    statusList.one(".close").removeClass("cancel-close");
+                }
                 Y.one(".total-progress-bar").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
                 // Y.log(uploader);
             });
