@@ -68,10 +68,11 @@ table, th, td, tr {
     YUI({filter:"raw"}).use("uploader", function(Y) {
         window.Y = Y;
         var _fileList,
+            _fileListlength,
             _uploadDone = false,
             _fileStatus = Y.one(".upload_status");
         if (Y.Uploader.TYPE != "none" && !Y.UA.ios) {
-            var uploader = new Y.Uploader({
+            var _uploader = new Y.Uploader({
                 width: "150px",
                 selectButtonLabel: "Upload",
                 multipleFiles: true,
@@ -80,17 +81,16 @@ table, th, td, tr {
                 uploadURL: "post_file.php", // The URL to which file upload requested are POSTed. Only used if a different url is not passed to the upload method call.
                 simLimit: 5, // upload files number 2~5
                 withCredentials: false
-            });
-
+            }),
             // handle not drag area
-            var uploaderOut = new Y.Uploader({
+            _uploaderOut = new Y.Uploader({
                 width: "0",
                 height: "0"
             });
 
             // render upload
-            uploader.render(".upload");
-            uploaderOut.render("body");
+            _uploader.render(".upload");
+            _uploaderOut.render("body");
 
             // drag message
             Y.one(".upload").append("<div><strong class='drop_message'>Drop here!</strong></div>");
@@ -101,31 +101,31 @@ table, th, td, tr {
                     nodeMessage = Y.one("strong");
 
                 // drag area
-                uploader.set("dragAndDropArea", ".upload");
-                uploaderOut.set("dragAndDropArea", "body");
+                _uploader.set("dragAndDropArea", ".upload");
+                _uploaderOut.set("dragAndDropArea", "body");
 
                 // handle area not drag
-                uploader.on(["dragenter", "dragover"], function (e) {
+                _uploader.on(["dragenter", "dragover"], function (e) {
                         if (ddArea) {
                             nodeMessage.removeClass("drop_message");
                             ddArea.addClass("blueBackground");
                         }
                 });
 
-                uploader.on(["dragleave", "drop"], function (e) {
+                _uploader.on(["dragleave", "drop"], function (e) {
                     if (ddArea) {
                         nodeMessage.addClass("drop_message");
                         ddArea.removeClass("blueBackground");
                     }
                 });
 
-                uploaderOut.on(["dragenter", "dragover"], function (e) {
+                _uploaderOut.on(["dragenter", "dragover"], function (e) {
                         if (ddArea) {
                             nodeMessage.removeClass("drop_message");
                         }
                 });
 
-                uploaderOut.on(["dragleave", "drop"], function (e) {
+                _uploaderOut.on(["dragleave", "drop"], function (e) {
                     if (ddArea) {
                         nodeMessage.addClass("drop_message");
                     }
@@ -133,7 +133,7 @@ table, th, td, tr {
             }
 
             // handle fileselect & render filestatus
-            uploader.after("fileselect", function (e) {
+            _uploader.after("fileselect", function (e) {
                 var cancelList;
                 _fileList = e.fileList;
                 var fileTable = Y.one("#filenames tbody");
@@ -147,13 +147,16 @@ table, th, td, tr {
                     fileTable.setHTML("");
                 }
 
-                if (!_uploadDone && uploader.get("fileList").length > 0) {
+                if (!_uploadDone && _uploader.get("fileList").length > 0) {
+                    if (_uploader.queue) {
+                        _uploader.queue = null;
+                    }
                     Y.log(_fileList);
-                    // uploader.uploadAll();
+                    // _uploader.uploadAll();
                     Y.log(this.get("fileList"));
-                    Y.log(uploader.get("fileList"));
-                    var uploadList = uploader.get("fileList");
-                    uploader.uploadThese(uploadList);
+                    Y.log(_uploader.get("fileList"));
+                    var uploadList = _uploader.get("fileList");
+                    _uploader.uploadThese(uploadList);
                 }
 
                 // render filestatus
@@ -190,12 +193,12 @@ table, th, td, tr {
                     // Y.log(offset.indexOf(e.currentTarget));
                     // Y.log(_fileList[offset.indexOf(e.currentTarget)]);
                     _fileList.splice(offset.indexOf(e.currentTarget),1);
-                    uploader.set("enabled", true);
+                    _uploader.set("enabled", true);
                     _uploadDone = true;
                     Y.log("cancel...");
                     Y.log(_fileList);
-                    uploader.set("fileList", _fileList);
-                    // uploader.set("fileList", []);
+                    // _uploader.set("fileList", _fileList);
+                    // _uploader.set("fileList", []);
                     // Y.log(_fileStatus.all(".file_status")._nodes[offset.indexOf(e.currentTarget)]);
                     _fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
                     Y.log(_fileStatus.all(".file_status").size());
@@ -204,10 +207,10 @@ table, th, td, tr {
 
                 // Y.log("offset:" + listlength);
                 // return fileListlength = _fileList.length;
-                return fileListlength = listlength;
+                _fileListlength = listlength;
             });
 
-            uploader.on("uploadprogress", function (e) {
+            _uploader.on("uploadprogress", function (e) {
                 var fileRow = Y.one("#" + e.file.get("id") + "_row");
                 var statusList = Y.one("#" + e.file.get("id") + "");
                 fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
@@ -217,18 +220,18 @@ table, th, td, tr {
                     statusList.one(".close").removeClass("cancel_close");
                 }
                 Y.one(".total_status").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
-                // Y.log(uploader);
+                // Y.log(_uploader);
             });
 
             // test upload time
             var startTime, endTime, total, sum;
 
-            uploader.on("uploadstart", function (e) {
-                uploader.set("enabled", false);
+            _uploader.on("uploadstart", function (e) {
+                _uploader.set("enabled", false);
                 startTime = new Date().getTime();
             });
 
-            uploader.on("uploadcomplete", function (e) {
+            _uploader.on("uploadcomplete", function (e) {
                 endTime = new Date().getTime();
                 total = (endTime - startTime)/1000;
                 speed = (sum/1000)/(total/1000);
@@ -239,14 +242,14 @@ table, th, td, tr {
                     "<div>" + "Speed: " + speed + "kb/s" + "</div>");
             });
 
-            uploader.on("totaluploadprogress", function (e) {
+            _uploader.on("totaluploadprogress", function (e) {
                 Y.one("#overallProgress").setHTML("Total uploaded: <strong>" +
                 e.bytesTotal + "Bytes" +
                 //e.percentLoaded + "%" +
                 "</strong>");
 
                 // total upload
-                Y.one(".total_status span").setHTML("Number: " + fileListlength + " Total: " + e.bytesTotal + "Bytes");
+                Y.one(".total_status span").setHTML("Number: " + _fileListlength + " Total: " + e.bytesTotal + "Bytes");
 
                 sum = e.bytesTotal;
                 var uploadStartTime = endTime;
@@ -257,9 +260,9 @@ table, th, td, tr {
                 uploadLog.append("<div>" + speed + "kb/s" +"</div>");
             });
 
-            uploader.on("alluploadscomplete", function (e) {
-                uploader.set("enabled", true);
-                uploader.set("fileList", []);
+            _uploader.on("alluploadscomplete", function (e) {
+                _uploader.set("enabled", true);
+                _uploader.set("fileList", []);
                 _uploadDone = true;
             });
 
