@@ -35,8 +35,8 @@ table, th, td, tr {
             </span>
             <span class="from">from file box</span>
         </div>
-        <div class="upload-status"></div>
-        <div class="upload-total"></div>
+        <div class="upload_status"></div>
+        <div class="upload_total"></div>
     </div>
     <div id="exampleContainer">
         <div id="uploaderContainer">
@@ -66,7 +66,10 @@ table, th, td, tr {
 
 <script>
     YUI({filter:"raw"}).use("uploader", function(Y) {
-            window.Y = Y;
+        window.Y = Y;
+        var _fileList,
+            _uploadDone = false,
+            _fileStatus = Y.one(".upload_status");
         if (Y.Uploader.TYPE != "none" && !Y.UA.ios) {
             var uploader = new Y.Uploader({
                 width: "150px",
@@ -78,82 +81,83 @@ table, th, td, tr {
                 simLimit: 5, // upload files number 2~5
                 withCredentials: false
             });
+
             // handle not drag area
             var uploaderOut = new Y.Uploader({
                 width: "0",
                 height: "0"
             });
 
-            var uploadDone = false;
-            // drag message
-            Y.one(".upload").append("<div><strong class='drop-message'>Drop here!</strong></div>");
+            // render upload
+            uploader.render(".upload");
+            uploaderOut.render("body");
 
+            // drag message
+            Y.one(".upload").append("<div><strong class='drop_message'>Drop here!</strong></div>");
+
+            // drag & drop
             if (Y.Uploader.TYPE == "html5") {
-                var ddmessage = Y.one(".upload"),
+                var ddArea = Y.one(".upload"),
                     nodeMessage = Y.one("strong");
+
                 // drag area
                 uploader.set("dragAndDropArea", ".upload");
                 uploaderOut.set("dragAndDropArea", "body");
 
                 // handle area not drag
-                Y.one("body").append("<span class='hiddenUploaderOut'></span>");
-                var NotDropArea = Y.one(".hiddenUploaderOut");
-                uploaderOut.set("selectFilesButton", NotDropArea);
-
                 uploader.on(["dragenter", "dragover"], function (e) {
-                        if (ddmessage) {
-                            nodeMessage.removeClass("drop-message");
-                            ddmessage.addClass("blueBackground");
+                        if (ddArea) {
+                            nodeMessage.removeClass("drop_message");
+                            ddArea.addClass("blueBackground");
                         }
                 });
 
                 uploader.on(["dragleave", "drop"], function (e) {
-                    if (ddmessage) {
-                        nodeMessage.addClass("drop-message");
-                        ddmessage.removeClass("blueBackground");
+                    if (ddArea) {
+                        nodeMessage.addClass("drop_message");
+                        ddArea.removeClass("blueBackground");
                     }
                 });
 
                 uploaderOut.on(["dragenter", "dragover"], function (e) {
-                        if (ddmessage) {
-                            nodeMessage.removeClass("drop-message");
+                        if (ddArea) {
+                            nodeMessage.removeClass("drop_message");
                         }
                 });
 
                 uploaderOut.on(["dragleave", "drop"], function (e) {
-                    if (ddmessage) {
-                        nodeMessage.addClass("drop-message");
+                    if (ddArea) {
+                        nodeMessage.addClass("drop_message");
                     }
                 });
-
             }
 
-            uploader.render(".upload");
-            uploaderOut.render("body");
-
-            var fileStatus = Y.one(".upload-status");
-
-
+            // handle fileselect & render filestatus
             uploader.after("fileselect", function (e) {
-                var fileList = e.fileList;
+                var cancelList;
+                _fileList = e.fileList;
                 var fileTable = Y.one("#filenames tbody");
-                if (fileList.length > 0 && Y.one("#nofiles")) {
+                if (_fileList.length > 0 && Y.one("#nofiles")) {
                     Y.one("#nofiles").remove();
                 }
-                Y.log("Total-" + fileList.length);
+                Y.log("Total-" + _fileList.length);
 
-                if (uploadDone) {
-                    uploadDone = false;
+                if (_uploadDone) {
+                    _uploadDone = false;
                     fileTable.setHTML("");
                 }
 
-                Y.log(fileList);
-                if (!uploadDone && uploader.get("fileList").length > 0) {
+                if (!_uploadDone && uploader.get("fileList").length > 0) {
+                    Y.log(_fileList);
                     uploader.uploadAll();
+                    Y.log(this.get("fileList"));
+                    // var uploadList = uploader.get("fileList");
+                    // uploader.uploadThese(uploadList, "post_file.php");
                 }
 
-                Y.each(fileList, function (fileInstance) {
-                    fileStatus.append("<div id='" + fileInstance.get("id") + "' class='progress-bar cancel'>" +
+                // render filestatus
+                Y.each(_fileList, function (fileInstance) {
+                    _fileStatus.append("<div id='" + fileInstance.get("id") + "' class='file_status cancel'>" +
                                           "<div class='progress'>" +
                                               "<div class='bar'></div>" +
                                           "</div>" +
@@ -168,36 +172,37 @@ table, th, td, tr {
                     "<td class='filesize'>" + fileInstance.get("size") + "</td>" +
                     "<td class='percentdone'>Hasn't started yet</td>");
                 });
-                Y.one(".upload-total").setHTML("<div class='total-progress-bar'>" +
+                Y.one(".upload_total").setHTML("<div class='total_status'>" +
                                       "<div class='progress'>" +
                                           "<div class='bar'></div>" +
                                       "</div>" +
                                       "<span></span>" +
                                   "</div>");
 
-                var listlength = Y.all(".progress-bar").size();
+                var listlength = Y.all(".file_status").size();
 
                 // handle cancel uploade
-                fileStatus.all(".close").on("click", function (e) {
+                _fileStatus.all(".close").on("click", function (e) {
                     e.preventDefault();
-                    var offset = fileStatus.all(".cancel-close");
-                    fileList[offset.indexOf(e.currentTarget)].cancelUpload();
-                    Y.log("cancel...");
-                    Y.log(fileList);
+                    var offset = _fileStatus.all(".cancel-close");
+                    _fileList[offset.indexOf(e.currentTarget)].cancelUpload();
                     // Y.log(offset.indexOf(e.currentTarget));
-                    // Y.log(fileList[offset.indexOf(e.currentTarget)]);
-                    //fileList.splice(offset.indexOf(e.currentTarget),1);
+                    // Y.log(_fileList[offset.indexOf(e.currentTarget)]);
+                    _fileList.splice(offset.indexOf(e.currentTarget),1);
                     uploader.set("enabled", true);
-                    uploadDone = true;
-                    Y.log(fileList);
-                    // Y.log(fileStatus.all(".progress-bar")._nodes[offset.indexOf(e.currentTarget)]);
-                    fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
-                    Y.log(fileStatus.all(".progress-bar").size());
+                    _uploadDone = true;
+                    Y.log("cancel...");
+                    Y.log(_fileList);
+                    uploader.set("fileList", _fileList);
+                    // uploader.set("fileList", []);
+                    // Y.log(_fileStatus.all(".file_status")._nodes[offset.indexOf(e.currentTarget)]);
+                    _fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
+                    Y.log(_fileStatus.all(".file_status").size());
                     // Y.log(offset);
                 });
 
                 // Y.log("offset:" + listlength);
-                // return fileListlength = fileList.length;
+                // return fileListlength = _fileList.length;
                 return fileListlength = listlength;
             });
 
@@ -210,7 +215,7 @@ table, th, td, tr {
                     statusList.removeClass("cancel");
                     statusList.one(".close").removeClass("cancel-close");
                 }
-                Y.one(".total-progress-bar").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
+                Y.one(".total_status").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
                 // Y.log(uploader);
             });
 
@@ -240,7 +245,7 @@ table, th, td, tr {
                 "</strong>");
 
                 // total upload
-                Y.one(".total-progress-bar span").setHTML("Number: " + fileListlength + " Total: " + e.bytesTotal + "Bytes");
+                Y.one(".total_status span").setHTML("Number: " + fileListlength + " Total: " + e.bytesTotal + "Bytes");
 
                 sum = e.bytesTotal;
                 var uploadStartTime = endTime;
@@ -254,7 +259,7 @@ table, th, td, tr {
             uploader.on("alluploadscomplete", function (e) {
                 uploader.set("enabled", true);
                 uploader.set("fileList", []);
-                uploadDone = true;
+                _uploadDone = true;
             });
 
         } else {

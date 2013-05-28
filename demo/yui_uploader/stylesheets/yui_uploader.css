@@ -113,17 +113,17 @@ html body {
 }
 
 /* line 41, ../sass/yui_uploader.scss */
-.progress-bar, .total-progress-bar {
+.file_status, .total_status {
   position: relative;
 }
 /* line 43, ../sass/yui_uploader.scss */
-.progress-bar span, .total-progress-bar span {
+.file_status span, .total_status span {
   position: absolute;
   top: 0;
   left: 10px;
 }
 /* line 48, ../sass/yui_uploader.scss */
-.progress-bar button, .total-progress-bar button {
+.file_status button, .total_status button {
   position: absolute;
   top: -2px;
   right: 10px;
@@ -140,6 +140,6 @@ html body {
 }
 
 /* line 60, ../sass/yui_uploader.scss */
-.drop-message {
+.drop_message {
   visibility: hidden;
 }

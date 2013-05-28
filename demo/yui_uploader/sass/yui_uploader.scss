@@ -38,7 +38,7 @@ html {
         border-right: solid #000 1px;
     }
 }
-.progress-bar, .total-progress-bar {
+.file_status, .total_status {
     position: relative;
     span {
         position: absolute;
@@ -57,6 +57,6 @@ html {
 .blueBackground {
     background: #0099ff;
 }
-.drop-message {
+.drop_message {
     visibility: hidden;
 }
