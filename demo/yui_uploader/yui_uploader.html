@@ -197,7 +197,7 @@ table, th, td, tr {
                     _uploadDone = true;
                     Y.log("cancel...");
                     Y.log(_fileList);
-                    // _uploader.set("fileList", _fileList);
+                    _uploader.set("fileList", _fileList);
                     // _uploader.set("fileList", []);
                     // Y.log(_fileStatus.all(".file_status")._nodes[offset.indexOf(e.currentTarget)]);
                     _fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
