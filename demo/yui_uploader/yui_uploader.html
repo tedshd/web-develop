@@ -151,11 +151,19 @@ table, th, td, tr {
                     if (_uploader.queue) {
                         _uploader.queue = null;
                     }
-                    Y.log(_fileList);
                     // _uploader.uploadAll();
                     Y.log("uploadlist");
                     Y.log(this.get("fileList"));
                     Y.log(_fileList);
+                    Y.log(_fileList[0].get("size"));
+                    var totalSize = 0;
+                    for (var i = 0; (_fileList.length - 1) >= i; i++) {
+                        Y.log("size" + i);
+                        Y.log(_fileList[i].get("size"));
+                        var fileSize = _fileList[i].get("size");
+                        totalSize = fileSize + totalSize;
+                    }
+                    Y.log("total----" + totalSize);
                     //var uploadList = _uploader.get("fileList");
                     var uploadList = _fileList;
                     _uploader.uploadThese(uploadList);
@@ -192,28 +200,33 @@ table, th, td, tr {
                 _fileStatus.all(".close").on("click", function (e) {
                     e.preventDefault();
                     var offset = _fileStatus.all(".cancel_close");
+                    Y.log("cancel...");
+                    Y.log(_fileList);
+                    Y.log(_fileList[offset.indexOf(e.currentTarget)]);
                     _fileList[offset.indexOf(e.currentTarget)].cancelUpload();
                     // Y.log(offset.indexOf(e.currentTarget));
-                    // Y.log(_fileList[offset.indexOf(e.currentTarget)]);
                     _fileList.splice(offset.indexOf(e.currentTarget),1);
                     _uploader.set("enabled", true);
                     _uploadDone = true;
-                    Y.log("cancel...");
-                    Y.log(_fileList);
-                    // _uploader.set("fileList", _fileList);
-                    _uploader.set("fileList", []);
+                    _uploader.set("fileList", _fileList);
+                    // _uploader.set("fileList", []);
                     // Y.log(_fileStatus.all(".file_status")._nodes[offset.indexOf(e.currentTarget)]);
                     _fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
                     Y.log(_fileStatus.all(".file_status").size());
                     // Y.log(offset);
-                    Y.one(".total_status span").setHTML("Number: " + _fileList.length + " Total: " + "Bytes");
+                    for (var i = 0; (_fileList.length - 1) >= i; i++) {
+                        Y.log("size" + i);
+                        Y.log(_fileList[i].get("size"));
+                        var fileSize = _fileList[i].get("size");
+                        totalSize = fileSize + totalSize;
+                    }
+                    Y.log("canceltotal----" + totalSize);
+                    Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + totalSize + "Bytes");
                 });
 
                 // Y.log("offset:" + listlength);
-                // return fileListlength = _fileList.length;
-                _fileListlength = listlength;
                 // total upload
-                Y.one(".total_status span").setHTML("Number: " + _fileListlength + " Total: " + e.bytesTotal + "Bytes");
+                Y.one(".total_status span").setHTML("Number- " + listlength + " Total:" + Math.round(totalSize/1000000) + "MiBytes");
             });
 
             _uploader.on("uploadprogress", function (e) {
@@ -226,7 +239,6 @@ table, th, td, tr {
                     statusList.one(".close").removeClass("cancel_close");
                 }
                 Y.one(".total_status").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
-                // Y.log(_uploader);
             });
 
             _uploader.on("uploadstart", function (e) {
@@ -245,7 +257,7 @@ table, th, td, tr {
                 "</strong>");
 
                 // total upload
-                // Y.one(".total_status span").setHTML("Number: " + _fileListlength + " Total: " + e.bytesTotal + "Bytes");
+                // Y.one(".total_status span").append("<span>" + " Total: " + e.bytesTotal + "Bytes" + "</span>");
             });
 
             _uploader.on("alluploadscomplete", function (e) {
