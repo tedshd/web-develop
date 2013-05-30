@@ -15,16 +15,16 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
             uploadURL: "post_file.php", // The URL to which file upload requested are POSTed. Only used if a different url is not passed to the upload method call.
             simLimit: 5, // upload files number 2~5
             withCredentials: false
-        }),
+        });
         // handle not drag area
-            _uploaderOut = new Y.Uploader({
-                width: "0",
-                height: "0"
-            });
+            // _uploaderOut = new Y.Uploader({
+            //     width: "0",
+            //     height: "0"
+            // });
 
         // render upload
         _uploader.render(".upload");
-        _uploaderOut.render("body");
+        // _uploaderOut.render("body");
 
         // drag message
         Y.one(".upload").append("<div><strong class='drop_message'>Drop here!</strong></div>");
@@ -35,8 +35,8 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 nodeMessage = Y.one("strong");
 
             // drag area
-            _uploader.set("dragAndDropArea", ".upload");
-            _uploaderOut.set("dragAndDropArea", "body");
+            _uploader.set("dragAndDropArea", "body");
+            // _uploaderOut.set("dragAndDropArea", "body");
 
             // handle area not drag
             _uploader.on(["dragenter", "dragover"], function () {
@@ -53,17 +53,17 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 }
             });
 
-            _uploaderOut.on(["dragenter", "dragover"], function () {
-                if (ddArea) {
-                    nodeMessage.removeClass("drop_message");
-                }
-            });
+            // _uploaderOut.on(["dragenter", "dragover"], function () {
+            //     if (ddArea) {
+            //         nodeMessage.removeClass("drop_message");
+            //     }
+            // });
 
-            _uploaderOut.on(["dragleave", "drop"], function () {
-                if (ddArea) {
+            // _uploaderOut.on(["dragleave", "drop"], function () {
+            //     if (ddArea) {
                     nodeMessage.addClass("drop_message");
-                }
-            });
+            //     }
+            // });
         }
 
         // handle fileselect & render filestatus
@@ -95,10 +95,10 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 // Y.log(_fileList);
                 // Y.log(_fileList[0].get("size"));
                 var totalSize = 0;
-                for (var i = 0; (_fileList.length - 1) >= i; i++) {
+                for (var i = 0; (_getthisList.length - 1) >= i; i++) {
                     // Y.log("size" + i);
                     // Y.log(_fileList[i].get("size"));
-                    var fileSize = _fileList[i].get("size");
+                    var fileSize = _getthisList[i].get("size");
                     totalSize = fileSize + totalSize;
                 }
                 // Y.log("total----" + totalSize);
@@ -143,16 +143,18 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 // Y.log(_getthisList);
                 // Y.log(_uploader.get("fileList"));
                 // Y.log(_fileList[offset.indexOf(e.currentTarget)]);
-                Y.log(offset.indexOf(e.currentTarget));
+                // Y.log(offset.indexOf(e.currentTarget));
                 // Y.log(_getthisList.indexOf(e.currentTarget));
                 // Y.log(_uploader.get("fileList"));
                 Y.log("-----------------------------");
                 // Y.log(_uploader.queue);
-                Y.log(_fileStatus.all(".cancel .progress .bar"));
-                Y.log(_fileStatus.all(".cancel .progress .bar").getStyle("width"));
-                Y.log(_fileStatus.all(".cancel .progress .bar").getStyle("width")[offset.indexOf(e.currentTarget)]);
+                // Y.log(_fileStatus.all(".cancel .progress .bar"));
+                // Y.log(_fileStatus.all(".cancel .progress .bar").getStyle("width"));
+                // Y.log(_fileStatus.all(".cancel .progress .bar").getStyle("width")[offset.indexOf(e.currentTarget)]);
                 if (_fileStatus.all(".cancel .progress .bar").getStyle("width")[offset.indexOf(e.currentTarget)] !== "0px" ) {
+                    Y.log(_getthisList[offset.indexOf(e.currentTarget)]);
                     _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
+                    alert("cancel");
                 }
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get("fileList")[offset.indexOf(e.currentTarget)].cancelUpload();
