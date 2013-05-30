@@ -75,7 +75,7 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
             if (_fileList.length > 0 && Y.one("#nofiles")) {
                 Y.one("#nofiles").remove();
             }
-            Y.log("Total-" + _fileList.length);
+            // Y.log("Total-" + _fileList.length);
 
             if (_uploadDone) {
                 _uploadDone = false;
@@ -83,23 +83,25 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
             }
 
             if (!_uploadDone && _uploader.get("fileList").length > 0) {
+                // Y.log("QUEUE");
+                // Y.log(_uploader.queue);
                 if (_uploader.queue) {
                     _uploader.queue = null;
                 }
                 // _uploader.uploadAll();
-                Y.log("uploadlist");
-                Y.log(this.get("fileList"));
-                Y.log(_uploader.get("fileList"));
-                Y.log(_fileList);
-                Y.log(_fileList[0].get("size"));
+                // Y.log("uploadlist");
+                // Y.log(this.get("fileList"));
+                // Y.log(_uploader.get("fileList"));
+                // Y.log(_fileList);
+                // Y.log(_fileList[0].get("size"));
                 var totalSize = 0;
                 for (var i = 0; (_fileList.length - 1) >= i; i++) {
-                    Y.log("size" + i);
-                    Y.log(_fileList[i].get("size"));
+                    // Y.log("size" + i);
+                    // Y.log(_fileList[i].get("size"));
                     var fileSize = _fileList[i].get("size");
                     totalSize = fileSize + totalSize;
                 }
-                Y.log("total----" + totalSize);
+                // Y.log("total----" + totalSize);
                 //var uploadList = _uploader.get("fileList");
                 var uploadList = _fileList;
                 _uploader.uploadThese(uploadList);
@@ -136,40 +138,54 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
             _fileStatus.all(".close").on("click", function (e) {
                 e.preventDefault();
                 var offset = _fileStatus.all(".cancel_close");
-                Y.log("cancel...");
-                Y.log(_fileList);
-                Y.log(_getthisList);
-                Y.log(_uploader.get("fileList"));
-                Y.log(_fileList[offset.indexOf(e.currentTarget)]);
+                // Y.log("cancel...");
+                // Y.log(_fileList);
+                // Y.log(_getthisList);
+                // Y.log(_uploader.get("fileList"));
+                // Y.log(_fileList[offset.indexOf(e.currentTarget)]);
                 Y.log(offset.indexOf(e.currentTarget));
+                // Y.log(_getthisList.indexOf(e.currentTarget));
+                // Y.log(_uploader.get("fileList"));
                 Y.log("-----------------------------");
-                Y.log(_getthisList.indexOf(e.currentTarget));
-                Y.log(_uploader.get("fileList"));
-                _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
+                // Y.log(_uploader.queue);
+                Y.log(_fileStatus.all(".cancel .progress .bar"));
+                Y.log(_fileStatus.all(".cancel .progress .bar").getStyle("width"));
+                Y.log(_fileStatus.all(".cancel .progress .bar").getStyle("width")[offset.indexOf(e.currentTarget)]);
+                if (_fileStatus.all(".cancel .progress .bar").getStyle("width")[offset.indexOf(e.currentTarget)] !== "0px" ) {
+                    _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
+                }
+                // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get("fileList")[offset.indexOf(e.currentTarget)].cancelUpload();
                 // Y.log(offset.indexOf(e.currentTarget));
                 _getthisList.splice(offset.indexOf(e.currentTarget),1);
-                _uploader.set("enabled", true);
+                // _uploader.set("enabled", true);
                 _uploadDone = true;
                 _uploader.set("fileList", _getthisList);
                 // _uploader.set("fileList", []);
                 // Y.log(_fileStatus.all(".file_status")._nodes[offset.indexOf(e.currentTarget)]);
                 _fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
-                Y.log(_fileStatus.all(".file_status").size());
+                // Y.log(_fileStatus.all(".file_status").size());
                 // Y.log(offset);
-                for (var i = 0; (_fileList.length - 1) >= i; i++) {
-                    Y.log("size" + i);
-                    Y.log(_fileList[i].get("size"));
+                var lastTotalSize = 0;
+                for (var i = 0; (_getthisList.length - 1) >= i; i++) {
+                    // Y.log("size" + i);
+                    // Y.log(_fileList[i].get("size"));
                     var fileSize = _fileList[i].get("size");
-                    totalSize = fileSize + totalSize;
+                    lastTotalSize = fileSize + lastTotalSize;
                 }
-                Y.log("canceltotal----" + totalSize);
-                Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + Math.round(totalSize/1000000) + "MiBytes");
+                // Y.log("canceltotal----" + lastTotalSize);
+                for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = lastTotalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+                    lastTotalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+                }
+                Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + lastTotalSize);
             });
 
             // Y.log("offset:" + listlength);
             // total upload
-            Y.one(".total_status span").setHTML("Number- " + listlength + " Total:" + Math.round(totalSize/1000000) + "MiBytes");
+            for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = totalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+                totalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+            }
+            Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + totalSize);
         });
 
         _uploader.on("uploadprogress", function (e) {
@@ -181,11 +197,12 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 statusList.removeClass("cancel");
                 statusList.one(".close").removeClass("cancel_close");
             }
-            Y.one(".total_status").one(".progress .bar").setStyle("width", e.percentLoaded + "%");
         });
 
         _uploader.on("uploadstart", function (e) {
-            _uploader.set("enabled", false);
+            // _uploader.set("enabled", false);
+            Y.log("START");
+            Y.log(_fileList);
         });
 
         _uploader.on("uploadcomplete", function (e) {
@@ -195,16 +212,20 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
 
         _uploader.on("totaluploadprogress", function (e) {
             Y.one("#overallProgress").setHTML("Total uploaded: <strong>" +
-            e.bytesTotal + "Bytes" +
-            //e.percentLoaded + "%" +
+            // e.bytesTotal + "Bytes" +
+            Math.floor((e.bytesLoaded/e.bytesTotal)*100) + "%" +
+            // e.percentLoaded + "%" +
             "</strong>");
 
+            Y.one(".total_status").one(".progress .bar").setStyle("width", Math.floor((e.bytesLoaded/e.bytesTotal)*100) + "%");
+            // Y.log("TOTAL%");
+            // Y.log(e.percentLoaded);
             // total upload
             // Y.one(".total_status span").append("<span>" + " Total: " + e.bytesTotal + "Bytes" + "</span>");
         });
 
         _uploader.on("alluploadscomplete", function (e) {
-            _uploader.set("enabled", true);
+            // _uploader.set("enabled", true);
             _uploader.set("fileList", []);
             _uploadDone = true;
         });
