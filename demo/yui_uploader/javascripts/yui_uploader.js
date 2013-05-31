@@ -1,4 +1,4 @@
-YUI({filter: "raw"}).use("uploader", function(Y) {
+YUI({filter: "raw"}).use("uploader", "event", function(Y) {
     window.Y = Y;
     var _fileList,
         _fileListlength,
@@ -69,6 +69,7 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
 
         // handle fileselect & render filestatus
         _uploader.after("fileselect", function (e) {
+            Y.log("--FileSelect--");
             var cancelList;
             _getthisList = this.get("fileList");
             _fileList = e.fileList;
@@ -125,18 +126,18 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 "<td class='filesize'>" + fileInstance.get("size") + "</td>" +
                 "<td class='percentdone'>Hasn't started yet</td>");
             });
-            Y.one(".upload_total").setHTML("<div class='total_status'>" +
-                                  "<div class='progress'>" +
-                                      "<div class='bar'></div>" +
-                                  "</div>" +
-                                  "<span></span>" +
-                              "</div>");
-
+            // Y.one(".upload_total").setHTML("<div class='total_status'>" +
+            //                       "<div class='progress'>" +
+            //                           "<div class='bar'></div>" +
+            //                       "</div>" +
+            //                       "<span></span>" +
+            //                   "</div>");
 
             var listlength = this.get("fileList").length;
 
             // handle cancel uploade
             _fileStatus.all(".close").on("click", function (e) {
+                Y.log("--Cancel--");
                 e.preventDefault();
                 var offset = _fileStatus.all(".cancel_close");
                 // Y.log("cancel...");
@@ -155,7 +156,7 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 if (_fileStatus.all(".cancel .progress .bar").getStyle("width")[offset.indexOf(e.currentTarget)] !== "0px" ) {
                     Y.log(_getthisList[offset.indexOf(e.currentTarget)]);
                     _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
-                    alert("cancel");
+                    Y.log("--Cancelupload--");
                 }
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get("fileList")[offset.indexOf(e.currentTarget)].cancelUpload();
@@ -180,7 +181,7 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
                 for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = lastTotalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
                     lastTotalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
                 }
-                Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + lastTotalSize);
+                // Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + lastTotalSize);
             });
 
             // Y.log("offset:" + listlength);
@@ -188,10 +189,11 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
             for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = totalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
                 totalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
             }
-            Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + totalSize);
+            // Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + totalSize);
         });
 
         _uploader.on("uploadprogress", function (e) {
+            Y.log("--Uploadprogress--");
             var fileRow = Y.one("#" + e.file.get("id") + "_row");
             var statusList = Y.one("#" + e.file.get("id") + "");
             fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
@@ -203,24 +205,27 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
         });
 
         _uploader.on("uploadstart", function (e) {
+            Y.log("--UploadStart--");
             // _uploader.set("enabled", false);
             Y.log("START");
             Y.log(_fileList);
         });
 
         _uploader.on("uploadcomplete", function (e) {
+            Y.log("--UploadComplete--");
             var fileRow = Y.one("#" + e.file.get("id") + "_row");
             fileRow.one(".percentdone").set("text", "Finished!");
         });
 
         _uploader.on("totaluploadprogress", function (e) {
+            Y.log("--ALLUploadprogress--");
             Y.one("#overallProgress").setHTML("Total uploaded: <strong>" +
             // e.bytesTotal + "Bytes" +
             Math.floor((e.bytesLoaded/e.bytesTotal)*100) + "%" +
             // e.percentLoaded + "%" +
             "</strong>");
 
-            Y.one(".total_status").one(".progress .bar").setStyle("width", Math.floor((e.bytesLoaded/e.bytesTotal)*100) + "%");
+            // Y.one(".total_status").one(".progress .bar").setStyle("width", Math.floor((e.bytesLoaded/e.bytesTotal)*100) + "%");
             // Y.log("TOTAL%");
             // Y.log(e.percentLoaded);
             // total upload
@@ -228,6 +233,7 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
         });
 
         _uploader.on("alluploadscomplete", function (e) {
+            Y.log("--ALLUploadComplete--");
             // _uploader.set("enabled", true);
             _uploader.set("fileList", []);
             _uploadDone = true;
