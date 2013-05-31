@@ -26,10 +26,6 @@ html {
     width: 500px;
     margin:0 auto;
     border: solid #000 1px;
-    .message {
-        max-width: 492px;
-        border: 0;
-    }
 }
 .attachment {
     display: table;
@@ -60,9 +56,6 @@ html {
         top: -2px;
         right: 10px;
     }
-}
-.yui3-uploader {
-    overflow: hidden;
 }
 .drop_message {
     visibility: hidden;

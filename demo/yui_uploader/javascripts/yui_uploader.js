@@ -96,13 +96,13 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
                 // Y.log(_uploader.get("fileList"));
                 // Y.log(_fileList);
                 // Y.log(_fileList[0].get("size"));
-                var totalSize = 0;
-                for (var i = 0; (_getthisList.length - 1) >= i; i++) {
-                    // Y.log("size" + i);
-                    // Y.log(_fileList[i].get("size"));
-                    var fileSize = _getthisList[i].get("size");
-                    totalSize = fileSize + totalSize;
-                }
+                // var totalSize = 0;
+                // for (var i = 0; (_getthisList.length - 1) >= i; i++) {
+                //     // Y.log("size" + i);
+                //     // Y.log(_fileList[i].get("size"));
+                //     var fileSize = _getthisList[i].get("size");
+                //     totalSize = fileSize + totalSize;
+                // }
                 // Y.log("total----" + totalSize);
                 //var uploadList = _uploader.get("fileList");
                 var uploadList = _fileList;
@@ -136,7 +136,7 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
             var listlength = this.get("fileList").length;
 
             // handle cancel uploade
-            _fileStatus.all(".close").on("click", function (e) {
+            Y.delegate("click", function (e) {
                 Y.log("--Cancel--");
                 e.preventDefault();
                 var offset = _fileStatus.all(".cancel_close");
@@ -170,25 +170,25 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
                 _fileStatus.all(".cancel")._nodes[offset.indexOf(e.currentTarget)].remove();
                 // Y.log(_fileStatus.all(".file_status").size());
                 // Y.log(offset);
-                var lastTotalSize = 0;
-                for (var i = 0; (_getthisList.length - 1) >= i; i++) {
-                    // Y.log("size" + i);
-                    // Y.log(_fileList[i].get("size"));
-                    var fileSize = _fileList[i].get("size");
-                    lastTotalSize = fileSize + lastTotalSize;
-                }
+                // var lastTotalSize = 0;
+                // for (var i = 0; (_getthisList.length - 1) >= i; i++) {
+                //     // Y.log("size" + i);
+                //     // Y.log(_fileList[i].get("size"));
+                //     var fileSize = _fileList[i].get("size");
+                //     lastTotalSize = fileSize + lastTotalSize;
+                // }
                 // Y.log("canceltotal----" + lastTotalSize);
-                for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = lastTotalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
-                    lastTotalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
-                }
+                // for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = lastTotalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+                //     lastTotalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+                // }
                 // Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + lastTotalSize);
-            });
+            }, _fileStatus, ".close");
 
             // Y.log("offset:" + listlength);
             // total upload
-            for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = totalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
-                totalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
-            }
+            // for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = totalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+            //     totalSize = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+            // }
             // Y.one(".total_status span").setHTML("Number: " + _fileStatus.all(".file_status").size() + " Total: " + totalSize);
         });
 
