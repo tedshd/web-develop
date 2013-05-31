@@ -31,7 +31,8 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
 
         // drag & drop
         if (Y.Uploader.TYPE === "html5") {
-            var ddArea = Y.one(".upload"),
+            Y.one("body").append("<div class='dd_area'></div>");
+            var ddArea = Y.one(".dd_area"),
                 nodeMessage = Y.one("strong");
 
             // drag area
@@ -42,14 +43,14 @@ YUI({filter: "raw"}).use("uploader", function(Y) {
             _uploader.on(["dragenter", "dragover"], function () {
                 if (ddArea) {
                     nodeMessage.removeClass("drop_message");
-                    ddArea.addClass("blueBackground");
+                    ddArea.addClass("ddtip");
                 }
             });
 
             _uploader.on(["dragleave", "drop"], function () {
                 if (ddArea) {
                     nodeMessage.addClass("drop_message");
-                    ddArea.removeClass("blueBackground");
+                    ddArea.removeClass("ddtip");
                 }
             });
 
