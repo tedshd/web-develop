@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>yui_handlebars</title>
+<script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+<script>
+    YUI().use('handlebars', 'node-base', function (Y) {
+        // Extract the template string and compile it into a reusable function.
+        var source   = Y.one('#list-template').getHTML(),
+            template = Y.Handlebars.compile(source),
+            html;
+
+        // Render the template to HTML using the specified data.
+        html = template({
+            items: [
+                {name: 'pie', url: 'http://pieisgood.org/'},
+                {name: 'mountain dew', url: 'http://www.mountaindew.com/'},
+                {name: 'kittens', url: 'http://www.flickr.com/search/?q=kittens'},
+                {name: 'rainbows', url: 'http://www.youtube.com/watch?v=OQSNhk5ICTI'}
+            ]
+        });
+
+        // Append the rendered template to the page.
+        Y.one('body').append(html);
+    });
+</script>
+</head>
+<body>
+    <script id="list-template" type="text/x-handlebars-template">
+        <p>YUI is brought to you by:</p>
+
+        <ul>
+            {{#items}}
+                <li><a href="{{url}}">{{name}}</a></li>
+            {{/items}}
+        </ul>
+    </script>
+</body>
+</html>

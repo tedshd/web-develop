@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Examples</title>
+<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+.progress {
+    border-radius: 0px;
+    height: 25px;
+}
+.progress .bar {
+    background: #0088ff;
+}
+.file_status {
+    margin: 5% auto;
+    width: 50%;
+    position: relative;
+}
+.file_info {
+    position: absolute;
+    top: 0;
+    display: table;
+    width: 100%;
+}
+.file_info .file_title,
+.file_info .file_progress,
+.file_info .file_cancel {
+    display: table-cell;
+    padding: 0 10px;
+    vertical-align: middle;
+    height: 25px;
+}
+.file_name {
+    width: 300px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space : nowrap;
+}
+.file_progress {
+    width: 50px;
+}
+.file_cancel {
+    width: 12px;
+}
+span {
+    /*border: solid 1px;*/
+}
+</style>
+</head>
+<body>
+    <div class="file_status cancel">
+        <div class="progress">
+            <div class="bar" style=""></div>
+        </div>
+        <span class="file_info">
+            <span class="file_title">
+                <span class="file_name">long very long & long too long name.long very long & long too long name and long very long & long too long name</span>
+            </span>
+            <span class="file_progress">waiting</span>
+            <span class="file_cancel">
+                <button type='button' class='close cancel_close'>&times;</button>
+            </span>
+        </span>
+    </div>
+    <div class="file_status cancel">
+        <div class="progress">
+            <div class="bar" style="width:50%"></div>
+        </div>
+        <span class="file_info">
+            <span class="file_title">name</span>
+            <span class="file_progress">50%</span>
+            <span class="file_cancel">
+                <button type='button' class='close cancel_close'>&times;</button>
+            </span>
+        </span>
+    </div>
+    <div class="file_status cancel">
+        <div class="progress">
+            <div class="bar" style="width:100%"></div>
+        </div>
+        <span class="file_info">
+            <span class="file_title">name</span>
+            <span class="file_progress">complete</span>
+            <span class="file_cancel">
+                <button type='button' class='close cancel_close'>&times;</button>
+            </span>
+        </span>
+    </div>
+    <div class="file_status cancel">
+        <div class="progress">
+            <div class="bar" style=""></div>
+        </div>
+        <span class="file_info">
+            <span class="file_title">
+                <span class="file_name">long very long & long too long name.long very long & long too long name and long very long & long too long name</span>
+            </span>
+            <span class="file_progress">等待中</span>
+            <span class="file_cancel">
+                <button type='button' class='close cancel_close'>&times;</button>
+            </span>
+        </span>
+    </div>
+    <div class="file_status cancel">
+        <div class="progress">
+            <div class="bar" style="width:50%"></div>
+        </div>
+        <span class="file_info">
+            <span class="file_title">name</span>
+            <span class="file_progress">50%</span>
+            <span class="file_cancel">
+                <button type='button' class='close cancel_close'>&times;</button>
+            </span>
+        </span>
+    </div>
+    <div class="file_status cancel">
+        <div class="progress">
+            <div class="bar" style="width:100%"></div>
+        </div>
+        <span class="file_info">
+            <span class="file_title">測試名稱</span>
+            <span class="file_progress">已完成</span>
+            <span class="file_cancel">
+                <button type='button' class='close cancel_close'>&times;</button>
+            </span>
+        </span>
+    </div>
+</body>
+</html>
