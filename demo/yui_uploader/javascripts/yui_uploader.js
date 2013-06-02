@@ -85,16 +85,16 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
             }
 
             if (!_uploadDone && _uploader.get("fileList").length > 0) {
-                // Y.log("QUEUE");
-                // Y.log(_uploader.queue);
+                Y.log("QUEUE");
+                Y.log(_uploader.queue);
                 if (_uploader.queue) {
                     _uploader.queue = null;
                 }
                 // _uploader.uploadAll();
-                // Y.log("uploadlist");
+                Y.log("uploadlist");
                 // Y.log(this.get("fileList"));
                 // Y.log(_uploader.get("fileList"));
-                // Y.log(_fileList);
+                Y.log(_fileList);
                 // Y.log(_fileList[0].get("size"));
                 // var totalSize = 0;
                 // for (var i = 0; (_getthisList.length - 1) >= i; i++) {
@@ -157,6 +157,7 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
                     Y.log(_getthisList[offset.indexOf(e.currentTarget)]);
                     _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                     Y.log("--Cancelupload--");
+                    Y.log(_uploader.queue);
                 }
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get("fileList")[offset.indexOf(e.currentTarget)].cancelUpload();
@@ -194,9 +195,12 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
 
         _uploader.on("uploadprogress", function (e) {
             Y.log("--Uploadprogress--");
+            Y.log(_uploader);
+            Y.log(e);
+            Y.log(e.file);
             var fileRow = Y.one("#" + e.file.get("id") + "_row");
             var statusList = Y.one("#" + e.file.get("id") + "");
-            fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
+            // fileRow.one(".percentdone").set("text", e.percentLoaded + "%");
             statusList.one(".progress .bar").setStyle("width", e.percentLoaded + "%");
             if (e.percentLoaded === 100) {
                 statusList.removeClass("cancel");
@@ -218,7 +222,7 @@ YUI({filter: "raw"}).use("uploader", "event", function(Y) {
         });
 
         _uploader.on("totaluploadprogress", function (e) {
-            Y.log("--ALLUploadprogress--");
+            // Y.log("--ALLUploadprogress--");
             Y.one("#overallProgress").setHTML("Total uploaded: <strong>" +
             // e.bytesTotal + "Bytes" +
             Math.floor((e.bytesLoaded/e.bytesTotal)*100) + "%" +
