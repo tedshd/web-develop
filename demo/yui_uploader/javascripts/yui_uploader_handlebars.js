@@ -1,4 +1,4 @@
-YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
+YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
     window.Y = Y;
     var _fileList,
         _fileListlength,
@@ -106,12 +106,25 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
                 // Y.log('total----' + totalSize);
                 //var uploadList = _uploader.get('fileList');
                 var uploadList = _fileList;
-                _uploader.uploadThese(uploadList);
+                // _uploader.uploadThese(uploadList);
             }
 
             // render filestatus
             Y.each(_fileList, function (fileInstance) {
-                _fileStatus.append('<div id="' + fileInstance.get('id') + '" class="file_status cancel">' +
+                var fileStatusTpl = Y.one("#tpl-file-status").getHTML(),
+                    items = [],
+                    html = '';
+                Y.each(_fileList, function(fileInstance) {
+                    items.push({
+                        id   : fileInstance.get('id'),
+                        name : fileInstance.get('name')
+                    });
+                });
+                html = Y.Handlebars.render(fileStatusTpl, {
+                    items: items
+                });
+                _fileStatus.setHTML(html);
+                /*_fileStatus.append('<div id="' + fileInstance.get('id') + '" class="file_status cancel">' +
                                       '<div class="progress">' +
                                           '<div class="bar"></div>' +
                                       '</div>' +
@@ -119,12 +132,12 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
                                           fileInstance.get('name') +
                                       '</span>' +
                                       '<button type="buttonr" class="close cancel_close">&times;</button>' +
-                                  '</div>');
+                                  '</div>');*/
 
-                fileTable.append('<tr id="' + fileInstance.get('id') + '_row' + '">' +
+                /*fileTable.append('<tr id="' + fileInstance.get('id') + '_row' + '">' +
                 '<td class="filename">' + fileInstance.get('name') + '</td>' +
                 '<td class="filesize">' + fileInstance.get('size') + '</td>' +
-                '<td class="percentdone">Hasnt started yet</td>');
+                '<td class="percentdone">Hasnt started yet</td>');*/
             });
             // Y.one('.upload_total').setHTML('<div class='total_status'>' +
             //                       '<div class='progress'>' +
@@ -194,10 +207,10 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
         });
 
         _uploader.on('uploadprogress', function (e) {
-            // Y.log('--Uploadprogress--');
-            // Y.log(_uploader);
-            // Y.log(e);
-            // Y.log(e.file);
+            Y.log('--Uploadprogress--');
+            Y.log(_uploader);
+            Y.log(e);
+            Y.log(e.file);
             var fileRow = Y.one('#' + e.file.get('id') + '_row');
             var statusList = Y.one('#' + e.file.get('id') + '');
             // fileRow.one('.percentdone').set('text', e.percentLoaded + '%');

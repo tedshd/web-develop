@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Progress_bar</title>
+<script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+<script type="text/javascript" src="javascripts/yui_uploader_handlebars.js"></script>
+<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+.progress {
+    border-radius: 0px;
+    height: 25px;
+}
+.progress .bar {
+    background: #0088ff;
+}
+.file_status {
+    margin: 5% auto;
+    width: 50%;
+    position: relative;
+}
+.file_info {
+    position: absolute;
+    top: 0;
+    display: table;
+    width: 100%;
+}
+.file_info .file_title,
+.file_info .file_progress,
+.file_info .file_cancel {
+    display: table-cell;
+    padding: 0 10px;
+    vertical-align: middle;
+    height: 25px;
+}
+.file_name {
+    width: 300px;
+    display: inline-block;
+    overflow: hidden;
+    white-space : nowrap;
+}
+.file_progress {
+    width: 50px;
+}
+.file_cancel {
+    width: 12px;
+}
+span {
+    /*border: solid 1px;*/
+}
+</style>
+</head>
+<body>
+    <div class="upload"></div>
+    <div class="upload_status"></div>
+    <script id="tpl-file-status" type="text/x-handlebars-template">
+        {{#each items}}
+            <div id="{{{id}}}" class="file_status cancel">
+                <div class="progress">
+                    <div class="bar" style="width:50%"></div>
+                </div>
+                <span class="file_info">
+                    <span class="file_title">
+                        <span class="file_name">{{{name}}}</span>
+                    </span>
+                    <span class="file_progress">{{{progress}}}</span>
+                    <span class="file_cancel">
+                        <button type='button' class='close cancel_close'>&times;</button>
+                    </span>
+                </span>
+            </div>
+        {{/each}}
+    </script>
+</body>
+</html>

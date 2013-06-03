@@ -22,6 +22,17 @@
 
         // Append the rendered template to the page.
         Y.one('body').append(html);
+        var fileStatusTpl = Y.one("#tpl-file-status").getHTML(),
+            html = '';
+        Y.each(_fileList, function(fileInstance) {
+            items.push({
+                name: fileInstance.get('name')
+            });
+        });
+        html = Y.Handlebars.render(fileStatusTpl, {
+            items: items
+        });
+        _fileStatus.setHTML(html);
     });
 </script>
 </head>
@@ -34,6 +45,22 @@
                 <li><a href="{{url}}">{{name}}</a></li>
             {{/items}}
         </ul>
+    </script>
+    <script id="tpl-file-status" type="text/x-handlebars-template">
+        {{#each items}}
+            <div class="file_status cancel">
+                <div class="progress">
+                    <div class="bar" style="width:50%"></div>
+                </div>
+                <span class="file_info">
+                    <span class="file_title">{{{name}}}</span>
+                    <span class="file_progress">{{{progress}}}</span>
+                    <span class="file_cancel">
+                        <button type='button' class='close cancel_close'>&times;</button>
+                    </span>
+                </span>
+            </div>
+        {{/each}}
     </script>
 </body>
 </html>
