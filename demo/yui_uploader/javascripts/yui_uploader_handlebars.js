@@ -3,6 +3,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
     var _fileList,
         _fileListlength,
         _getthisList,
+        _statusList,
         _uploadDone = false,
         _fileStatus = Y.one('.upload_status');
     if (Y.Uploader.TYPE !== 'none' && !Y.UA.ios) {
@@ -16,15 +17,9 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             simLimit: 5, // upload files number 2~5
             withCredentials: false
         });
-        // handle not drag area
-            // _uploaderOut = new Y.Uploader({
-            //     width: '0',
-            //     height: '0'
-            // });
 
         // render upload
         _uploader.render('.upload');
-        // _uploaderOut.render('body');
 
         // drag message
         Y.one('.upload').append('<div><strong class="drop_message">Drop here!</strong></div>');
@@ -37,7 +32,6 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
 
             // drag area
             _uploader.set('dragAndDropArea', 'body');
-            // _uploaderOut.set('dragAndDropArea', 'body');
 
             // handle area not drag
             _uploader.on(['dragenter', 'dragover'], function () {
@@ -54,17 +48,6 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 }
             });
 
-            // _uploaderOut.on(['dragenter', 'dragover'], function () {
-            //     if (ddArea) {
-            //         nodeMessage.removeClass('drop_message');
-            //     }
-            // });
-
-            // _uploaderOut.on(['dragleave', 'drop'], function () {
-            //     if (ddArea) {
-                    nodeMessage.addClass('drop_message');
-            //     }
-            // });
         }
 
         // handle fileselect & render filestatus
@@ -79,11 +62,6 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             }
             // Y.log('Total-' + _fileList.length);
 
-            if (_uploadDone) {
-                _uploadDone = false;
-                fileTable.setHTML('');
-            }
-
             if (!_uploadDone && _uploader.get('fileList').length > 0) {
                 Y.log('QUEUE');
                 Y.log(_uploader.queue);
@@ -96,17 +74,10 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 // Y.log(_uploader.get('fileList'));
                 Y.log(_fileList);
                 // Y.log(_fileList[0].get('size'));
-                // var totalSize = 0;
-                // for (var i = 0; (_getthisList.length - 1) >= i; i++) {
-                //     // Y.log('size' + i);
-                //     // Y.log(_fileList[i].get('size'));
-                //     var fileSize = _getthisList[i].get('size');
-                //     totalSize = fileSize + totalSize;
-                // }
                 // Y.log('total----' + totalSize);
                 //var uploadList = _uploader.get('fileList');
                 var uploadList = _fileList;
-                // _uploader.uploadThese(uploadList);
+                _uploader.uploadThese(uploadList);
             }
 
             // render filestatus
@@ -123,28 +94,8 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 html = Y.Handlebars.render(fileStatusTpl, {
                     items: items
                 });
-                _fileStatus.setHTML(html);
-                /*_fileStatus.append('<div id="' + fileInstance.get('id') + '" class="file_status cancel">' +
-                                      '<div class="progress">' +
-                                          '<div class="bar"></div>' +
-                                      '</div>' +
-                                      '<span>' +
-                                          fileInstance.get('name') +
-                                      '</span>' +
-                                      '<button type="buttonr" class="close cancel_close">&times;</button>' +
-                                  '</div>');*/
-
-                /*fileTable.append('<tr id="' + fileInstance.get('id') + '_row' + '">' +
-                '<td class="filename">' + fileInstance.get('name') + '</td>' +
-                '<td class="filesize">' + fileInstance.get('size') + '</td>' +
-                '<td class="percentdone">Hasnt started yet</td>');*/
+                _fileStatus.append(html);
             });
-            // Y.one('.upload_total').setHTML('<div class='total_status'>' +
-            //                       '<div class='progress'>' +
-            //                           '<div class='bar'></div>' +
-            //                       '</div>' +
-            //                       '<span></span>' +
-            //                   '</div>');
 
             var listlength = this.get('fileList').length;
 
@@ -177,81 +128,52 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 // Y.log(offset.indexOf(e.currentTarget));
                 _getthisList.splice(offset.indexOf(e.currentTarget),1);
                 // _uploader.set('enabled', true);
-                _uploadDone = true;
                 _uploader.set('fileList', _getthisList);
                 // _uploader.set('fileList', []);
                 // Y.log(_fileStatus.all('.file_status')._nodes[offset.indexOf(e.currentTarget)]);
-                _fileStatus.all('.cancel')._nodes[offset.indexOf(e.currentTarget)].remove();
+                _fileStatus.all('.cancel').item(offset.indexOf(e.currentTarget)).remove();
+                // _fileStatus.all('.cancel')._nodes[offset.indexOf(e.currentTarget)].remove();
                 // Y.log(_fileStatus.all('.file_status').size());
                 // Y.log(offset);
-                // var lastTotalSize = 0;
-                // for (var i = 0; (_getthisList.length - 1) >= i; i++) {
-                //     // Y.log('size' + i);
-                //     // Y.log(_fileList[i].get('size'));
-                //     var fileSize = _fileList[i].get('size');
-                //     lastTotalSize = fileSize + lastTotalSize;
-                // }
                 // Y.log('canceltotal----' + lastTotalSize);
-                // for (var aMultiples = ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'], nMultiple = 0, nApprox = lastTotalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
-                //     lastTotalSize = nApprox.toFixed(3) + ' ' + aMultiples[nMultiple];
-                // }
-                // Y.one('.total_status span').setHTML('Number: ' + _fileStatus.all('.file_status').size() + ' Total: ' + lastTotalSize);
             }, _fileStatus, '.close');
 
             // Y.log('offset:' + listlength);
-            // total upload
-            // for (var aMultiples = ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'], nMultiple = 0, nApprox = totalSize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
-            //     totalSize = nApprox.toFixed(3) + ' ' + aMultiples[nMultiple];
-            // }
-            // Y.one('.total_status span').setHTML('Number: ' + _fileStatus.all('.file_status').size() + ' Total: ' + totalSize);
         });
 
         _uploader.on('uploadprogress', function (e) {
             Y.log('--Uploadprogress--');
-            Y.log(_uploader);
-            Y.log(e);
-            Y.log(e.file);
-            var fileRow = Y.one('#' + e.file.get('id') + '_row');
-            var statusList = Y.one('#' + e.file.get('id') + '');
-            // fileRow.one('.percentdone').set('text', e.percentLoaded + '%');
-            statusList.one('.progress .bar').setStyle('width', e.percentLoaded + '%');
-            if (e.percentLoaded === 100) {
-                statusList.removeClass('cancel');
-                statusList.one('.close').removeClass('cancel_close');
-            }
+            // Y.log(_uploader);
+            // Y.log(e);
+            // Y.log(e.file);
+            // var fileRow = Y.one('#' + e.file.get('id') + '_row');
+            _statusList = Y.one('#' + e.file.get('id') + '');
+            _statusList.one(".file_progress").set("text", e.percentLoaded + "%");
+            _statusList.one('.progress .bar').setStyle('width', e.percentLoaded + '%');
         });
 
         _uploader.on('uploadstart', function (e) {
             Y.log('--UploadStart--');
-            // _uploader.set('enabled', false);
             Y.log('START');
             Y.log(_fileList);
         });
 
         _uploader.on('uploadcomplete', function (e) {
             Y.log('--UploadComplete--');
-            var fileRow = Y.one('#' + e.file.get('id') + '_row');
-            fileRow.one('.percentdone').set('text', 'Finished!');
+            // var fileRow = Y.one('#' + e.file.get('id') + '_row');
+            // fileRow.one('.percentdone').set('text', 'Finished!');
+            _statusList.one(".file_progress").set("text", "Complete");
+            _statusList.one('.progress .bar').setStyle('width', '100%');
+            _statusList.removeClass('cancel');
+            _statusList.one('.close').removeClass('cancel_close');
         });
 
         _uploader.on('totaluploadprogress', function (e) {
             // Y.log('--ALLUploadprogress--');
-            Y.one('#overallProgress').setHTML('Total uploaded: <strong>' +
-            // e.bytesTotal + 'Bytes' +
-            Math.floor((e.bytesLoaded/e.bytesTotal)*100) + '%' +
-            // e.percentLoaded + '%' +
-            '</strong>');
-
-            // Y.one('.total_status').one('.progress .bar').setStyle('width', Math.floor((e.bytesLoaded/e.bytesTotal)*100) + '%');
-            // Y.log('TOTAL%');
-            // Y.log(e.percentLoaded);
-            // total upload
-            // Y.one('.total_status span').append('<span>' + ' Total: ' + e.bytesTotal + 'Bytes' + '</span>');
         });
 
         _uploader.on('alluploadscomplete', function (e) {
             Y.log('--ALLUploadComplete--');
-            // _uploader.set('enabled', true);
             _uploader.set('fileList', []);
             _uploadDone = true;
         });
