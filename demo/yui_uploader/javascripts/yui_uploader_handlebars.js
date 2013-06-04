@@ -3,7 +3,6 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
     var _fileList,
         _fileListlength,
         _getthisList,
-        _statusList,
         _uploadDone = false,
         _fileStatus = Y.one('.upload_status');
     if (Y.Uploader.TYPE !== 'none' && !Y.UA.ios) {
@@ -37,14 +36,14 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             _uploader.on(['dragenter', 'dragover'], function () {
                 if (ddArea) {
                     nodeMessage.removeClass('drop_message');
-                    ddArea.addClass('ddtip');
+                    ddArea.addClass('miii-ddtip');
                 }
             });
 
             _uploader.on(['dragleave', 'drop'], function () {
                 if (ddArea) {
                     nodeMessage.addClass('drop_message');
-                    ddArea.removeClass('ddtip');
+                    ddArea.removeClass('miii-ddtip');
                 }
             });
 
@@ -53,14 +52,15 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
         // handle fileselect & render filestatus
         _uploader.after('fileselect', function (e) {
             Y.log('--FileSelect--');
-            var cancelList;
             _getthisList = this.get('fileList');
+            Y.log("_getthisList");
+            Y.log(_getthisList);
             _fileList = e.fileList;
             var fileTable = Y.one('#filenames tbody');
-            if (_fileList.length > 0 && Y.one('#nofiles')) {
-                Y.one('#nofiles').remove();
+
+            if (_uploadDone) {
+                _uploadDone = false;
             }
-            // Y.log('Total-' + _fileList.length);
 
             if (!_uploadDone && _uploader.get('fileList').length > 0) {
                 Y.log('QUEUE');
@@ -80,22 +80,21 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 _uploader.uploadThese(uploadList);
             }
 
-            // render filestatus
-            Y.each(_fileList, function (fileInstance) {
-                var fileStatusTpl = Y.one("#tpl-file-status").getHTML(),
-                    items = [],
-                    html = '';
-                Y.each(_fileList, function(fileInstance) {
-                    items.push({
-                        id   : fileInstance.get('id'),
-                        name : fileInstance.get('name')
-                    });
+            // handlebars render filestatus
+            var fileStatusTpl = Y.one("#tpl-file-status").getHTML(),
+                items = [],
+                html = '';
+            Y.each(_fileList, function(fileInstance) {
+                items.push({
+                    id   : fileInstance.get('id'),
+                    name : fileInstance.get('name')
                 });
-                html = Y.Handlebars.render(fileStatusTpl, {
-                    items: items
-                });
-                _fileStatus.append(html);
             });
+            html = Y.Handlebars.render(fileStatusTpl, {
+                items: items
+            });
+            // _fileStatus.append(html);
+            _fileStatus.insert(html, Y.one('.file_status'));
 
             var listlength = this.get('fileList').length;
 
@@ -105,14 +104,15 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 e.preventDefault();
                 var offset = _fileStatus.all('.cancel_close');
                 // Y.log('cancel...');
-                // Y.log(_fileList);
-                // Y.log(_getthisList);
+                Y.log("uploadList");
+                Y.log(_fileList);
+                Y.log("_getthisList");
+                Y.log(_getthisList);
                 // Y.log(_uploader.get('fileList'));
                 // Y.log(_fileList[offset.indexOf(e.currentTarget)]);
                 // Y.log(offset.indexOf(e.currentTarget));
                 // Y.log(_getthisList.indexOf(e.currentTarget));
                 // Y.log(_uploader.get('fileList'));
-                Y.log('-----------------------------');
                 // Y.log(_uploader.queue);
                 // Y.log(_fileStatus.all('.cancel .progress .bar'));
                 // Y.log(_fileStatus.all('.cancel .progress .bar').getStyle('width'));
@@ -121,14 +121,20 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                     Y.log(_getthisList[offset.indexOf(e.currentTarget)]);
                     _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                     Y.log('--Cancelupload--');
+                    Y.log("QUEUE");
                     Y.log(_uploader.queue);
+                    Y.log(_uploader.queue.queuedFiles);
+                    // _uploader.fire("uploadstart");
                 }
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get('fileList')[offset.indexOf(e.currentTarget)].cancelUpload();
                 // Y.log(offset.indexOf(e.currentTarget));
                 _getthisList.splice(offset.indexOf(e.currentTarget),1);
                 // _uploader.set('enabled', true);
+                _uploadDone = true;
                 _uploader.set('fileList', _getthisList);
+                Y.log("SetList(_getthisList)");
+                Y.log(_getthisList);
                 // _uploader.set('fileList', []);
                 // Y.log(_fileStatus.all('.file_status')._nodes[offset.indexOf(e.currentTarget)]);
                 _fileStatus.all('.cancel').item(offset.indexOf(e.currentTarget)).remove();
@@ -147,9 +153,9 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             // Y.log(e);
             // Y.log(e.file);
             // var fileRow = Y.one('#' + e.file.get('id') + '_row');
-            _statusList = Y.one('#' + e.file.get('id') + '');
-            _statusList.one(".file_progress").set("text", e.percentLoaded + "%");
-            _statusList.one('.progress .bar').setStyle('width', e.percentLoaded + '%');
+            var statusList = Y.one('#' + e.file.get('id') + '');
+            statusList.one('.file_progress').set('text', e.percentLoaded + '%');
+            statusList.one('.progress .bar').setStyle('width', e.percentLoaded + '%');
         });
 
         _uploader.on('uploadstart', function (e) {
@@ -162,10 +168,12 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             Y.log('--UploadComplete--');
             // var fileRow = Y.one('#' + e.file.get('id') + '_row');
             // fileRow.one('.percentdone').set('text', 'Finished!');
-            _statusList.one(".file_progress").set("text", "Complete");
-            _statusList.one('.progress .bar').setStyle('width', '100%');
-            _statusList.removeClass('cancel');
-            _statusList.one('.close').removeClass('cancel_close');
+            var statusList = Y.one('#' + e.file.get('id') + '');
+            statusList.one('.file_progress').set('text', 'Complete');
+            statusList.one('.progress .bar').setStyle('width', '100%');
+            statusList.one('.progress .bar').addClass('miii-finish-bar');
+            statusList.removeClass('cancel');
+            statusList.one('.close').removeClass('cancel_close');
         });
 
         _uploader.on('totaluploadprogress', function (e) {

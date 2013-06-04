@@ -1,0 +1,12 @@
+@import "compass";
+@import "compass/reset";
+.progress {
+    border-radius: 0px;
+    height: 25px;
+}
+.progress .bar {
+    background: #0088ff;
+}
+.progress .miii-finish-bar {
+    background: #dceff5;
+}
