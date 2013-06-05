@@ -56,7 +56,6 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             Y.log("_getthisList");
             Y.log(_getthisList);
             _fileList = e.fileList;
-            var fileTable = Y.one('#filenames tbody');
 
             if (_uploadDone) {
                 _uploadDone = false;
@@ -66,6 +65,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 Y.log('QUEUE');
                 Y.log(_uploader.queue);
                 if (_uploader.queue) {
+                    _uploader.queue._startNextFile();
                     _uploader.queue = null;
                 }
                 // _uploader.uploadAll();
@@ -94,7 +94,8 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 items: items
             });
             // _fileStatus.append(html);
-            _fileStatus.insert(html, Y.one('.file_status'));
+            // _fileStatus.insert(html, Y.one('.file_status'));
+            _fileStatus.append(html);
 
             var listlength = this.get('fileList').length;
 
@@ -118,12 +119,15 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 // Y.log(_fileStatus.all('.cancel .progress .bar').getStyle('width'));
                 // Y.log(_fileStatus.all('.cancel .progress .bar').getStyle('width')[offset.indexOf(e.currentTarget)]);
                 if (_fileStatus.all('.cancel .progress .bar').getStyle('width')[offset.indexOf(e.currentTarget)] !== '0px' ) {
+                    Y.log(offset.indexOf(e.currentTarget));
                     Y.log(_getthisList[offset.indexOf(e.currentTarget)]);
                     _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                     Y.log('--Cancelupload--');
                     Y.log("QUEUE");
                     Y.log(_uploader.queue);
                     Y.log(_uploader.queue.queuedFiles);
+                    _uploader.queue._startNextFile();
+                    // _uploader.queue.startUpload();
                     // _uploader.fire("uploadstart");
                 }
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
@@ -137,6 +141,9 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                 Y.log(_getthisList);
                 // _uploader.set('fileList', []);
                 // Y.log(_fileStatus.all('.file_status')._nodes[offset.indexOf(e.currentTarget)]);
+                Y.log("--removeNode--");
+                Y.log(_fileStatus.all('.cancel'));
+                Y.log(offset.indexOf(e.currentTarget));
                 _fileStatus.all('.cancel').item(offset.indexOf(e.currentTarget)).remove();
                 // _fileStatus.all('.cancel')._nodes[offset.indexOf(e.currentTarget)].remove();
                 // Y.log(_fileStatus.all('.file_status').size());
@@ -172,7 +179,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             statusList.one('.file_progress').set('text', 'Complete');
             statusList.one('.progress .bar').setStyle('width', '100%');
             statusList.one('.progress .bar').addClass('miii-finish-bar');
-            statusList.removeClass('cancel');
+            // statusList.removeClass('cancel');
             statusList.one('.close').removeClass('cancel_close');
         });
 
