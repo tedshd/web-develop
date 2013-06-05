@@ -4,7 +4,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
         _fileListlength,
         _getthisList,
         _uploadDone = false,
-        _fileStatus = Y.one('.upload_status');
+        _fileStatus = Y.one('.upload-status');
     if (Y.Uploader.TYPE !== 'none' && !Y.UA.ios) {
         var _uploader = new Y.Uploader({
             width: '150px',
@@ -13,7 +13,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             fileFieldName: 'pic', //A String specifying what should be the POST field name for the file content in the upload request.(Default:'Filedata')
             swfURL: 'http://yui.yahooapis.com/3.10.1/build/uploader/assets/flashuploader.swf?t=' + Math.random(),
             uploadURL: 'post_file.php', // The URL to which file upload requested are POSTed. Only used if a different url is not passed to the upload method call.
-            simLimit: 5, // upload files number 2~5
+            simLimit: 1,
             withCredentials: false
         });
 
@@ -21,12 +21,12 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
         _uploader.render('.upload');
 
         // drag message
-        Y.one('.upload').append('<div><strong class="drop_message">Drop here!</strong></div>');
+        Y.one('.upload').append('<div><strong class="drop-message">Drop here!</strong></div>');
 
         // drag & drop
         if (Y.Uploader.TYPE === 'html5') {
-            Y.one('body').append('<div class="dd_area"></div>');
-            var ddArea = Y.one('.dd_area'),
+            Y.one('body').append('<div class="dd-area"></div>');
+            var ddArea = Y.one('.dd-area'),
                 nodeMessage = Y.one('strong');
 
             // drag area
@@ -35,14 +35,14 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             // handle area not drag
             _uploader.on(['dragenter', 'dragover'], function () {
                 if (ddArea) {
-                    nodeMessage.removeClass('drop_message');
+                    nodeMessage.removeClass('drop-message');
                     ddArea.addClass('miii-ddtip');
                 }
             });
 
             _uploader.on(['dragleave', 'drop'], function () {
                 if (ddArea) {
-                    nodeMessage.addClass('drop_message');
+                    nodeMessage.addClass('drop-message');
                     ddArea.removeClass('miii-ddtip');
                 }
             });
@@ -64,10 +64,10 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             if (!_uploadDone && _uploader.get('fileList').length > 0) {
                 Y.log('QUEUE');
                 Y.log(_uploader.queue);
-                if (_uploader.queue) {
-                    _uploader.queue._startNextFile();
+                /*if (_uploader.queue) {
+                    // _uploader.queue._startNextFile();
                     _uploader.queue = null;
-                }
+                }*/
                 // _uploader.uploadAll();
                 Y.log('uploadlist');
                 // Y.log(this.get('fileList'));
@@ -87,7 +87,8 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             Y.each(_fileList, function(fileInstance) {
                 items.push({
                     id   : fileInstance.get('id'),
-                    name : fileInstance.get('name')
+                    name : fileInstance.get('name'),
+                    size : fileInstance.get('size')
                 });
             });
             html = Y.Handlebars.render(fileStatusTpl, {
@@ -103,7 +104,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             Y.delegate('click', function (e) {
                 Y.log('--Cancel--');
                 e.preventDefault();
-                var offset = _fileStatus.all('.cancel_close');
+                var offset = _fileStatus.all('.cancel-close');
                 // Y.log('cancel...');
                 Y.log("uploadList");
                 Y.log(_fileList);
@@ -126,10 +127,16 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                     Y.log("QUEUE");
                     Y.log(_uploader.queue);
                     Y.log(_uploader.queue.queuedFiles);
-                    _uploader.queue._startNextFile();
                     // _uploader.queue.startUpload();
                     // _uploader.fire("uploadstart");
+                } else {
+                    // remove waiting queue
+                    _uploader.queue.queuedFiles.splice((offset.indexOf(e.currentTarget)-1),1);
                 }
+                _uploader.queue._startNextFile();
+                Y.log("--CancelQUEUE--");
+                Y.log(_uploader.queue);
+                Y.log(_uploader.queue.queuedFiles);
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get('fileList')[offset.indexOf(e.currentTarget)].cancelUpload();
                 // Y.log(offset.indexOf(e.currentTarget));
@@ -161,7 +168,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             // Y.log(e.file);
             // var fileRow = Y.one('#' + e.file.get('id') + '_row');
             var statusList = Y.one('#' + e.file.get('id') + '');
-            statusList.one('.file_progress').set('text', e.percentLoaded + '%');
+            statusList.one('.file-progress').set('text', e.percentLoaded + '%');
             statusList.one('.progress .bar').setStyle('width', e.percentLoaded + '%');
         });
 
@@ -176,11 +183,11 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             // var fileRow = Y.one('#' + e.file.get('id') + '_row');
             // fileRow.one('.percentdone').set('text', 'Finished!');
             var statusList = Y.one('#' + e.file.get('id') + '');
-            statusList.one('.file_progress').set('text', 'Complete');
+            statusList.one('.file-progress').set('text', 'Complete');
             statusList.one('.progress .bar').setStyle('width', '100%');
             statusList.one('.progress .bar').addClass('miii-finish-bar');
-            // statusList.removeClass('cancel');
-            statusList.one('.close').removeClass('cancel_close');
+            statusList.removeClass('cancel');
+            statusList.one('.close').removeClass('cancel-close');
         });
 
         _uploader.on('totaluploadprogress', function (e) {

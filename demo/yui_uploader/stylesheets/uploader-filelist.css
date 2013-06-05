@@ -64,49 +64,49 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 3, ../sass/uploader-filelist.scss */
-.file_status {
+.file-status {
   margin: 5% auto;
   width: 50%;
   position: relative;
 }
-
-/* line 8, ../sass/uploader-filelist.scss */
-.file_info {
+/* line 7, ../sass/uploader-filelist.scss */
+.file-status .file-info {
   position: absolute;
   top: 0;
   display: table;
   width: 100%;
 }
-
-/* line 16, ../sass/uploader-filelist.scss */
-.file_info .file_title,
-.file_info .file_progress,
-.file_info .file_cancel {
+/* line 15, ../sass/uploader-filelist.scss */
+.file-status .file-info .file-title,
+.file-status .file-info .file-progress,
+.file-status .file-info .file-size,
+.file-status .file-info .file-cancel {
   display: table-cell;
   padding: 0 10px;
   vertical-align: middle;
   height: 25px;
 }
-
-/* line 22, ../sass/uploader-filelist.scss */
-.file_name {
+/* line 21, ../sass/uploader-filelist.scss */
+.file-status .file-info .file-name {
   width: 410px;
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
 }
-
-/* line 28, ../sass/uploader-filelist.scss */
-.file_progress {
-  width: 50px;
+/* line 27, ../sass/uploader-filelist.scss */
+.file-status .file-info .fille-size {
+  width: 100px;
 }
-
-/* line 31, ../sass/uploader-filelist.scss */
-.file_cancel {
+/* line 30, ../sass/uploader-filelist.scss */
+.file-status .file-info .file-progress {
+  width: 100px;
+}
+/* line 33, ../sass/uploader-filelist.scss */
+.file-status .file-info .file-cancel {
   width: 12px;
 }
 
-/* line 34, ../sass/uploader-filelist.scss */
+/* line 38, ../sass/uploader-filelist.scss */
 span {
   /*border: solid 1px;*/
 }

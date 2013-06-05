@@ -12,20 +12,21 @@
 </head>
 <body>
     <div class="upload"></div>
-    <div class="upload_status"></div>
+    <div class="upload-status"></div>
     <script id="tpl-file-status" type="text/x-handlebars-template">
         {{#items}}
-            <div id="{{{id}}}" class="file_status cancel">
+            <div id="{{{id}}}" class="file-status cancel">
                 <div class="progress">
                     <div class="bar"></div>
                 </div>
-                <span class="file_info">
-                    <span class="file_title">
-                        <span class="file_name">{{{name}}}</span>
+                <span class="file-info">
+                    <span class="file-title">
+                        <span class="file-name" title="{{{name}}}">{{{name}}}</span>
                     </span>
-                    <span class="file_progress">Waiting</span>
-                    <span class="file_cancel">
-                        <a class='close cancel_close' href="javascript:void(0)">&times;</a>
+                    <span class="file-size">{{{size}}}</span>
+                    <span class="file-progress">Waiting</span>
+                    <span class="file-cancel">
+                        <a class='close cancel-close' href="javascript:void(0)">&times;</a>
                     </span>
                 </span>
             </div>

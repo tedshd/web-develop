@@ -1,35 +1,39 @@
 @import "compass";
 @import "compass/reset";
-.file_status {
+.file-status {
     margin: 5% auto;
     width: 50%;
     position: relative;
-}
-.file_info {
-    position: absolute;
-    top: 0;
-    display: table;
-    width: 100%;
-}
-.file_info .file_title,
-.file_info .file_progress,
-.file_info .file_cancel {
-    display: table-cell;
-    padding: 0 10px;
-    vertical-align: middle;
-    height: 25px;
-}
-.file_name {
-    width: 410px;
-    display: inline-block;
-    overflow: hidden;
-    white-space : nowrap;
-}
-.file_progress {
-    width: 50px;
-}
-.file_cancel {
-    width: 12px;
+    .file-info {
+        position: absolute;
+        top: 0;
+        display: table;
+        width: 100%;
+        .file-title,
+        .file-progress,
+        .file-size,
+        .file-cancel {
+            display: table-cell;
+            padding: 0 10px;
+            vertical-align: middle;
+            height: 25px;
+        }
+        .file-name {
+            width: 410px;
+            display: inline-block;
+            overflow: hidden;
+            white-space : nowrap;
+        }
+        .fille-size {
+            width: 100px;
+        }
+        .file-progress {
+            width: 100px;
+        }
+        .file-cancel {
+            width: 12px;
+        }
+    }
 }
 span {
     /*border: solid 1px;*/
