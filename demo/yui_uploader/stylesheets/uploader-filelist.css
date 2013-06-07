@@ -94,8 +94,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   white-space: nowrap;
 }
 /* line 27, ../sass/uploader-filelist.scss */
-.file-status .file-info .fille-size {
-  width: 100px;
+.file-status .file-info .file-size {
+  width: 200px;
 }
 /* line 30, ../sass/uploader-filelist.scss */
 .file-status .file-info .file-progress {

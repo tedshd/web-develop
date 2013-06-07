@@ -13,7 +13,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             fileFieldName: 'pic', //A String specifying what should be the POST field name for the file content in the upload request.(Default:'Filedata')
             swfURL: 'http://yui.yahooapis.com/3.10.1/build/uploader/assets/flashuploader.swf?t=' + Math.random(),
             uploadURL: 'post_file.php', // The URL to which file upload requested are POSTed. Only used if a different url is not passed to the upload method call.
-            simLimit: 1,
+            simLimit: 1, // upload files number 2~5
             withCredentials: false
         });
 
@@ -64,10 +64,10 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             if (!_uploadDone && _uploader.get('fileList').length > 0) {
                 Y.log('QUEUE');
                 Y.log(_uploader.queue);
-                /*if (_uploader.queue) {
-                    // _uploader.queue._startNextFile();
+                if (_uploader.queue) {
+                    _uploader.queue._startNextFile();
                     _uploader.queue = null;
-                }*/
+                }
                 // _uploader.uploadAll();
                 Y.log('uploadlist');
                 // Y.log(this.get('fileList'));
@@ -87,8 +87,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
             Y.each(_fileList, function(fileInstance) {
                 items.push({
                     id   : fileInstance.get('id'),
-                    name : fileInstance.get('name'),
-                    size : fileInstance.get('size')
+                    name : fileInstance.get('name')
                 });
             });
             html = Y.Handlebars.render(fileStatusTpl, {
@@ -130,13 +129,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', 'handlebars', function(Y) {
                     _uploader.queue._startNextFile();
                     // _uploader.queue.startUpload();
                     // _uploader.fire("uploadstart");
-                } else {
-                    // remove waiting queue
-                    _uploader.queue.queuedFiles.splice((offset.indexOf(e.currentTarget)-1),1);
                 }
-                Y.log("--CancelQUEUE--");
-                Y.log(_uploader.queue);
-                Y.log(_uploader.queue.queuedFiles);
                 // _getthisList[offset.indexOf(e.currentTarget)].cancelUpload();
                 // _uploader.get('fileList')[offset.indexOf(e.currentTarget)].cancelUpload();
                 // Y.log(offset.indexOf(e.currentTarget));
