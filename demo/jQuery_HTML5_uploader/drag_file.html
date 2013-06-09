@@ -78,6 +78,20 @@
 
             var dt = e.dataTransfer;
             var files = dt.files;
+            // check file or folder
+            var length = e.dataTransfer.items.length;
+            for (var i = 0; i < length; i++) {
+                var entry = e.dataTransfer.items[i].webkitGetAsEntry();
+                console.log(entry);
+                if (entry.isFile) {
+                  // do whatever you want
+                  console.log(isFile);
+                } else if (entry.isDirectory) {
+                  // do whatever you want
+                  console.log(entry.isDirectory);
+                  alert("Don't drop folder");
+                }
+            }
 
             handleFiles(files);
         }
