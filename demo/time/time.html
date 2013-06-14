@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<style type="text/css">
+	    body {
+
+		}
+		#m_bar, #s_bar, #thismonth_bar, #h_bar, #thisdate_bar, #getweek_bar {
+		height:10px;
+		background:#0088ff;
+		}
+	</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript">
+	function startTime()
+	{
+	var today=new Date();
+	var thisyear=today.getFullYear();
+	var thismonth=today.getMonth();
+	var thisdate=today.getDate();
+	var getweek=today.getDay();
+	var h=today.getHours();
+	var m=today.getMinutes();
+	var s=today.getSeconds();
+	// add a zero in front of numbers<10
+	m=checkTime(m);
+	s=checkTime(s);
+	y=thisyear-2000;
+	$('#thismonth').html(thismonth);
+	$('#thismonth_bar').width(thismonth+'px');
+
+	$('#thisdate').html(thisdate);
+	$('#thisdate_bar').width(thisdate+'px');
+
+	$('#getweek').html(getweek);
+	$('#getweek_bar').width(getweek+'px');
+
+	$('#h').html(h);
+	$('#h_bar').width(h+'px');
+
+	$('#m').html(m);
+	$('#m_bar').width(m+'px');
+
+	$('#s').html(s);
+	$('#s_bar').width(s+'px');
+
+	$('#s').html(s);
+	$('#s_bar').width(s+'px');
+
+	t=setTimeout('startTime()',500);
+	}
+	function checkTime(i)
+	{
+	if (i<10)
+	{
+	i="0" + i;
+	}
+	return i;
+	}
+	</script>
+</head>
+<body onload="startTime()">
+    <div id="thismonth"></div>
+	<div id="thismonth_bar"></div>
+
+	<div id="thisdate"></div>
+	<div id="thisdate_bar"></div>
+
+	<div id="getweek"></div>
+	<div id="getweek_bar"></div>
+
+	<div id="h"></div>
+	<div id="h_bar"></div>
+
+	<div id="m"></div>
+	<div id="m_bar"></div>
+
+	<div id="s"></div>
+	<div id="s_bar"></div>
+
+</body>
+</html>
