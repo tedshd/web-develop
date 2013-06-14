@@ -9,6 +9,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
         var _uploader = new Y.Uploader({
             width: '150px',
             selectButtonLabel: 'Upload',
+            selectFilesButton: Y.one('.file-upload'),
             multipleFiles: true,
             fileFieldName: 'pic', //A String specifying what should be the POST field name for the file content in the upload request.(Default:'Filedata')
             swfURL: 'http://yui.yahooapis.com/3.10.1/build/uploader/assets/flashuploader.swf?t=' + Math.random(),
@@ -27,30 +28,32 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
         // _uploaderOut.render('body');
 
         // drag message
-        Y.one('.upload').append('<div><strong class="drop_message">Drop here!</strong></div>');
+        Y.one('.upload').append('<span><strong class="drop_message">Drop here!</strong></span>');
 
         // drag & drop
         if (Y.Uploader.TYPE === 'html5') {
-            Y.one('body').append('<div class="dd_area"></div>');
+            Y.one('body').append('<span class="dd_area"></span>');
             var ddArea = Y.one('.dd_area'),
                 nodeMessage = Y.one('strong');
 
             // drag area
-            _uploader.set('dragAndDropArea', 'body');
+            _uploader.set('dragAndDropArea', '.attachment');
             // _uploaderOut.set('dragAndDropArea', 'body');
 
             // handle area not drag
             _uploader.on(['dragenter', 'dragover'], function () {
                 if (ddArea) {
-                    nodeMessage.removeClass('drop_message');
-                    ddArea.addClass('ddtip');
+                    // nodeMessage.removeClass('drop_message');
+                    // ddArea.addClass('ddtip');
+                    Y.one('.attachment').addClass('ddtip');
                 }
             });
 
             _uploader.on(['dragleave', 'drop'], function () {
                 if (ddArea) {
-                    nodeMessage.addClass('drop_message');
-                    ddArea.removeClass('ddtip');
+                    // nodeMessage.addClass('drop_message');
+                    // ddArea.removeClass('ddtip');
+                    Y.one('.attachment').removeClass('ddtip');
                 }
             });
 

@@ -4,10 +4,15 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Uploader Prototype</title>
-<link rel="stylesheet" type="text/css" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" />
+<!-- <link rel="stylesheet" type="text/css" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" /> -->
 <link href="stylesheets/uploader-filelist.css" rel="stylesheet">
 <style>
-#divContainer {
+#uploaderContainerID {
+  width: 300px;
+  height: 50px;
+  background: #ccc;
+}
+.divContainer {
   border: 1px solid red;
   height: 50px;
 }
@@ -22,12 +27,68 @@
 .progress .complete {
   background: green;
 }
+/*----*/
+.drop_area {
+  position: relative;
+  width: 320px;
+  height: 240px;
+  background: #ccc;
+  overflow: hidden;
+}
+.action {
+  width: 100%;
+  height: 100px;
+  background: #aaa;
+  /*clear: both;*/
+  display: table;
+}
+.left {
+  /*float: left;*/
+  display: table-cell;
+  width: 50%;
+  height: 100%;
+  background: red;
+}
+.right {
+  /*float: right;*/
+  display: table-cell;
+  width: 50%;
+  height: 100%;
+  background: green;
+}
+/*.drop_area:hover*/ .tip:after {
+  content: "Drop here";
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: yellow;
+  box-sizing: border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  border: dotted 2px #0088ff;
+  opacity: 0.5;
+}
+.hidden {
+  display: none;
+}
+.drop {
+  width: 100%;
+  height: 100%;
+  background: blue;
+  box-sizing: border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  border: dotted 5px #0088ff;
+  opacity: 0.5;
+}
 </style>
 </head>
 <body class="yui-skin-sam">
 
 <div class="container">
   <h1>Uploader example</h1>
+  <div class="divContainer">Drop here!</div>
   <a href="javascript:void(0)" class="file-upload">Upload</a>
   <div id="uploaderContainerID"></div>
   <div class="miii-total-progress"></div>
@@ -40,7 +101,23 @@
     </div>
   </div>
 
-  <div id="divContainer">Drop here!</div>
+  <div class="divContainer">Drop here!</div>
+  <div class="drop_area">
+<div class="area"></div>
+    <span class="con">
+      <textarea></textarea>
+      <span class="action">
+        <span class="left">
+          <a href="http://www.google.com/">TEST1</a>
+        </span>
+        <span class="right">
+          <a href="javascript:void(0)">TEST2</a>
+        </span>
+      </span>
+    </span>
+
+
+  </div>
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -61,21 +138,47 @@ YUI().use('uploader', function (Y) {
       fileFieldName: 'pic',
       simLimit: 1
     }).render("#uploaderContainerID");
+    var _uploaderOut = new Y.Uploader({
+      width: 0,
+      height: 0
+    }).render("body");
   }
 
   if (Y.Uploader.TYPE == "html5") {
-    uploader.set("dragAndDropArea", "#divContainer");
+    uploader.set("dragAndDropArea", ".drop_area");
     //uploader.render("#selectFilesButtonContainer");
-    uploader.on(['dragenter', 'dragover'], function () {
+    uploader.on('dragover', function () {
+      // $('.area').addClass('drop');
+      $('.drop_area').addClass('tip');
+      // $('.con').addClass('hidden');
     });
 
-    uploader.on(['dragleave', 'drop'], function (e) {
-        console.log(e);
-        console.log(e.fileList);
-        console.log(e.fileList[0]);
-        console.log(e.fileList[0].get('file'));
-        console.log(e.fileList[0].get('file').type);
+    uploader.on(['drop'], function (e) {
+      // $('.area').removeClass('drop');
+        $('.drop_area').removeClass('tip');
+        // $('.con').removeClass('hidden');
+        // console.log(e);
+        // console.log(e.fileList);
+        // console.log(e.fileList[0]);
+        // console.log(e.fileList[0].get('file'));
+        // console.log(e.fileList[0].get('file').type);
     });
+        uploader.on(['dragleave'], function (e) {
+      // $('.area').removeClass('drop');
+      $('.drop_area').removeClass('tip');
+    });
+
+          _uploaderOut.set("dragAndDropArea", "body");
+                _uploaderOut.on(['dragenter', 'dragover'], function () {
+                  $('.area').removeClass('drop');
+                  // $('.area').addClass('drop');
+                  // $('.con').addClass('hidden');
+            });
+
+            _uploaderOut.on(['dragleave', 'drop'], function () {
+              $('.area').removeClass('drop');
+              // $('.con').addClass('hidden');
+            });
   }
   else if (Y.Uploader.TYPE == "flash") {
     uploader.render("#selectFilesButtonContainer");

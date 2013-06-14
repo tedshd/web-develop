@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drag_Area_Demo</title>
+<style type="text/css">
+.drop_area {
+	position: relative;
+	width: 320px;
+	height: 240px;
+	background: #ccc;
+}
+.action {
+	width: 100%;
+	height: 100px;
+	background: #aaa;
+	/*clear: both;*/
+    display: table;
+}
+.left {
+	/*float: left;*/
+    display: table-cell;
+	width: 50%;
+	height: 100%;
+	background: red;
+}
+.right {
+	/*float: right;*/
+    display: table-cell;
+	width: 50%;
+	height: 100%;
+	background: green;
+}
+/*.drop_area:hover .tip {*/
+/*.drop_area:after {*/
+.tip:after {
+    content: "";
+    display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: yellow;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box;
+	border: dotted 5px #0088ff;
+	opacity: 0.5;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+    function updateSize() {
+        var nBytes = 0,
+            // get upload file(s)
+            oFiles = document.getElementById("uploadInput").files,
+            // oFiles = document.getElementById("fileElem").files,
+            // get file quantity
+            nFiles = oFiles.length;
+        for (var nFileId = 0; nFileId < nFiles; nFileId++) {
+            // get file size
+            nBytes += oFiles[nFileId].size;
+        }
+        var sOutput = nBytes + " bytes";
+        // optional code for multiples approximation
+        for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+            sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
+        }
+        // end of optional code
+        document.getElementById("fileNum").innerHTML = nFiles;
+        document.getElementById("fileSize").innerHTML = sOutput;
+
+        // set input type file on customize style
+        var fileSelect = document.getElementById("fileSelect"), // customize style
+            fileElem = document.getElementById("fileElem"); // input type file
+
+        fileSelect.addEventListener("click", function (e) {
+            e.preventDefault(); // prevent navigation to "#"
+            if (fileElem) {
+                fileElem.click();
+            }
+        }, false);
+
+        // drag file
+        var dropbox;
+
+        dropbox = document.getElementById("dropbox");
+        dropbox.addEventListener("dragenter", dragenter, false);
+        dropbox.addEventListener("dragover", dragover, false);
+        dropbox.addEventListener("dragleave", dragleave, false);
+        dropbox.addEventListener("drop", drop, false);
+
+        // stop default event
+        function dragenter(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $('.drop_area').addClass('tip');
+        }
+
+        // stop default event
+        function dragover(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        function dragleave(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $('.drop_area').removeClass('tip');
+        }
+
+        function drop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $('.drop_area').removeClass('tip');
+
+            var dt = e.dataTransfer;
+            var files = dt.files;
+            // check file or folder
+            var length = e.dataTransfer.items.length;
+            for (var i = 0; i < length; i++) {
+                var entry = e.dataTransfer.items[i].webkitGetAsEntry();
+                console.log(entry);
+                if (entry.isFile) {
+                  // do whatever you want
+                  console.log(entry.isFile);
+                } else if (entry.isDirectory) {
+                  // do whatever you want
+                  console.log(entry.isDirectory);
+                  alert("Don't drop folder");
+                }
+            }
+
+            handleFiles(files);
+        }
+
+    }
+
+    // handle file
+    function handleFiles(files) {
+        var d = document.getElementById("fileList");
+        if (!files.length) {
+            d.innerHTML = "<p>No files selected!</p>";
+        } else {
+            var list = document.createElement("ul");
+            d.appendChild(list);
+            for (var i=0; i < files.length; i++) {
+                var li = document.createElement("li");
+                list.appendChild(li);
+
+                // show image,can set document type default icon.ex:if type is ppt,show ppt icon
+                var img = document.createElement("img");
+                // create file's object url
+                img.src = window.URL.createObjectURL(files[i]);;
+                img.height = 60;
+                img.onload = function() {
+                    window.URL.revokeObjectURL(this.src);
+                }
+                li.appendChild(img);
+
+                // show name, type, size
+                var info = document.createElement("span");
+                if (files[i].size > (1000*1000)) {
+                    info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/(1000*1000)) + " mbytes";
+                } else {
+                    info.innerHTML = files[i].name + "- type: " + files[i].type + ":" + ((files[i].size)/1000) + " kbytes";
+                }
+                li.appendChild(info);
+            }
+        }
+    }
+</script>
+</head>
+<body onload="updateSize();">
+    <div class="drop_area"  id="dropbox">
+
+        <div class="con">
+<span class="action">
+            <span class="left">
+                <a href="http://www.google.com/">TEST1</a>
+            </span>
+            <span class="right">
+                <a href="javascript:void(0)">TEST2</a>
+            </span>
+        </span>
+        </div>
+    	<textarea></textarea>
+
+    	<div class="area"></div>
+    </div>
+
+
+<form name="uploadForm">
+    <p>
+        <input id="uploadInput" type="file" name="myFiles" onchange="updateSize();" multiple>
+        selected files:
+        <span id="fileNum">
+            0
+        </span>
+            ; total size:
+        <span id="fileSize">
+            0
+        </span>
+    </p>
+    <p>
+        <input type="submit" value="Send file">
+    </p>
+    <input type="file" id="fileElem" multiple style="display:none" onchange="handleFiles(this.files)">
+    <a href="#" id="fileSelect">Select some files</a>
+    <!-- <div id="dropbox"> -->
+        <div id="fileList">
+            <p>Drag file here!</p>
+        </div>
+    <!-- </div> -->
+</form>
+</body>
+</html>
