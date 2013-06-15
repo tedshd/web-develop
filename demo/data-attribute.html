@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Data-attribute_test</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    console.log($('.box').attr('data'));
+    console.log(document.getElementById('box_id').getAttribute('data')); // JavaScript
+    console.log($('li').attr('data-id'));
+    for (var i = 0;$('li').length - 1 >= i; i++) {
+        console.log($('li:eq(' + i + ')').attr('data-id'));
+    };
+    console.log($('li').data('id')); // jQuery get data attribute
+});
+</script>
+</head>
+<body>
+    <div class="box" id="box_id" data="box-data">
+        <ul>
+            <li class="data" data-id="11">1</li>
+            <li class="data" data-id="22">2</li>
+            <li class="data" data-id="33">3</li>
+            <li class="data" data-id="44">4</li>
+        </ul>
+    </div>
+</body>
+</html>
