@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+    
+</head>
+<body>
+    
+    <ul></ul>
+    <script>
+    var run = function (formEl) {
+        
+
+        // script tag hack
+        // get data from flickr web service everytime I need...
+        var scriptEl = document.createElement("script");
+        scriptEl.src = "http://picasaweb.google.com/data/feed/base/user/TEDsHD/albumid/5263807088660719009?alt=json&callback=photo";
+        document.getElementsByTagName("head")[0].appendChild(scriptEl);            
+    };
+
+    var listEl = document.getElementsByTagName("ul")[0];
+    var photo = function (o) {
+        listEl.innerHTML = "";
+            
+            //el.innerHTML = o.encoding;
+            //alert(o.feed.xmlns);
+            //alert(o.feed.entry[0].title.$t);
+            //listEl.appendChild(el);
+            for (var i = 0; o.feed.entry.length >= i ; i++) {
+                var el = document.createElement("li");
+                var link = o.feed.entry[i].content.src;
+                el.innerHTML = "<img src='"+o.feed.entry[i].content.src+"'>";
+                console.log(i);
+                console.log(o.feed.entry[i].content.src);
+                listEl.appendChild(el);
+            };
+
+    };
+    run(); 
+    </script>
+</body>
+</html>

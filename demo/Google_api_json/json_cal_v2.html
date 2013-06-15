@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Cal</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <ul></ul>
+    <script>
+    var run = function (formEl) {
+        
+
+        // script tag hack
+        // get data from flickr web service everytime I need...
+        var scriptEl = document.createElement("script");
+        scriptEl.src = "http://www.google.com/calendar/feeds/tedshd%40gmail.com/public/basic?alt=json&callback=cal";
+        document.getElementsByTagName("head")[0].appendChild(scriptEl);            
+    };
+
+    var listEl = document.getElementsByTagName("ul")[0];
+    var cal = function (o) {
+        listEl.innerHTML = "";
+            
+            //el.innerHTML = o.encoding;
+            //alert(o.feed.xmlns);
+            //alert(o.feed.entry[0].title.$t);
+            //listEl.appendChild(el);
+            for (var i = 0; o.feed.entry.length >= i ; i++) {
+                var el = document.createElement("li");
+                //alert(o.feed.entry[i].link[0].href);
+                el.innerHTML = "<a href='"+o.feed.entry[i].link[0].href+"'>"+o.feed.entry[i].summary.$t+"</a>";
+                console.log(i);
+                console.log(o.feed.entry[i].summary.$t);
+                console.log(o.feed.entry[i].title.$t);
+                listEl.appendChild(el);
+            };
+
+    };
+    run(); 
+    </script>
+</body>
+</html>

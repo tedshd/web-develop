@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+    
+</head>
+<body>
+    
+    <ul></ul>
+    <script>
+    var run = function (formEl) {
+        
+
+        // script tag hack
+        // get data from flickr web service everytime I need...
+        var scriptEl = document.createElement("script");
+        scriptEl.src = "http://spreadsheets.google.com/feeds/list/0AjwXA87smFI2dDBEcjNPekxCU28taE1GSFJPYzlRV0E/od6/public/basic?alt=json-in-script&callback=myFunction";
+        document.getElementsByTagName("head")[0].appendChild(scriptEl);            
+    };
+
+    var listEl = document.getElementsByTagName("ul")[0];
+    var myFunction = function (o, title) {
+        listEl.innerHTML = "";
+            
+            //el.innerHTML = o.encoding;
+            //alert(o.feed.xmlns);
+            //alert(o.feed.entry[0].title.$t);
+            //listEl.appendChild(el);
+            for (var i = 0; o.feed.entry.length >= i ; i++) {
+                var el=document.createElement("li");
+                console.log(i);
+            };
+            alert(o.feed.entry[0].content.$t.nodeType);
+            //alert(o.feed.entry[0].content.$t);
+            //alert(o.feed.entry[1].content.$t);
+
+    };
+    run(); 
+    </script>
+</body>
+</html>
