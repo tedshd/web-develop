@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQ_node</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    console.log($('.div3').parent('.div2').parent('.div1').attr('data'));
+    console.log($('.div3').parent('.div2').attr('data'));
+    console.log($('.div3').parents('.div1').attr('data'));
+    console.log($('.div4').parents('.div1').attr('data'));
+});
+</script>
+</head>
+<body>
+    <div class="div1" data="first">
+        <div class="div2" data="second">
+            <div class="div3">
+                <div class="div4">Node4</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

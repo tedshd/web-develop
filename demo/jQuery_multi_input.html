@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery_select_test</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+</head>
+<script>
+$(function() {
+    $('.message .post_form').delegate('form', 'submit', function(e) {
+        e.preventDefault();
+        console.log($(this));
+        console.log($('input', $(this)).val());
+    });
+});
+</script>
+<body>
+    <div class="message">
+        <div class="post_form">
+            <form>
+                <div class="post">
+                    <input type="text" value=""></input>
+                </div>
+            </form>
+        </div>
+        <div class="post_form">
+            <form>
+                <div class="post">
+                    <input type="text" val=""></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
