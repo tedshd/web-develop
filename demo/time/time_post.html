@@ -21,7 +21,7 @@ function postTime() {
   var endTime = new Date().getTime();
   var time =  endTime - startTime;
   $('.clicktime').html(time);
-  t=setTimeout('postTime()',3000);
+  t=setTimeout('postTime()',10000);
 }
 
 $('button').click(function() {
