@@ -9,23 +9,36 @@
     <span class="time"></span>
     <button>start</button>
     <span class="clicktime"></span>
+    <span class="loadtime"></span>
 </body>
 <script type="text/javascript">
-var startTime;
+var startTime,
+    // loadTime = new Date().getTime();
+    t1 = new Date(),
+    loadTime = new Date().getTime();
+    console.log(loadTime);
+    console.log(Date());
+    console.log(Date(loadTime));
+
 function setTime() {
   startTime = new Date().getTime();
   $('.time').html(startTime);
 }
-
+var endTime, t2;
 function postTime() {
-  var endTime = new Date().getTime();
-  var time =  endTime - startTime;
-  $('.clicktime').html(time);
+  endTime = new Date().getTime(),
+  t2 = new Date();
+  console.log(t2 - t1);
+  // var time = endTime - startTime;
+  var load = endTime - loadTime;
+  // $('.clicktime').html(time);
+  $('.loadtime').html(load);
+  endTime = null;
   t=setTimeout('postTime()',10000);
 }
 
 $('button').click(function() {
-  setTime();
+  // setTime();
   postTime();
 });
 </script>
