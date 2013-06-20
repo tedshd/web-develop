@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Check_DOM</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    var node = $('div').length;
+    console.log(node);
+    if(node) {
+        alert('Node_True');
+    }
+    if($('span').length) {
+        alert('Node_True');
+    }
+});
+</script>
+</head>
+<body>
+    <div class="check">True</div>
+    <div class="check">True</div>
+</body>
+</html>

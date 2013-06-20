@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Exit_confirm</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        if (!confirm('您的郵件尚未寄出，\n您要捨棄此郵件嗎？')) {
+            return '按一下「取消」停留在此頁。';
+        }
+    }
+    alert(location.href);
+</script>
+</head>
+<body>
+
+</body>
+</html>
