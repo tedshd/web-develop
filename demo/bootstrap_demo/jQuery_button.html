@@ -13,7 +13,13 @@ $(function() {
 </head>
 <body>
     <button class="btn btn-primary">BUTTON</button>
-    <button class="btn btn-primary disabled">BUTTON</button>
-    <button id="jq" class="btn btn-primary">BUTTON</button>
+    <button class="btn btn-primary disabled">Bootstrap.disabled</button>
+    <button id="jq" class="btn btn-primary">disabled=true</button>
+    <button class="btn btn-primary" disabled="disabled">BUTTON</button>
+    <form>
+        <legend>Form Submit</legend>
+        <input type="submit" class="btn" value="Submit">
+        <input type="submit" class="btn" disabled="disabled" value="Submit">
+    </form>
 </body>
 </html>
