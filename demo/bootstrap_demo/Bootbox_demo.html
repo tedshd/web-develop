@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bootbox_demo</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="javascripts/bootstrap-modal.js"></script>
+<script src="javascripts/bootstrap-transition.js"></script>
+<link rel="stylesheet" href="stylesheets/styles.css">
+<script src="javascripts/bootbox_3.2.0.js"></script>
+<script>
+$(function() {
+    $('a:eq(0)').click(function(e) {
+        e.preventDefault();
+        bootbox.alert('<div class="con">Alert</div>', 'OK_Button', {header: 'Title'});
+        $('.con').append('<div class="test">APPEND</div>');
+    });
+    $('a:eq(1)').click(function(e) {
+        e.preventDefault();
+        bootbox.confirm('<div class="con">Confirm</div>');
+        $('.con').append('<div class="test">APPEND</div>');
+    });
+    $('a:eq(2)').click(function(e) {
+        e.preventDefault();
+        bootbox.prompt('<div class="con">prompt</div>');
+        $('.con').append('<div class="test">APPEND</div>');
+    });
+    $('a:eq(3)').click(function(e) {
+        e.preventDefault();
+        bootbox.dialog('<div class="con">Dialog</div>', {label: 'ok'}, {header: 'Title'});
+        $('.con').append('<div class="test">APPEND</div>');
+    });
+
+});
+</script>
+</head>
+<body>
+    <a href="javascript:void(0)">click_alert</a><br>
+    <a href="javascript:void(0)">click_confirrm</a><br>
+    <a href="javascript:void(0)">click_prompt</a><br>
+    <a href="javascript:void(0)">click_dailog</a><br>
+</body>
+</html>
