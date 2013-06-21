@@ -7,6 +7,27 @@
 <script src="javascripts/bootstrap-modal.js"></script>
 <script src="javascripts/bootstrap-transition.js"></script>
 <link rel="stylesheet" href="stylesheets/styles.css">
+<script>
+$(function() {
+    $('#myModal').modal({
+        show     : true,
+        backdrop : true,
+        keyboard : false
+    })
+    $('#myModal').on('show', function () {
+        console.log('show');
+    });
+    $('#myModal').on('shown', function () {
+        console.log('shown');
+    });
+    $('#myModal').on('hide', function () {
+        console.log('hide');
+    });
+    $('#myModal').on('hidden', function () {
+        console.log('hidden');
+    });
+});
+</script>
 </head>
 <body>
     <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
