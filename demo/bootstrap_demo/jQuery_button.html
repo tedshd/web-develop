@@ -8,6 +8,9 @@
 <script>
 $(function() {
     $('#jq').attr('disabled', true);
+    $('#click').click(function(e) {
+        alert('click');
+    });
 });
 </script>
 </head>
@@ -21,5 +24,6 @@ $(function() {
         <input type="submit" class="btn" value="Submit">
         <input type="submit" class="btn" disabled="disabled" value="Submit">
     </form>
+    <button id="click" class="btn btn-primary" disabled="disabled">BUTTON</button>
 </body>
 </html>
