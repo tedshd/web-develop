@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bind_EVENT</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background: #ccc;
+    }
+</style>
+<script>
+$(function() {
+    $('body').delegate('div', 'click', function() {
+        alert('click');
+    });
+    $('body').append('<div></div>');
+});
+</script>
+</head>
+<body>
+    <h1>Use delegate can bind event even DOM isn't exist</h1>
+</body>
+</html>
