@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Function</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    $('.origin').click(function() {
+        alert('Click');
+    });
+    $('#click').on('click', function() {
+        $('.origin').click();
+    });
+});
+</script>
+</head>
+<body>
+    <div class="origin">A</div>
+    <a href="javascript:void(0)" id="click">B</a>
+</body>
+</html>

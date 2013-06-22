@@ -6,8 +6,12 @@
 <script src="../../lib/jquery-1.10.1.js"></script>
 <script>
 $(function() {
+    var setTime;
     $('input').blur(function() {
         console.log($('input').val());
+        console.log(Date());
+        setTime = new Date();
+        console.log(setTime);
     });
 });
 </script>

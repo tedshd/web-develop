@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery_submit_test</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    // $('form').submit(function(e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "some.php",
+    //         data: { name: "John", location: "Boston" }
+    //     }).done(function( msg ) {
+    //         alert( "Data Saved: " + msg );
+    //     });
+    // });
+    $('form input').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "some.php",
+            data: { name: "John", location: "Boston" }
+        }).done(function( msg ) {
+            alert( "Data Saved: " + msg );
+        });
+    });
+    // $('button').click(function(e) {
+    //     e.preventDefault();
+    // });
+});
+</script>
+</head>
+<body>
+    <form action="">
+        <button>Button</button>
+        <input type="submit" value="Submit">
+    </form>
+    <span>Submit problem in jQuery.Button in form has event submit.</span>
+</body>
+</html>
