@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CSS3_animation</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<style>
+    div {
+        width: 400px;
+        height: 300px;
+        background: #000;
+    }
+    .fade {
+        transition: 1s;
+        opacity: 0.25;
+    }
+</style>
+<script>
+$(function() {
+    $('button').click(function() {
+        $('div').addClass('fade');
+    });
+});
+</script>
+</head>
+<body>
+    <button>BUTTON</button>
+    <div></div>
+</body>
+</html>
