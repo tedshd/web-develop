@@ -17,15 +17,15 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
             simLimit: 5, // upload files number 2~5
             withCredentials: false
         });
-        // handle not drag area
-            // _uploaderOut = new Y.Uploader({
-            //     width: '0',
-            //     height: '0'
-            // });
+        handle not drag area
+            _uploaderOut = new Y.Uploader({
+                width: '0',
+                height: '0'
+            });
 
         // render upload
         _uploader.render('.upload');
-        // _uploaderOut.render('body');
+        _uploaderOut.render('body');
 
         // drag message
         Y.one('.upload').append('<span><strong class="drop_message">Drop here!</strong></span>');
@@ -38,7 +38,7 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
 
             // drag area
             _uploader.set('dragAndDropArea', '.attachment');
-            // _uploaderOut.set('dragAndDropArea', 'body');
+            _uploaderOut.set('dragAndDropArea', 'body');
 
             // handle area not drag
             _uploader.on(['dragenter', 'dragover'], function () {
@@ -57,17 +57,17 @@ YUI({filter: 'raw'}).use('uploader', 'event', function(Y) {
                 }
             });
 
-            // _uploaderOut.on(['dragenter', 'dragover'], function () {
-            //     if (ddArea) {
-            //         nodeMessage.removeClass('drop_message');
-            //     }
-            // });
+            _uploaderOut.on(['dragenter', 'dragover'], function () {
+                if (ddArea) {
+                    nodeMessage.removeClass('drop_message');
+                }
+            });
 
-            // _uploaderOut.on(['dragleave', 'drop'], function () {
-            //     if (ddArea) {
+            _uploaderOut.on(['dragleave', 'drop'], function () {
+                if (ddArea) {
                     nodeMessage.addClass('drop_message');
-            //     }
-            // });
+                }
+            });
         }
 
         // handle fileselect & render filestatus
