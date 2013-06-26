@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery_hide_show</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<style>
+    .hide {
+        display: none;
+    }
+    .con_2 {
+        display: none;
+    }
+</style>
+<script>
+$(function() {
+    $('body').delegate('.disable', 'click', function() {
+        $('.con').removeClass('hide');
+        $(this).addClass('enable').removeClass('disable');
+    });
+    $('body').delegate('.enable', 'click', function() {
+        $('.con').addClass('hide');
+        $(this).removeClass('enable').addClass('disable');
+    });
+    $('a').on('click', function(e) {
+        e.preventDefault();
+        $('.con_2').toggle();
+    });
+});
+</script>
+</head>
+<body>
+    <button class="disable">BUTTON(changeClass)</button>
+    <a href="javascript:void(0)">Click(toggle())</a>
+    <div class="con hide">CONTENT</div>
+    <div class="con_2">Content2</div>
+</body>
+</html>
