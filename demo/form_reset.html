@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form_Reset</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    $('button').on('click', function() {
+        // document.getElementById("form_1").reset();
+        $('form')[0].reset();
+    });
+});
+function formReset() {
+    document.getElementById("form_1").reset();
+}
+</script>
+</head>
+<body>
+    <form id="form_1">
+        <input type="text" name="fname"><br>
+        <input type="checkbox"><br>
+        <input type="radio"><br>
+        <input type="button" onclick="formReset()" value="Reset_form"><br>
+    </form>
+    <button>BUTTON</button>
+</body>
+</html>
