@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CSS_selection</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<style>
+    body::selection {
+        background: green;
+    }
+    .area::selection {
+        background: #0088ff;
+    }
+</style>
+</head>
+<body>
+    <div class="area">
+        This is a selection area.<br>
+        Color is blue.
+    </div>
+    Color is green.
+</body>
+</html>
