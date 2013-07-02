@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2013-07-02 12:19:09
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+#card {
+    @include clearfix;
+    border: solid 1px gray;
+    img {
+        width: 180px;
+        height: 180px;
+        float: left;
+    }
+}
