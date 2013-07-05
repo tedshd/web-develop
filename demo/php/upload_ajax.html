@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>formdata(ajax)</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    // if(0)
+    $('#file').on('change', function() {
+        var formData = new FormData();
+            formData.append('file', $("#file")[0].files[0]);
+        $.ajax({
+            url: 'upload_ajax.php',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST'
+        }).done(function(data) {
+            alert(data);
+        });
+    });
+});
+</script>
+</head>
+<body>
+    <form action="upload_ajax.php" method="post" enctype="multipart/form-data">
+        <label for="file">File:</label>
+        <input type="file" name="file" id="file"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
