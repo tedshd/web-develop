@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JQ_ajax_form</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="javascripts/jquery.form.js"></script>
+<script>
+$(function() {
+    $('#file').on('change', function() {
+        // $('#submit').click();
+        $('form').ajaxSubmit(
+            {
+                beforeSubmit: function() {
+                    $('#results').html('Submitting...');
+                },
+                success: function(data) {
+                    var $out = $('#results');
+                    $out.html('Your results:');
+                    $out.append(
+                        '<div><pre>'+
+                        data +
+                        '</pre></div>'
+                    );
+                }
+            }
+        );
+    });
+});
+</script>
+</head>
+<body>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" id="submit" style="">
+        <div id="results"></div>
+    </form>
+</body>
+</html>
