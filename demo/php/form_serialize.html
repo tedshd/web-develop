@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>form(serialize)</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    $('form').on('change', function() {
+        var str = $("form").serialize();
+        $("body").append('<div>' + str + '</div>');
+    });
+});
+</script>
+</head>
+<body>
+    <form action="text.php" id="form">
+            <label for="text">text</label>
+            <input name="text" id="text" type="text" placeholder="text">
+
+            <label for="password">password</label>
+            <input name="password" id="password" type="password" placeholder="password">
+
+            <label for="radio">radio</label>
+            <input name="radio" id="radio" type="radio" value="redio_on">
+
+            <label for="checkbox">checkbox</label>
+            <input name="checkbox" id="checkbox" type="checkbox" value="checked">
+
+            <select name="single">
+            <option>Single</option>
+            <option>Single2</option>
+            </select>
+
+            <select name="multiple" multiple="multiple">
+            <option selected="selected">Multiple</option>
+            <option>Multiple2</option>
+            <option selected="selected">Multiple3</option>
+            </select>
+    </form>
+</body>
+</html>
