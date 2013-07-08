@@ -4,39 +4,33 @@
 <meta charset="utf-8">
 <title>Drag_prototype</title>
 <script src="../../lib/jquery-1.10.1.js"></script>
-<style>
-    #drag_area {
-        position: relative;
-        width: 800px;
-        height: 600px;
-        background: #ddd;
-    }
-    #box1, #box2 {
-        width: 100px;
-        height: 100px;
-    }
-    #box1 {
-        background: red;
-    }
-    #box2 {
-        background: green;
-    }
-    .drop_down {
-        /*position: absolute;*/
-        z-index: 5;
-        /*top: 0;*/
-        /*left: 0;*/
-        /*width: 800px;*/
-        /*height: 600px;*/
-        background: #000;
-        opacity: .5;
-    }
-</style>
+<link rel="stylesheet" href="stylesheets/drag_prototype.css">
 <script>
     function load() {
-        var dropbox;
+        var dropbox,
+            outarea;
 
-        dropbox = document.getElementById("drag_area");
+        outarea = document.getElementById('body');
+        outarea.addEventListener("dragenter", dragin, false);
+        outarea.addEventListener("dragover", dragin, false);
+        outarea.addEventListener("dragleave", dragout, false);
+
+        function dragin(e) {
+            e.preventDefault();
+            // $('#drag_area').addClass('drop_down');
+            $('#tip').removeClass('hide');
+        }
+        function dragout(e) {
+            e.preventDefault();
+            console.log('body leave');
+            // $('#tip').addClass('hide');
+            if (!$('#tip').hasClass('inArea')) {
+                $('#tip').addClass('hide');
+            }
+            $('#tip').removeClass('inArea');
+        }
+
+        dropbox = document.getElementById('drag_area');
         dropbox.addEventListener("dragenter", dragenter, false);
         dropbox.addEventListener("dragover", dragover, false);
         dropbox.addEventListener("dragleave", dragleave, false);
@@ -44,27 +38,42 @@
         // stop default event
         function dragenter(e) {
             e.preventDefault();
-            $('#drag_area').addClass('drop_down');
+
+            // $('#drag_area').addClass('drop_down');
+            $('#tip').removeClass('hide');
+            $('body *').css({'z-index':'0'});
+            $('#tip').addClass('inArea');
         }
 
         // stop default event
         function dragover(e) {
             e.preventDefault();
-            $('#drag_area').addClass('drop_down');
+            // $('#drag_area').addClass('drop_down');
+            // $('#tip').removeClass('hide').addClass('status_drop');
+            $('#tip').removeClass('hide');
         }
 
         function dragleave(e) {
             e.preventDefault();
-            $('#drag_area').removeClass('drop_down');
+            // $('#drag_area').removeClass('drop_down');
+            console.log('leave');
+            // $('.status').removeClass('hide');
+            // $('#tip').addClass('hide');
+            // $('#tip').removeClass('status_drop');
         }
+
     }
 </script>
 </head>
 <body onload="load()" id="body">
     <div id="drag_area">
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        <div id="box1">sub_box_1</div>
-        <div id="box2">sub_box_2</div>
+        <div id="tip" class="hide">Drop here</div>
+        <div class="status">
+            <textarea name="" id="" cols="30" rows="4"></textarea>
+            <div id="box1">sub_box_1</div>
+            <div id="box2">sub_box_2</div>
+        </div>
+
     </div>
 </body>
 </html>
