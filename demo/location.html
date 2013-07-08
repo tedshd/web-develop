@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>location</title>
+<script src="../lib/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    $('#host').html(location.host);
+    $('#href').html(location.href);
+    $('#pathname').html(location.pathname);
+    $('#port').html(location.port);
+    $('button').on('click', function() {
+        location.href = 'http://www.google.com';
+    });
+});
+</script>
+</head>
+<body>
+    host:
+    <div id="host"></div>
+    href:
+    <div id="href"></div>
+    pathname:
+    <div id="pathname"></div>
+    port:
+    <div id="port"></div>
+    <button>Button</button>
+</body>
+</html>
