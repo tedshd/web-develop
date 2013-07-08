@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Drag_prototype</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<style>
+    #drag_area {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        background: #ddd;
+    }
+    #box1, #box2 {
+        width: 100px;
+        height: 100px;
+    }
+    #box1 {
+        background: red;
+    }
+    #box2 {
+        background: green;
+    }
+    .drop_down {
+        /*position: absolute;*/
+        z-index: 5;
+        /*top: 0;*/
+        /*left: 0;*/
+        /*width: 800px;*/
+        /*height: 600px;*/
+        background: #000;
+        opacity: .5;
+    }
+</style>
+<script>
+    function load() {
+        var dropbox;
+
+        dropbox = document.getElementById("drag_area");
+        dropbox.addEventListener("dragenter", dragenter, false);
+        dropbox.addEventListener("dragover", dragover, false);
+        dropbox.addEventListener("dragleave", dragleave, false);
+
+        // stop default event
+        function dragenter(e) {
+            e.preventDefault();
+            $('#drag_area').addClass('drop_down');
+        }
+
+        // stop default event
+        function dragover(e) {
+            e.preventDefault();
+            $('#drag_area').addClass('drop_down');
+        }
+
+        function dragleave(e) {
+            e.preventDefault();
+            $('#drag_area').removeClass('drop_down');
+        }
+    }
+</script>
+</head>
+<body onload="load()" id="body">
+    <div id="drag_area">
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <div id="box1">sub_box_1</div>
+        <div id="box2">sub_box_2</div>
+    </div>
+</body>
+</html>
