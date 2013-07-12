@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>list(ng-repeat)</title>
+<script src="../../lib/angular.js"></script>
+<script>
+    function phoneList($scope) {
+        $scope.phones = [
+            {
+                name: 'Xperia S',
+                brand: 'SONY'
+            },
+            {
+                name: 'Xperia Z',
+                brand: 'SONY'
+            },
+            {
+                name: 'iPhone 5',
+                brand: 'Apple'
+            }
+        ];
+    }
+</script>
+</head>
+<body ng-controller="phoneList">
+    <ul>
+        <li ng-repeat="list in phones">
+            <h2>{{list.brand}}</h2>
+            {{list.name}}
+        </li>
+    </ul>
+</body>
+
+</html>

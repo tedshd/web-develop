@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>Hello_word</title>
+<script src="../../lib/angular.js"></script>
+</head>
+<body>
+    <input type="text" ng-model="name">
+    <h2>Hello {{name}} !</h2>
+    <ul>
+        <li>
+            {{10*10}}
+        </li>
+        <li>
+            {{1+1}}
+        </li>
+        <li>
+            {{10 | number:3}}
+        </li>
+    </ul>
+    <div>
+        <input type="number" ng-model="a" ng-init="a = 0">
+        <input type="number" ng-model="b" ng-init="b = 0">
+        {{a*b}}
+    </div>
+</body>
+</html>

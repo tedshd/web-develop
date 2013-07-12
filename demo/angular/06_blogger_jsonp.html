@@ -1,0 +1,35 @@
+<!--
+http://stackoverflow.com/questions/12066002/parsing-jsonp-http-jsonp-response-in-angular-js
+http://docs.angularjs.org/api/ng.$http
+-->
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>06_jsonp</title>
+<script src="../../lib/angular.js"></script>
+<script>
+    function blogger($scope, $http) {
+        // json callback must JSON_CALLBACK
+        $http.jsonp('http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=JSON_CALLBACK').success(
+            function(data) {
+                console.log(data);
+                console.log(data.feed);
+                console.log(data.feed.entry);
+                // $scope.blog = data;
+                $scope.blog = data.feed.entry;
+            }
+        );
+    }
+</script>
+</head>
+<body ng-controller="blogger">
+    <ul>
+        <li ng-repeat="list in blog">
+            <a href="{{list.link.4.href}}" target="_blank">
+                {{list.title.$t}}
+            </a>
+        </li>
+    </ul>
+</body>
+</html>
