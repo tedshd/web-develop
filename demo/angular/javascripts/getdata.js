@@ -12,5 +12,9 @@ function phoneList($scope, $http) {
         function(data) {
             $scope.phones = data;
         }
+    ).error(
+        function() {
+            $scope.error = true;
+        }
     );
 }

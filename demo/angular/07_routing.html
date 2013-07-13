@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- set module for routing -->
+<html ng-app="phonecat">
+<head>
+<meta charset="utf-8">
+<title>07_routing</title>
+<script src="../../lib/angular.js"></script>
+<script src="javascripts/module.js"></script>
+<script src="javascripts/controllers.js"></script>
+<!-- <link rel="stylesheet" href="stylesheets/screen.css"> -->
+<style>
+    li {
+        list-style: none;
+    }
+    .phones * {
+        vertical-align: middle;
+    }
+    .thumb {
+        display: inline-block;
+        text-decoration: none;
+    }
+    #img {
+        width: 150px;
+    }
+    .content {
+        display: inline-block;
+    }
+</style>
+</head>
+<body>
+    <div ng-view></div>
+</body>
+</html>
