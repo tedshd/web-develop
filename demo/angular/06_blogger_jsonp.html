@@ -9,27 +9,58 @@ http://docs.angularjs.org/api/ng.$http
 <title>06_jsonp</title>
 <script src="../../lib/angular.js"></script>
 <script>
-    function blogger($scope, $http) {
+    function blogger($scope, $http, $parse) {
         // json callback must JSON_CALLBACK
         $http.jsonp('http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=JSON_CALLBACK').success(
             function(data) {
                 console.log(data);
                 console.log(data.feed);
                 console.log(data.feed.entry);
+                console.log(data.feed.category);
                 // $scope.blog = data;
+                $scope.feed = data.feed;
                 $scope.blog = data.feed.entry;
+                $scope.tag = data.feed.category;
+                console.log(data.feed.entry[0].content.$t);
             }
         );
     }
 </script>
+<style>
+    div {
+        display: table;
+    }
+    span {
+        display: table-cell;
+    }
+    p {
+        background: #eee;
+    }
+</style>
 </head>
 <body ng-controller="blogger">
-    <ul>
-        <li ng-repeat="list in blog">
-            <a href="{{list.link.4.href}}" target="_blank">
-                {{list.title.$t}}
-            </a>
-        </li>
-    </ul>
+    <h1>{{feed.title.$t}}</h1>
+    <div>
+        <span>
+            <ul>
+                <li ng-repeat="list in tag">
+                    <a href="http://tysh310246.blogspot.tw/search/label/{{list.term}}">
+                        {{list.term}}
+                    </a>
+                </li>
+            </ul>
+        </span>
+        <span>
+            <ul>
+                <li ng-repeat="list in blog">
+                    <a href="{{list.link.4.href}}" target="_blank">
+                        {{list.title.$t}}
+                    </a>
+                    <input type="checkbox" ng-model="checked">
+                    <p ng-bind-html-unsafe="list.content.$t" ng-show="checked"></p>
+                </li>
+            </ul>
+        </span>
+    </div>
 </body>
 </html>
