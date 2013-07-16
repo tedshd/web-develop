@@ -33,6 +33,9 @@ http://docs.angularjs.org/api/ng.$http
     span {
         display: table-cell;
     }
+    #tag {
+        width: 210px;
+    }
     p {
         background: #eee;
     }
@@ -41,7 +44,7 @@ http://docs.angularjs.org/api/ng.$http
 <body ng-controller="blogger">
     <h1>{{feed.title.$t}}</h1>
     <div>
-        <span>
+        <span id="tag">
             <ul>
                 <li ng-repeat="list in tag">
                     <a href="http://tysh310246.blogspot.tw/search/label/{{list.term}}">
