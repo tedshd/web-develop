@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chart</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    // body...
+    for (var i = 0; i < 10000; i++) {
+        $('#chart').append(
+            '<div>' +
+            i +
+            '<span style="color:red;font-size:24px;">&#' + i + '</span>' +
+            '</div>'
+        );
+    };
+});
+</script>
+</head>
+<body>
+    <div id="chart">
+    </div>
+</body>
+</html>
