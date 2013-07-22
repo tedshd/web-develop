@@ -72,6 +72,12 @@ $(function() {
      * @param  {[type]} array   [description]
      * @return {[type]}         [description]
      */
+    console.log('--filter--');
+    function fill(element, index, array, value) {
+        return (element == 5);
+    }
+    var filt = [12, 5, 8, 130, 44, '5'].filter(fill);
+    console.log(filt);
 
     console.log('--filter_2--');
     function isBigEnough(element, index, array) {
@@ -79,4 +85,11 @@ $(function() {
     }
     var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
     console.log(filtered);
+
+    console.log('--filter_3--');
+    // function filterObj(element, index, array, key) {
+    //     return (value = '1');
+    // }
+    // var objfiled = arr.filter(filterObj);
+    // console.log(objfiled);
 });
