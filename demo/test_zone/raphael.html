@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>RaphaelJs</title>
+<script src="../../lib/raphael.js"></script>
+</head>
+<body>
+    <div id="notepad"></div>
+</body>
+<script>
+    // Each of the following examples create a canvas
+    // that is 320px wide by 200px high.
+    // Canvas is created at the viewport’s 10,50 coordinate.
+    // var paper = Raphael(10, 50, 320, 200);
+    // Canvas is created at the top left corner of the #notepad element
+    // (or its top right corner in dir="rtl" elements)
+    var paper = Raphael(document.getElementById("notepad"), 320, 200);
+    // Same as above
+    // var paper = Raphael("notepad", 320, 200);
+    // Image dump
+    var set = Raphael(["notepad", 320, 200, {
+        type: "circle",
+        cx: 50,
+        cy: 50,
+        r: 50,
+        stroke: "#f00"
+    }]);
+    // var c = paper.circle(50, 50, 40);
+    // var c = paper.circle(10, 10, 10);
+    // c.node.onclick = function () {
+    //     c.attr("fill", "red");
+    // };
+    var st = paper.set();
+    st.push(
+        paper.circle(50, 50, 40)
+    );
+    st.attr({fill: "red"});
+</script>
+</html>
