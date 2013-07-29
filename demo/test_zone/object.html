@@ -13,6 +13,15 @@
     };
     console.log(obj);
     console.log(Object.keys(obj).length);
+    var count = 0;
+    var i;
+
+    for (i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            count++;
+        }
+    }
+    console.log(count);
 </script>
 </head>
 <body>
