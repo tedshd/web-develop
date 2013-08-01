@@ -36,30 +36,52 @@ http://docs.angularjs.org/api/ng.$http
     #tag {
         width: 210px;
     }
+    #tag ul {
+        padding-left: 10px;
+    }
+    #tag li {
+        list-style: none;
+    }
+    #tag li a {
+        color: #999;
+        text-decoration: none;
+    }
+    #article li a {
+        color: #444;
+        font-weight: bold;
+        font-size: 19px;
+        text-decoration: none;
+    }
     p {
         background: #eee;
+        padding: 10px;
     }
 </style>
 </head>
 <body ng-controller="blogger">
     <h1>{{feed.title.$t}}</h1>
+    <span id="search">
+        Search:<input ng-model="query">
+    </span>
     <div>
         <span id="tag">
+            <h2>Tag</h2>
             <ul>
                 <li ng-repeat="list in tag">
-                    <a href="http://tysh310246.blogspot.tw/search/label/{{list.term}}">
+                    <a href="http://tysh210246.blogspot.tw/search/label/{{list.term}}">
                         {{list.term}}
                     </a>
                 </li>
             </ul>
         </span>
-        <span>
+        <span id="article">
+            <h2>Article</h2>
             <ul>
-                <li ng-repeat="list in blog">
+                <li ng-repeat="list in blog | filter:query">
+                    <input type="checkbox" ng-model="checked">
                     <a href="{{list.link.4.href}}" target="_blank">
                         {{list.title.$t}}
                     </a>
-                    <input type="checkbox" ng-model="checked">
                     <p ng-bind-html-unsafe="list.content.$t" ng-show="checked"></p>
                 </li>
             </ul>
