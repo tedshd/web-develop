@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Array_slice</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    // var arr = ['1'];
+    // var arr = ['1', '2'];
+    // var arr = ['1', '2', '3'];
+    // var arr = ['1', '2', '3', '4'];
+    // var arr = ['1', '2', '3', '4', '5'];
+    // var arr = ['1', '2', '3', '4', '5', '6'];
+    // var arr = ['1', '2', '3', '4', '5', '6', '7'];
+    // var arr = ['1', '2', '3', '4', '5', '6', '7', '8'];
+    // var arr = ['1', '2', '3', '4', '5', '6', '7', '8' ,'9', '10'];
+    var arr = ['1', '2', '3', '4', '5', '6', '7', '8' ,'9'];
+    // var arr = ['1', '2', '3', '4', '5', '6', '7', '8' ,'9', '10', '11'];
+    var l = arr.length;
+    var arr2 = ['1', '2'];
+    var l2 = arr2.length;
+
+    var slice = arr.slice(0, 3),
+    slice2 = arr.slice(3,6),
+    slice3 = arr.slice(6,9);
+    var m = Math.floor(l/5);
+
+    var m2 = l%5;
+    var fun;
+    var cl;
+    fun = function() {
+        console.log(cl);
+    };
+
+    $('#d1').append(m);
+    $('#d2').append(m2);
+    if (m !== 0) {
+        for (var i = 0; m > i; i++) {
+            cl = arr.slice(i*5, (i+1)*5);
+            $('#for').append('<div>' + cl + '</div>');
+            fun();
+        }
+        $('#for').append('<div>' + arr.slice(l - m2, l) + '</div>');
+        cl = arr.slice(l - m2, l);
+        fun();
+    } else {
+        $('#for').append('<div>' + arr + '</div>');
+    }
+});
+</script>
+</head>
+<body>
+    <div id="d1">/:</div>
+    <div id="d2">oher:</div>
+    <div id="for"></div>
+    <div id="for"></div>
+</body>
+</html>
