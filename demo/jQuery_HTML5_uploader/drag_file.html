@@ -75,6 +75,9 @@
         function drop(e) {
             e.stopPropagation();
             e.preventDefault();
+            console.log('--drop--');
+            console.log(e.dataTransfer);
+            console.log(e.dataTransfer.items[0].webkitGetAsEntry());
 
             var dt = e.dataTransfer;
             var files = dt.files;
