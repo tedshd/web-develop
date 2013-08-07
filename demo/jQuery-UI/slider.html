@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>slider</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="../../lib/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script>
+<link rel="stylesheet" href="../../lib/jquery-ui-1.10.3.custom/css/no-theme/jquery-ui-1.10.3.custom.css">
+<style>
+    .ui-slider {
+        /*border: solid #333 1px;*/
+        background: #00aaff;
+    }
+    .ui-slider-handle {
+        border: solid #00aaff 1px;
+        background: #00bbff;
+    }
+    .ui-slider-range {
+        background: #ddd;
+    }
+    .ui-state-focus {
+        outline: 0;
+    }
+    .ui-state-hover {
+        /*border: solid red 1px;*/
+    }
+    input {
+        border: 0;
+    }
+    /*remove input number arrows*/
+    /*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-inputs-spin-box*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+</style>
+<script>
+$(function() {
+    $('#slider-range-max').slider({
+        animate: 90,
+        range: 'max',
+        min: 1,
+        max: 100,
+        value: 10,
+        slide: function( event, ui ) {
+            $( '#percent' ).val( ui.value );
+        }
+    });
+    $( '#percent' ).val( $( '#slider-range-max' ).slider( 'value' ) );
+    $('input').blur(function () {
+        var val = $(this).val();
+        console.log(val);
+        $('#slider-range-max').slider('value', val);
+    });
+});
+</script>
+</head>
+<body>
+    <form action="">
+        <p>
+            <label for="percent">Minimum number of bedrooms:</label>
+            <input type="number" id="percent" min="1" max="100" />
+        </p>
+        <div id="slider-range-max"></div>
+        <br>
+        <input type="submit" value="submit">
+    </form>
+
+</body>
+</html>
