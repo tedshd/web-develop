@@ -69,10 +69,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 7, ../sass/scroll_to_top.scss */
-.scroll-to-top {
+#top {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  padding: 10px;
   cursor: pointer;
-  background: #ccc;
+  background: #0088ff;
 }

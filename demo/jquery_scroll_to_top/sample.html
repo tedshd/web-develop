@@ -6,6 +6,13 @@
 <script src="../../lib/jquery-1.10.1.js"></script>
 <script src="javascripts/scroll_to_top.js"></script>
 <link href="stylesheets/scroll_to_top.css" rel="stylesheet">
+<script>
+$(function () {
+    $.scrollToTop({
+        node: '#top'
+    });
+});
+</script>
 </head>
 <body>
     <script>
@@ -15,5 +22,8 @@
             };
         });
     </script>
+    <div id="top" class="hidden">
+        Top
+    </div>
 </body>
 </html>
