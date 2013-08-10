@@ -9,27 +9,39 @@
 
 $(function () {
     var scrollToTop;
-    scrollToTop = function (set) {
-        var tipNode;
-        if ($(set.node).length) {
-            tipNode = $(set.node);
-        } else {
-            $('body').append('<div class="scroll-to-top hidden">Top</div>');
-            tipNode = $('.scroll-to-top');
+
+    scrollToTop = function (setting) {
+        var tipNode,
+            defaultSetting = {
+                speed: 1000
+            };
+
+        setting = $.extend(defaultSetting, setting);
+        console.log(this);
+        if (this === window) {
+            console.log('not selector');
+            $('body').append('<div class="arrowup hidden"></div>');
+            tipNode = $('.arrowup');
             tipNode.css({
                 'position': 'fixed',
-                'bottom': '10px',
-                'right': '10px',
-                'padding': '10px',
-                'cursor': 'pointer',
-                'background': '#ccc'
+                'bottom': '20px',
+                'right': '20px',
+                'cursor': 'pointer'
             });
+        } else {
+            if (this.length > 1) {
+                alert('Selector is not only one,it is plurality');
+                return;
+            }
+            tipNode = this;
         }
-        tipNode.click(function () {
+
+        tipNode.on('click', function () {
             $('body, html').animate(
                 {
                     scrollTop: '0px'
-                }
+                },
+                setting.speed
             );
         });
         $(window).scroll(function() {
@@ -40,5 +52,6 @@ $(function () {
             }
         });
     };
-    $.scrollToTop = scrollToTop;
+
+    $.fn.scrollToTop = scrollToTop;
 });

@@ -8,9 +8,11 @@
 <link href="stylesheets/scroll_to_top.css" rel="stylesheet">
 <script>
 $(function () {
-    $.scrollToTop({
-        node: '#top'
-    });
+    // $('#top').scrollToTop({speed: 90});
+    // $('#top').scrollToTop();
+    // $('.top').scrollToTop();
+    $('div').scrollToTop();
+    // scrollToTop();
 });
 </script>
 </head>
@@ -18,11 +20,17 @@ $(function () {
     <script>
         $('document').ready(function() {
             for (var i = 0; 1000 >= i; i++) {
-                $('body').append('<div>Test</div>');
+                $('body').append('<p>Test</p>');
             };
         });
     </script>
     <div id="top" class="hidden">
+        Top
+    </div>
+    <div class="top" class="hidden">
+        Top
+    </div>
+    <div class="top" class="hidden">
         Top
     </div>
 </body>
