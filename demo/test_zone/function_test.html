@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Function_test</title>
+<script src="javascripts/jquery-1.10.1.js"></script>
+<script>
+$(function() {
+    var fun = function(message) {
+        if(message.con) {
+            alert(message.con);
+        }
+    }
+    $('button').on('click', function () {
+        fun(
+            {
+                con: 'TEST'
+            }
+        );
+    });
+    var fun_2 = function(set, callback) {
+        if(set.val) {
+            $('#area').html(set.val);
+        }
+        $('body').delegate('#area', 'click', function() {
+            if (typeof callback === 'function') {
+                return callback(true);
+            }
+        });
+    }
+    $('a').on('click', function() {
+        fun_2(
+            {
+                val: 'test html'
+            },
+            function(result) {
+                if(result) {
+                    alert('callback');
+                }
+            }
+        );
+    });
+});
+</script>
+</head>
+<body>
+    <div id="box">
+        <div id="con">
+            <a href="javascript:void(0)">Link</a>
+        </div>
+    </div>
+    <div id="area"></div>
+    <button>Button</button>
+</body>
+</html>
