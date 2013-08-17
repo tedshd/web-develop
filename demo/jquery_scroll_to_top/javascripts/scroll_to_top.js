@@ -15,10 +15,11 @@ $(function () {
             defaultSetting = {
                 speed: 1000
             };
-
         setting = $.extend(defaultSetting, setting);
         console.log(this);
-        if (this === window) {
+        console.log(this[0]);
+        // if does't set any selector or selector doesn't exist
+        if (this === window || !this[0]) {
             console.log('not selector');
             $('body').append('<div class="arrowup hidden"></div>');
             tipNode = $('.arrowup');
@@ -29,6 +30,7 @@ $(function () {
                 'cursor': 'pointer'
             });
         } else {
+            // if selector is not only one
             if (this.length > 1) {
                 alert('Selector is not only one,it is plurality');
                 return;
@@ -44,6 +46,7 @@ $(function () {
                 setting.speed
             );
         });
+
         $(window).scroll(function() {
             if ($(window).scrollTop() > 0) {
                 tipNode.removeClass('hidden');
@@ -52,6 +55,5 @@ $(function () {
             }
         });
     };
-
     $.fn.scrollToTop = scrollToTop;
 });
