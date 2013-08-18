@@ -7,6 +7,9 @@
 <script src="javascripts/jquery.form.js"></script>
 <script>
 $(function() {
+
+    $.fn.ajaxSubmit.debug = true;
+
     $('#file').on('change', function() {
         // $('#submit').click();
         $('form').ajaxSubmit(
