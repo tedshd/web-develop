@@ -1,0 +1,46 @@
+/**
+ *
+ * @authors Ted Shiu (you@example.org)
+ * @date    2013-08-23 22:59:23
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+*:hover {
+    outline: solid 2px red;
+}
+* *:hover {
+    outline: solid 2px green;
+}
+* * *:hover {
+    outline: solid 2px blue;
+}
+* * * *:hover {
+    outline: solid 2px gray;
+}
+* * * * *:hover {
+    outline: solid 2px #0088ff;
+}
+* * * * * *:hover {
+    outline: solid 2px #ff8800;
+}
+* * * * * * *:hover {
+    outline: solid 2px #de3c4a;
+}
+* * * * * * * *:hover {
+    outline: solid 2px #8100de;
+}
+* * * * * * * * *:hover {
+    outline: solid 2px #00a1cd;
+}
+* * * * * * * * * *:hover {
+    outline: solid 2px #884800;
+}
+* * * * * * * * * * *:hover {
+    outline: solid 2px #88287f;
+}
+* * * * * * * * * * * *:hover {
+    outline: solid 2px #4f6c88;
+}
