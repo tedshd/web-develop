@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>onbeforeunload_fire</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    var fun2 = function (e) {
+        alert(1);
+    };
+    var str = 'string';
+    var arr = ['apple', 1, 2, 'string']
+    $('#poxt').on('click', function (e) {
+        $.post(
+            '../php/test.php',
+            function (data) {
+                console.log(data);
+            }
+        );
+    });
+    $('#submit').on('click', function (e) {
+        $('form').submit();
+    });
+    var fun = function (e) {
+        return str;
+    };
+    window.onbeforeunload = fun;
+});
+</script>
+</head>
+<body>
+    <button id="post">Click_post</button>
+    <form action="../php/test.php">
+        <input type="submit">
+    </form>
+    <button id="submit">Click_submit</button>
+</body>
+</html>
