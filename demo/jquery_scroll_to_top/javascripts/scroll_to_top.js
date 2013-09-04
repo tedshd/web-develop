@@ -13,6 +13,8 @@ $(function () {
     scrollToTop = function (setting) {
         var tipNode,
             defaultSetting = {
+                bottom: '20px',
+                right: '20px',
                 speed: 1000
             };
         setting = $.extend(defaultSetting, setting);
@@ -25,8 +27,8 @@ $(function () {
             tipNode = $('.arrowup');
             tipNode.css({
                 'position': 'fixed',
-                'bottom': '20px',
-                'right': '20px',
+                'bottom': setting.bottom,
+                'right': setting.right,
                 'cursor': 'pointer'
             });
         } else {
