@@ -5,10 +5,11 @@
 <title>input_file_style</title>
 <link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
 <style>
-    #file-style {
+    #file-style, #file-style_2 {
         opacity: 0;
     }
 </style>
+
 </head>
 <body>
     <form action="upload_img.php" method='post' enctype='multipart/form-data'>
@@ -16,7 +17,17 @@
             <input type="button" class="btn" value="Select file">
         </label>
         <input type="file" name="file" id="file-style">
+        <label for="file-style_2" class="btn btn-primary">
+            <span>Select file</span>
+        </label>
+        <input type="file" name="file_2" id="file-style_2">
         <input type="submit" class="btn btn-primary">
     </form>
 </body>
+<script>
+    // var tag = document.getElementsByTagName('a')[0];
+    // tag.addEventListener('click', function (e) {
+    //     e.preventDefault();
+    // });
+</script>
 </html>
