@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>Am_todo_list</title>
+<script src="../../lib/angular.js"></script>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- check browser -->
+<script src="../../lib/modernizr-latest.js"></script>
+<!-- for CSS3 event -->
+<script src="../../lib/CSS3-event.js"></script>
+<!-- all -->
+<link rel="stylesheet" href="../../lib/Effeckt.css/css/modules/list-items.autoprefixed.css">
+<style>
+    ul {
+        width: 300px;
+    }
+    li {
+        margin: 5px;
+        background: #ccc;
+    }
+</style>
+<script>
+function TodoCtrl($scope) {
+    $scope.todos = [
+        {text:'learn angular', done:false},
+        {text:'build an angular app', done:true}
+    ];
+    $scope.newItem = 'new';
+
+    $scope.addTodo = function() {
+        $scope.todos.push({text:$scope.todoText, done:false, status:'new'});
+        $scope.todoText = '';
+    };
+
+    $scope.remaining = function() {
+        var count = 0;
+        angular.forEach($scope.todos, function(todo) {
+            count += todo.done ? 0 : 1;
+        });
+        return count;
+    };
+
+    $scope.archive = function() {
+        var oldTodos = $scope.todos;
+        var remove;
+
+        angular.forEach(oldTodos, function(todo) {
+            todo.status = '';
+            if (todo.done) {
+                console.log(todo);
+                console.log($scope.todos);
+                todo.status = 'remove';
+                setTimeout(function () {
+                    console.log($scope.todos);
+                    remove = $scope.todos.indexOf(todo);
+                    $scope.todos.splice(remove, 1);
+                },
+                900);
+                // remove = $scope.todos.indexOf(todo);
+                // $scope.todos.splice(remove, 1);
+            }
+        });
+    };
+}
+</script>
+</head>
+<body>
+    <h2>Todo</h2>
+    <div ng-controller="TodoCtrl">
+        <span>{{remaining()}} of {{todos.length}} remaining</span>
+        [ <a href="" ng-click="archive()">archive</a> ]
+        <form ng-submit="addTodo()">
+            <input type="text" ng-model="todoText"  size="30" placeholder="add new todo here">
+            <input class="btn-primary" type="submit" value="add">
+        </form>
+        <ul class="effeckt-list" data-effeckt-type="from-above">
+            <li class="{{todo.status}}-item" ng-repeat="todo in todos">
+                <input type="checkbox" ng-model="todo.done">
+                <span class="done-{{todo.done}}">{{todo.text}}</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
