@@ -6,6 +6,9 @@
 <script src="../../lib/jquery-1.10.1.js"></script>
 <style>
     div {
+        position: relative;
+        top: 0;
+        left: 0;
         width: 400px;
         height: 300px;
         background: #000;
@@ -14,17 +17,61 @@
         transition: 1s;
         opacity: 0.25;
     }
+    .move {
+        animation: move 5s;
+        -webkit-animation: move 5s;
+    }
+    @keyframes move
+    {
+        0%   {
+            left: 0;
+        }
+        25%  {
+            left: 20px;
+        }
+        50%  {
+            left: 40px;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    @-webkit-keyframes move
+    {
+        0%   {
+            left: 0;
+        }
+        25%  {
+            left: 25%;
+        }
+        50%  {
+            left: 50%;
+        }
+        100% {
+            left: 0;
+        }
+    }
 </style>
 <script>
 $(function() {
-    $('button').click(function() {
+    $('#start').click(function() {
         $('div').addClass('fade');
+        setTimeout(
+            function () {
+                $('div').addClass('move');
+            },
+            1000
+        );
+    });
+    $('#reset').click(function() {
+        $('div').toggleClass('fade move');
     });
 });
 </script>
 </head>
 <body>
-    <button>BUTTON</button>
+    <button id="start">start</button>
+    <button id="reset">reset</button>
     <div></div>
 </body>
 </html>
