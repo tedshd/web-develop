@@ -1,0 +1,77 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-09-08 00:27:07
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+}
+
+#layout {
+    background: #555;
+}
+
+@media (min-width: 961px) {
+    #layout {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 960px;
+        min-height: 100%;
+        margin-left: -480px;
+        background: #555;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+#thumb {
+    margin: 0 auto;
+    width: 150px;
+}
+
+p, a {
+    color: #333;
+    line-height: 1.5;
+}
+
+.desc {
+    margin: 5px;
+}
+
+
+/* salvattore */
+
+[data-columns]:before {
+    display: none;
+} /* Don't forget this. */
+.column {
+    float: left;
+} /* Don't forget this. */
+.brick[data-columns]:before {
+    content: '1';
+}
+.column {
+    width: 100%;
+}
+@media (min-width: 961px) {
+    .brick[data-columns]:before {
+        content: '2';
+    }
+    .column {
+        width: 50%;
+    }
+}
