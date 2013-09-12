@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>htmlspecialchars</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    var util = {};
+
+    util.htmlspecialchars = function (str) {
+        console.log(str);
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    };
+    util.htmlspecialchars_decode = function (str) {
+        return str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"");
+    };
+    util.nl2br = function (str) {
+        return str.replace(/\n/g, "<br>");
+    };
+
+    var str = '&#9999';
+
+    str = '&lt;';
+    str = '%20';
+    str = '&#9992';
+    str = '<script>alert("alert")</\script>';
+    str = '<'
+    // str = escape(str);
+    // str = unescape(str);
+    str = util.htmlspecialchars(str);
+    console.log(str);
+    $('#area_1').html('html-' + str);
+    $('#area_2').text('text-' + str);
+    $('#area_3').append('append-' + '<span>' + str + '</span>');
+    $('#area_4').append('append-SCRIPT-' + str);
+});
+</script>
+</head>
+<body>
+    <div id="area_1"></div>
+    <div id="area_2"></div>
+    <div id="area_3"></div>
+    <div id="area_4"></div>
+    <div id="area_5"></div>
+    <div id="area_6"></div>
+    <div id="area_7"></div>
+    <div id="area_8"></div>
+</body>
+</html>
