@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>columns</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<link rel="stylesheet" href="stylesheets/columns.css">
+</head>
+<body>
+    <ul class="grid">
+        <li>
+            <div class="con">
+                <h1>#1</h1>
+                筆記一下
+                在 IE 中<br>
+                當 Flash Player 更新到 11.8.800.168 時, 發現一個問題<br>
+                就是用 flash 上傳檔案時, 中文的檔名會用 Big5 去解, 所以就造成亂碼<br>
+                測試的 OS<br>
+                Windows 7<br>
+                繁體中文語系<br>
+            </div>
+        </li>
+        <li>
+            <div class="con">
+                <h1>#2</h1>
+                在 PHP & JavaScript 中有許多邏輯判斷<br>
+                當有許多條件要去檢查時, 一般來說就是用 if 一直寫下去<br>
+                最後就造成下面的情況(以 PHP 為例)<br>
+            </div>
+        </li>
+        <li>
+            <div class="con">
+                <h1>#3</h1>
+                使用該 library 須載入 Modernizr 這個 library
+                Modernizr 是用來判斷 browser 是否支援 HTML5 or CSS3 所用的 library, 並能把相同功能但在不同 browser 實作的 API 或 CSS3 property 一致化
+
+                主要是透過添加 class or data attribute 的方式, Modernizer 就在其中做了整合各 browser 的事情
+
+                How does it work
+                動畫部分是利用 CSS3 的 Animations 與 Transitions
+                至於事件的觸發是利用 CSS3 Transition Events, 由於各個 browser 實作都不一樣, 所以這裡加載了一個 /js/demo/demo.js 的 js, 但在這 js 有個有趣的地方就是有用 ajax 去載入開發者名單, 所以就另開個 js 來載入
+            </div>
+        </li>
+        <li>
+            <div class="con">
+                <h1>#4</h1>
+                unbeforeunload 是在 browser 在轉換頁面時會觸發的事件
+                當有 return 值時, 會出現 confirm 視窗, 並停住觸發的行為
+                目前試過會觸發的行為有
+
+                上一頁 / 下一頁
+                重新整理
+                關閉視窗
+                前往其它 URL
+                submit 事件
+                URL 改變時
+            </div>
+        </li>
+        <li>
+            <div class="con">
+                <h1>#5</h1>
+                unbeforeunload 是在 browser 在轉換頁面時會觸發的事件
+                當有 return 值時, 會出現 confirm 視窗, 並停住觸發的行為
+                目前試過會觸發的行為有
+
+                上一頁 / 下一頁
+                重新整理
+                關閉視窗
+                前往其它 URL
+                submit 事件
+                URL 改變時
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
