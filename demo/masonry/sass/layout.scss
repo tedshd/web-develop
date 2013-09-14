@@ -1,0 +1,56 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-09-15 01:51:47
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+}
+
+#layout {
+    background: #555;
+}
+.desc {
+    margin: 5px;
+    width: 100%;
+}
+
+@media (min-width: 961px) {
+    #layout {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 960px;
+        min-height: 100%;
+        margin-left: -480px;
+        background: #555;
+    }
+    .desc {
+        width: 48%;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+#thumb {
+    margin: 0 auto;
+    width: 150px;
+}
+
+p, a {
+    color: #333;
+    line-height: 1.5;
+}
