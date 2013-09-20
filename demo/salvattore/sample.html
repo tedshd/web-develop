@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>sample</title>
+<link rel="stylesheet" href="../../lib/salvattore/salvattore.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <style>
 [data-columns]:before { display: none; } /* Don't forget this. */
@@ -16,18 +17,17 @@
     content: '3';
   }
 }
-.column {
+/*.column {
     float: left;
-}
+}*/
 .desc {
-    width: 300px;
     margin: 5px;
     background: #ccc;
 }
 </style>
 </head>
 <body>
-    <div id="timeline" data-columns>
+    <div class="salvattore-grid" data-columns>
         <div class="desc">
             Item #1
             <p>
@@ -48,5 +48,5 @@
         </div>
     </div>
 </body>
-<script src="javascripts/salvattore.js"></script>
+<script src="../../lib/salvattore/salvattore.js"></script>
 </html>
