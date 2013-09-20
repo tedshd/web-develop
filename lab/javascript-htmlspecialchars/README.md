@@ -3,7 +3,7 @@ javascript-htmlspecialchars
 
 ## Description
 
-handle view special chars in HTML
+handle view special chars or HTML ASCII in HTML
 
 if string ```&#lt;```
 show in HTML ```<```
