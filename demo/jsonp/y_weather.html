@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Y!-weather</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    var UpdateData;
+    UpdateData = function () {
+        var city = '2306179',
+            url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D' + city + '%20and%20u%20%3D%20"c"&format=json&diagnostics=true&callback=?';
+        $.getJSON(
+            url,
+            function (data) {
+                console.log('success');
+                console.log(data);
+            }
+        ).done(
+            function (data) {
+                console.log('second success');
+                console.log(data);
+                console.log(data.query.results.channel);
+                console.log(data.query.results.channel.location.city);
+                $('#city').html(data.query.results.channel.location.city);
+                // $('#description').html(data.query.results.channel.item.description);
+                $('#temp').html(data.query.results.channel.item.condition.temp + '&#186;C');
+                var img = data.query.results.channel.item.condition.code;
+                $('#img').html('<img src="http://l.yimg.com/a/i/us/we/52/' + img + '.gif"/>');
+                $('#text').html(data.query.results.channel.item.condition.text);
+            }
+        ).fail(
+            function() {
+                console.log('error');
+            }
+        ).always(
+            function() {
+                console.log('complete');
+            }
+        );
+    };
+    UpdateData();
+    setInterval(UpdateData, 600000);
+});
+</script>
+</head>
+<body>
+    <div id='city'></div>
+    <div id="description"></div>
+    <div>
+        Temp:
+        <div id="temp"></div>
+        <div id="img"></div>
+        Desc:
+        <div id="text"></div>
+    </div>
+</body>
+</html>
