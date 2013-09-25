@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Object_var</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    var obj = {
+            str1: 'str',
+            str2: '',
+            num: '',
+            arr: []
+        },
+        obj2 = {
+            con: 'content'
+        };
+    console.log('default', obj);
+    console.log('num', obj.num);
+
+    obj.str2 = 'string';
+    obj.num = 1000;
+    obj.arr = ['arr1', 'arr2', 'arr3'];
+
+    // log
+    console.log('init', obj);
+    console.log('str1:', obj.str1);
+    console.log('str2:', obj.str2);
+    console.log('num:', obj.num);
+    console.log('arr:', obj.arr);
+    console.log('con:', obj2.con);
+
+    // function
+    function fun () {
+        obj.str1 = 'change';
+        console.log('fun', obj);
+        console.log(obj.str1);
+    };
+    fun();
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>
