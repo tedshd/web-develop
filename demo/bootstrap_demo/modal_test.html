@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>modal_test</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="javascripts/bootstrap-modal.js"></script>
+<script src="javascripts/bootstrap-transition.js"></script>
+<script src="https://rawgithub.com/inuyaksa/jquery.nicescroll/master/jquery.nicescroll.js"></script>
+<link rel="stylesheet" href="stylesheets/styles.css">
+<style>
+    #list {
+        height: 300px;
+        background: #ccc;
+    }
+    #scroll {
+        height: 100px;
+    }
+</style>
+<script>
+$(function() {
+    $('#scroll').niceScroll();
+    // $('#myModal').modal({
+    //     show     : true,
+    //     backdrop : true,
+    //     keyboard : false
+    // })
+    $('#load').on('click', function () {
+        $.getJSON(
+            'http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=?',
+            function (data) {
+                console.log('success');
+                console.log(data);
+            }
+        ).done(
+            function (data) {
+                console.log('second success');
+                console.log(data.feed.entry);
+                for (var i = 0; i < Math.round(Math.random()*data.feed.entry.length); i++) {
+                    // console.log(data.feed.entry[i].title.$t);
+                    $('#list').append('<h1>' + data.feed.entry[i].title.$t + '</h1>')
+                }
+                $('#myModal').modal('show');
+                $('#myModal').on('show', function () {
+                    console.log('show');
+                    // $('#list').append('<h1>A</h1>');
+                });
+                $('#myModal').on('shown', function () {
+                    $('#list').niceScroll();
+                    console.log('shown');
+                    // for (var i = 0; 10 >= i; i++) {
+                    //     $('#list').append('<h1>B</h1>');
+                    // }
+                });
+                $('#myModal').on('hide', function () {
+                    console.log('hide');
+                });
+                $('#myModal').on('hidden', function () {
+                    console.log('hidden');
+                    $('#list h1').remove();
+                });
+            }
+        );
+    });
+
+
+});
+</script>
+</head>
+<body>
+    <div id="scroll">
+        <h1>A</h1>
+        <h1>B</h1>
+        <h1>C</h1>
+        <h1>D</h1>
+        <h1>E</h1>
+        <h1>F</h1>
+    </div>
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+    <a href="javascript:" id="load">LOAD</a>
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Modal header</h3>
+        </div>
+        <div class="modal-body">
+            <p>One fine body…</p>
+            <div id="list"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</body>
+</html>
