@@ -13,7 +13,8 @@ $(function () {
             arr: []
         },
         obj2 = {
-            con: 'content'
+            con: 'content',
+            con2: ''
         };
     console.log('default', obj);
     console.log('num', obj.num);
@@ -21,6 +22,7 @@ $(function () {
     obj.str2 = 'string';
     obj.num = 1000;
     obj.arr = ['arr1', 'arr2', 'arr3'];
+    obj2.con2 = ['Array', 'Array2', 'Array3'];
 
     // log
     console.log('init', obj);
@@ -29,6 +31,7 @@ $(function () {
     console.log('num:', obj.num);
     console.log('arr:', obj.arr);
     console.log('con:', obj2.con);
+    console.log('con2:', obj2.con2);
 
     // function
     function fun () {
