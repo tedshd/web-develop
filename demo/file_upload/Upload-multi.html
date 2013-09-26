@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Upload_mult</title>
+</head>
+<body>
+    <form action="upload_mult.php" method='post' enctype='multipart/form-data'>
+        Upload<br />
+        <input type="file" name ='Upfile[]' value="" /><br /><!--上傳多個會以array存取-->
+        <input type="file" name ='Upfile[]' value="" /><br />
+        <input type="file" name ='Upfile[]' value="" /><br />
+        <input type="submit" value="送出" />
+    </form>
+</body>
+</html>

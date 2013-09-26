@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>upload_html5_drag</title>
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+    <form action="upload_mult.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="Upfile[]" multiple>
+        <input type="submit">
+    </form>
+</body>
+<script src="javascripts/drop_upload.js"></script>
+</html>
