@@ -15,7 +15,8 @@ html, body {
 
 .grid {
     @include column-count(3);
-    height: 50%;
+    // @include column-width(500px);
+    // height: 50%;
     li {
         display: inline-block;
         margin: 5px;

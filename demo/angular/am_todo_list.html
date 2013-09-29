@@ -51,12 +51,12 @@ function TodoCtrl($scope) {
                 console.log(todo);
                 console.log($scope.todos);
                 todo.status = 'remove';
-                setTimeout(function () {
-                    console.log($scope.todos);
-                    remove = $scope.todos.indexOf(todo);
-                    $scope.todos.splice(remove, 1);
-                },
-                900);
+                // setTimeout(function () {
+                //     $('.remove-item').on(EffecktDemos.animationEndEventName + ' ' + EffecktDemos.transitionEndEventName , function () {
+                //         $('.remove-item').remove();
+                //     });
+                // },
+                // 900);
                 // remove = $scope.todos.indexOf(todo);
                 // $scope.todos.splice(remove, 1);
             }

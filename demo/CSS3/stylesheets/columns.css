@@ -82,9 +82,8 @@ html, body {
   -ms-column-count: 3;
   -o-column-count: 3;
   column-count: 3;
-  height: 50%;
 }
-/* line 19, ../sass/columns.scss */
+/* line 20, ../sass/columns.scss */
 .grid li {
   display: inline-block;
   margin: 5px;
