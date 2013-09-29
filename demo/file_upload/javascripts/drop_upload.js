@@ -6,7 +6,9 @@
  * @version $Id$
  */
 
-// init drag area and bind event
+/**
+ * init drag area and bind event
+ */
 var imageTypes = ['image/png', 'image/jpeg', 'image/gif', 'image/bmp'],
     defaultArea = document.body.setAttribute('id', 'dropArea'),
     dropArea = document.getElementById('dropArea') || defaultArea,
@@ -48,32 +50,37 @@ function drop(e, i) {
     e.preventDefault();
 
     console.log('--drop--');
-    console.log('dataTransfer', e.dataTransfer);
-    console.log('files', e.dataTransfer.files);
-    console.log('webkitGetAsEntry', e.dataTransfer.items[0].webkitGetAsEntry());
+    // console.log('dataTransfer', e.dataTransfer);
+    // console.log('files', e.dataTransfer.files);
+    // console.log('webkitGetAsEntry', e.dataTransfer.items[0].webkitGetAsEntry());
     console.log('--drop end--');
 
     // use files API handle drop file
     var dt = e.dataTransfer,
         files = dt.files,
-        length = dt.items.length,
+        // length = dt.items.length,
         entry;
-    for (i = 0; i < length; i++) {
-        entry = e.dataTransfer.items[i].webkitGetAsEntry();
-        console.log(entry);
-        if (entry.isFile) {
-            console.log(entry.isFile);
-        } else if (entry.isDirectory) {
-            console.log(entry.isDirectory);
-            alert('Don\'t drop folder');
-            return;
-        }
-    }
+    // for (i = 0; i < length; i++) {
+    //     entry = e.dataTransfer.items[i].webkitGetAsEntry();
+    //     console.log(entry);
+    //     if (entry.isFile) {
+    //         console.log(entry.isFile);
+    //     } else if (entry.isDirectory) {
+    //         console.log(entry.isDirectory);
+    //         alert('Don\'t drop folder');
+    //         return;
+    //     }
+    // }
 
     handleFiles(files);
 }
 
-// handle file
+/**
+ * [handleFiles show file on view]
+ * @param  {[type]} file [drop file]
+ * @param  {[type]} i    [init for]
+ * @return {[type]}      [description]
+ */
 function handleFiles(file, i) {
     if (!file.length) {
         fileList.innerHTML = '<p>No file selected!</p>';
@@ -118,6 +125,12 @@ function handleFiles(file, i) {
     }
 }
 
+/**
+ * [uploadDropFile upload file]
+ * @param  {[type]} file [drop file]
+ * @param  {[type]} i    [for]
+ * @return {[type]}      [description]
+ */
 function uploadDropFile(file, i) {
     var settings = {
             "name": "Upfile",
@@ -205,25 +218,25 @@ function uploadDropFile(file, i) {
     };
     xmlHttpRequest.open("POST", settings.postUrl, true);
 
-    if (file.getAsBinary) { // Firefox
+    // if (file.getAsBinary) { // Firefox
 
-        var data = dashes + boundary + crlf +
-            "Content-Disposition: form-data;" +
-            "name=\"" + settings.name + "\";" +
-            "filename=\"" + unescape(encodeURIComponent(file[i].name)) + "\"" + crlf +
-            "Content-Type: application/octet-stream" + crlf + crlf +
-            file.getAsBinary() + crlf +
-            dashes + boundary + dashes;
+    //     var data = dashes + boundary + crlf +
+    //         "Content-Disposition: form-data;" +
+    //         "name=\"" + settings.name + "\";" +
+    //         "filename=\"" + unescape(encodeURIComponent(file[i].name)) + "\"" + crlf +
+    //         "Content-Type: application/octet-stream" + crlf + crlf +
+    //         file.getAsBinary() + crlf +
+    //         dashes + boundary + dashes;
 
-        xmlHttpRequest.setRequestHeader("Content-Type", "multipart/form-data;boundary=" + boundary);
-        xmlHttpRequest.sendAsBinary(data);
+    //     xmlHttpRequest.setRequestHeader("Content-Type", "multipart/form-data;boundary=" + boundary);
+    //     xmlHttpRequest.sendAsBinary(data);
 
-    } else if (window.FormData) { // Chrome
+    // } else if (window.FormData) { // Chrome
 
         var formData = new FormData();
         formData.append(settings.name, file[i]);
 
         xmlHttpRequest.send(formData);
 
-    }
+    // }
 }

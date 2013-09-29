@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>upload_AJAX</title>
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+    <form action="upload_one.php" method="post" enctype="multipart/form-data">
+        <label for="file">File:</label>
+        <input type="file" name="Upfile" id="select"><br>
+        <input type="submit">
+    </form>
+    <a href="javascript:upload()">AJAX_upload</a>
+</body>
+<script>
+function upload () {
+    var length = document.getElementById('select').files.length;
+    // init FormData object
+    var formData = new FormData();
+    // use append method append upload file
+    formData.append('Upfile', document.getElementById('select').files[0]);
+    // init XMLHttpRequest object
+    var xmlHttpRequest = new XMLHttpRequest();
+    // init to backend
+    xmlHttpRequest.open('POST', 'upload_one.php');
+    // check ajax status
+    xmlHttpRequest.onreadystatechange = function () {
+        if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+            alert('upload');
+        } else {
+            alert('ERROR');
+        }
+    };
+    // post to backend
+    xmlHttpRequest.send(formData);
+
+}
+</script>
+</html>
