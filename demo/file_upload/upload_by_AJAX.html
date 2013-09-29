@@ -26,10 +26,10 @@ function upload () {
     xmlHttpRequest.open('POST', 'upload_one.php');
     // check ajax status
     xmlHttpRequest.onreadystatechange = function () {
-        if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-            alert('upload');
-        } else {
-            alert('ERROR');
+        if (xmlHttpRequest.readyState == 4) {
+            if (xmlHttpRequest.status == 200) {
+                alert('upload');
+            }
         }
     };
     // post to backend
