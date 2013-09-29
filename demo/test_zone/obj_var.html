@@ -10,7 +10,8 @@ $(function () {
             str1: 'str',
             str2: '',
             num: '',
-            arr: []
+            arr: [],
+            fun: ''
         },
         obj2 = {
             con: 'content',
@@ -22,6 +23,9 @@ $(function () {
     obj.str2 = 'string';
     obj.num = 1000;
     obj.arr = ['arr1', 'arr2', 'arr3'];
+    obj.fun = function () {
+        alert('ok');
+    }
     obj2.con2 = ['Array', 'Array2', 'Array3'];
 
     // log
@@ -30,6 +34,7 @@ $(function () {
     console.log('str2:', obj.str2);
     console.log('num:', obj.num);
     console.log('arr:', obj.arr);
+    obj.fun();
     console.log('con:', obj2.con);
     console.log('con2:', obj2.con2);
 
