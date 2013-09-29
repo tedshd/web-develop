@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AJAX</title>
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+    <a href="javascript:ajax()">Click</a>
+    <div id="result"></div>
+</body>
+<script>
+function ajax () {
+    var formData = new FormData();
+    formData.append('str', 'string');
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('POST', 'test.php');
+    xmlHttpRequest.onload = function(e) {
+        if (xmlHttpRequest.status == 200) {
+            document.getElementById('result').innerHTML = 'send';
+        } else {
+            document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status + ' occurred uploading your file.<br \/>';
+        }
+    };
+    xmlHttpRequest.send(formData);
+}
+</script>
+</html>

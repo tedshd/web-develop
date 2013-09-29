@@ -1,3 +1,6 @@
 <?php
-    echo 'test';
+    echo 'test<br>';
+    if ($_POST['str']) {
+        echo $_POST['str'];
+    }
 ?>
