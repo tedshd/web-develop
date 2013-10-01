@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AJAX_JSON</title>
+</head>
+<body>
+    <a href="javascript:json()">Click</a>
+    <div id="info"></div>
+</body>
+<script>
+function json () {
+    var obj = {
+            'user': 'ted_shiu',
+            'password': '123456'
+        },
+        jsonData;
+    jsonData = JSON.stringify(obj);
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('POST', 'json.php', true);
+    // xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
+    xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xmlHttpRequest.onreadystatechange = function(e) {
+        if (xmlHttpRequest.status == 200) {
+            document.getElementById('info').innerHTML = xmlHttpRequest.responseText;
+        }
+    };
+    xmlHttpRequest.send('json=' + jsonData);
+}
+</script>
+</html>

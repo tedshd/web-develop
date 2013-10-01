@@ -17,9 +17,13 @@ function ajax () {
     xmlHttpRequest.open('POST', 'test.php');
     xmlHttpRequest.onload = function(e) {
         if (xmlHttpRequest.status == 200) {
-            document.getElementById('result').innerHTML = 'send';
+            alert('Send');
+            document.getElementById('result').innerHTML = xmlHttpRequest.responseText;
+            var data = JSON.parse(xmlHttpRequest.responseText);
+            console.log(data);
+            alert(data.status);
         } else {
-            document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status + ' occurred uploading your file.<br \/>';
+            document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status ;
         }
     };
     xmlHttpRequest.send(formData);

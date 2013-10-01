@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery_json</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script>
+$(function () {
+    $.post(
+        'json.php',
+        {
+            val: 'string',
+            val2: 1
+        },
+        function(data) {
+            console.log(data);
+            if(data.status === 'ok') {
+                // dosomething
+            } else {
+                // alert fail
+            }
+        },
+        'json'
+    );
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>
