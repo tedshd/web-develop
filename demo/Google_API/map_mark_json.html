@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>map_get_json_mark</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#map_canvas {
+    height: 100%;
+}
+</style>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
+
+</head>
+<body>
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+<script>
+var latlng = new google.maps.LatLng(25.05060, 121.51870);
+var myOptions = {
+        zoom: 14,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+var map = new google.maps.Map(
+        document.getElementById("map_canvas"),
+        myOptions
+    );
+var jsonp = function () {
+    var scriptEl = document.createElement("script");
+    scriptEl.src = "http://spreadsheets.google.com/feeds/list/0AjwXA87smFI2dDBEcjNPekxCU28taE1GSFJPYzlRV0E/od6/public/values?alt=json-in-script&callback=markData";
+    document.getElementsByTagName("head")[0].appendChild(scriptEl);
+};
+var markData = function (data) {
+    var marks = [],
+        updateMark,
+        marker = [],
+        infowindow = new google.maps.InfoWindow(),
+        markJson = data.feed.entry,
+        content;
+
+        console.log(markJson);
+
+    for (x in markJson) {
+        updateMark = {
+            position: new google.maps.LatLng(
+                markJson[x].gsx$latitude.$t,
+                markJson[x].gsx$longitude.$t
+            ),
+            title: markJson[x].gsx$title.$t,
+            desc: markJson[x].gsx$description.$t,
+            tag: markJson[x].gsx$tag.$t
+        }
+
+        marks.push(updateMark);
+    }
+    for (var i = 0; marks.length-1 >= i; i++) {
+        console.log('marks', marks[i].title);
+        marker = new google.maps.Marker(marks[i]);
+        marker.setMap(map);
+        content = 'Title:' + marks[i].title +
+                '<br>' +
+                'Desc:' + marks[i].desc;
+        // http://stackoverflow.com/questions/11106671/google-maps-api-multiple-markers-with-infowindows
+        google.maps.event.addListener(
+            marker,
+            'click',
+            (function (marker,content,infowindow) {
+                return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                };
+            })(marker, content, infowindow)
+        );
+    }
+
+
+};
+jsonp();
+
+
+</script>
+</html>
