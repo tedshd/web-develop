@@ -41,6 +41,7 @@ function codeAddress() {
           map: map,
           position: results[0].geometry.location
       });
+      console.log(results);
       console.log(results[0].geometry.location);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
