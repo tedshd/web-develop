@@ -24,6 +24,11 @@ function upload () {
     var xmlHttpRequest = new XMLHttpRequest();
     // init to backend
     xmlHttpRequest.open('POST', 'upload_one.php');
+    // upload progress
+    xmlHttpRequest.upload.onprogress = function (e) {
+        console.log('onprogress', e);
+        console.log(e.loaded);
+    };
     // check ajax status
     xmlHttpRequest.onreadystatechange = function () {
         if (xmlHttpRequest.readyState == 4) {

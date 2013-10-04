@@ -184,31 +184,38 @@ function uploadDropFile(file, i) {
 
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.upload.onabort = function (e) {
+        console.log('onabort', e);
         if (settings.onServerAbort) {
             settings.onServerAbort(e, file[i]);
         }
     };
     xmlHttpRequest.upload.onerror = function (e) {
+        console.log('onerror', e);
         if (settings.onServerError) {
             settings.onServerError(e, file[i]);
         }
     };
     xmlHttpRequest.upload.onload = function (e) {
+        console.log('onload', e);
         if (settings.onServerLoad) {
             settings.onServerLoad(e, file[i]);
         }
     };
     xmlHttpRequest.upload.onloadstart = function (e) {
+        console.log('onloadstart', e);
         if (settings.onServerLoadStart) {
             settings.onServerLoadStart(e, file[i]);
         }
     };
     xmlHttpRequest.upload.onprogress = function (e) {
+        console.log('onprogress', e);
+        console.log(e.loaded);
         if (settings.onServerProgress) {
             settings.onServerProgress(e, file[i]);
         }
     };
     xmlHttpRequest.onreadystatechange = function (e) {
+        console.log('onreadystatechange', e);
         if (settings.onServerReadyStateChange) {
             settings.onServerReadyStateChange(e, file[i], xmlHttpRequest.readyState);
         }
