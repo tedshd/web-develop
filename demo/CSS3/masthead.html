@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>masthead</title>
+<!-- <link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<script src="../../lib/jquery-1.10.1.js"></script>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    ul, li {
+        padding: 0;
+        margin: 0;
+    }
+    .masthead {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        width: 100%;
+        height: 100px;
+        background: #ccc;
+    }
+    .logo:before, .nav:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+    }
+    .masthead * {
+        vertical-align: middle;
+    }
+    .logo {
+        height: 100%;
+        float: left;
+    }
+    .nav {
+        height: 100%;
+        float: right;
+    }
+    ul {
+        display: inline-block;
+    }
+    ul li {
+        padding-right: 10px;
+        display: inline-block;
+        float: left;
+    }
+</style>
+</head>
+<body>
+    <div class="masthead">
+        <div class="logo">
+            <img src="" alt="LOGO">
+        </div>
+        <div class="nav">
+            <ul>
+                <li>A</li>
+                <li>B</li>
+                <li>C</li>
+                <li>D</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
