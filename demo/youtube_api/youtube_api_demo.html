@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>youtube_api_demo</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="swfobject/swfobject.js"></script>
+
+</head>
+<body>
+    <div id="ytapiplayer">
+        You need Flash player 8+ and JavaScript enabled to view this video.
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+<script>
+
+var n = 0, play;
+function onYouTubePlayerReady(playerId) {
+    ytplayer = document.getElementById("myytplayer");
+    ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+}
+
+function onytplayerStateChange(newState) {
+    console.log("Player's new state: " + newState);
+    console.log('ytplayer', ytplayer);
+    if (newState === 0) {
+        console.log("PLAY AGAIN");
+        n++;
+        console.log('N', n);
+        delete ytplayer;
+        ytplayer.remove();
+        play();
+        // ytplayer.playVideo();
+    }
+}
+
+$(function () {
+
+    var video_ID = {
+        'a_0': 'ArRhIohEuvk',
+        'a_1': 'pWhXUuTX3co',
+        'a_2': 'JzhY0sbc7xA',
+        'a_3': 'MsbYk57s6FE',
+    };
+    var Arr = [];
+    for(var key in video_ID) {
+        var value = video_ID[key];
+        console.log(value);
+        Arr.push(value);
+    }
+    console.log(Arr);
+
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "myytplayer" };
+
+    play = function () {
+        // alert(n);
+        // if (ytplayer) {
+        //     console.log('ytplayer', ytplayer);
+        // }
+        swfobject.embedSWF("http://www.youtube.com/v/" + Arr[n] + "?enablejsapi=1&playerapiid=ytplayer&client=181113669792.apps.googleusercontent.com&key=FPeUyXpXTD2HVLSzK0zdbIcn&rel=1&autoplay=0&disablekb=1&showsearch=0&showinfo=0&controls=1&wmode=opaque&hd=1", "ytapiplayer", "824", "463.5", "8", null, null, params, atts);
+        // ytplayer.playVideo();
+    };
+    play();
+
+});
+</script>
+</html>
