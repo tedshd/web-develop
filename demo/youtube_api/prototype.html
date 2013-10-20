@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Prototype</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<script src="../../lib/jquery-1.10.1.js"></script>
+
+</head>
+<body>
+    <div id="player"></div>
+    <button>Click</button>
+</body>
+<script>
+if (document.getElementById('player')) {
+    // get youtube api
+    var tag = document.createElement('script'),
+        firstScriptTag = document.getElementsByTagName('script')[0];
+    tag.src = "https://www.youtube.com/iframe_api?client=181113669792.apps.googleusercontent.com&key=AIzaSyAqP-AGifepfLUe_XqZDbC75B3e4xYmVlk";
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var playList = [],
+        playCount = 0,
+        player,
+        onPlayerStateChange;
+
+    var video_ID = {
+        'a_0': 'ArRhIohEuvk',
+        'a_1': 'pWhXUuTX3co',
+        'a_2': 'JzhY0sbc7xA',
+        'a_3': 'MsbYk57s6FE',
+    };
+
+    // playList array
+    for(var key in video_ID) {
+        var value = video_ID[key];
+        console.log(value);
+        playList.push(value);
+    }
+
+    function playChannel () {
+        // init player
+        player = new YT.Player('player', {
+            height: '463.5',
+            width: '824',
+            videoId: playList[0],
+            playerVars: {
+                rel: 1,
+                autoplay: 0,
+                disablekb: 0,
+                showsearch: 0,
+                showinfo: 0,
+                controls: 1,
+                wmode: 'opaque',
+                hd: 1,
+                iv_load_policy: 3
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+
+        // play video
+        function onPlayerReady (event) {
+            event.target.playVideo();
+        }
+    }
+
+    // play list loop
+    function onPlayerStateChange (event) {
+        console.log(event);
+        if (event.data === 0) {
+            console.log('Next');
+            playCount++;
+            if (playCount > (playList.length -1)) {
+                playCount = 0;
+            }
+            player.loadVideoById(playList[playCount]);
+            player.playVideo();
+        }
+    }
+
+    function onYouTubeIframeAPIReady () {
+        playChannel();
+    }
+}
+
+$(function () {
+    console.log('jQuery');
+    $('button').on('click', function () {
+        playList = ['DLFPqJedFuw', 'MmHkPXG4Td4'];
+        // update play list
+        // playList =
+        player.loadVideoById(playList[0]);
+        onPlayerStateChange();
+
+    });
+
+});
+</script>
+</html>
