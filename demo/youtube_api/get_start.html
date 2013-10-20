@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!-- https://developers.google.com/youtube/iframe_api_reference?hl=zh-cn -->
 <body>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
@@ -8,7 +9,7 @@
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
-    tag.src = "https://www.youtube.com/iframe_api";
+    tag.src = "https://www.youtube.com/iframe_api?client=181113669792.apps.googleusercontent.com&key=AIzaSyAqP-AGifepfLUe_XqZDbC75B3e4xYmVlk";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -71,6 +72,9 @@
         if (event.data === 0) {
             console.log('stop');
             n++;
+            if (n > (Arr.length -1)) {
+                n = 0;
+            }
             player.loadVideoById(Arr[n]);
             player.playVideo();
         }
