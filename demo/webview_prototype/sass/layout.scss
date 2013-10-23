@@ -226,7 +226,7 @@ $hexVertical3: 33px;
     position: absolute;
     width: 95px;
     height: 93px;
-    background: red;
+    // background: red;
     .left_top_left {
         top: $hexVertical1;
         left: 0;
@@ -251,7 +251,7 @@ $hexVertical3: 33px;
         top: $hexVertical3;
         right: 50px;
     }
-    .right_ans {
+    .right_ans, .shake_count {
         position: absolute;
         font-size: 32px;
     }
@@ -264,13 +264,21 @@ $hexVertical3: 33px;
         top: 14px;
         left: -6px;
     }
+    .shake_count {
+        bottom: 14px;
+        right: 11px;
+    }
 }
 #hex_2 {
     top: 2px;
     right: 1px;
     .right_ans {
-        bottom: 14px;
+        bottom: -16px;
         left: -6px;
+    }
+    .shake_count {
+        bottom: 14px;
+        right: 11px;
     }
 }
 #hex_3 {
@@ -280,13 +288,21 @@ $hexVertical3: 33px;
         top: 14px;
         right: -6px;
     }
+    .shake_count {
+        bottom: 14px;
+        left: 8px;
+    }
 }
 #hex_4 {
     top: 2px;
     left: 1px;
     .right_ans {
-        bottom: 14px;
+        bottom: -16px;
         right: -6px;
+    }
+    .shake_count {
+        bottom: 14px;
+        left: 8px;
     }
 }
 

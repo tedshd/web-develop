@@ -329,7 +329,6 @@ body {
   position: absolute;
   width: 95px;
   height: 93px;
-  background: red;
 }
 /* line 230, ../sass/layout.scss */
 .hex_area .left_top_left {
@@ -362,7 +361,7 @@ body {
   right: 50px;
 }
 /* line 254, ../sass/layout.scss */
-.hex_area .right_ans {
+.hex_area .right_ans, .hex_area .shake_count {
   position: absolute;
   font-size: 32px;
 }
@@ -377,38 +376,58 @@ body {
   top: 14px;
   left: -6px;
 }
+/* line 267, ../sass/layout.scss */
+#hex_1 .shake_count {
+  bottom: 14px;
+  right: 11px;
+}
 
-/* line 268, ../sass/layout.scss */
+/* line 272, ../sass/layout.scss */
 #hex_2 {
   top: 2px;
   right: 1px;
 }
-/* line 271, ../sass/layout.scss */
+/* line 275, ../sass/layout.scss */
 #hex_2 .right_ans {
-  bottom: 14px;
+  bottom: -16px;
   left: -6px;
 }
+/* line 279, ../sass/layout.scss */
+#hex_2 .shake_count {
+  bottom: 14px;
+  right: 11px;
+}
 
-/* line 276, ../sass/layout.scss */
+/* line 284, ../sass/layout.scss */
 #hex_3 {
   bottom: 34px;
   left: 61x;
 }
-/* line 279, ../sass/layout.scss */
+/* line 287, ../sass/layout.scss */
 #hex_3 .right_ans {
   top: 14px;
   right: -6px;
 }
+/* line 291, ../sass/layout.scss */
+#hex_3 .shake_count {
+  bottom: 14px;
+  left: 8px;
+}
 
-/* line 284, ../sass/layout.scss */
+/* line 296, ../sass/layout.scss */
 #hex_4 {
   top: 2px;
   left: 1px;
 }
-/* line 287, ../sass/layout.scss */
+/* line 299, ../sass/layout.scss */
 #hex_4 .right_ans {
-  bottom: 14px;
+  bottom: -16px;
   right: -6px;
+}
+/* line 303, ../sass/layout.scss */
+#hex_4 .shake_count {
+  bottom: 14px;
+  left: 8px;
 }
 
 /**
@@ -419,7 +438,7 @@ body {
  *    / .___/_/   \____/_/ /_/_/\___/
  *   /_/
  */
-/* line 302, ../sass/layout.scss */
+/* line 318, ../sass/layout.scss */
 .profile {
   position: absolute;
   overflow: hidden;
@@ -428,16 +447,16 @@ body {
   width: 240px;
   font-size: 28px;
 }
-/* line 310, ../sass/layout.scss */
+/* line 326, ../sass/layout.scss */
 .profile .horizon {
   width: 105px;
   border: solid 3px #ff8800;
 }
-/* line 314, ../sass/layout.scss */
+/* line 330, ../sass/layout.scss */
 .profile .name, .profile .rank {
   padding: 6px 0;
 }
-/* line 317, ../sass/layout.scss */
+/* line 333, ../sass/layout.scss */
 .profile .name {
   width: 185px;
   overflow: hidden;
@@ -445,58 +464,58 @@ body {
   white-space: nowrap;
 }
 
-/* line 324, ../sass/layout.scss */
+/* line 340, ../sass/layout.scss */
 #profile_1 {
   bottom: 10px;
 }
 
-/* line 327, ../sass/layout.scss */
+/* line 343, ../sass/layout.scss */
 #profile_2 {
   top: 10px;
 }
 
-/* line 330, ../sass/layout.scss */
+/* line 346, ../sass/layout.scss */
 #profile_3 {
   bottom: 10px;
   right: 0;
   text-align: right;
 }
-/* line 334, ../sass/layout.scss */
+/* line 350, ../sass/layout.scss */
 #profile_3 .name {
   position: relative;
   left: 55px;
 }
-/* line 338, ../sass/layout.scss */
+/* line 354, ../sass/layout.scss */
 #profile_3 .horizon {
   position: relative;
   left: 125px;
 }
 
-/* line 343, ../sass/layout.scss */
+/* line 359, ../sass/layout.scss */
 #profile_4 {
   top: 10px;
   right: 0;
   text-align: right;
 }
-/* line 347, ../sass/layout.scss */
+/* line 363, ../sass/layout.scss */
 #profile_4 .name {
   position: relative;
   left: 55px;
 }
-/* line 351, ../sass/layout.scss */
+/* line 367, ../sass/layout.scss */
 #profile_4 .horizon {
   position: relative;
   left: 125px;
 }
 
-/* line 357, ../sass/layout.scss */
+/* line 373, ../sass/layout.scss */
 .con {
   position: relative;
   width: 840px;
   height: 720px;
   margin: 0 auto;
 }
-/* line 363, ../sass/layout.scss */
+/* line 379, ../sass/layout.scss */
 .con .qusetion_bg {
   position: absolute;
   top: 50%;
@@ -504,26 +523,26 @@ body {
   width: 100%;
   margin-top: -30px;
 }
-/* line 370, ../sass/layout.scss */
+/* line 386, ../sass/layout.scss */
 .con .ans_bg {
   position: absolute;
   bottom: 10px;
   width: 100%;
   height: 170px;
 }
-/* line 375, ../sass/layout.scss */
+/* line 391, ../sass/layout.scss */
 .con .ans_bg .top {
   top: 20px;
 }
-/* line 378, ../sass/layout.scss */
+/* line 394, ../sass/layout.scss */
 .con .ans_bg .bottom {
   bottom: 10px;
 }
-/* line 381, ../sass/layout.scss */
+/* line 397, ../sass/layout.scss */
 .con .ans_bg .left {
   left: 135px;
 }
-/* line 384, ../sass/layout.scss */
+/* line 400, ../sass/layout.scss */
 .con .ans_bg .right {
   right: 135px;
 }
