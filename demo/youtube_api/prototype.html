@@ -82,21 +82,21 @@ if (document.getElementById('player')) {
     }
 
     function onYouTubeIframeAPIReady () {
-        playChannel();
+        $(function () {
+            console.log('jQuery');
+            playChannel();
+            $('button').on('click', function () {
+                playList = ['DLFPqJedFuw', 'MmHkPXG4Td4'];
+                // update play list
+                // playList =
+                player.loadVideoById(playList[0]);
+                onPlayerStateChange();
+
+            });
+
+        });
     }
 }
 
-$(function () {
-    console.log('jQuery');
-    $('button').on('click', function () {
-        playList = ['DLFPqJedFuw', 'MmHkPXG4Td4'];
-        // update play list
-        // playList =
-        player.loadVideoById(playList[0]);
-        onPlayerStateChange();
-
-    });
-
-});
 </script>
 </html>
