@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Object init new</title>
+<!-- <link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<script>
+var data;
+data = {
+    "data_01": {
+        "title": "title 01",
+        "num": 01,
+        "con": {
+            "con_01": "news",
+            "con_02": "sport",
+            "con_03": "tech"
+        }
+    },
+    "data_02": {
+        "title": "title 02",
+        "num": 02,
+        "con": {
+            "con_01": "life",
+            "con_02": "movie",
+            "con_03": "cars"
+        }
+    }
+};
+var x,
+    newData = {},
+    newDataArr = [];
+for (x in data) {
+    if (data.hasOwnProperty(x)) {
+        newData = {
+            title: data[x].title,
+            num: data[x].num
+        }
+        newDataArr.push(newData);
+    }
+}
+
+window.data = data;
+window.newData = newData;
+</script>
+</head>
+<body>
+
+</body>
+</html>
