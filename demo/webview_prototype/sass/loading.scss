@@ -1,0 +1,58 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-10-24 22:58:06
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+$themeColor: #ff0000;
+$bgColor: #000;
+
+.loading {
+    position: relative;
+    width: 640px;
+    height: 280px;
+    overflow: hidden;
+    background: $bgColor;
+    margin: 0 auto;
+    border: solid $themeColor;
+    border-width: 20px 0;
+    text-align: center;
+    font-size: 130px;
+    color: $themeColor;
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: solid 10px $bgColor;
+        @include box-sizing(border-box);
+    }
+    .loading_bg {
+        position: absolute;
+        left: 50%;
+        margin-left: -360px;
+        width: 710px;
+        .col {
+            display: inline-block;
+            height: 280px;
+            width: 40px;
+            background: $themeColor;
+            @include skew(-30deg, 0);
+        }
+    }
+    .text {
+        position: absolute;
+        padding: 10px;
+        top: 50%;
+        left: 50%;
+        margin-top: -70px;
+        margin-left: -205px;
+        background: #000;
+    }
+}
