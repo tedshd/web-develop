@@ -40,7 +40,7 @@ $hexagonalWidth: 30px;
     margin: 0 auto;
     width: $hexagonalWidth;
     height: $hexagonalHeight;
-    background: #ff8800;
+    background: $themeColor;
     &:before {
         content: "";
         position: absolute;
@@ -51,7 +51,7 @@ $hexagonalWidth: 30px;
         border-top: solid $hexagonalWidth transparent;
         border-bottom: solid $hexagonalWidth transparent;
         border-left: 0;
-        border-right: solid $hexagonalWidth/2 #ff8800;
+        border-right: solid $hexagonalWidth/2 $themeColor;
     }
     &:after {
         content: "";
@@ -62,7 +62,7 @@ $hexagonalWidth: 30px;
         height: 0;
         border-top: solid $hexagonalWidth transparent;
         border-bottom: solid $hexagonalWidth transparent;
-        border-left: solid $hexagonalWidth/2 #ff8800;
+        border-left: solid $hexagonalWidth/2 $themeColor;
         border-right: 0;
     }
 }
@@ -141,7 +141,7 @@ $hexagonalWidth: 30px;
         position: absolute;
         width: 200px;
         height: 200px;
-        background: #ff8800;
+        background: $themeColor;
         img {
             border: 0;
             padding: 25px;
@@ -331,7 +331,7 @@ $hexVertical3: 33px;
     font-size: 28px;
     .horizon {
         width: 105px;
-        border: solid 3px #ff8800;
+        border: solid 3px $themeColor;
     }
     .name, .rank {
         padding: 6px 0;

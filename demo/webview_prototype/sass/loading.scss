@@ -7,6 +7,37 @@
 
 @import "compass";
 @import "compass/reset";
+$animation-support: webkit, moz, o, ms, not khtml;
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+@include keyframes(glow) {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.1;
+    }
+}
+.glow {
+    @include experimental('animation-name', glow, $animation-support);
+    @include experimental('animation-duration', 1.5s, $animation-support);
+    @include experimental('animation-iteration-count', infinite, $animation-support);
+}
 
 $themeColor: #ff0000;
 $bgColor: #000;
@@ -48,11 +79,11 @@ $bgColor: #000;
     }
     .text {
         position: absolute;
-        padding: 10px;
+        padding: 20px;
         top: 50%;
         left: 50%;
-        margin-top: -70px;
-        margin-left: -205px;
+        margin-top: -85px;
+        margin-left: -215px;
         background: #000;
     }
 }

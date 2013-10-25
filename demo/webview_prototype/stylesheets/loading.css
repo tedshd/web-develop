@@ -69,7 +69,94 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 14, ../sass/loading.scss */
+@-webkit-keyframes glow {
+  /* line 26, ../sass/loading.scss */
+  0% {
+    opacity: 0.1;
+  }
+
+  /* line 29, ../sass/loading.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 32, ../sass/loading.scss */
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@-moz-keyframes glow {
+  /* line 26, ../sass/loading.scss */
+  0% {
+    opacity: 0.1;
+  }
+
+  /* line 29, ../sass/loading.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 32, ../sass/loading.scss */
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@-ms-keyframes glow {
+  /* line 26, ../sass/loading.scss */
+  0% {
+    opacity: 0.1;
+  }
+
+  /* line 29, ../sass/loading.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 32, ../sass/loading.scss */
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes glow {
+  /* line 26, ../sass/loading.scss */
+  0% {
+    opacity: 0.1;
+  }
+
+  /* line 29, ../sass/loading.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 32, ../sass/loading.scss */
+  100% {
+    opacity: 0.1;
+  }
+}
+
+/* line 36, ../sass/loading.scss */
+.glow {
+  -webkit-animation-name: glow;
+  -moz-animation-name: glow;
+  -ms-animation-name: glow;
+  -o-animation-name: glow;
+  animation-name: glow;
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  -ms-animation-duration: 1.5s;
+  -o-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+/* line 45, ../sass/loading.scss */
 .loading {
   position: relative;
   width: 640px;
@@ -83,7 +170,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 130px;
   color: red;
 }
-/* line 26, ../sass/loading.scss */
+/* line 57, ../sass/loading.scss */
 .loading:after {
   content: "";
   position: absolute;
@@ -96,14 +183,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 36, ../sass/loading.scss */
+/* line 67, ../sass/loading.scss */
 .loading .loading_bg {
   position: absolute;
   left: 50%;
   margin-left: -360px;
   width: 710px;
 }
-/* line 41, ../sass/loading.scss */
+/* line 72, ../sass/loading.scss */
 .loading .loading_bg .col {
   display: inline-block;
   height: 280px;
@@ -115,13 +202,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-transform: skew(-30deg, 0);
   transform: skew(-30deg, 0);
 }
-/* line 49, ../sass/loading.scss */
+/* line 80, ../sass/loading.scss */
 .loading .text {
   position: absolute;
-  padding: 10px;
+  padding: 20px;
   top: 50%;
   left: 50%;
-  margin-top: -70px;
-  margin-left: -205px;
+  margin-top: -85px;
+  margin-left: -215px;
   background: #000;
 }
