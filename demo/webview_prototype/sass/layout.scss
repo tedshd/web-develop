@@ -22,6 +22,12 @@ body {
     background: $bgColor;
     color: #fff;
 }
+.dark {
+    opacity: 0.5;
+}
+.correct {
+    color: #0088ff;
+}
 
 /**
  *         __                                            __
@@ -144,7 +150,7 @@ $hexagonalWidth: 30px;
         background: $themeColor;
         img {
             border: 0;
-            padding: 25px;
+            padding: 15px;
         }
     }
 }
@@ -165,7 +171,7 @@ $hexagonalWidth: 30px;
     bottom: 0;
     right: 0;
 }
-#avatar_1 {
+.avatar_1 {
     &:after {
         content: "";
         position: absolute;
@@ -179,7 +185,7 @@ $hexagonalWidth: 30px;
         border-right: 0;
     }
 }
-#avatar_2 {
+.avatar_2 {
     bottom: 0;
     &:after {
         content: "";
@@ -194,7 +200,7 @@ $hexagonalWidth: 30px;
         border-right: 0;
     }
 }
-#avatar_3 {
+.avatar_3 {
     right: 0;
     &:after {
         content: "";
@@ -209,7 +215,7 @@ $hexagonalWidth: 30px;
         border-left: 0;
     }
 }
-#avatar_4 {
+.avatar_4 {
     right: 0;
     bottom: 0;
     &:after {
@@ -259,7 +265,7 @@ $hexVertical3: 33px;
     }
     .right_ans, .shake_count {
         position: absolute;
-        font-size: 32px;
+        font-size: 28px;
     }
 
 }
@@ -382,6 +388,12 @@ $hexVertical3: 33px;
     height: $deviceHeight;
     // background: #aaa;
     margin: 0 auto;
+    #player {
+        position: absolute;
+        top: -145px;
+        left: 50%;
+        margin-left: -240px;
+    }
     .qusetion_bg {
         position: absolute;
         top: 50%;
@@ -394,6 +406,15 @@ $hexVertical3: 33px;
         bottom: 10px;
         width: 100%;
         height: 170px;
+        font-size: 28px;
+        .ans {
+            position: absolute;
+            width: 240px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
         .top {
             top: 20px;
         }
@@ -405,6 +426,23 @@ $hexVertical3: 33px;
         }
         .right {
             right: 135px;
+        }
+        .ans_top {
+            top: 35px;
+        }
+        .ans_bottom {
+            bottom: 25px;
+        }
+        .reciprocal_bg {
+            bottom: 50px;
+            left: 50%;
+            margin-left: -15px;
+            text-align: center;
+            .reciprocal {
+                color: #ff0000;
+                font-size: 50px;
+                padding-top: 6px;
+            }
         }
     }
 }
