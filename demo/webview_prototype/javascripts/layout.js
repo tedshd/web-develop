@@ -7,36 +7,19 @@
  */
 
 $(function () {
-    function reciprocal() {
-        var reciprocal,
-            count = 3;
-        reciprocal = setInterval(
-            function () {
-                // body...
-                count--;
-                $('.reciprocal').html(count);
-                if (count === 0) {
-                    // $('.reciprocal').html('');
-                    // android.start();
-                    clearInterval(reciprocal);
-                }
-            },
-            1000
-        );
-    }
-    reciprocal();
+    // static data
     var profile = {
-            'user': {
-                'facebook_id': '123456',
-                'avatar': 'url',
-                'name': 'user_name1',
-                'rank': 'win:0,lose:0,score:0'
-            }
+            'facebook_id': '123456',
+            'facebook_avatar': 'url',
+            'facebook_name': 'user_name1',
+            'win': 0,
+            'lose': 0
         },
         question = {
             'question_lib': {
                 'question': 'QQ',
-                'answer': {
+                'answer': 'a_1',
+                'options': {
                     'a_1': 'ans_1',
                     'a_2': 'ans_2',
                     'a_3': 'ans_3',
@@ -50,41 +33,80 @@ $(function () {
         },
         ok = {
             status: 'ok',
-            ok_ans: 1
+            answer: 1
         };
+    // static data end
+
     var n = 0,
         fail_id;
-    addPlayer(profile);
+
+    function reciprocal() {
+        var rec,
+            count = 3;
+        rec = setInterval(
+            function () {
+                // body...
+                console.log('count: ' + count);
+                $('.reciprocal').html(count);
+                if (count === 0) {
+                    // $('.reciprocal').html('');
+                    // window.game.start();
+                    clearInterval(rec);
+                }
+                count--;
+            },
+            1000
+        );
+    }
+
     // addPlayer
     function addPlayer(data) {
         console.log(data);
         var avatar,
             name,
-            rank,
+            win,
+            lose,
             f_id;
 
-            avatar = data.user.avatar;
-            name = data.user.name;
-            rank = data.user.rank;
-            f_id = data.user.facebook_id;
+            f_id = data.facebook_id;
+            avatar = data.facebook_avatar;
+            name = data.facebook_name;
+            win = data.win;
+            lose = data.lose;
             $('.avatar:eq(' + n + ') img').attr('src', avatar).parent('.avatar').attr('id', f_id);
             $('.name:eq(' + n + ')').html(name);
-            $('.rank:eq(' + n + ')').html(rank);
+            $('.rank:eq(' + n + ')').html(win + ' Win | ' + lose + ' Lose');
+            if (n === 3) {
+                setTimeout(function () {
+                    finishAdd();
+                }, 10000);
+            }
             n++;
     }
-    // getQuestion and begin 3210 call start
-    function getQuestion(data) {
+
+    // finish add 4 player
+    function finishAdd() {
         // body...
+        $('.question_bg').removeClass('hide');
+        $('#player').removeClass('hide');
+        $('.ans_bg').removeClass('hide');
+        $('.loading').addClass('hide');
+    }
+
+    // showQuestion and begin 3210 call start
+    function showQuestion(data) {
+        // reset UI
         $('.hexagonal_ans').removeClass('dark');
         $('.ans').removeClass('correct');
         $('.avatar').removeClass('dark');
         console.log(data);
+
         var n = 0,
             x,
             q,
             a_array;
         q = data.question_lib.question;
-        a_array = data.question_lib.answer;
+        a_array = data.question_lib.options;
         $('.question_area').html(q);
         for (x in a_array) {
             $('.ans:eq(' + n + ')').html(a_array[x]);
@@ -92,18 +114,15 @@ $(function () {
         }
         reciprocal();
     }
-    // select
-    function select(f_id) {
+
+    // selectAnswerer
+    function selectAnswerer(fbid) {
         // body...
-        console.log(f_id);
+        console.log(fbid);
         $('.avatar').addClass('dark');
-        $('#' + f_id + '').removeClass('dark');
-        fail_id = f_id;
+        $('#' + fbid + '').removeClass('dark');
+        fail_id = fbid;
     }
-    select(123456);
-    setTimeout(function () {
-        getQuestion(question);
-    }, 5000);
 
     // result
     function result(data) {
@@ -111,22 +130,36 @@ $(function () {
         if (data.status === 'ok') {
             // right
             // win UI
-            $('.ans:eq(' + data.ok_ans + ')').addClass('correct');
+            $('.ans:eq(' + data.answer + ')').addClass('correct');
             // play music
         } else {
             // fail
             // update UI(fail user dark)
-            $('.hexagonal_ans:eq(' + data.fail_ans + ')').addClass('dark');
+            $('.hexagonal_ans:eq(' + data.answer + ')').addClass('dark');
             $('.avatar').removeClass('dark');
             $('#' + fail_id + '').addClass('dark');
             reciprocal();
         }
     }
+
+    /**
+     * TEST Area
+     * @return {[type]} [description]
+     */
+    addPlayer(profile);
+    addPlayer(profile);
+    addPlayer(profile);
+    addPlayer(profile);
+    selectAnswerer(123456);
+    setTimeout(function () {
+        showQuestion(question);
+    }, 5000);
     setTimeout(function () {
         result(ok);
-    }, 3000);
+    }, 10000);
 
 });
+
 
 
 if (document.getElementById('player2')) {

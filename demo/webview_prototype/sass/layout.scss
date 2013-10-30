@@ -22,11 +22,106 @@ body {
     background: $bgColor;
     color: #fff;
 }
+img {
+    border: 0;
+}
+.hide {
+    display: none;
+}
 .dark {
     opacity: 0.5;
 }
 .correct {
     color: #0088ff;
+}
+
+/**
+ * loading
+ */
+
+$animation-support: webkit, moz, o, ms, not khtml;
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+@include keyframes(glow) {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.1;
+    }
+}
+.glow {
+    @include experimental('animation-name', glow, $animation-support);
+    @include experimental('animation-duration', 1.5s, $animation-support);
+    @include experimental('animation-iteration-count', infinite, $animation-support);
+}
+
+$loadingColor: #ff0000;
+$bgColor: #000;
+
+.loading {
+    position: absolute;
+    width: 640px;
+    height: 280px;
+    top: 50%;
+    left: 50%;
+    margin-top: -140px;
+    margin-left: -320px;
+    overflow: hidden;
+    background: $bgColor;
+    border: solid $loadingColor;
+    border-width: 20px 0;
+    text-align: center;
+    font-size: 130px;
+    color: $loadingColor;
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: solid $bgColor;
+        border-width: 10px 0;
+        @include box-sizing(border-box);
+    }
+    .loading_bg {
+        position: absolute;
+        left: 50%;
+        margin-left: -360px;
+        width: 710px;
+        .col {
+            display: inline-block;
+            height: 280px;
+            width: 40px;
+            background: $loadingColor;
+            @include skew(-30deg, 0);
+        }
+    }
+    .text {
+        position: absolute;
+        padding: 20px;
+        top: 50%;
+        left: 50%;
+        margin-top: -85px;
+        margin-left: -215px;
+        background: #000;
+    }
 }
 
 /**
@@ -388,13 +483,59 @@ $hexVertical3: 33px;
     height: $deviceHeight;
     // background: #aaa;
     margin: 0 auto;
+    .banner {
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        .hexagonal {
+            // position: absolute;
+        }
+        .hexagonal_top {
+            top: -30px;
+        }
+        .hexagonal_bottom {
+            top: 30px;
+        }
+        .hexagonal_left {
+            left: 240px;
+        }
+        .hexagonal_right {
+            right: 240px;
+        }
+    }
     #player {
         position: absolute;
-        top: -145px;
+        top: 50%;
         left: 50%;
+        margin-top: -175px;
         margin-left: -240px;
+        background: $bgColor;
+        .img_corner {
+            position: absolute;
+            height: $hexagonalHeight/2;
+            width: $hexagonalWidth/2;
+            background: $themeColor;
+        }
+        .d-30 {
+            @include skew(-30deg, 0);
+        }
+        .d_30 {
+            @include skew(30deg, 0);
+        }
+        .img_corner_top {
+            top: -5px;
+        }
+        .img_corner_bottom {
+            bottom: -3px;
+        }
+        .img_corner_left {
+            left: -8px;
+        }
+        .img_corner_right {
+            right: -8px;
+        }
     }
-    .qusetion_bg {
+    .question_bg {
         position: absolute;
         top: 50%;
         height: $hexagonalHeight;
