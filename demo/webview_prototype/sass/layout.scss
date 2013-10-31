@@ -487,8 +487,12 @@ $hexVertical3: 33px;
         position: absolute;
         top: 60px;
         width: 100%;
-        .hexagonal {
-            // position: absolute;
+        .banner_title {
+            position: absolute;
+            top:6px;
+            width: 100%;
+            font-size: 48px;
+            text-align: center;
         }
         .hexagonal_top {
             top: -30px;
