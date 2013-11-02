@@ -10,7 +10,7 @@
 
 $bgColor: #000;
 $themeColor: #ff8800;
-$deviceHeight: 720px;
+$deviceHeight: 768px;
 
 body, html {
     width: 100%;
@@ -135,6 +135,8 @@ $bgColor: #000;
 
 $hexagonalHeight: 60px;
 $hexagonalWidth: 30px;
+$hexagonalHeight_small: 40px;
+$hexagonalWidth_small: 20px;
 
 .hexagonal {
     position: absolute;
@@ -167,13 +169,44 @@ $hexagonalWidth: 30px;
         border-right: 0;
     }
 }
+.hexagonal_small {
+    position: absolute;
+    margin: 0 auto;
+    width: $hexagonalWidth_small;
+    height: $hexagonalHeight_small;
+    background: $themeColor;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -$hexagonalWidth_small/2;
+        width: 0;
+        height: 0;
+        border-top: solid $hexagonalWidth_small transparent;
+        border-bottom: solid $hexagonalWidth_small transparent;
+        border-left: 0;
+        border-right: solid $hexagonalWidth_small/2 $themeColor;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -$hexagonalWidth_small/2;
+        width: 0;
+        height: 0;
+        border-top: solid $hexagonalWidth_small transparent;
+        border-bottom: solid $hexagonalWidth_small transparent;
+        border-left: solid $hexagonalWidth_small/2 $themeColor;
+        border-right: 0;
+    }
+}
 .hexagonal_1 {
-    width: 840px;
+    width: 630px;
 }
 .hexagonal_2 {
-    width: 720px;
+    width: 540px;
     left: 50%;
-    margin-left: -360px;
+    margin-left: -270px;
 }
 .hexagonal_2_up {
     top: -$hexagonalHeight/2;
@@ -182,15 +215,20 @@ $hexagonalWidth: 30px;
     top: $hexagonalHeight/2;
 }
 .hexagonal_3 {
-    width: 600px;
+    width: 450px;
     left: 50%;
-    margin-left: -300px;
+    margin-left: -225px;
 }
 .hexagonal_3_up {
     top: -$hexagonalHeight;
 }
 .hexagonal_3_down {
     top: $hexagonalHeight;
+}
+.hexagonal_4 {
+    width: 362px;
+    left: 50%;
+    margin-left: -181px;
 }
 .hexagonal_4_up {
     top: -$hexagonalHeight*2;
@@ -199,22 +237,33 @@ $hexagonalWidth: 30px;
     top: $hexagonalHeight*2;
 }
 .hexagonal_5 {
-    width: 480px;
+    width: 390px;
     left: 50%;
-    margin-left: -240px;
+    margin-left: -195px;
 }
 .hexagonal_5_up {
-    top: -($hexagonalHeight/2)*5;
+    top: -($hexagonalHeight/2)*3;
 }
 .hexagonal_5_down {
-    top: ($hexagonalHeight/2)*5;
+    top: ($hexagonalHeight/2)*3;
+}
+.hexagonal_6 {
+    width: 240px;
+    left: 50%;
+    margin-left: -120px;
 }
 .hexagonal_6_up {
+    top: -($hexagonalHeight/2)*5;
+}
+.hexagonal_6_down {
+    top: ($hexagonalHeight/2)*5;
+}
+.hexagonal_7_up {
     top: -$hexagonalHeight*3;
     left: 50%;
     margin-left: -$hexagonalWidth/2;
 }
-.hexagonal_6_down {
+.hexagonal_7_down {
     top: $hexagonalHeight*3;
     left: 50%;
     margin-left: -$hexagonalWidth/2;
@@ -327,12 +376,12 @@ $hexagonalWidth: 30px;
     }
 }
 $hexVertical1: 0;
-$hexVertical2: 65px;
-$hexVertical3: 33px;
+$hexVertical2: 45px;
+$hexVertical3: 23px;
 .hex_area {
     position: absolute;
-    width: 95px;
-    height: 93px;
+    width: 85px;
+    height: 83px;
     // background: red;
     .left_top_left {
         top: $hexVertical1;
@@ -344,7 +393,7 @@ $hexVertical3: 33px;
     }
     .left_right {
         top: $hexVertical3;
-        left: 50px;
+        left: 34px;
     }
     .right_top_right {
         top: $hexVertical1;
@@ -356,59 +405,59 @@ $hexVertical3: 33px;
     }
     .right_left {
         top: $hexVertical3;
-        right: 50px;
+        right: 34px;
     }
     .right_ans, .shake_count {
         position: absolute;
-        font-size: 28px;
+        font-size: 24px;
     }
 
 }
 #hex_1 {
-    bottom: 34px;
-    right: 1px;
+    bottom: 40px;
+    right: 12px;
     .right_ans {
-        top: 14px;
+        top: 8px;
         left: -6px;
     }
     .shake_count {
-        bottom: 14px;
+        bottom: 10px;
         right: 11px;
     }
 }
 #hex_2 {
-    top: 2px;
-    right: 1px;
+    top: 36px;
+    right: 13px;
     .right_ans {
-        bottom: -16px;
+        bottom: 6px;
         left: -6px;
     }
     .shake_count {
-        bottom: 14px;
+        bottom: 10px;
         right: 11px;
     }
 }
 #hex_3 {
-    bottom: 34px;
-    left: 61x;
+    bottom: 40px;
+    left: 12px;
     .right_ans {
-        top: 14px;
+        top: 8px;
         right: -6px;
     }
     .shake_count {
-        bottom: 14px;
+        bottom: 10px;
         left: 8px;
     }
 }
 #hex_4 {
-    top: 2px;
-    left: 1px;
+    top: 36px;
+    left: 13px;
     .right_ans {
-        bottom: -16px;
+        bottom: 6px;
         right: -6px;
     }
     .shake_count {
-        bottom: 14px;
+        bottom: 10px;
         left: 8px;
     }
 }
@@ -479,7 +528,7 @@ $hexVertical3: 33px;
 
 .con {
     position: relative;
-    width: 840px;
+    width: 630px;
     height: $deviceHeight;
     // background: #aaa;
     margin: 0 auto;
@@ -511,8 +560,8 @@ $hexVertical3: 33px;
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-top: -175px;
-        margin-left: -240px;
+        margin-top: -145px;
+        margin-left: -180px;
         background: $bgColor;
         .img_corner {
             position: absolute;
@@ -567,10 +616,10 @@ $hexVertical3: 33px;
             bottom: 10px;
         }
         .left {
-            left: 135px;
+            left: 40px;
         }
         .right {
-            right: 135px;
+            right: 40px;
         }
         .ans_top {
             top: 35px;
