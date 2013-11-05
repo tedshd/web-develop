@@ -34,6 +34,12 @@ img {
 .correct {
     color: #0088ff;
 }
+.win_color {
+    color: #0088ff;
+}
+.lose_color {
+    color: #ff0000;
+}
 
 /**
  * loading
@@ -76,18 +82,18 @@ $bgColor: #000;
 
 .loading {
     position: absolute;
-    width: 640px;
-    height: 280px;
+    width: 520px;
+    height: 200px;
     top: 50%;
     left: 50%;
-    margin-top: -140px;
-    margin-left: -320px;
+    margin-top: -120px;
+    margin-left: -260px;
     overflow: hidden;
     background: $bgColor;
     border: solid $loadingColor;
     border-width: 20px 0;
     text-align: center;
-    font-size: 130px;
+    font-size: 96px;
     color: $loadingColor;
     &:after {
         content: "";
@@ -108,18 +114,18 @@ $bgColor: #000;
         .col {
             display: inline-block;
             height: 280px;
-            width: 40px;
+            width: 20px;
             background: $loadingColor;
             @include skew(-30deg, 0);
         }
     }
     .text {
         position: absolute;
-        padding: 20px;
+        padding: 10px;
         top: 50%;
         left: 50%;
-        margin-top: -85px;
-        margin-left: -215px;
+        margin-top: -58px;
+        margin-left: -154px;
         background: #000;
     }
 }
@@ -134,9 +140,9 @@ $bgColor: #000;
  */
 
 $hexagonalHeight: 60px;
-$hexagonalWidth: 30px;
+$hexagonalWidth: $hexagonalHeight/2;
 $hexagonalHeight_small: 40px;
-$hexagonalWidth_small: 20px;
+$hexagonalWidth_small: $hexagonalHeight_small/2;
 
 .hexagonal {
     position: absolute;
@@ -201,7 +207,7 @@ $hexagonalWidth_small: 20px;
     }
 }
 .hexagonal_1 {
-    width: 630px;
+    width: 720px;
 }
 .hexagonal_2 {
     width: 540px;
@@ -407,6 +413,10 @@ $hexVertical3: 23px;
         top: $hexVertical3;
         right: 34px;
     }
+    .right_ans {
+        text-align: center;
+        width: 30px;
+    }
     .right_ans, .shake_count {
         position: absolute;
         font-size: 24px;
@@ -494,13 +504,13 @@ $hexVertical3: 23px;
     }
 }
 #profile_1 {
-    bottom: 10px;
+    bottom: -10px;
 }
 #profile_2 {
-    top: 10px;
+    top: -10px;
 }
 #profile_3 {
-    bottom: 10px;
+    bottom: -10px;
     right: 0;
     text-align: right;
     .name {
@@ -513,7 +523,7 @@ $hexVertical3: 23px;
     }
 }
 #profile_4 {
-    top: 10px;
+    top: -10px;
     right: 0;
     text-align: right;
     .name {
@@ -528,7 +538,7 @@ $hexVertical3: 23px;
 
 .con {
     position: relative;
-    width: 630px;
+    width: 720px;
     height: $deviceHeight;
     // background: #aaa;
     margin: 0 auto;
@@ -561,7 +571,7 @@ $hexVertical3: 23px;
         top: 50%;
         left: 50%;
         margin-top: -145px;
-        margin-left: -180px;
+        margin-left: -220px;
         background: $bgColor;
         .img_corner {
             position: absolute;
@@ -616,10 +626,10 @@ $hexVertical3: 23px;
             bottom: 10px;
         }
         .left {
-            left: 40px;
+            left: 80px;
         }
         .right {
-            right: 40px;
+            right: 80px;
         }
         .ans_top {
             top: 35px;
