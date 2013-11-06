@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>upload_prototype</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<body>
+    <input type="file" name="Upfile[]" id="select" multiple>
+    <a id="upload" href="javascript:">AJAX_upload</a>
+</body>
+<script>
+(function () {
+
+    var selectFiles = function () {
+        var fileCount = document.getElementById('select').files.length;
+        console.log(fileCount);
+        for (var i = 0; fileCount > i; i++) {
+            console.log(this.files);
+            console.log(this.files[i].name);
+            console.log(this.files[i].size);
+        }
+    }
+    document.getElementById('select').addEventListener('change', selectFiles);
+
+    document.getElementById('upload').addEventListener('click', upload);
+    function upload () {
+        console.log('files', document.getElementById('select').files);
+        var fileCount = document.getElementById('select').files.length;
+
+        for (var i = 0; fileCount > i; i++) {
+            // var length = document.getElementById('select').files.length;
+            // init FormData object
+            var formData = new FormData();
+            // use append method append upload file
+            formData.append('Upfile[]', document.getElementById('select').files[i]);
+            // init XMLHttpRequest object
+            var xmlHttpRequest = new XMLHttpRequest();
+            // init to backend
+            xmlHttpRequest.open('POST', 'upload_mult.php');
+            // upload progress
+            xmlHttpRequest.upload.onprogress = function (e) {
+                console.log('onprogress', e);
+                console.log(e.loaded);
+                console.log(Math.ceil((e.loaded/e.total) * 100) + '%');
+            };
+            // check ajax status
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState == 4) {
+                    if (xmlHttpRequest.status == 200) {
+                        // alert('upload');
+                    }
+                }
+            };
+            // post to backend
+            xmlHttpRequest.send(formData);
+        }
+    }
+})();
+</script>
+</html>
