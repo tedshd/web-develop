@@ -9,8 +9,9 @@ $upload_dir='upload/';
 $num = sizeof($_FILES['Upfile']['name']);
 for ($i=0; $i < $num; $i++) {
   if($_FILES["Upfile"]["error"][$i] > 0) {
-    echo $_FILES["Upfile"]["error"];
+    print_r($_FILES["Upfile"]["error"]);
   } else {
+    echo 'upload success';
       //將暫存檔搬移到上傳目錄下, 並且改回原始檔名
       move_uploaded_file(
         $_FILES["Upfile"]["tmp_name"][$i],

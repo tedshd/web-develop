@@ -4,7 +4,7 @@
 $upload_dir='upload/';
 //如果錯誤代碼為 UPLOAD_ERR_OK, 表示上傳成功
 if($_FILES["Upfile"]["error"] > 0) {
-  echo $_FILES["Upfile"]["error"];
+  print_r($_FILES["Upfile"]["error"]);
 } else {
   //將暫存檔搬移到上傳目錄下, 並且改回原始檔名
   move_uploaded_file(
