@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dev_test</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<body>
+    <input type="file" name="Upfile[]" id="select" class="up" multiple>
+    <a id="upload" href="javascript:">AJAX_upload</a>
+</body>
+<script src="javascripts/dev.js"></script>
+<script>
+    var upload = new uploadFiles(
+        {
+            inputFileNode: 'select',
+            fileName: 'Upfile[]'
+        }
+    );
+/*
+    var upload = new uploadFiles(
+        {
+            inputFileNode: 'select',
+            fileName: 'upfile[]',
+            server: '/server/upload.php',
+            dropArea: 'body'
+        }
+    );
+    upload.addEventListener('selectFiles', function() {});
+    upload.addEventListener('uploadError', function() {});
+    upload.addEventListener('uploadProgress', function() {});
+    upload.addEventListener('uploadComplete', function() {});
+    upload.addEventListener('dragenter', function() {});
+    upload.addEventListener('dragover', function() {});
+    upload.addEventListener('drop', function() {});
+    upload.addEventListener('drag', function() {});
+    upload.upload();
+    upload.cancel();
+ */
+</script>
+</html>
