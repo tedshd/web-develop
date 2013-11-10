@@ -30,9 +30,20 @@
         // get input
         inputFileNode = document.getElementById(setting.inputFileNode) ||
                         document.getElementsByTagName(setting.inputFileNode);
-        console.log(inputFileNode);
+        console.log('uploadNode', inputFileNode);
 
-        filesInfo = function () {
+        // create event
+        // selectFiles
+        // uploadError
+        // uploadProgress
+        // uploadComplete
+        // dragenter
+        // dragover
+        // drop
+        // drag
+
+        filesInfo = function (e) {
+            console.log('e', e);
             fileCount = inputFileNode.files.length;
             console.log(fileCount);
             for (i = 0; fileCount > i; i++) {
@@ -42,6 +53,8 @@
                 console.log(inputFileNode.files[i].type);
             }
         };
+
+        // method
 
         upload = function () {
             console.log('files', document.getElementById('select').files);
@@ -76,6 +89,10 @@
             }
         }
 
+        cancel = function () {
+            // body...
+        }
+
         // bind event
         // inputFileNode.addEventListener('change', filesInfo);
         // inputFileNode.addEventListener('change', filesInfo, false, true);
@@ -85,6 +102,7 @@
         // define method
         this.filesInfo = filesInfo;
         this.upload = upload;
+        this.cancel = cancel;
         console.log('this', this);
     }
     window.uploadFiles = uploadFiles;

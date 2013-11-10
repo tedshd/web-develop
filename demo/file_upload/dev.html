@@ -13,10 +13,17 @@
 <script>
     var upload = new uploadFiles(
         {
-            inputFileNode: 'select',
+            inputFileNode: 'hoho',
             fileName: 'Upfile[]'
         }
     );
+    function fun (e) {
+        // e.fileList;
+        console.log('fun');
+        console.log(e);
+    }
+    document.getElementById('select').onfileSelect = fun;
+    document.getElementById('select').addEventListener('filesInfo', fun);
 /*
     var upload = new uploadFiles(
         {
