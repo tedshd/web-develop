@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>javascript - delegate</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<body>
+
+</body>
+<script>
+var div = document.createElement('div'),
+    prefix = ['moz','webkit','ms','o'].filter(function (prefix) {
+        return prefix + 'MatchesSelector' in div;
+    })[0] + 'MatchesSelector';
+
+Element.prototype.addDelegateListener = function(type, selector, fn) {
+    this.addEventListener( type, function(e){
+        var target = e.target;
+
+        while(target && target !== this && !target[prefix](selector)) {
+            target = target.parentNode;
+        }
+        if(target && target !== this) {
+            return fn.call(target, e);
+        }
+
+    }, false );
+};
+console.log(prefix);
+document.querySelector('body').addDelegateListener('click', '#btn', function () {
+    alert('ok');
+});
+
+document.body.innerHTML = '<button id="btn">Click</button>';
+</script>
+</html>

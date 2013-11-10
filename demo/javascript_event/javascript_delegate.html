@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JavaScript- delegate</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+    <ul></ul>
+</body>
+<!-- http://stackoverflow.com/questions/11179841/addeventlistener-for-new-elements -->
+<script>
+var div = document.createElement("div"),
+    prefix = ["moz","webkit","ms","o"].filter(function(prefix){
+    return prefix+"MatchesSelector" in div;
+    })[0] + "MatchesSelector";
+
+Element.prototype.addDelegateListener = function( type, selector, fn ) {
+
+    this.addEventListener( type, function(e){
+        var target = e.target;
+
+        while( target && target !== this && !target[prefix](selector) ) {
+            target = target.parentNode;
+        }
+
+        if( target && target !== this ) {
+            return fn.call( target, e );
+        }
+
+    }, false );
+};
+
+document.querySelector("ul").addDelegateListener("click", "li", function(e){
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode("hi"));
+    this.parentNode.appendChild(li);
+});
+
+// create node
+var li = document.createElement('li');
+document.getElementsByTagName('ul')[0].appendChild(li);
+document.getElementsByTagName('li')[0].innerHTML = 'jsList';
+</script>
+</html>
