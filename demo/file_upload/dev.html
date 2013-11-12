@@ -22,27 +22,27 @@
         console.log('fun');
         console.log(e);
     }
-    document.getElementById('select').onfileSelect = fun;
-    document.getElementById('select').addEventListener('filesInfo', fun);
-/*
-    var upload = new uploadFiles(
-        {
-            inputFileNode: 'select',
-            fileName: 'upfile[]',
-            server: '/server/upload.php',
-            dropArea: 'body'
-        }
-    );
-    upload.addEventListener('selectFiles', function() {});
-    upload.addEventListener('uploadError', function() {});
-    upload.addEventListener('uploadProgress', function() {});
-    upload.addEventListener('uploadComplete', function() {});
-    upload.addEventListener('dragenter', function() {});
-    upload.addEventListener('dragover', function() {});
-    upload.addEventListener('drop', function() {});
-    upload.addEventListener('drag', function() {});
-    upload.upload();
-    upload.cancel();
- */
+    // document.getElementById('select').onfileSelect = fun;
+    document.getElementById('select').addEventListener('selectFiles', fun);
+
+    // var upload = new uploadFiles(
+    //     {
+    //         inputFileNode: 'select',
+    //         fileName: 'upfile[]',
+    //         server: '/server/upload.php',
+    //         dropArea: 'body'
+    //     }
+    // );
+    // upload.addEventListener('selectFiles', function() {});
+    // upload.addEventListener('uploadError', function() {});
+    // upload.addEventListener('uploadProgress', function() {});
+    // upload.addEventListener('uploadComplete', function() {});
+    // upload.addEventListener('dragenter', function() {});
+    // upload.addEventListener('dragover', function() {});
+    // upload.addEventListener('drop', function() {});
+    // upload.addEventListener('drag', function() {});
+    // upload.upload();
+    // upload.cancel();
+
 </script>
 </html>

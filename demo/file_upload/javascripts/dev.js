@@ -7,11 +7,11 @@
  */
 
 (function () {
-    console.log('init uploadFiles');
+    console.log('load(I) - init uploadFiles');
     // init uploadFiles
     // var uploadFiles;
     function uploadFiles(options) {
-        console.log('uploadFiles');
+        console.log('load(II) - uploadFiles');
         var defaultSetting,
             setting,
             inputFileNode,
@@ -30,10 +30,28 @@
         // get input
         inputFileNode = document.getElementById(setting.inputFileNode) ||
                         document.getElementsByTagName(setting.inputFileNode);
-        console.log('uploadNode', inputFileNode);
+        // console.log('uploadNode', inputFileNode);
 
         // create event
         // selectFiles
+        function selectFiles (files) {
+            if (inputFileNode && window.CustomEvent) {
+                var event = new CustomEvent(
+                    "selectFiles",
+                    {
+                        detail: {
+                            fileList: files
+                        },
+                        bubbles: true,
+                        cancelable: true
+                    }
+                );
+                inputFileNode.dispatchEvent(event);
+                event.fileList = event.detail.fileList;
+                // console.log('selectFiles', event);
+            }
+        }
+
         // uploadError
         // uploadProgress
         // uploadComplete
@@ -43,15 +61,16 @@
         // drag
 
         filesInfo = function (e) {
-            console.log('e', e);
-            fileCount = inputFileNode.files.length;
-            console.log(fileCount);
-            for (i = 0; fileCount > i; i++) {
-                console.log(inputFileNode.files);
-                console.log(inputFileNode.files[i].name);
-                console.log(inputFileNode.files[i].size);
-                console.log(inputFileNode.files[i].type);
-            }
+            selectFiles(inputFileNode.files);
+            // console.log('e', e);
+            // fileCount = inputFileNode.files.length;
+            // console.log(fileCount);
+            // for (i = 0; fileCount > i; i++) {
+            //     console.log(inputFileNode.files);
+            //     console.log(inputFileNode.files[i].name);
+            //     console.log(inputFileNode.files[i].size);
+            //     console.log(inputFileNode.files[i].type);
+            // }
         };
 
         // method
@@ -105,5 +124,5 @@
         this.cancel = cancel;
         console.log('this', this);
     }
-    window.uploadFiles = uploadFiles;
+    window.uploadFiles = uploaddFiles;
 })();
