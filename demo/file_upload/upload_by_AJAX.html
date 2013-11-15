@@ -6,6 +6,13 @@
 <link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
 <!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
 </head>
+<style>
+    #progress_bar {
+        background: #0088ff;
+        height: 30px;
+        width: 0;
+    }
+</style>
 <body>
     <form action="upload_one.php" method="post" enctype="multipart/form-data">
         <label for="file">File:</label>
@@ -14,40 +21,48 @@
     </form>
     <a href="javascript:upload()">AJAX_upload</a>
     <br>
+    <div id="progress">
+        <div id="progress_bar"></div>
+    </div>
+    <br>
     <a href="javascript:" id="cancel">Cancel</a>
 </body>
 <script>
 function upload () {
-    // var length = document.getElementById('select').files.length;
-    // init FormData object
-    var formData = new FormData();
-    // use append method append upload file
-    formData.append('Upfile', document.getElementById('select').files[0]);
-    // init XMLHttpRequest object
-    var xmlHttpRequest = new XMLHttpRequest();
-    // init to backend
-    xmlHttpRequest.open('POST', 'upload_one.php');
-    // upload progress
-    xmlHttpRequest.upload.onprogress = function (e) {
-        console.log('onprogress', e);
-        console.log(e.loaded);
-        console.log(Math.ceil((e.loaded/e.total) * 100) + '%');
-    };
-    // check ajax status
-    xmlHttpRequest.onreadystatechange = function () {
-        if (xmlHttpRequest.readyState == 4) {
-            if (xmlHttpRequest.status == 200) {
-                // alert('upload');
+    if (document.getElementById('select').files.length !== 0) {
+        // var length = document.getElementById('select').files.length;
+        // init FormData object
+        var formData = new FormData();
+        // use append method append upload file
+        formData.append('Upfile', document.getElementById('select').files[0]);
+        // init XMLHttpRequest object
+        var xmlHttpRequest = new XMLHttpRequest();
+        // init to backend
+        xmlHttpRequest.open('POST', 'upload_one.php');
+        // upload progress
+        xmlHttpRequest.upload.onprogress = function (e) {
+            console.log('onprogress', e);
+            console.log(e.loaded);
+            console.log(Math.ceil((e.loaded/e.total) * 100) + '%');
+            document.getElementById('progress_bar').style.width = Math.ceil((e.loaded/e.total) * 100) + '%';
+            document.getElementById('progress_bar').innerHTML = Math.ceil((e.loaded/e.total) * 100) + '%';
+        };
+        // check ajax status
+        xmlHttpRequest.onreadystatechange = function () {
+            if (xmlHttpRequest.readyState == 4) {
+                if (xmlHttpRequest.status == 200) {
+                    // alert('upload');
+                }
             }
-        }
-    };
-    // post to backend
-    xmlHttpRequest.send(formData);
-    function cancel () {
-        xmlHttpRequest.abort();
-    };
-    document.getElementById('cancel').addEventListener('click', cancel);
+        };
+        // post to backend
+        xmlHttpRequest.send(formData);
+        function cancel () {
+            xmlHttpRequest.abort();
+        };
+        document.getElementById('cancel').addEventListener('click', cancel);
 
+    }
 }
 </script>
 </html>

@@ -164,7 +164,7 @@ function appendStr(str) {
 function appendItem(name, type, parentNode) {
     var li = document.createElement('li');
     var ul = document.createElement('ul');
-    li.innerHTML = '<img src="../images/' + type + '.png" />' + name;
+    li.innerHTML = name;
     ul.appendChild(li);
     parentNode.appendChild(ul);
 }

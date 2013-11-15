@@ -92,6 +92,7 @@ function handleFiles(file, i) {
             list.appendChild(li);
             // check drop file is image
             if (imageTypes.indexOf(file[i].type) !== -1) {
+                img = document.createElement('img');
                 img.src = window.URL.createObjectURL(file[i]);
                 img.height = 60;
                 img.onload = function() {
