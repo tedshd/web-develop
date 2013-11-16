@@ -13,17 +13,23 @@
 <script>
     var upload = new uploadFiles(
         {
-            inputFileNode: 'hoho',
+            inputFileNode: 'select',
             fileName: 'Upfile[]'
         }
     );
-    function fun (e) {
+    function test (e) {
         // e.fileList;
-        console.log('fun');
-        console.log(e);
+        console.log('test');
+        console.log('event', e);
+        console.log('detail', e.detail);
+        console.log('fileList', e.fileList);
+        console.log('bytesLoaded', e.bytesLoaded);
+        console.log('bytesTotal', e.bytesTotal);
+        console.log('percentLoaded', e.percentLoaded);
     }
-    // document.getElementById('select').onfileSelect = fun;
-    document.getElementById('select').addEventListener('selectFiles', fun);
+    // document.getElementById('select').onfileSelect = test;
+    document.getElementById('select').addEventListener('selectFiles', test);
+    document.getElementById('select').addEventListener('uploadProgress', test);
 
     // var upload = new uploadFiles(
     //     {

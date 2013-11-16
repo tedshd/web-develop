@@ -16,14 +16,18 @@
             setting,
             inputFileNode,
             fileCount,
+            files,
             /*-- function --*/
-            filesInfo,
+            _filesInfo,
             upload,
             /*-- loop --*/
             i;
+
         defaultSetting = {
             inputFileNode: 'upload_files',
-            fileName: 'UplpadFiles[]'
+            fileName: 'UplpadFiles[]',
+            server: '/server/upload.php',
+            dropArea: 'body'
         };
         setting = options || defaultSetting;
 
@@ -34,7 +38,7 @@
 
         // create event
         // selectFiles
-        function selectFiles (files) {
+        function _selectFiles(files) {
             if (inputFileNode && window.CustomEvent) {
                 var event = new CustomEvent(
                     "selectFiles",
@@ -46,38 +50,56 @@
                         cancelable: true
                     }
                 );
-                inputFileNode.dispatchEvent(event);
                 event.fileList = event.detail.fileList;
+                inputFileNode.dispatchEvent(event);
                 // console.log('selectFiles', event);
             }
         }
 
+        _filesInfo = function () {
+            _selectFiles(inputFileNode.files);
+        };
+
         // uploadError
         // uploadProgress
+        function _uploadProgress(file) {
+            if (inputFileNode && window.CustomEvent) {
+                var event = new CustomEvent(
+                    "uploadProgress",
+                    {
+                        detail: {
+                            bytesLoaded: file.loaded,
+                            bytesTotal: file.total,
+                            percentLoaded: Math.ceil((file.loaded / file.total) * 100)
+                        },
+                        bubbles: true,
+                        cancelable: true
+                    }
+                );
+                event.bytesLoaded = event.detail.bytesLoaded;
+                event.bytesTotal = event.detail.bytesTotal;
+                event.percentLoaded = event.detail.percentLoaded;
+                inputFileNode.dispatchEvent(event);
+            }
+        }
+
+        _progress = function (e) {
+            _uploadProgress(e);
+        };
+
         // uploadComplete
         // dragenter
         // dragover
         // drop
         // drag
 
-        filesInfo = function (e) {
-            selectFiles(inputFileNode.files);
-            // console.log('e', e);
-            // fileCount = inputFileNode.files.length;
-            // console.log(fileCount);
-            // for (i = 0; fileCount > i; i++) {
-            //     console.log(inputFileNode.files);
-            //     console.log(inputFileNode.files[i].name);
-            //     console.log(inputFileNode.files[i].size);
-            //     console.log(inputFileNode.files[i].type);
-            // }
-        };
 
         // method
 
         upload = function () {
-            console.log('files', document.getElementById('select').files);
-            fileCount = document.getElementById('select').files.length;
+
+            // console.log('files', document.getElementById('select').files);
+            fileCount = inputFileNode.files.length;
 
             for (i = 0; fileCount > i; i++) {
                 // var length = document.getElementById('select').files.length;
@@ -90,11 +112,12 @@
                 // init to backend
                 xmlHttpRequest.open('POST', 'upload_mult.php');
                 // upload progress
-                xmlHttpRequest.upload.onprogress = function (e) {
-                    console.log('onprogress', e);
-                    console.log(e.loaded);
-                    console.log(Math.ceil((e.loaded / e.total) * 100) + '%');
-                };
+                // xmlHttpRequest.upload.onprogress = function (e) {
+                //     console.log('onprogress', e);
+                //     console.log(e.loaded);
+                //     console.log(Math.ceil((e.loaded / e.total) * 100) + '%');
+                // };
+                xmlHttpRequest.upload.onprogress = _progress;
                 // check ajax status
                 xmlHttpRequest.onreadystatechange = function () {
                     if (xmlHttpRequest.readyState === 4) {
@@ -113,16 +136,15 @@
         }
 
         // bind event
-        // inputFileNode.addEventListener('change', filesInfo);
-        // inputFileNode.addEventListener('change', filesInfo, false, true);
-        inputFileNode.onchange = filesInfo;
+        // inputFileNode.addEventListener('change', _filesInfo);
+        // inputFileNode.addEventListener('change', _filesInfo, false, true);
+        inputFileNode.onchange = _filesInfo;
         document.getElementById('upload').addEventListener('click', upload);
 
         // define method
-        this.filesInfo = filesInfo;
         this.upload = upload;
         this.cancel = cancel;
         console.log('this', this);
     }
-    window.uploadFiles = uploaddFiles;
+    window.uploadFiles = uploadFiles;
 })();
