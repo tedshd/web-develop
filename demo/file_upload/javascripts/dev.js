@@ -24,7 +24,7 @@
             i;
 
         defaultSetting = {
-            inputFileNode: 'upload_files',
+            inputFileSelector: 'upload_files',
             fileName: 'UplpadFiles[]',
             server: '/server/upload.php',
             dropArea: 'body'
@@ -32,9 +32,8 @@
         setting = options || defaultSetting;
 
         // get input
-        inputFileNode = document.getElementById(setting.inputFileNode) ||
-                        document.getElementsByTagName(setting.inputFileNode);
-        // console.log('uploadNode', inputFileNode);
+        inputFileNode = document.querySelector(setting.inputFileSelector);
+        console.log('uploadNode', inputFileNode);
 
         // create event
         // selectFiles
