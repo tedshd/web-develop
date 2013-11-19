@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>parse_youtube</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+    <input type="text">
+    <button class="btn btn btn-primary">Parse id</button>
+</body>
+<script>
+    document.querySelector('input').focus();
+    var handleClick;
+    function handleClick (e) {
+        var youtubeUrl = document.querySelector('input').value,
+            regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = youtubeUrl.match(regExp);
+        if (match && match[2].length == 11){
+            alert(match[2]);
+        }else{
+            //error
+        }
+
+    }
+    document.querySelector('button').addEventListener('click', handleClick);
+    /** refer
+    var video_id = window.location.search.split('v=')[1];
+    var ampersandPosition = video_id.indexOf('&');
+    if(ampersandPosition != -1) {
+        video_id = video_id.substring(0, ampersandPosition);
+    }
+    **/
+</script>
+</html>
