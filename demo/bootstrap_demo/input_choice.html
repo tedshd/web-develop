@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>input_choice_num</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="../../lib/bootstrap-3.0.0/js/bootstrap.js"></script>
+<script>
+$(function () {
+    $('.dropdown-menu').on('click', 'li', function () {
+        $('.form-control').val($(this).find('a').html());
+    });
+});
+</script>
+</head>
+<body>
+    <form action="test.php" method="post">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" name="str" class="form-control">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </div><!-- /btn-group -->
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <button type="submit" class="btn-danger">Submit</button>
+    </form>
+</body>
+</html>
