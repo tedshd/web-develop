@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>querySelector</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+    <div id="box" class="area">
+        test
+    </div>
+    <hr>
+    <span id="id"></span><br>
+    <span id="class"></span><br>
+    <span id="tag"></span><br>
+</body>
+<script>
+    var id, cl, tag;
+    id = document.querySelector('#box').innerHTML;
+    cl = document.querySelector('.area').innerHTML;
+    tag = document.querySelector('div').innerHTML;
+    document.querySelector('#id').innerHTML = id;
+    document.querySelector('#class').innerHTML = cl;
+    document.querySelector('#tag').innerHTML = tag;
+    var node;
+    function node (node) {
+        return document.querySelector(node);
+    };
+    console.log(document.querySelector('.area'));
+    console.log(node(".area"));
+</script>
+</html>
