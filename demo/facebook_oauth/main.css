@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-11-25 12:38:03
+ * @version $Id$
+ */
+#facebook_load_frame {
+ width:1px;
+ height:1px;
+ border:0;
+ position:absolute;
+ top:0;
+ left:0;
+ display:none;
+}

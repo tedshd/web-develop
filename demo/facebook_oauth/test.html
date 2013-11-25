@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fb_oauth</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<script src="../../lib/jquery-1.10.1.js"></script>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <p>
+        <input id="FBLogin" type="button" value="登入臉書" />
+    </p>
+    <p>
+        <span id="uid"></span>
+    <br>
+        <span id="accessToken"></span>
+    </p>
+</body>
+<script src="http://connect.facebook.net/zh_TW/all.js"></script>
+<script>
+    FB.init({
+        appId: 428293247270957,
+        status: true,
+        cookie: true,
+        xfbml: true,
+        oauth: true
+    });
+    $('#FBLogin').click(function () {
+        FB.login(function (response) {
+            // 登入之後執行的語法
+            alert('You have login');
+        },
+        {
+            scope: 'email'
+        });
+    });
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            // 程式有連結到 Facebook 帳號
+            // 取得 UID
+            var uid = response.authResponse.userID;
+            // 取得 accessToken
+            var accessToken = response.authResponse.accessToken;
+            $('#uid').html('UID：' + uid);
+            $('#accessToken').html('accessToken：' + accessToken);
+        } else if (response.status === 'not_authorized') {
+            // 帳號沒有連結到 Facebook 程式
+            alert('請允許授權！');
+        } else {
+            // 帳號沒有登入
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,16 @@
+{
+ "name": "Chrome Extension that Connects to a Facebook App",
+ "version": "0.1",
+ "description": "To connect a Chrome extension to a Facebook app!",
+ "content_scripts": [
+ {
+ "matches": ["*://*.ted.miiitv.com/*"], //The page(s) where your content scripts will fire, which has to match the message passing param in iframe.html
+ "css" : ["main.css"],
+ "js" : ["main.js"],
+ "run_at" : "document_start",
+ "all_frames" : false
+ }
+ ],
+ "manifest_version": 2,
+ "minimum_chrome_version": "17"
+}
