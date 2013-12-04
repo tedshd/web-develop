@@ -136,6 +136,7 @@ function runApp (fb_data) {
             node('#add').removeAttribute('disabled');
         }
         choice.innerHTML = this.innerHTML;
+        choice.setAttribute('class', 'btn btn-info');
         choice.setAttribute('data-pid', this.getAttribute('data-pid'));
     }
 
@@ -179,10 +180,12 @@ function runApp (fb_data) {
             console.log(data);
             if (data.status === 'ok') {
                 node('#add').setAttribute('class', 'btn btn-success');
+                node('#add').innerHTML = 'success';
                 setTimeout(function () {
                     node('#add').setAttribute('class', 'btn');
+                    node('#add').innerHTML = 'Add';
                 },
-                2000);
+                1600);
             } else {
                 document.write('handleAdd fail');
             }
