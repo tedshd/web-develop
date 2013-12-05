@@ -1,0 +1,187 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-12-05 23:51:51
+ * @version $Id$
+ */
+/* line 17, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 11, ../sass/style.scss */
+.clearfix {
+  *zoom: 1;
+}
+
+/* line 14, ../sass/style.scss */
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+  clear: both;
+}
+
+/* line 21, ../sass/style.scss */
+body {
+  font-size: 18px;
+  color: #444;
+}
+/* line 24, ../sass/style.scss */
+body h2 {
+  font-size: 32px;
+}
+
+/* line 29, ../sass/style.scss */
+.active {
+  background: #aaa;
+}
+
+/* line 34, ../sass/style.scss */
+.nav-layout {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+/* line 42, ../sass/style.scss */
+.nav-layout ul {
+  float: right;
+  margin-right: 5px;
+}
+/* line 45, ../sass/style.scss */
+.nav-layout ul li {
+  float: left;
+  padding: 5px;
+  cursor: pointer;
+}
+/* line 49, ../sass/style.scss */
+.nav-layout ul li:hover {
+  background: #aaa;
+}
+
+/* line 56, ../sass/style.scss */
+#con {
+  position: relative;
+  padding-top: 30px;
+}
+
+/* line 62, ../sass/style.scss */
+.layout-card {
+  background: #eee;
+}
+/* line 64, ../sass/style.scss */
+.layout-card #layout {
+  margin-left: 10px;
+}
+/* line 66, ../sass/style.scss */
+.layout-card #layout .resume {
+  display: none;
+}
+/* line 69, ../sass/style.scss */
+.layout-card #layout .thumb, .layout-card #layout .desc {
+  float: left;
+  margin: 0 10px 10px 0;
+  padding: 10px;
+  width: 320px;
+  background: #dcdcdc;
+}
+
+/* line 82, ../sass/style.scss */
+.layout-list #layout {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ddd;
+}
+/* line 83, ../sass/style.scss */
+.layout-list #layout .resume {
+  display: none;
+}
+/* line 90, ../sass/style.scss */
+.layout-list #layout #avatar img {
+  display: block;
+  margin: 0 auto;
+}
+/* line 95, ../sass/style.scss */
+.layout-list #layout .desc {
+  margin-top: 10px;
+  padding: 0 10px;
+}
+/* line 98, ../sass/style.scss */
+.layout-list #layout .desc h2 {
+  background: #ccc;
+  padding: 5px;
+}
+/* line 102, ../sass/style.scss */
+.layout-list #layout .desc hr {
+  display: none;
+}
+/* line 105, ../sass/style.scss */
+.layout-list #layout .desc p {
+  padding: 10px;
+  color: #666;
+}

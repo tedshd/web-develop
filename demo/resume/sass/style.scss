@@ -1,0 +1,111 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-12-05 23:51:51
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+}
+
+body {
+    font-size: 18px;
+    color: #444;
+    h2 {
+        font-size: 32px;
+    }
+}
+
+.active {
+    background: #aaa;
+}
+
+// nav-layout
+.nav-layout {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    @include opacity(0.3);
+    ul {
+        float: right;
+        margin-right: 5px;
+        li {
+            float: left;
+            padding: 5px;
+            cursor: pointer;
+            &:hover {
+                background: #aaa;
+            }
+        }
+    }
+}
+
+#con {
+    position: relative;
+    padding-top: 30px;
+}
+
+// layout card
+.layout-card {
+    background: #eee;
+    #layout {
+        margin-left: 10px;
+        .resume {
+            display: none;
+        }
+        .thumb, .desc {
+            float: left;
+            margin: 0 10px 10px 0;
+            padding: 10px;
+            width: 320px;
+            background: #dcdcdc;
+        }
+    }
+
+}
+
+// layout list
+.layout-list {
+    #layout {
+        .resume {
+            display: none;
+        }
+        max-width: 960px;
+        margin: 0 auto;
+        background: #ddd;
+        #avatar {
+            img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        .desc {
+            margin-top: 10px;
+            padding: 0 10px;
+            h2 {
+                background: #ccc;
+                padding: 5px;
+            }
+            hr {
+                display: none;
+            }
+            p {
+                padding: 10px;
+                color: #666;
+            }
+        }
+    }
+}
