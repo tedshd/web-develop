@@ -1,0 +1,25 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2013-11-27 17:07:05
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+.nav-tabs>li.active>a {
+    background: #ddd;
+    &:hover {
+        background: #ddd;
+    }
+}
+.table {
+    min-width: 960px;
+    thead {
+        background: #ddd;
+    }
+}
+.hd, .bd, .ft {
+    padding: 10px;
+}
