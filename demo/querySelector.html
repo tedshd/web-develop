@@ -10,6 +10,9 @@
     <div id="box" class="area">
         test
     </div>
+    <div class="area">
+        test2
+    </div>
     <hr>
     <span id="id"></span><br>
     <span id="class"></span><br>
@@ -24,10 +27,15 @@
     document.querySelector('#class').innerHTML = cl;
     document.querySelector('#tag').innerHTML = tag;
     var node;
-    function node (node) {
-        return document.querySelector(node);
+    function node (selector) {
+        if (selector.indexOf('.') === -1) {
+            // return node list to handle class
+            return document.querySelector(selector);
+        } else {
+            return document.querySelectorAll(selector);
+        }
     };
-    console.log(document.querySelector('.area'));
-    console.log(node(".area"));
+    console.log('ID', node('#box'));
+    console.log('CLASS', node('.area'));
 </script>
 </html>
