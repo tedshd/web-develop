@@ -86,18 +86,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   font-size: 18px;
   color: #444;
+  line-height: 1.5;
 }
-/* line 24, ../sass/style.scss */
+/* line 25, ../sass/style.scss */
 body h2 {
   font-size: 32px;
 }
 
-/* line 29, ../sass/style.scss */
+/* line 30, ../sass/style.scss */
 .active {
   background: #aaa;
 }
 
-/* line 34, ../sass/style.scss */
+/* line 35, ../sass/style.scss */
 .nav-layout {
   z-index: 10;
   position: fixed;
@@ -108,79 +109,84 @@ body h2 {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
-/* line 42, ../sass/style.scss */
+/* line 43, ../sass/style.scss */
 .nav-layout ul {
   float: right;
   margin-right: 5px;
 }
-/* line 45, ../sass/style.scss */
+/* line 46, ../sass/style.scss */
 .nav-layout ul li {
   float: left;
   padding: 5px;
   cursor: pointer;
 }
-/* line 49, ../sass/style.scss */
+/* line 50, ../sass/style.scss */
 .nav-layout ul li:hover {
   background: #aaa;
 }
 
-/* line 56, ../sass/style.scss */
+/* line 57, ../sass/style.scss */
 #con {
   position: relative;
   padding-top: 30px;
 }
 
-/* line 62, ../sass/style.scss */
+/* line 64, ../sass/style.scss */
+.layout-full #layout {
+  margin: 10px;
+}
+
+/* line 70, ../sass/style.scss */
 .layout-card {
   background: #eee;
 }
-/* line 64, ../sass/style.scss */
+/* line 72, ../sass/style.scss */
 .layout-card #layout {
   margin-left: 10px;
 }
-/* line 66, ../sass/style.scss */
+/* line 74, ../sass/style.scss */
 .layout-card #layout .resume {
   display: none;
 }
-/* line 69, ../sass/style.scss */
+/* line 77, ../sass/style.scss */
 .layout-card #layout .thumb, .layout-card #layout .desc {
   float: left;
   margin: 0 10px 10px 0;
   padding: 10px;
-  width: 320px;
+  width: 300px;
   background: #dcdcdc;
 }
 
-/* line 82, ../sass/style.scss */
+/* line 90, ../sass/style.scss */
 .layout-list #layout {
   max-width: 960px;
   margin: 0 auto;
   background: #ddd;
 }
-/* line 83, ../sass/style.scss */
+/* line 91, ../sass/style.scss */
 .layout-list #layout .resume {
   display: none;
 }
-/* line 90, ../sass/style.scss */
+/* line 98, ../sass/style.scss */
 .layout-list #layout #avatar img {
   display: block;
   margin: 0 auto;
 }
-/* line 95, ../sass/style.scss */
+/* line 103, ../sass/style.scss */
 .layout-list #layout .desc {
   margin-top: 10px;
   padding: 0 10px;
 }
-/* line 98, ../sass/style.scss */
+/* line 106, ../sass/style.scss */
 .layout-list #layout .desc h2 {
   background: #ccc;
   padding: 5px;
 }
-/* line 102, ../sass/style.scss */
+/* line 110, ../sass/style.scss */
 .layout-list #layout .desc hr {
   display: none;
 }
-/* line 105, ../sass/style.scss */
+/* line 113, ../sass/style.scss */
 .layout-list #layout .desc p {
   padding: 10px;
   color: #666;

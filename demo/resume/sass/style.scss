@@ -21,6 +21,7 @@
 body {
     font-size: 18px;
     color: #444;
+    line-height: 1.5;
     h2 {
         font-size: 32px;
     }
@@ -58,6 +59,13 @@ body {
     padding-top: 30px;
 }
 
+// layout-full
+.layout-full {
+    #layout {
+        margin: 10px;
+    }
+}
+
 // layout card
 .layout-card {
     background: #eee;
@@ -70,7 +78,7 @@ body {
             float: left;
             margin: 0 10px 10px 0;
             padding: 10px;
-            width: 320px;
+            width: 300px;
             background: #dcdcdc;
         }
     }
