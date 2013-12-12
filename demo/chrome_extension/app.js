@@ -1,4 +1,4 @@
-/*global $, jQuery, alert, console, angular, document, Element, chrome*/
+/*global $, jQuery, alert, console, angular, document, Element, chrome, node*/
 /**
  *
  * @authors Ted Shiu (tedshd@gmail.com)
@@ -6,7 +6,7 @@
  * @version $Id$
  */
 
-function runApp (fb_data) {
+function runApp(fb_data) {
 
     var xhr,
         formData,
@@ -14,19 +14,15 @@ function runApp (fb_data) {
         video_hash,
         // node
         choice = node('#choice'),
-        // Function
-        handleClick,
-        handleSelect,
-        handleCreate,
-        handleAdd;
+        add = node('#add');
 
     console.log('get_data', fb_data);
     // node('#data').innerHTML = fb_data;
     node('#avatar').setAttribute('alt', fb_data.name);
-    node('#avatar').setAttribute('src', 'https://graph.facebook.com/'+fb_data.id+'/picture');
+    node('#avatar').setAttribute('src', 'https://graph.facebook.com/' + fb_data.id + '/picture');
     node('#user').innerHTML = fb_data.name;
 
-    function loginMiiiTV () {
+    function loginMiiiTV() {
         formData = new FormData();
         var token_arr = localStorage.accessToken.split('=');
         formData.append('sns_uid', fb_data.id);
@@ -34,7 +30,7 @@ function runApp (fb_data) {
 
         xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://www.miiitv.com/service/q/login', true);
-        xhr.onload = function(e) {
+        xhr.onload = function() {
             var data;
             console.log('loginMiiiTV');
             // console.log(e);
@@ -49,13 +45,13 @@ function runApp (fb_data) {
             }
         };
         xhr.send(formData);
-    };
+    }
     loginMiiiTV();
 
-    function loadChannelList () {
+    function loadChannelList() {
         xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://www.miiitv.com/service/q/getChannelList', true);
-        xhr.onload = function(e) {
+        xhr.onload = function() {
             var data,
                 x;
             console.log('loadChannelList');
@@ -132,8 +128,8 @@ function runApp (fb_data) {
     }
 
     function handleSelect() {
-        if (!node('#add').getAttribute('disabled')) {
-            node('#add').removeAttribute('disabled');
+        if (!add.getAttribute('disabled')) {
+            add.removeAttribute('disabled');
         }
         choice.innerHTML = this.innerHTML;
         choice.setAttribute('class', 'btn btn-info');
@@ -155,11 +151,106 @@ function runApp (fb_data) {
         channelName.value = '';
     }
 
-    function handleAdd () {
+    function handleAdd() {
         // console.log(choice.innerHTML);
         // console.log(choice.getAttribute('data-pid'));
         // console.log(video_hash);
+        add.setAttribute('class', 'btn btn-info');
+        add.innerHTML = 'Adding...';
+        add.setAttribute('disabled');
+
+        function updateVideoList(channelData, videoList) {
+            console.log('updateVideoList');
+            formData = new FormData();
+            xhr = new XMLHttpRequest();
+            console.log(channelData);
+            console.log(channelData.pid);
+            console.log(channelData.name);
+            console.log(channelData.description);
+            console.log(channelData.ch_id);
+
+            // console.log(JSON.stringify(videoList));
+
+            formData.append('pid', channelData.pid);
+            formData.append('name', channelData.name);
+            formData.append('desc', channelData.description);
+            formData.append('cid', channelData.category);
+            formData.append('videos', JSON.stringify(videoList));
+            xhr.open('POST', 'http://www.miiitv.com/service/q/editChannel', true);
+            xhr.onload = function() {
+                var data;
+                data = JSON.parse(this.response);
+                console.log(data);
+                if (data.status === 'ok') {
+                    // finish
+                    add.setAttribute('class', 'btn btn-success');
+                    add.innerHTML = 'success';
+                    setTimeout(function () {
+                        add.setAttribute('class', 'btn');
+                        add.innerHTML = 'Add';
+                    },
+                    300);
+                } else {
+                    document.write('updateVideoList fail');
+                }
+            };
+            xhr.send(formData);
+        }
+
+        function loadVideoList() {
+            if (node('#add_first').checked) {
+                xhr = new XMLHttpRequest();
+                console.log('checked');
+                var pid = choice.getAttribute('data-pid');
+                xhr.open(
+                    'POST',
+                    'http://www.miiitv.com/service/q/getChannelList/' + pid,
+                    true
+                );
+                xhr.onload = function() {
+                    var data,
+                        x,
+                        videoList = [],
+                        newVideo;
+                    data = JSON.parse(this.response);
+                    console.log(data);
+                    console.log('videoList', data.videos);
+                    if (data.status === 'ok') {
+                        for (x in data.videos) {
+                            if (data.videos.hasOwnProperty(x)) {
+                                videoList.push(data.videos[x].vid);
+                            }
+                        }
+                        // console.log('videoList', videoList);
+                        // console.log('last', videoList[videoList.length - 1]);
+                        // console.log('videoList', videoList.pop());
+                        newVideo = videoList.pop();
+                        // console.log('newArray', videoList);
+                        videoList.unshift(newVideo);
+                        console.log('finArray', videoList);
+                        updateVideoList(data, videoList);
+                    } else {
+                        document.write('add video to first fail');
+                    }
+                };
+                xhr.send();
+            } else {
+                    // finish
+                    add.setAttribute('class', 'btn btn-success');
+                    add.innerHTML = 'success';
+                    setTimeout(function () {
+                        add.setAttribute('class', 'btn');
+                        add.innerHTML = 'Add';
+                    },
+                    300);
+                }
+        }
+        // loadVideoList();
+        // return;
+
+        // add video
         formData = new FormData();
+        xhr = new XMLHttpRequest();
         if (choice.getAttribute('data-pid') === 'null') {
             formData.append('pid', 'new');
         } else {
@@ -168,9 +259,8 @@ function runApp (fb_data) {
         formData.append('video_hash', video_hash);
         formData.append('p_name', choice.innerHTML);
 
-        xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://www.miiitv.com/service/q/addVideo', true);
-        xhr.onload = function(e) {
+        xhr.onload = function() {
             var data;
             console.log('handleAdd');
             // console.log(e);
@@ -179,13 +269,7 @@ function runApp (fb_data) {
             data = JSON.parse(this.response);
             console.log(data);
             if (data.status === 'ok') {
-                node('#add').setAttribute('class', 'btn btn-success');
-                node('#add').innerHTML = 'success';
-                setTimeout(function () {
-                    node('#add').setAttribute('class', 'btn');
-                    node('#add').innerHTML = 'Add';
-                },
-                1600);
+                loadVideoList();
             } else {
                 document.write('handleAdd fail');
             }
@@ -196,5 +280,5 @@ function runApp (fb_data) {
     choice.addEventListener('click', handleClick);
     node('ul').addDelegateListener('click', 'li', handleSelect);
     node('#create').addEventListener('click', handleCreate);
-    node('#add').addEventListener('click', handleAdd);
+    add.addEventListener('click', handleAdd);
 }

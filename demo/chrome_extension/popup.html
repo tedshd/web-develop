@@ -104,7 +104,7 @@
     #user {
         text-align: center;
     }
-    #channel_name {
+    input[type="text"] {
         width: 170px;
     }
     #choice, #create {
@@ -155,7 +155,15 @@
                 </ul>
             </div>
         </div>
+        <div>
+            <input type="checkbox" id="add_first">
+            <label for="add_first">Add video to first</label>
+        </div>
         <button id="add" class="btn" disabled>Add</button>
+        <br>
+        <h3>For spaced video share</h3>
+        <input type="text" placeholder="Enter share video url">
+        <button class="btn">Push</button>
     </div>
 </body>
 <script src="background.js"></script>
