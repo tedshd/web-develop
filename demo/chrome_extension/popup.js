@@ -14,10 +14,11 @@ if (localStorage.accessToken) {
         data = JSON.parse(this.response);
         console.log(data);
         if (data.error) {
+            node('#loading').setAttribute('class', 'hide');
             node('#login').setAttribute('class', '');
             node('#content').setAttribute('class', 'hide');
         } else {
-            node('#login').setAttribute('class', 'hide');
+            node('#loading').setAttribute('class', 'hide');
             node('#content').setAttribute('class', '');
         }
         fb_data = data;

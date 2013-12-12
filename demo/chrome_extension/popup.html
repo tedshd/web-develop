@@ -126,7 +126,8 @@
 </style>
 </head>
 <body>
-    <div id="login">
+    <div id="loading">Loading...</div>
+    <div id="login" class="hide">
         <h2>Fackbook Connect</h2>
         <a href="https://www.facebook.com/dialog/oauth?client_id=446014568822675&response_type=token&scope=email&redirect_uri=http://www.facebook.com/connect/login_success.html" class="btn btn-primary" target="_blank">Connect</a>
     </div>
@@ -161,9 +162,11 @@
         </div>
         <button id="add" class="btn" disabled>Add</button>
         <br>
-        <h3>For spaced video share</h3>
-        <input type="text" placeholder="Enter share video url">
-        <button class="btn">Push</button>
+        <div id="share_link" class="hide">
+            <h3>For spaced video share</h3>
+            <input type="text" placeholder="Enter share video url">
+            <button class="btn">Push</button>
+        </div>
     </div>
 </body>
 <script src="background.js"></script>

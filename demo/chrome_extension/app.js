@@ -128,7 +128,7 @@ function runApp(fb_data) {
     }
 
     function handleSelect() {
-        if (!add.getAttribute('disabled')) {
+        if (add.disabled) {
             add.removeAttribute('disabled');
         }
         choice.innerHTML = this.innerHTML;
@@ -271,6 +271,10 @@ function runApp(fb_data) {
             if (data.status === 'ok') {
                 loadVideoList();
             } else {
+                if (data.errmsg !== '') {
+                    document.write(data.errmsg);
+                    return;
+                }
                 document.write('handleAdd fail');
             }
         };
