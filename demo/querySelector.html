@@ -13,6 +13,11 @@
     <div class="area">
         test2
     </div>
+    <div id="selector" class="area">
+        <p class="con">
+            content
+        </p>
+    </div>
     <hr>
     <span id="id"></span><br>
     <span id="class"></span><br>
@@ -37,5 +42,7 @@
     };
     console.log('ID', node('#box'));
     console.log('CLASS', node('.area'));
+    console.log('selector', node('#selector p'));
+    console.log('selector', node('.area .con'));
 </script>
 </html>
