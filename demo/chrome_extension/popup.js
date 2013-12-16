@@ -25,4 +25,7 @@ if (localStorage.accessToken) {
         runApp(fb_data);
     };
     xhr.send();
+} else {
+    node('#loading').setAttribute('class', 'hide');
+    node('#login').setAttribute('class', '');
 }
