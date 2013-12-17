@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Geocoding service</title>
+    <style>
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    #map-canvas {
+        height: 100%;
+    }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+  </head>
+  <body>
+    <div id="panel">
+      <input id="address" type="textbox" value="Sydney, NSW">
+      <input type="button" value="Geocode" onclick="codeAddress()">
+    </div>
+    <div id="map-canvas"></div>
+  </body>
+<script>
+// define method
+var div = document.createElement('div'),
+    prefix = ['moz','webkit','ms','o'].filter(function (prefix) {
+        return prefix + 'MatchesSelector' in div;
+    })[0] + 'MatchesSelector';
+
+Element.prototype.addDelegateListener = function(type, selector, fn) {
+    this.addEventListener( type, function(e){
+        var target = e.target;
+
+        while(target && target !== this && !target[prefix](selector)) {
+            target = target.parentNode;
+        }
+        if(target && target !== this) {
+            return fn.call(target, e);
+        }
+
+    }, false );
+};
+// end
+var geocoder;
+var map;
+var marker;
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(-34.397, 150.644);
+  var mapOptions = {
+    zoom: 8,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+}
+
+function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var infowindow = new google.maps.InfoWindow();
+        marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            position: results[0].geometry.location
+        });
+        var content = '<button id="set">Set</button>';
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+        map.setZoom(17);
+        google.maps.event.addListener(
+            marker,
+            'click',
+            (function (marker, content, infowindow) {
+                return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                };
+            })(marker, content, infowindow)
+        );
+        console.log(results);
+        console.log(results[0].geometry.location);
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+        google.maps.event.addListener(marker, 'dragend', function() {
+            console.log(marker.getPosition());
+        });
+    });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+document.querySelector('body').addDelegateListener('click', '#set', function() {
+});
+
+</script>
+</html>
