@@ -3,3 +3,5 @@
 .DS_Store
 config.rb
 fire_app_log.txt
+/lib/*
+/temp
