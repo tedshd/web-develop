@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="Konami 密技 JS 簡單實作">
+<meta name="keywords" content="Konami, JavaScript, 上上下下左右左右BA">
+<meta name="author" content="Ted Shiu">
+<meta charset="utf-8">
+<title>Konami</title>
+</head>
+<style>
+    h1 {
+        text-align: center;
+    }
+</style>
+<body>
+<h1>上、上、下、下、左、右、左、右、B、A</h1>
+</body>
+<script>
+    var keyCount = 0;
+    window.onkeydown = konami;
+    function konami(e) {
+        // console.log(e);
+        if (e.keyCode === 38 && keyCount === 0) {
+            keyCount++;
+            console.log(keyCount);
+        } else if (e.keyCode === 38 && keyCount === 1) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 40 && keyCount === 2) {
+            keyCount++;
+            console.log(keyCount);
+        } else if (e.keyCode === 40 && keyCount === 3) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 37 && keyCount === 4) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 39 && keyCount === 5) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 37 && keyCount === 6) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 39 && keyCount === 7) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 66 && keyCount === 8) {
+            keyCount++;
+            console.log(keyCount);
+        }
+        if (e.keyCode === 65 && keyCount === 9) {
+            keyCount = 0;
+            console.log('Konami');
+            alert('打密技阿你');
+        }
+    }
+</script>
+</html>
