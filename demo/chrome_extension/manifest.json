@@ -4,7 +4,7 @@
   "name": "miiiTV",
   "description": "This is a miiiTV for chrome extension,
   it can add youtube video to miiTV.",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "background":
   {
     "page":"background.html"
