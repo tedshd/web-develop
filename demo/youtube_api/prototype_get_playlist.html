@@ -17,7 +17,10 @@
 <body>
     <div class="screen">
         <div id="player"></div>
-        <button>Click</button>
+        <button id="next">Click</button>
+        <button id="vol_up">Vol+</button>
+        <button id="vol_down">Vol-</button>
+        <button id="mute">Mute</button>
     </div>
 </body>
 <script>
@@ -31,7 +34,8 @@ if (document.getElementById('player')) {
     var playList = [],
         playCount = 0,
         player,
-        onPlayerStateChange;
+        onPlayerStateChange,
+        vol = 50;
 
     var video_ID = {
         'a_0': 'ArRhIohEuvk',
@@ -52,7 +56,7 @@ if (document.getElementById('player')) {
         player = new YT.Player('player', {
             height: '463.5',
             width: '824',
-            videoId: 'pWhXUuTX3co',
+            videoId: video_ID[0],
             playerVars: {
                 rel: 1,
                 autoplay: 0,
@@ -62,6 +66,7 @@ if (document.getElementById('player')) {
                 controls: 1,
                 wmode: 'opaque',
                 hd: 1,
+                html5: 1,
                 iv_load_policy: 3,
                 list: 'UUC6XuDtfec7DxZdUa7ClFBQ'
                 // list: ''
@@ -96,7 +101,7 @@ if (document.getElementById('player')) {
         $(function () {
             console.log('jQuery');
             playChannel();
-            $('button').on('click', function () {
+            $('#next').on('click', function () {
                 playList = ['DLFPqJedFuw', 'MmHkPXG4Td4'];
                 // update play list
                 // playList =
@@ -104,6 +109,25 @@ if (document.getElementById('player')) {
                 player.loadVideoById(playList[0]);
                 onPlayerStateChange();
 
+            });
+            $('#vol_up').on('click', function () {
+                if (player.isMuted()) {
+                    player.unMute();
+                }
+                player.setVolume(vol++);
+            });
+            $('#vol_down').on('click', function () {
+                if (player.isMuted()) {
+                    player.unMute();
+                }
+                player.setVolume(vol--);
+            });
+            $('#mute').on('click', function () {
+                if (player.isMuted()) {
+                    player.unMute();
+                } else {
+                    player.mute();
+                }
             });
 
         });
