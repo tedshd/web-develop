@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>youtube_iframe_api</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<style>
+    .info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.8);
+    }
+</style>
+<body>
+    <div id="player"></div>
+    <div class="info">
+        <div id="vol">50</div>
+        <ul>
+            <li>
+                getPlayerState-<span id="getPlayerState"></span>
+            </li>
+            <li>
+                getPlaybackRate-<span id="getPlaybackRate"></span>
+            </li>
+            <li>
+                getVideoBytesLoaded-<span id="getVideoBytesLoaded"></span>
+            </li>
+            <li>
+                getPlaybackQuality-<span id="getPlaybackQuality"></span>
+            </li>
+            <li>
+                getDuration-<span id="getDuration"></span>
+            </li>
+            <li>
+                getPlaylist-<span id="getPlaylist"></span>
+            </li>
+        </ul>
+    </div>
+    <button class="btn" id="play">Pause</button>
+    <button class="btn" id="prev">&lt; Prev</button>
+    <button class="btn" id="next">Next &gt;</button>
+    <button class="btn" id="vol_up">Vol+</button>
+    <button class="btn" id="vol_down">Vol-</button>
+    <button class="btn" id="mute">Mute</button>
+</body>
+<script>
+    var Main ={
+        vol: 50,
+        playCount: 0
+    };
+    var loadPlayer;
+
+    function loadPlayer() {
+        // alert('2 - load player');
+        if (document.querySelector('#player')) {
+            // alert('3 - check player DOM');
+            // get API
+            var tag = document.createElement('script'),
+            firstScriptTag = document.getElementsByTagName('script')[0];
+            tag.src = 'https://www.youtube.com/iframe_api';
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            var videoList = [],
+                // playCount = 0,
+                player;
+
+            var video_ID = {
+                // 'v_0': '7wvNwOPprBE',
+                // 'v_1': 'mTSuiGubCHE',
+                // 'v_8': 'DDs5bXh4erM',
+                // 'v_2': 'V8BTsiMxyaQ',
+                // 'v_3': 'n-BXNXvTvV4',
+                // 'v_4': 'CRJDQQXS4uE',
+                // 'v_5': 'ASO_zypdnsQ',
+                // 'v_6': 'IZkYdqRWKaY',
+                // 'v_7': '9Y15es8OY0U',
+                // 'v_9': 'LWV-f6dMN3Q'
+                'v_10': '0lfDNu-k6oo',
+                'v_11': 'pWhXUuTX3co',
+                'v_12': 'COZIk_dhSK4',
+                'v_13': 'QJjpWSwTagc',
+                'v_14': '-reqZIE_DSg',
+                'v_15': 'bbqY1P6KJmI',
+                'v_16': 'QfVpg0IQ8rk',
+                'v_17': '8wWuH7MIeCA',
+                'v_18': 'i3eSt6UFnVY',
+                'v_19': '7dtHVkm4i6o'
+            };
+
+            // videoList array
+            for(var key in video_ID) {
+                var value = video_ID[key];
+                videoList.push(value);
+            }
+            // Main.videoList = videoList;
+            // channelList[0] = videoList;
+
+            function playChannel() {
+                // init player
+                    // alert('5 - init player');
+                player = new YT.Player('player', {
+                    width: '640',
+                    height: '480',
+                    videoId: videoList[0],
+                    playerVars: {
+                        rel: 1,
+                        autoplay: 0,
+                        disablekb: 0,
+                        showsearch: 0,
+                        showinfo: 0,
+                        controls: 1,
+                        wmode: 'opaque',
+                        hd: 1,
+                        html5: 1,
+                        iv_load_policy: 3
+                    },
+                    events: {
+                        'onReady'        : onPlayerReady,
+                        'onStateChange'  : onPlayerStateChange,
+                        'onError'        : error
+                    }
+                });
+
+                function error(e) {
+                    console.log('Error');
+                    console.log(e);
+                    player.nextVideo();
+                }
+
+                // play video
+                function onPlayerReady(event) {
+                    // alert('onPlayerReady');
+                    // event.target.playVideo();
+                    player.loadPlaylist(videoList);
+                    player.setLoop(true);
+                    player.playVideo();
+                }
+                // alert('player--' + player);
+                // Main.player = player;
+            }
+
+            // play list loop
+            function onPlayerStateChange(event) {
+                // get state
+                document.querySelector('#getPlayerState').innerHTML = player.getPlayerState();
+                document.querySelector('#getPlaybackRate').innerHTML = player.getPlaybackRate();
+                document.querySelector('#getVideoBytesLoaded').innerHTML = player.getVideoBytesLoaded();
+                document.querySelector('#getPlaybackQuality').innerHTML = player.getPlaybackQuality();
+                document.querySelector('#getDuration').innerHTML = player.getDuration();
+                document.querySelector('#getPlaylist').innerHTML = player.getPlaylist();
+                if (event.data === 0) {
+                    // alert('Next');
+                    // Main.playCount++;
+                    // if (Main.playCount > (videoList.length -1)) {
+                    //     Main.playCount = 0;
+                    // }
+                    // player.loadVideoById(videoList[Main.playCount]);
+                    // player.playVideo();
+
+                }
+            }
+
+            function onYouTubeIframeAPIReady() {
+                playChannel();
+
+                // set control
+                document.querySelector('#play').addEventListener('click', function() {
+                    if (player.getPlayerState() === 2) {
+                        player.playVideo();
+                        document.querySelector('#play').innerHTML = 'Pause';
+                    }
+                    if (player.getPlayerState() === 1) {
+                        player.pauseVideo();
+                        document.querySelector('#play').innerHTML = 'Play';
+                    }
+                });
+                document.querySelector('#prev').addEventListener('click', function() {
+                    player.previousVideo();
+                });
+                document.querySelector('#next').addEventListener('click', function() {
+                    player.nextVideo();
+                });
+                document.querySelector('#vol_up').addEventListener('click', function () {
+                    if (player.isMuted()) {
+                        player.unMute();
+                    }
+                    if (100 > Main.vol) {
+                        player.setVolume(Main.vol++);
+                        document.querySelector('#vol').innerHTML = Main.vol;
+                    }
+                });
+                document.querySelector('#vol_down').addEventListener('click', function () {
+                    if (player.isMuted()) {
+                        player.unMute();
+                    }
+                    if (Main.vol > 0) {
+                        player.setVolume(Main.vol--);
+                        document.querySelector('#vol').innerHTML = Main.vol;
+                    }
+                });
+                document.querySelector('#mute').addEventListener('click', function () {
+                    if (player.isMuted()) {
+                        player.unMute();
+                    } else {
+                        player.mute();
+                    }
+                });
+            }
+
+            setTimeout(function() {
+                onYouTubeIframeAPIReady();
+                // alert('4 - iframe api ready');
+            }, 1200);
+        }
+    }
+
+    loadPlayer();
+</script>
+</html>
