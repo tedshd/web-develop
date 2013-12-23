@@ -137,13 +137,7 @@
             <img id="avatar" src="" alt="">
             <p id="user"></p>
         </div>
-        <input type="text" id="channel_name" placeholder="Enter new channel name">
-        <button id="create" class="btn">Create New</button>
-        <div id="error_msg" class="error hide">
-            Please enter your channel name
-        </div>
-        or<br>
-        <div class="ch">
+        <div id="ch">
             <div id="choice" class="btn btn-primary">Select</div>
             <div id="option" class="hide">
                 <ul id="channel_list">
@@ -155,12 +149,14 @@
 -->
                 </ul>
             </div>
+            or<br>
         </div>
-        <div>
-            <input type="checkbox" id="add_first">
-            <label for="add_first">Add video to first</label>
+        <input type="text" id="channel_name" placeholder="Enter new channel name">
+        <button id="create" class="btn">Create New</button>
+        <div id="error_msg" class="error hide">
+            Please enter your channel name
         </div>
-        <button id="add" class="btn" disabled>Add</button>
+        <button id="add" class="btn btn-info" disabled>Add</button>
         <br>
         <div id="share_link" class="hide">
             <h3>For spaced video share</h3>

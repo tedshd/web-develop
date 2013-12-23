@@ -62,16 +62,21 @@ function runApp(fb_data) {
             console.log(data);
             console.log(data.channels);
             if (data.status === 'ok') {
-                for (x in data.channels) {
-                    if (data.channels.hasOwnProperty(x)) {
-                        var li = document.createElement('li');
-                        li.setAttribute('class', 'channel');
-                        li.setAttribute('data-pid', data.channels[x].pid);
-                        li.innerHTML = data.channels[x].ch_name;
-                        // console.log(li);
-                        node('#channel_list').appendChild(li);
+                if (data.channels.length === 0) {
+                    node('#ch').setAttribute('hide');
+                } else {
+                    for (x in data.channels) {
+                        if (data.channels.hasOwnProperty(x)) {
+                            var li = document.createElement('li');
+                            li.setAttribute('class', 'channel');
+                            li.setAttribute('data-pid', data.channels[x].pid);
+                            li.innerHTML = data.channels[x].ch_name;
+                            // console.log(li);
+                            node('#channel_list').appendChild(li);
+                        }
                     }
                 }
+
                 // console.log(data.channels.ch_name);
             } else {
                 document.write('loadChannelList fail');
@@ -159,95 +164,6 @@ function runApp(fb_data) {
         add.innerHTML = 'Adding...';
         add.setAttribute('disabled');
 
-        function updateVideoList(channelData, videoList) {
-            console.log('updateVideoList');
-            formData = new FormData();
-            xhr = new XMLHttpRequest();
-            console.log(channelData);
-            console.log(channelData.pid);
-            console.log(channelData.name);
-            console.log(channelData.description);
-            console.log(channelData.ch_id);
-
-            // console.log(JSON.stringify(videoList));
-
-            formData.append('pid', channelData.pid);
-            formData.append('name', channelData.name);
-            formData.append('desc', channelData.description);
-            formData.append('cid', channelData.category);
-            formData.append('videos', JSON.stringify(videoList));
-            xhr.open('POST', 'http://www.miiitv.com/service/q/editChannel', true);
-            xhr.onload = function() {
-                var data;
-                data = JSON.parse(this.response);
-                console.log(data);
-                if (data.status === 'ok') {
-                    // finish
-                    add.setAttribute('class', 'btn btn-success');
-                    add.innerHTML = 'success';
-                    setTimeout(function () {
-                        add.setAttribute('class', 'btn');
-                        add.innerHTML = 'Add';
-                    },
-                    300);
-                } else {
-                    document.write('updateVideoList fail');
-                }
-            };
-            xhr.send(formData);
-        }
-
-        function loadVideoList() {
-            if (node('#add_first').checked) {
-                xhr = new XMLHttpRequest();
-                console.log('checked');
-                var pid = choice.getAttribute('data-pid');
-                xhr.open(
-                    'POST',
-                    'http://www.miiitv.com/service/q/getChannelList/' + pid,
-                    true
-                );
-                xhr.onload = function() {
-                    var data,
-                        x,
-                        videoList = [],
-                        newVideo;
-                    data = JSON.parse(this.response);
-                    console.log(data);
-                    console.log('videoList', data.videos);
-                    if (data.status === 'ok') {
-                        for (x in data.videos) {
-                            if (data.videos.hasOwnProperty(x)) {
-                                videoList.push(data.videos[x].vid);
-                            }
-                        }
-                        // console.log('videoList', videoList);
-                        // console.log('last', videoList[videoList.length - 1]);
-                        // console.log('videoList', videoList.pop());
-                        newVideo = videoList.pop();
-                        // console.log('newArray', videoList);
-                        videoList.unshift(newVideo);
-                        console.log('finArray', videoList);
-                        updateVideoList(data, videoList);
-                    } else {
-                        document.write('add video to first fail');
-                    }
-                };
-                xhr.send();
-            } else {
-                    // finish
-                    add.setAttribute('class', 'btn btn-success');
-                    add.innerHTML = 'success';
-                    setTimeout(function () {
-                        add.setAttribute('class', 'btn');
-                        add.innerHTML = 'Add';
-                    },
-                    300);
-                }
-        }
-        // loadVideoList();
-        // return;
-
         // add video
         formData = new FormData();
         xhr = new XMLHttpRequest();
@@ -269,7 +185,14 @@ function runApp(fb_data) {
             data = JSON.parse(this.response);
             console.log(data);
             if (data.status === 'ok') {
-                loadVideoList();
+                // finish
+                add.setAttribute('class', 'btn btn-success');
+                add.innerHTML = 'success';
+                setTimeout(function () {
+                    add.setAttribute('class', 'btn');
+                    add.innerHTML = 'Add';
+                },
+                300);
             } else {
                 if (data.errmsg !== '') {
                     document.write(data.errmsg);
