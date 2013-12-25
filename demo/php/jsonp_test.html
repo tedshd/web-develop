@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Jsonp_test</title>
+</head>
+<body>
+    <!-- <input type="text" name="val"> -->
+    <button>Send request</button>
+</body>
+<script>
+    function handleAjax() {
+        // console.log(document.querySelector('input').value);
+
+        var obj = {
+            'user': 'ted_shiu',
+            'password': '123456'
+        };
+        var queryString = '';
+        for (var key in obj) {
+            queryString += encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]) + '&';
+        }
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.open('POST', 'http://tedshd.lionfree.net/demo/php/api_test.php?' + queryString, true);
+        xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xmlHttpRequest.onload = function(e) {
+            if (xmlHttpRequest.status == 200) {
+                var data = JSON.parse(xmlHttpRequest.responseText);
+                console.log(xmlHttpRequest.responseText);
+                console.log(data);
+                alert(data.status);
+                alert(data.msg);
+            } else {
+                document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status ;
+            }
+        };
+        xmlHttpRequest.send();
+    }
+    document.querySelector('button').addEventListener('click', function() {
+        handleAjax();
+    });
+    function fun(data) {
+        console.log(data);
+    }
+</script>
+</html>
