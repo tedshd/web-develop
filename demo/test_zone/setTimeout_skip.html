@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>setTimeout_skip</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+
+</body>
+<script>
+    var skipContinue;
+    var count = 0;
+    window.onkeydown = skip;
+    function skip (e) {
+        if(e.keyCode === 39) {
+            clearTimeout(skipContinue);
+            count++;
+            skipContinue = setTimeout(
+                function () {
+                    console.log(count);
+                    alert(count);
+                    count = 0;
+                },
+                900
+            );
+        }
+    }
+</script>
+</html>
