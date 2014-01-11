@@ -1,7 +1,7 @@
 if (localStorage.accessToken) {
     var graphUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
-    console.log(graphUrl);
     console.log('url', graphUrl);
+    console.log('token', localStorage.accessToken);
 
 
 
@@ -14,9 +14,11 @@ if (localStorage.accessToken) {
         data = JSON.parse(this.response);
         console.log(data);
         if (data.error) {
+            console.log(data);
             node('#loading').setAttribute('class', 'hide');
             node('#login').setAttribute('class', '');
             node('#content').setAttribute('class', 'hide');
+            localStorage.accessToken = '';
         } else {
             node('#loading').setAttribute('class', 'hide');
             node('#content').setAttribute('class', '');
@@ -26,6 +28,7 @@ if (localStorage.accessToken) {
     };
     xhr.send();
 } else {
+    console.log('no localStorage accessToken');
     node('#loading').setAttribute('class', 'hide');
     node('#login').setAttribute('class', '');
 }

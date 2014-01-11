@@ -38,7 +38,7 @@ function onFacebookLogin() {
     var i,
         params,
         access;
-    if (!localStorage.accessToken) {
+    // if (!localStorage.accessToken) {
         chrome.tabs.getAllInWindow(null, function(tabs) {
             for (i = 0; i < tabs.length; i++) {
                 if (tabs[i].url.indexOf(successURL) === 0) {
@@ -46,11 +46,13 @@ function onFacebookLogin() {
                     access = params.split('&')[0];
                     console.log(access);
                     localStorage.accessToken = access;
+                    console.log('token', localStorage.accessToken);
                     chrome.tabs.onUpdated.removeListener(onFacebookLogin);
                     return;
                 }
             }
         });
-    }
+    // }
 }
+onFacebookLogin();
 chrome.tabs.onUpdated.addListener(onFacebookLogin);
