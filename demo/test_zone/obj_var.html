@@ -11,7 +11,8 @@ $(function () {
             str2: '',
             num: '',
             arr: [],
-            fun: ''
+            fun: '',
+            run: run
         },
         obj2 = {
             con: 'content',
@@ -26,6 +27,12 @@ $(function () {
     obj.fun = function () {
         alert('ok');
     }
+    function run (str) {
+        alert('RUN');
+        if (str === 'run') {
+            alert('RUN with str');
+        }
+    }
     obj2.con2 = ['Array', 'Array2', 'Array3'];
 
     // log
@@ -35,6 +42,8 @@ $(function () {
     console.log('num:', obj.num);
     console.log('arr:', obj.arr);
     obj.fun();
+    obj.run();
+    obj.run('run');
     console.log('con:', obj2.con);
     console.log('con2:', obj2.con2);
 
