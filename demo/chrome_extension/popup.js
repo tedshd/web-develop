@@ -1,8 +1,7 @@
+console.log('token_popupjs', localStorage.accessToken);
 if (localStorage.accessToken) {
     var graphUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
     console.log('url', graphUrl);
-    console.log('token', localStorage.accessToken);
-
 
 
     var xhr = new XMLHttpRequest();

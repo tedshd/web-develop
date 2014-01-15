@@ -38,13 +38,17 @@ function onFacebookLogin() {
     var i,
         params,
         access;
+    console.log('facebook login');
     // if (!localStorage.accessToken) {
         chrome.tabs.getAllInWindow(null, function(tabs) {
+            console.log(tabs);
             for (i = 0; i < tabs.length; i++) {
+                console.log('tab loop');
                 if (tabs[i].url.indexOf(successURL) === 0) {
+                    console.log('fb token');
                     params = tabs[i].url.split('#')[1];
                     access = params.split('&')[0];
-                    console.log(access);
+                    console.log('access', access);
                     localStorage.accessToken = access;
                     console.log('token', localStorage.accessToken);
                     chrome.tabs.onUpdated.removeListener(onFacebookLogin);

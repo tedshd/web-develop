@@ -148,11 +148,16 @@ function runApp(fb_data) {
             node('#error_msg').setAttribute('class', 'error');
             return;
         }
-        // reset UI
-        node('#error_msg').setAttribute('class', 'hide');
-        newList.setAttribute('class', 'channel');
+        node('#animation').innerHTML = channelName.value;
+        node('#animation').setAttribute('class', 'add');
+        setTimeout(function() {
+            node('#animation').setAttribute('class', 'hide');
+            // reset UI
+            newList.setAttribute('class', 'channel');
+            node('#channel_list').appendChild(newList);
+        },300);
         newList.innerHTML = channelName.value;
-        node('#channel_list').appendChild(newList);
+        node('#error_msg').setAttribute('class', 'hide');
         channelName.value = '';
     }
 

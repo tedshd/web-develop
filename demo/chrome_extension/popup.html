@@ -107,6 +107,36 @@
     input[type="text"] {
         width: 170px;
     }
+    @keyframes add
+    {
+        from {
+        }
+        to {
+            opacity: 0;
+            top: -20px;
+        }
+    }
+
+    @-webkit-keyframes add /* Safari and Chrome */
+    {
+        from {
+        }
+        to {
+            opacity: 0;
+            top: -20px;
+        }
+    }
+    #animation {
+        background: #ddd;
+        text-align: center;
+        position: relative;
+        margin-top: -20px;
+        top: 20px;
+    }
+    .add {
+        animation: add 1s;
+        -webkit-animation: add 1s;
+    }
     #choice, #create {
         width: 150px;
     }
@@ -151,6 +181,7 @@
             </div>
             or<br>
         </div>
+        <div id="animation" class="hide"></div>
         <input type="text" id="channel_name" placeholder="Enter new channel name">
         <button id="create" class="btn">Create New</button>
         <div id="error_msg" class="error hide">
