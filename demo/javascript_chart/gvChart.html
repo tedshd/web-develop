@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>
+            jQuery gvChart plugin - Google Visualization Charts via jQuery
+        </title>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="gvChart/jquery.gvChart-1.1.min.js"></script>
+        <script type="text/javascript">
+        gvChartInit();
+        $(document).ready(function(){
+            $('#myTable1').gvChart({
+                chartType: 'AreaChart',
+                gvSettings: {
+                    vAxis: {title: 'Number'},
+                    hAxis: {title: 'Brand'},
+                    width: 720,
+                    height: 300,
+                    // colors: ['green', 'pink']
+                    }
+            });
+
+
+            $('#myTable2').gvChart({
+                chartType: 'LineChart',
+                gvSettings: {
+                    vAxis: {title: 'No of players'},
+                    hAxis: {title: 'Month'},
+                    width: 720,
+                    height: 300
+                    }
+            });
+
+            $('#myTable3').gvChart({
+                chartType: 'BarChart',
+                gvSettings: {
+                    vAxis: {title: 'No of players'},
+                    hAxis: {title: 'Month'},
+                    width: 720,
+                    height: 300
+                    }
+            });
+
+
+            $('#myTable4').gvChart({
+                chartType: 'ColumnChart',
+                gvSettings: {
+                    vAxis: {title: 'No of players'},
+                    hAxis: {title: 'Month'},
+                    width: 720,
+                    height: 300
+                    }
+            });
+
+            $('#myTable5').gvChart({
+                chartType: 'PieChart',
+                gvSettings: {
+                    vAxis: {title: 'No of players'},
+                    hAxis: {title: 'Month'},
+                    width: 720,
+                    height: 300
+                    }
+            });
+        });
+        </script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div class="main">
+
+            <h2 id="area">AreaChart</h2>
+
+            <table id='myTable1'>
+                <caption>Device</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>SONY</th>
+                        <th>Sansung</th>
+                        <th>Apple</th>
+                        <th>htc</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    <tr>
+                        <th>2012</th>
+                        <td>125</td>
+                        <td>185</td>
+                        <td>327</td>
+                        <td>359</td>
+                    </tr>
+                    <tr>
+                        <th>2009</th>
+                        <td>700</td>
+                        <td>50</td>
+                        <td>691</td>
+                        <td>165</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="line">LineChart</h2>
+
+            <table id='myTable2'>
+                <caption>Device</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>SONY</th>
+                        <th>Sansung</th>
+                        <th>Apple</th>
+                        <th>htc</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    <tr>
+                        <th>2012</th>
+                        <td>125</td>
+                        <td>185</td>
+                        <td>327</td>
+                        <td>359</td>
+                    </tr>
+                    <tr>
+                        <th>2009</th>
+                        <td>700</td>
+                        <td>50</td>
+                        <td>691</td>
+                        <td>165</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="bar">BarChart</h2>
+
+            <table id='myTable3'>
+                <caption>Device</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>SONY</th>
+                        <th>Sansung</th>
+                        <th>Apple</th>
+                        <th>htc</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    <tr>
+                        <th>2012</th>
+                        <td>125</td>
+                        <td>185</td>
+                        <td>327</td>
+                        <td>359</td>
+                    </tr>
+                    <tr>
+                        <th>2009</th>
+                        <td>700</td>
+                        <td>50</td>
+                        <td>691</td>
+                        <td>165</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="column">ColumnChart</h2>
+
+            <table id='myTable4'>
+                <caption>Device</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>SONY</th>
+                        <th>Sansung</th>
+                        <th>Apple</th>
+                        <th>htc</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    <tr>
+                        <th>2012</th>
+                        <td>125</td>
+                        <td>185</td>
+                        <td>327</td>
+                        <td>359</td>
+                    </tr>
+                    <tr>
+                        <th>2009</th>
+                        <td>700</td>
+                        <td>50</td>
+                        <td>691</td>
+                        <td>165</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="pie">PieChart</h2>
+
+            <p><strong>Note</strong> that PieChart uses only first table row as a data set. Next data rows are ignored.</p>
+
+            <table id='myTable5'>
+                <caption>Device</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>SONY</th>
+                        <th>Sansung</th>
+                        <th>Apple</th>
+                        <th>htc</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    <tr>
+                        <th>2012</th>
+                        <td>125</td>
+                        <td>185</td>
+                        <td>327</td>
+                        <td>359</td>
+                    </tr>
+                    <tr>
+                        <th>2009</th>
+                        <td>700</td>
+                        <td>50</td>
+                        <td>691</td>
+                        <td>165</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
+

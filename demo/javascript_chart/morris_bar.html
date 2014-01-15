@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>morris_bar</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link href="morris.js-0.4.2/morris.css" rel="stylesheet">
+<script src="morris.js-0.4.2/morris.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<style>
+    #bar-example {
+        width: 800px;
+        height: 400px;
+    }
+</style>
+<script>
+    $("document").ready(function() {
+        var brand_data = [
+                {"brand": "SONY", "value": 125, "value2": 700},
+                {"brand": "Samsung", "value": 185, "value2": 50},
+                {"brand": "Apple", "value": 327, "value2": 691},
+                {"brand": "htc", "value": 359, "value2": 165}
+            ],
+            year_data = [
+                { y: '2006', a: 200, b: 90 },
+                { y: '2007', a: 75,  b: -20 },
+                { y: '2008', a: 50,  b: 40 },
+                { y: '2009', a: 30,  b: 65 },
+                { y: '2010', a: 50,  b: 40 },
+                { y: '2011', a: 5,  b: 65 },
+                { y: '2012', a: 100, b: 20 }
+            ];
+        Morris.Bar({
+            element: 'bar-example',
+            data: brand_data,
+            xkey: 'brand',
+            ykeys: ['value', 'value2'],
+            labels: ['number', 'max'],
+            // stacked: true,
+            hideHover: 'auto'
+            // barColors: ['red','green']
+        });
+    });
+</script>
+</head>
+<body>
+    <div id="bar-example"></div>
+</body>
+</html>

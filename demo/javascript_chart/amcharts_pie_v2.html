@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>amcharts</title>
+<script src="amcharts_2.10.0/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="amcharts_prototype/data.js"></script>
+<script>
+    AmCharts.ready(function () {
+        // PIE CHART
+        chart = new AmCharts.AmPieChart();
+        // chart.alphaField = 1;
+        // load data
+        chart.dataProvider = storage;
+        chart.titleField = "user";
+        chart.valueField = "total";
+        chart.outlineColor = "#FFFFFF";
+        chart.radius = 50;
+        chart.minRadius = 40;
+        chart.innerRadius = 30;
+        chart.outlineAlpha = 0.8;
+        chart.outlineThickness = 2;
+        chart.startAngle = 30;
+        chart.pieBaseColor = '#006600';
+        chart.groupedPulled = true;
+        chart.groupedTitle = 'total';
+        // value over total %
+        // chart.groupPercent = 70;
+        // chart.hideLabelsPercent = 50;
+        chart.labelText = '[[title]]:[[value]]GB';
+        chart.labelTickColor = 'red';
+        chart.legendDiv = legenddiv;
+        // chart.startEffect = '<';
+        // this makes the chart 3D
+        // chart.depth3D = 15;
+        // chart.angle = 45;
+        // chart.pieAlpha = 0.5;
+
+        // LEGEND
+        legend = new AmCharts.AmLegend();
+        legend.position = "right";
+        legend.align = "center";
+        legend.markerType = "circle";
+        legend.backgroundAlpha = 1;
+        legend.horizontalGap = 2;
+        legend.labelText = '[[title]]';
+        legend.title = 'unit:GB';
+        legend.backgroundColor = '#ddd';
+        // legend.labelText = "";
+        chart.addLegend(legend);
+
+        // WRITE
+        chart.write("chartdiv");
+    });
+</script>
+</head>
+<body>
+    <h3>Storage</h3>
+    <div id="chartdiv" style="width: 800px; height: 500px;"></div>
+    <div id="legenddiv"></div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>amcharts_pie</title>
+<script src="amcharts_2.10.0/amcharts/amcharts.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var chart;
+    var legend;
+
+    var chartData = [{
+        country: "Lithuania",
+        value: 260
+    }, {
+        country: "Ireland",
+        value: 201
+    }, {
+        country: "Germany",
+        value: 65
+    }, {
+        country: "Australia",
+        value: 39
+    }, {
+        country: "UK",
+        value: 19
+    }, {
+        country: "Latvia",
+        value: 10
+    }];
+
+    AmCharts.ready(function () {
+        // PIE CHART
+        chart = new AmCharts.AmPieChart();
+        // chart.alphaField = 1;
+        // load data
+        chart.dataProvider = chartData;
+        chart.titleField = "country";
+        chart.valueField = "value";
+        chart.outlineColor = "#FFFFFF";
+        chart.innerRadius = 60;
+        chart.outlineAlpha = 0.8;
+        chart.outlineThickness = 2;
+        // this makes the chart 3D
+        // chart.depth3D = 15;
+        // chart.angle = 45;
+        // chart.pieAlpha = 0.5;
+
+        // LEGEND
+        legend = new AmCharts.AmLegend();
+        legend.position = "right";
+        legend.align = "center";
+        legend.markerType = "circle";
+        chart.addLegend(legend);
+
+        // WRITE
+        chart.write("chartdiv");
+    });
+</script>
+</head>
+<body>
+    <div id="chartdiv" style="width: 800px; height: 400px;"></div>
+</body>
+</html>

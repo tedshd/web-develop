@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chart</title>
+<script src="dist/jquery.min.js"></script>
+<!--[if IE]><script language="javascript" type="text/javascript" src="dist/excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="dist/jquery.jqplot.min.js"></script>
+<!-- Tooltip -->
+<script type="text/javascript" src="dist/plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="dist/plugins/jqplot.cursor.min.js"></script>
+<script type="text/javascript" src="dist/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="dist/plugins/jqplot.dateAxisRenderer.min.js"></script>
+<link rel="stylesheet" type="text/css" href="dist/jquery.jqplot.css" />
+<style>
+    #line-brand, #bar-line {
+        width: 720px;
+        height: 300px;
+    }
+</style>
+<script>
+$("document").ready(function() {
+    var y2009 = [125, 185, 327, 359],
+        y2012 = [700, 50, 691, 165],
+        ticks = ['Apple', 'htc', 'SONY', 'Samsung'];
+    $.jqplot(
+        'line-brand',
+        [y2009,y2012],
+        {
+            title:'Chart demo Line',
+            axes:{
+                xaxis:{
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                },
+                yaxis:{
+                    min:-10,
+                    max:800
+                }
+            },
+            series:[{color:'#5FAB78'},{color:'#0088ff'}],
+            highlighter: {
+                show: true,
+                sizeAdjust: 7.5
+            },
+            cursor: {
+                show: false
+            }
+        });
+});
+</script>
+</head>
+<body>
+    <div id="line-brand"></div>
+    <div id="bar-line"></div>
+</body>
+</html>

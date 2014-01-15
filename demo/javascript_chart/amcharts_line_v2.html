@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>amcharts_line</title>
+<script src="amcharts_2.10.0/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="amcharts_prototype/data.js"></script>
+<script>
+AmCharts.ready(function() {
+    // SERIAL CHART
+    chart = new AmCharts.AmSerialChart();
+
+    chart.dataProvider = lineArea;
+    chart.marginTop = 10;
+    chart.autoMarginOffset = 3;
+    chart.marginRight = 0;
+    chart.categoryField = "year";
+
+    // AXES
+    // Category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.gridAlpha = 0.07;
+    categoryAxis.axisColor = "#DADADA";
+    categoryAxis.startOnAxis = true;
+    categoryAxis.showLastLabel = false;
+
+    // Value
+    var valueAxis = new AmCharts.ValueAxis();
+    valueAxis.stackType = "regular"; // this line makes the chart "stacked"
+    valueAxis.gridAlpha = 0.07;
+    valueAxis.title = "Traffic incidents";
+    chart.addValueAxis(valueAxis);
+
+    // GUIDES are vertical (can also be horizontal) lines (or areas) marking some event.
+    // first guide
+    // var guide1 = new AmCharts.Guide();
+    // guide1.category = "2001";
+    // guide1.lineColor = "#CC0000";
+    // guide1.lineAlpha = 1;
+    // guide1.dashLength = 2;
+    // guide1.inside = true;
+    // guide1.labelRotation = 90;
+    // guide1.label = "fines for speeding increased";
+    // categoryAxis.addGuide(guide1);
+
+    // second guide
+    // var guide2 = new AmCharts.Guide();
+    // guide2.category = "2007";
+    // guide2.lineColor = "#CC0000";
+    // guide2.lineAlpha = 1;
+    // guide2.dashLength = 2;
+    // guide2.inside = true;
+    // guide2.labelRotation = 90;
+    // guide2.label = "motorcycle maintenance fee introduced";
+    // categoryAxis.addGuide(guide2);
+
+
+    // GRAPHS
+    // first graph
+    var graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.hidden = true;
+    graph.title = "Cars";
+    graph.valueField = "cars";
+    graph.lineAlpha = 1;
+    graph.fillAlphas = 0.6; // setting fillAlphas to > 0 value makes it area graph
+    chart.addGraph(graph);
+
+    // second graph
+    graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.title = "Motorcycles";
+    graph.valueField = "motorcycles";
+    graph.lineColor ='green';
+    graph.fillColors = 'green';
+    graph.lineAlpha = 1;
+    graph.fillAlphas = 1;
+    chart.addGraph(graph);
+
+    // third graph
+    graph = new AmCharts.AmGraph();
+    graph.type = "line";
+    graph.title = "Bicycles";
+    graph.valueField = "bicycles";
+    graph.lineColor = '#0088ff';
+    graph.fillColors = '#0088ff';
+    graph.lineAlpha = 1;
+    graph.fillAlphas = 0.6;
+    chart.addGraph(graph);
+
+    // LEGEND
+    var legend = new AmCharts.AmLegend();
+    legend.position = "top";
+    chart.addLegend(legend);
+
+    // CURSOR
+    var chartCursor = new AmCharts.ChartCursor();
+    chartCursor.zoomable = false; // as the chart displayes not too many values, we disabled zooming
+    chartCursor.cursorAlpha = 1;
+    chart.addChartCursor(chartCursor);
+
+    // WRITE
+    chart.write("chartdiv");
+});
+</script>
+</head>
+<body>
+    <div id="chartdiv" style="width: 100%; height: 362px;"></div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>amCharts_bar</title>
+    <script src="amcharts_2.10.0/amcharts/amcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var chartData = [{ country: "USA", visits: 2323 },
+                    { country: "China", visits: 1882 },
+                    { country: "Japan", visits: 1809 },
+                    { country: "Germany", visits: 1322 },
+                    { country: "UK", visits: 1122 },
+                    { country: "France", visits: 1114 },
+                    { country: "India", visits: 984 },
+                    { country: "Spain", visits: 711 },
+                    { country: "Netherlands", visits: 665 },
+                    { country: "Russia", visits: 580 },
+                    { country: "South Korea", visits: 443 },
+                    { country: "Canada", visits: 441 },
+                    { country: "Brazil", visits: 395 },
+                    { country: "Italy", visits: 386 },
+                    { country: "Australia", visits: 384 },
+                    { country: "Taiwan", visits: 700 },
+                    { country: "Poland", visits: 328}];
+
+
+        window.onload = function () {
+            var chart = new AmCharts.AmSerialChart();
+            // chart display
+            chart.dataProvider = chartData;
+            chart.categoryField = "country";
+            chart.marginTop = 20;
+            chart.marginLeft = 55;
+            chart.marginRight = 15;
+            chart.marginBottom = 80;
+            chart.angle = 30;
+            chart.depth3D = 15;
+
+            // axias
+            var catAxis = chart.categoryAxis;
+            catAxis.gridCount = chartData.length;
+            catAxis.labelRotation = 45;
+
+            // graph
+            var graph = new AmCharts.AmGraph();
+            graph.title = "Country";
+            graph.balloonColor = "green";
+            graph.legendValueText = "[[category]]: [[value]]";
+            graph.valueField = "visits"
+            graph.type = "column";
+            graph.lineColor = "#0088ff";
+            graph.lineAlpha = 0;
+            graph.fillAlphas = 0.8;
+            chart.addGraph(graph);
+
+            // LEGEND
+            legend = new AmCharts.AmLegend();
+            legend.position = "right";
+            legend.align = "center";
+            legend.markerType = "triangleUp";
+            // graph.title
+            legend.labelText = "[[title]]";
+            chart.addLegend(legend);
+
+            chart.write('chartContainer');
+        }
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="width: 1000px; height: 400px;"></div>
+</body>
+</html>

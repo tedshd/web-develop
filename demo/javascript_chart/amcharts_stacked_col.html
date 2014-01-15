@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>stacked_col</title>
+<script src="amcharts_2.10.0/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="amcharts_prototype/data.js"></script>
+<style>
+    body {
+        font-size:12px;
+        color:#000000;
+        background-color:#ffffff;
+        font-family:verdana,helvetica,arial,sans-serif;
+    }
+</style>
+<script>
+    var chart;
+
+    var chartData = [{
+        year: "2003",
+        europe: 2.5,
+        namerica: 2.5,
+        asia: 2.1,
+        lamerica: 0.3,
+        meast: 0.2,
+        africa: 0.1},
+    {
+        year: "2004",
+        europe: 2.6,
+        namerica: 2.7,
+        asia: 2.2,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1},
+    {
+        year: "2005",
+        europe: 2.8,
+        namerica: 2.9,
+        asia: 2.4,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1}];
+
+    AmCharts.ready(function() {
+        // SERIAL CHART
+        chart = new AmCharts.AmSerialChart();
+        chart.dataProvider = hd;
+        chart.categoryField = "title";
+        chart.rotate = true;
+
+        // sometimes we need to set margins manually
+        // autoMargins should be set to false in order chart to use custom margin values
+        chart.autoMargins = false;
+        chart.marginLeft = 0;
+        chart.marginRight = 0;
+        chart.marginTop = 30;
+        chart.marginBottom = 40;
+
+        // AXES
+        // category
+        var categoryAxis = chart.categoryAxis;
+        categoryAxis.gridAlpha = 0;
+        categoryAxis.axisAlpha = 0;
+        categoryAxis.gridPosition = "start";
+
+        // value
+        var valueAxis = new AmCharts.ValueAxis();
+        valueAxis.stackType = "100%"; // this line makes the chart 100% stacked
+        valueAxis.gridAlpha = 0;
+        valueAxis.axisAlpha = 0;
+        valueAxis.labelsEnabled = false;
+        chart.addValueAxis(valueAxis);
+
+        // GRAPHS
+        // first graph
+        var graph = new AmCharts.AmGraph();
+        graph.title = "Europe";
+        graph.labelText = "[[percents]]%";
+        graph.balloonText = "[[01gb]]/[[value]] ([[percents]]%)";
+        graph.valueField = "01";
+        graph.type = "column";
+        graph.lineAlpha = 0;
+        graph.fillAlphas = 1;
+        graph.lineColor = "#C72C95";
+        chart.addGraph(graph);
+
+        // second graph
+        graph = new AmCharts.AmGraph();
+        graph.title = "North America";
+        graph.labelText = "[[percents]]%";
+        graph.balloonText = "[[02gb]]/[[[value]] ([[percents]]%)";
+        graph.valueField = "02";
+        graph.type = "column";
+        graph.lineAlpha = 0;
+        graph.fillAlphas = 1;
+        graph.lineColor = "#D8E0BD";
+        chart.addGraph(graph);
+
+        // third graph
+        graph = new AmCharts.AmGraph();
+        graph.title = "Asia-Pacific";
+        graph.labelText = "[[percents]]%";
+        graph.balloonText = "[[03gb]]/[[[value]] ([[percents]]%)";
+        graph.valueField = "03";
+        graph.type = "column";
+        graph.lineAlpha = 0;
+        graph.fillAlphas = 1;
+        graph.lineColor = "#B3DBD4";
+        chart.addGraph(graph);
+
+        // fourth graph
+        graph = new AmCharts.AmGraph();
+        graph.title = "Latin America";
+        graph.labelText = "[[percents]]%";
+        graph.balloonText = "[[04gb]]/[[[value]] ([[percents]]%)";
+        graph.valueField = "04";
+        graph.type = "column";
+        graph.lineAlpha = 0;
+        graph.fillAlphas = 1;
+        graph.lineColor = "#69A55C";
+        chart.addGraph(graph);
+
+        // LEGEND
+        var legend = new AmCharts.AmLegend();
+        legend.position = 'top';
+        legend.horizontalGap = 10;
+        legend.autoMargins = false;
+        legend.marginLeft = 10;
+        legend.marginRight = 20;
+        legend.valueWidth = 0;
+        legend.switchType = "v";
+        chart.addLegend(legend);
+
+        // WRITE
+        chart.write("chartdiv");
+    });
+</script>
+</head>
+<body>
+    <div id="chartdiv" style="width: 100%; height: 300px;"></div>
+</body>
+</html>
