@@ -172,7 +172,8 @@ ul, li {
         var menuList = document.querySelectorAll('#channel_list li');
             l = menuList.length,
             positionTop = document.querySelector('#channel_list').style.top,
-            listHeight = 90;
+            listHeight = 90,
+            menuView = 7;
         menuList[Main.menuCount].setAttribute('class', '');
         switch(status) {
             case 'up':
@@ -201,7 +202,7 @@ ul, li {
                 if (!top) {
                     top = 0;
                 }
-                if ((h - top) === 630) {
+                if ((h - top) === listHeight*menuView) {
                     document.querySelector('#channel_list').style.top = '-' + listHeight*(Main.menuCount - 6) + 'px';
                 }
             break;
