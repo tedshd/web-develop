@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>channel_list</title>
+<style>
+ul, li {
+    padding: 0;
+    margin: 0;
+}
+#menu {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 360px;
+    height: 100%;
+    background: rgba(32, 7, 46, 0.8);
+    height: 720px;
+    overflow: hidden;
+}
+#title li {
+    padding: 10px;
+}
+#channel_list_bg {
+    overflow: hidden;
+}
+#channel_list {
+    position: relative;
+    top: 0;
+}
+#channel_list li {
+    border-bottom: 1px solid #231c37;
+}
+#channel_list li * {
+    vertical-align: middle;
+}
+#channel_list li span {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+}
+#channel_list .focus {
+    outline: 0;
+    text-decoration: none;
+    background: #312b56;
+    -webkit-box-shadow: 0 10px 6px black, 0 -10px 6px black;
+}
+</style>
+</head>
+<body>
+    <div id="menu" class="hide">
+        <ul id="title">
+            <li>
+                <img src="images/icon.png" alt="img" width="50" height="50">
+                <span>miiiTV</span>
+            </li>
+        </ul>
+        <div id="channel_list_bg">
+            <ul id="channel_list">
+                <li class="focus">
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        1
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        2
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        3
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        4
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        5
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        6
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        7
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        8
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        9
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        10
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        11
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        12
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        13
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        14
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        15
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        16
+                    </span>
+                </li>
+                <li>
+                    <img src="" alt="img" width="90" height="90">
+                    <span>
+                        17
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    var Main = {menuCount: 0};
+    function channelSelect(status) {
+        // document.querySelector('#error').innerHTML = 'channel select';
+        var menuList = document.querySelectorAll('#channel_list li');
+            l = menuList.length,
+            positionTop = document.querySelector('#channel_list').style.top,
+            listHeight = 90;
+        menuList[Main.menuCount].setAttribute('class', '');
+        switch(status) {
+            case 'up':
+                Main.menuCount--;
+                if (Main.menuCount < 0) {
+                    Main.menuCount = l - 1;
+                }
+                var h = Main.menuCount*listHeight,
+                    top = document.querySelector('#channel_list').style.top;
+                top = Math.abs(parseInt(top.slice(0, top.length - 2), 10));
+                if (h === (top - listHeight)) {
+                    document.querySelector('#channel_list').style.top = '-' + (top - listHeight) + 'px';
+                }
+                if (Main.menuCount === (l -1)) {
+                    document.querySelector('#channel_list').style.top = '-' + (l - 1)*listHeight + 'px';
+                }
+            break;
+            case 'down':
+                Main.menuCount++;
+                if (Main.menuCount > l - 1) {
+                    Main.menuCount = 0;
+                }
+                var h = Main.menuCount*listHeight,
+                    top = document.querySelector('#channel_list').style.top;
+                top = Math.abs(parseInt(top.slice(0, top.length - 2), 10));
+                if (!top) {
+                    top = 0;
+                }
+                if ((h - top) === 630) {
+                    document.querySelector('#channel_list').style.top = '-' + listHeight*(Main.menuCount - 6) + 'px';
+                }
+            break;
+            default:
+                Main.menuCount = 0;
+        }
+        if (Main.menuCount === 0) {
+            document.querySelector('#channel_list').style.top = '0px';
+        }
+        menuList[Main.menuCount].setAttribute('class', 'focus');
+    }
+    window.onkeydown = keyboard;
+    function keyboard(e) {
+        if (e.keyCode === 38) {
+            channelSelect('up');
+        }
+        if (e.keyCode === 40) {
+            channelSelect('down');
+        }
+    }
+</script>
+</html>
