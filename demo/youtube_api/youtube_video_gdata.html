@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>YouTube video gdata</title>
+<!-- <link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+</head>
+<body>
+    <input type="text">
+    <button onclick="run()">Check</button>
+    <code>
+        <div id="result"></div>
+    </code>
+    <div id="media"></div>
+</body>
+<script>
+// var util = {
+//     htmlspecialchars:
+//         function (str) {
+//             console.log(str);
+//             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+//         },
+//     htmlspecialchars_decode:
+//         function (str) {
+//             return str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"");
+//         },
+//     nl2br:
+//         function (str) {
+//             return str.replace(/\n/g, "<br>");
+//         }
+// };
+    function run () {
+        var xmlHttpRequest = new XMLHttpRequest();
+        var id = document.querySelector('input').value;
+        xmlHttpRequest.open('GET', 'http://gdata.youtube.com/feeds/api/videos/' + id + '?alt=json');
+        xmlHttpRequest.onload = function(e) {
+            if (xmlHttpRequest.status == 200) {
+                // document.getElementById('result').innerHTML = util.htmlspecialchars(xmlHttpRequest.responseText);
+                // document.getElementById('result').innerHTML = xmlHttpRequest.responseText;
+                var data = JSON.parse(xmlHttpRequest.responseText);
+                document.getElementById('result').innerHTML = JSON.stringify(data.entry.media$group.media$content);
+                // console.log(xmlHttpRequest.responseText);
+                console.log(JSON.parse(xmlHttpRequest.responseText));
+                console.log(data.entry.media$group.media$content);
+            } else {
+                document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status ;
+            }
+        };
+        xmlHttpRequest.send();
+    }
+</script>
+</html>
