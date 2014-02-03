@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>long polling</title>
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<script src="../../lib/jsonp.js"></script>
+</head>
+<body>
+    <h1></h1>
+</body>
+<script>
+    setTimeout(function() {
+        clearInterval(polling);
+    }, 180000);
+
+    polling = setInterval(
+        function () {
+                JSONP.init({
+                        error: function(ex){
+                            alert("Failed to load : " + ex.url);
+                        }
+                    });
+
+                    JSONP.get('http://tedshd.lionfree.net/demo/php/random.php', {}, function(data) {
+                        console.log(data);
+                        // alert(data.num);
+                        document.querySelector('h1').innerHTML = data.num;
+                });
+        },
+        5000
+    );
+</script>
+</html>
