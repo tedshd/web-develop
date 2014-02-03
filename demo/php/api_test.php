@@ -21,7 +21,8 @@ $json_data = array(
     'user' => $_GET['user'],
 );
 $request_json = json_encode($json_data, true);
-echo $request_json;
+// echo $request_json;
+echo $_GET['callback'] . '(' . $request_json . ');';
 // echo '<br>';
 // echo $request_json['user'];
 
