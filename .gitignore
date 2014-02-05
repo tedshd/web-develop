@@ -5,3 +5,5 @@ config.rb
 fire_app_log.txt
 /lib/*
 /temp
+/Widget/*
+widgetlist.xml
