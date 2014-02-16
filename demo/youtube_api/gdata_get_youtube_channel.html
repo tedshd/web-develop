@@ -4,33 +4,30 @@
 <meta charset="utf-8">
 <title>gdata_get_youtube_channel</title>
 <script src="../../lib/jquery-1.10.1.js"></script>
+<style>
+    .hide {
+        display: none;
+    }
+</style>
 </head>
 <body>
     <h1>Use gdata get YouTube Channel video</h1>
     <input type="text" placeholder="Channel author">
     <button>Get</button>
-    <div id="result"></div>
+    <div id="result" class="hide">Loading...</div>
+    <div id="video_data" class="hide"></div>
 </body>
 <script>
     document.querySelector('button').addEventListener('click', getData);
     function getData() {
+        document.querySelector('#result').setAttribute('class', '');
         var author = document.querySelector('input').value;
-        // $.getJSON('https://gdata.youtube.com/feeds/api/videos?q='+ author +'&v=2&alt=jsonc', function(data) {
-        //     console.log(data);
-        //     console.log(data.data.items);
-        // });
         $.getJSON(
             'https://gdata.youtube.com/feeds/api/users/'+ author +'/uploads?&v=2&alt=jsonc',
             function(data) {
                 console.log(data);
                 console.log(data.data.totalItems);
                 console.log(data.data.totalItems/50);
-                // for (var i = 0; i < data.data.items.length; i++) {
-                //     console.log(data.data.items[i].player.default);
-                //     var div = document.createElement('div');
-                //     div.innerHTML = data.data.items[i].player.default;
-                //     document.querySelector('#result').appendChild(div);
-                // };
                 var i = 0,
                     count = data.data.totalItems/50;
                 function runLoop() {
@@ -46,31 +43,20 @@
                                         console.log(data.data.items[i].player.default);
                                         var div = document.createElement('div');
                                         div.innerHTML = data.data.items[i].player.default;
-                                        document.querySelector('#result').appendChild(div);
+                                        document.querySelector('#video_data').appendChild(div);
                                     };
                                 }
                             );
+                            if (data.data.totalItems/50 >= i) {
+                                document.querySelector('#result').setAttribute('class', 'hide');
+                                document.querySelector('#video_data').setAttribute('class', '');
+                            }
                             i++;
                             runLoop();
                         }
                     }, 1500);
                 }
                 runLoop();
-                // for (var i = 0; i < (data.data.totalItems/50); i++) {
-                //     var num = 50*i + 1;
-                //     $.getJSON(
-                //         'https://gdata.youtube.com/feeds/api/users/'+ author +'/uploads?&v=2&start-index='+ num + '&max-results=50&alt=jsonc',
-                //         function(data) {
-                //             console.log(data);
-                //             // for (var i = 0; i < data.data.items.length; i++) {
-                //             //     console.log(data.data.items[i].player.default);
-                //             //     var div = document.createElement('div');
-                //             //     div.innerHTML = data.data.items[i].player.default;
-                //             //     document.querySelector('#result').appendChild(div);
-                //             // };
-                //         }
-                //     );
-                // }
             }
         );
     }
