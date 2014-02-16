@@ -1,0 +1,19 @@
+/**
+ *
+ * @authors Ted Shiu (you@example.org)
+ * @date    2014-02-16 13:32:14
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+%head {
+    color: red;
+}
+h1 {
+    @extend %head;
+}
+h2 {
+    @extend %head;
+}
