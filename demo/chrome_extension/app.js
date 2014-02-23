@@ -134,7 +134,7 @@ function runApp(fb_data) {
 
     function handleSelect() {
         if (add.disabled) {
-            add.removeAttribute('disabled');
+            add.removeAttribute('disabled', '');
         }
         choice.innerHTML = this.innerHTML;
         choice.setAttribute('class', 'btn btn-info');
@@ -167,7 +167,7 @@ function runApp(fb_data) {
         // console.log(video_hash);
         add.setAttribute('class', 'btn btn-info');
         add.innerHTML = 'Adding...';
-        add.setAttribute('disabled');
+        add.setAttribute('disabled', '');
 
         // add video
         formData = new FormData();
