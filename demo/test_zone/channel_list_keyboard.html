@@ -65,7 +65,14 @@ ul, li {
                         1
                     </span>
                 </li>
-                <li>
+<script>
+    for (var i = 2; 22 >= i; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = '<img src="" alt="img" width="90" height="90"><span>'+i+'</span>';
+        document.querySelector('#channel_list').appendChild(li);
+    };
+</script>
+                <!-- <li>
                     <img src="" alt="img" width="90" height="90">
                     <span>
                         2
@@ -160,7 +167,7 @@ ul, li {
                     <span>
                         17
                     </span>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -206,6 +213,29 @@ ul, li {
                     document.querySelector('#channel_list').style.top = '-' + listHeight*(Main.menuCount - 6) + 'px';
                 }
             break;
+            case 'pgUp':
+                console.log('con' + Main.menuCount);
+                console.log('l - menuView' + (l - menuView));
+                if (Main.menuCount >= (l - 1)) {
+                    Main.menuCount = l - (2*menuView);
+                } else {
+                    Main.menuCount-= menuView;
+                    if (Main.menuCount < 0) {
+                        Main.menuCount = 0;
+                    }
+                }
+                document.querySelector('#channel_list').style.top = '-' + listHeight*Main.menuCount + 'px';
+            break;
+            case 'pgDn':
+                Main.menuCount+= menuView;
+                console.log('Main.menuCount:'+Main.menuCount);
+                if ((Main.menuCount + menuView) > l - 1) {
+                    Main.menuCount = l - 1;
+                    document.querySelector('#channel_list').style.top = '-' + (l - menuView)*listHeight + 'px';
+                } else {
+                    document.querySelector('#channel_list').style.top = '-' + listHeight*Main.menuCount + 'px';
+                }
+            break;
             default:
                 Main.menuCount = 0;
         }
@@ -221,6 +251,14 @@ ul, li {
         }
         if (e.keyCode === 40) {
             channelSelect('down');
+        }
+        if (e.keyCode === 81) {
+            console.log('Q');
+            channelSelect('pgUp');
+        }
+        if (e.keyCode === 65) {
+            console.log('A');
+            channelSelect('pgDn');
         }
     }
 </script>
