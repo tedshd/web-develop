@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM_obj_Operate</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<style>
+    .bg {
+        background: #ddd;
+    }
+</style>
+<body>
+    <div id="dom">dom</div>
+    <div id="list"></div>
+    <button id="btn_1" class="btn">hihi</button>
+    <button id="btn_2" class="btn">null</button>
+    <button id="btn_3" class="btn">ok</button>
+    <button id="btn_4" class="btn">append div</button>
+    <button id="btn_5" class="btn">set list</button>
+    <button id="btn_6" class="btn">set dom</button>
+</body>
+<script>
+    var Main = {
+        a: 0,
+        b: 0
+    };
+    var dom = document.querySelector('#dom');
+    var list = document.querySelector('#list');
+    console.log(Main);
+    document.querySelector('#btn_1').addEventListener('click', function() {
+        dom.innerHTML = 'hihi';
+    });
+    document.querySelector('#btn_2').addEventListener('click', function() {
+        dom.innerHTML = '';
+    });
+    document.querySelector('#btn_3').addEventListener('click', function() {
+        dom.innerHTML = 'ok';
+    });
+    document.querySelector('#btn_4').addEventListener('click', function() {
+        var div = document.createElement('div');
+        div.innerHTML = 'This is Div';
+        dom.appendChild(div);
+    });
+    document.querySelector('#btn_5').addEventListener('click', function() {
+        set(list);
+    });
+    document.querySelector('#btn_6').addEventListener('click', function() {
+        set(dom, 'a', 'bg');
+    });
+    function set(dom, state, view) {
+        dom.innerHTML = 'functon set dom';
+        if (view) {
+            dom.setAttribute('class', view);
+        }
+        if (state) {
+            Main[state] = 1;
+            console.log(Main[state]);
+        }
+    }
+</script>
+</html>
