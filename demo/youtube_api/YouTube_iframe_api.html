@@ -22,6 +22,9 @@
         <div id="vol">50</div>
         <ul>
             <li>
+                getVideoLoadedFraction-<span id="getVideoLoadedFraction"></span>
+            </li>
+            <li>
                 getPlayerState-<span id="getPlayerState"></span>
             </li>
             <li>
@@ -176,7 +179,7 @@
             //     var value = video_ID[key];
             //     Main.videoList.push(value);
             // }
-            Main.videoList = Main.channelList[0];
+            Main.videoList = Main.channelList[1];
             // channelList[0] = videoList;
 
             function playChannel() {
@@ -258,6 +261,9 @@
                 document.querySelector('#getCurrentTime').innerHTML = player.getCurrentTime();
 
                 clearInterval(currentTime);
+                setInterval(function() {
+                    document.querySelector('#getVideoLoadedFraction').innerHTML = player.getVideoLoadedFraction();
+                }, 1000);
                 // if (player.getPlaybackQuality() !== 'hd1080') {
                 //     player.setPlaybackQuality('highres');
                 // }
