@@ -460,6 +460,7 @@ h1 span {
         -webkit-box-shadow: 0 3px 6px black, 0 -3px 6px black;
     }
     li {
+        box-sizing: border-box;
         border-bottom: 1px solid #231c37;
         * {
             vertical-align: middle;
@@ -559,6 +560,22 @@ h1 span {
     }
 }
 
+#video_info {
+    #progress_time_bg {
+        height: 5px;
+        width: 100%;
+        background: #666;
+        #progress_time {
+            height: 100%;
+            width: 0;
+            background: #ff0000;
+        }
+    }
+    #num_time {
+        margin: auto;
+        width: 180px;
+    }
+}
 /* control info */
 #control_info {
     border-top: 1px solid;

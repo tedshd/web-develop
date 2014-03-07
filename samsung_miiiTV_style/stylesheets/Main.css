@@ -636,23 +636,24 @@ h1 span {
 }
 /* line 462, ../sass/Main.scss */
 #channel_list li {
+  box-sizing: border-box;
   border-bottom: 1px solid #231c37;
 }
-/* line 464, ../sass/Main.scss */
+/* line 465, ../sass/Main.scss */
 #channel_list li * {
   vertical-align: middle;
 }
-/* line 467, ../sass/Main.scss */
+/* line 468, ../sass/Main.scss */
 #channel_list li img {
   padding: 10px;
   box-sizing: border-box;
 }
-/* line 471, ../sass/Main.scss */
+/* line 472, ../sass/Main.scss */
 #channel_list li span {
   display: inline-block;
   width: 200px;
 }
-/* line 474, ../sass/Main.scss */
+/* line 475, ../sass/Main.scss */
 #channel_list li span div {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -661,7 +662,7 @@ h1 span {
 }
 
 /* video list */
-/* line 485, ../sass/Main.scss */
+/* line 486, ../sass/Main.scss */
 #video_list {
   position: absolute;
   top: 0;
@@ -671,7 +672,7 @@ h1 span {
   background: rgba(0, 0, 0, 0.9);
   overflow: hidden;
 }
-/* line 493, ../sass/Main.scss */
+/* line 494, ../sass/Main.scss */
 #video_list #video_list_title {
   position: absolute;
   top: 0;
@@ -680,11 +681,11 @@ h1 span {
   border-bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
-/* line 500, ../sass/Main.scss */
+/* line 501, ../sass/Main.scss */
 #video_list #video_list_title * {
   vertical-align: sub;
 }
-/* line 503, ../sass/Main.scss */
+/* line 504, ../sass/Main.scss */
 #video_list #video_list_title #video_list_channel_title {
   display: inline-block;
   overflow: hidden;
@@ -692,7 +693,7 @@ h1 span {
   white-space: nowrap;
   width: 960px;
 }
-/* line 511, ../sass/Main.scss */
+/* line 512, ../sass/Main.scss */
 #video_list #video_list_info {
   position: absolute;
   bottom: 0;
@@ -702,18 +703,18 @@ h1 span {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* line 520, ../sass/Main.scss */
+/* line 521, ../sass/Main.scss */
 .info_bar:before {
   /*background: rgba(0, 0, 0, 0.9);*/
 }
 
-/* line 523, ../sass/Main.scss */
+/* line 524, ../sass/Main.scss */
 #video_list_bg {
   position: relative;
   top: 0;
 }
 
-/* line 527, ../sass/Main.scss */
+/* line 528, ../sass/Main.scss */
 .cell {
   float: left;
   position: relative;
@@ -726,7 +727,7 @@ h1 span {
   border: solid 5px #000;
   overflow: hidden;
 }
-/* line 538, ../sass/Main.scss */
+/* line 539, ../sass/Main.scss */
 .cell .list_video_title {
   position: absolute;
   bottom: 0;
@@ -739,23 +740,41 @@ h1 span {
   white-space: nowrap;
 }
 
-/* line 550, ../sass/Main.scss */
+/* line 551, ../sass/Main.scss */
 .list_focus {
   border: solid 5px #ff8800;
 }
 
 /**/
-/* line 555, ../sass/Main.scss */
+/* line 556, ../sass/Main.scss */
 #sync_ok {
   text-align: center;
 }
-/* line 557, ../sass/Main.scss */
+/* line 558, ../sass/Main.scss */
 #sync_ok .info_bar {
   bottom: 30px;
 }
 
+/* line 564, ../sass/Main.scss */
+#video_info #progress_time_bg {
+  height: 5px;
+  width: 100%;
+  background: #666;
+}
+/* line 568, ../sass/Main.scss */
+#video_info #progress_time_bg #progress_time {
+  height: 100%;
+  width: 0;
+  background: #ff0000;
+}
+/* line 574, ../sass/Main.scss */
+#video_info #num_time {
+  margin: auto;
+  width: 180px;
+}
+
 /* control info */
-/* line 563, ../sass/Main.scss */
+/* line 580, ../sass/Main.scss */
 #control_info {
   border-top: 1px solid;
   border-top-color: #ccc;
@@ -765,7 +784,7 @@ h1 span {
 }
 
 /* channel info */
-/* line 572, ../sass/Main.scss */
+/* line 589, ../sass/Main.scss */
 #channel_info {
   position: absolute;
   top: 25px;
@@ -779,13 +798,13 @@ h1 span {
   z-index: 100;
 }
 
-/* line 584, ../sass/Main.scss */
+/* line 601, ../sass/Main.scss */
 #channel_number {
   text-align: right;
   line-height: 1;
 }
 
-/* line 588, ../sass/Main.scss */
+/* line 605, ../sass/Main.scss */
 #channel_title {
   line-height: 1;
   overflow: hidden;
@@ -797,7 +816,7 @@ h1 span {
 }
 
 /* exit confirm */
-/* line 600, ../sass/Main.scss */
+/* line 617, ../sass/Main.scss */
 #exit_confirm {
   margin: auto;
   position: absolute;
@@ -811,19 +830,19 @@ h1 span {
   text-align: center;
 }
 
-/* line 609, ../sass/Main.scss */
+/* line 626, ../sass/Main.scss */
 #exit_confirm h2 {
   margin: 25px 10px;
 }
 
-/* line 612, ../sass/Main.scss */
+/* line 629, ../sass/Main.scss */
 #confirm_select {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
 }
-/* line 617, ../sass/Main.scss */
+/* line 634, ../sass/Main.scss */
 #confirm_select div {
   z-index: 0;
   float: left;
@@ -832,7 +851,7 @@ h1 span {
   padding: 25px 0;
   background: #3a3460;
 }
-/* line 625, ../sass/Main.scss */
+/* line 642, ../sass/Main.scss */
 #confirm_select .confirm_focus:before {
   content: "";
   z-index: -1;
@@ -844,7 +863,7 @@ h1 span {
   background: #6f18ab;
 }
 
-/* line 637, ../sass/Main.scss */
+/* line 654, ../sass/Main.scss */
 #no_videos_view {
   position: absolute;
   top: 0;
@@ -853,7 +872,7 @@ h1 span {
   width: 100%;
   height: 100%;
 }
-/* line 644, ../sass/Main.scss */
+/* line 661, ../sass/Main.scss */
 #no_videos_view #no_videos {
   margin: auto;
   position: absolute;
@@ -868,7 +887,7 @@ h1 span {
   text-align: center;
 }
 
-/* line 655, ../sass/Main.scss */
+/* line 672, ../sass/Main.scss */
 #pause {
   margin: auto;
   position: absolute;
