@@ -29,6 +29,7 @@ ul, li {
     top: 0;
 }
 #channel_list li {
+    box-sizing: border-box;
     border-bottom: 1px solid #231c37;
 }
 #channel_list li * {
@@ -53,7 +54,7 @@ ul, li {
     <div id="menu" class="hide">
         <ul id="title">
             <li>
-                <img src="images/icon.png" alt="img" width="50" height="50">
+                <img src="" alt="img" width="50" height="50">
                 <span>miiiTV</span>
             </li>
         </ul>
@@ -66,7 +67,7 @@ ul, li {
                     </span>
                 </li>
 <script>
-    for (var i = 2; 22 >= i; i++) {
+    for (var i = 2; 100 >= i; i++) {
         var li = document.createElement('li');
         li.innerHTML = '<img src="" alt="img" width="90" height="90"><span>'+i+'</span>';
         document.querySelector('#channel_list').appendChild(li);
@@ -179,7 +180,7 @@ ul, li {
         var menuList = document.querySelectorAll('#channel_list li');
             l = menuList.length,
             positionTop = document.querySelector('#channel_list').style.top,
-            listHeight = 90,
+            listHeight = 91,
             menuView = 7;
         menuList[Main.menuCount].setAttribute('class', '');
         switch(status) {
