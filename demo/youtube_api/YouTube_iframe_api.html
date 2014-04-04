@@ -15,10 +15,16 @@
         color: #fff;
         background: rgba(0, 0, 0, 0.8);
     }
+    #progress_bar {
+        height: 5px;
+        width: 0;
+        background: #ff0000;
+    }
 </style>
 <body>
     <div id="player"></div>
     <div class="info">
+        Vol:
         <div id="vol">50</div>
         <ul>
             <li>
@@ -29,6 +35,9 @@
             </li>
             <li>
                 getPlaybackRate-<span id="getPlaybackRate"></span>
+            </li>
+            <li>
+                getAvailablePlaybackRates-<span id="getAvailablePlaybackRates"></span>
             </li>
             <li>
                 getVideoBytesLoaded-<span id="getVideoBytesLoaded"></span>
@@ -51,7 +60,14 @@
             <li>
                 getCurrentTime-<span id="getCurrentTime"></span>
             </li>
+            <li>
+                totalTime-<span id="totalTime"></span>
+            </li>
+            <li>
+                playTime-<span id="playTime"></span>
+            </li>
         </ul>
+        <div id="progress_bar"></div>
     </div>
     <button class="btn" id="play">Pause</button>
     <button class="btn" id="prev">&lt; Prev</button>
@@ -63,6 +79,22 @@
     <button class="btn" id="nextChannel">nextChannel</button>
 </body>
 <script>
+/**
+ * second to time
+ * @param  {[type]} sec_num [description]
+ * @return {[type]}         [description]
+ */
+function toHHMMSS(sec_num) {
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60));
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    var time    = hours+':'+minutes+':'+seconds;
+    return time;
+}
     var Main = {
         vol: 50,
         videoList: [],
@@ -202,7 +234,7 @@
                             modestbranding: 0,
                             wmode: 'opaque',
                             // hd: 1,
-                            // html5: 1,
+                            html5: 1,
                             iv_load_policy: 3
                         },
                         events: {
@@ -252,6 +284,7 @@
                 // get state
                 document.querySelector('#getPlayerState').innerHTML = player.getPlayerState();
                 document.querySelector('#getPlaybackRate').innerHTML = player.getPlaybackRate();
+                document.querySelector('#getAvailablePlaybackRates').innerHTML = player.getAvailablePlaybackRates();
                 document.querySelector('#getVideoBytesLoaded').innerHTML = player.getVideoBytesLoaded();
                 document.querySelector('#width').innerHTML = document.querySelector('#player').getAttribute('width');
                 document.querySelector('#height').innerHTML = document.querySelector('#player').getAttribute('height');
@@ -259,6 +292,8 @@
                 document.querySelector('#getDuration').innerHTML = player.getDuration();
                 document.querySelector('#getPlaylist').innerHTML = player.getPlaylist();
                 document.querySelector('#getCurrentTime').innerHTML = player.getCurrentTime();
+                document.querySelector('#totalTime').innerHTML = toHHMMSS(player.getDuration());
+                // Math.floor(player.getDuration()/60) + ':' + Math.floor(player.getDuration()%60);
 
                 clearInterval(currentTime);
                 setInterval(function() {
@@ -275,6 +310,10 @@
                     currentTime = setInterval(
                         function () {
                             document.querySelector('#getCurrentTime').innerHTML = player.getCurrentTime();
+                            document.querySelector('#playTime').innerHTML = toHHMMSS(player.getCurrentTime());
+                            // Math.floor(player.getCurrentTime()/60) + ':' + Math.floor(player.getCurrentTime()%60);
+                            document.querySelector('#progress_bar').style.width = (player.getCurrentTime()/player.getDuration())*100 + '%';
+                            // console.log(player.getCurrentTime()/player.getDuration());
                         },
                         1000
                     );
@@ -418,6 +457,41 @@
                 document.querySelector('#nextChannel').addEventListener('click', function () {
                     switchChannel(1);
                 });
+                window.onkeydown = keyboard;
+                function keyboard (e) {
+                    if (e.keyCode === 37) {
+                        // player.pauseVideo();
+                        player.seekTo(player.getCurrentTime() - 3, true);
+                        document.querySelector('#progress_bar').style.width = ((player.getCurrentTime() - 3)/player.getDuration())*100 + '%';
+                        console.log(player.getCurrentTime() - 3);
+                        // player.playVideo();
+                    }
+                    if (e.keyCode === 39) {
+                        // player.pauseVideo();
+                        player.seekTo(player.getCurrentTime() + 3, true);
+                        document.querySelector('#progress_bar').style.width = ((player.getCurrentTime() + 3)/player.getDuration())*100 + '%';
+                        console.log(player.getCurrentTime() + 3);
+                        // player.playVideo();
+                    }
+                    if (e.keyCode === 90) {
+                        console.log('z');
+                        player.pauseVideo();
+                        player.setPlaybackRate(2);
+                        player.playVideo();
+                    }
+                    if (e.keyCode === 88) {
+                        console.log('x');
+                        player.pauseVideo();
+                        player.setPlaybackRate(1);
+                        player.playVideo();
+                    }
+                    if (e.keyCode === 67) {
+                        console.log('c');
+                        player.pauseVideo();
+                        player.setPlaybackRate(0.25);
+                        player.playVideo();
+                    }
+                }
             }
 
             setTimeout(function() {
