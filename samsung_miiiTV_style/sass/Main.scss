@@ -46,6 +46,9 @@
 /* Layout */
 body
 {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 1280px;
     height: 720px;
     color: #fff;
@@ -306,8 +309,9 @@ h1 span {
         height: 220px;
         margin: 15px;
         background: #3d406a;
+        text-align: center;
         h3 {
-            padding: 10px 0 0 10px;
+            padding: 10px 0;
         }
         img{
             margin: auto;
@@ -315,8 +319,10 @@ h1 span {
             margin-top: 5px;
         }
         p {
-            margin-top: 5px;
-            text-align: center;
+            margin: 5px 5px 0 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
     .setting_focus {
@@ -361,9 +367,131 @@ h1 span {
     width: 1150px;
 }
 #users_list {
-    width: 690px;
+    width: 720px;
     .arrow {
         text-align: center;
+    }
+    .users_list_focus {
+        z-index: 1;
+        &:before {
+            content: "";
+            z-index: -2;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 90%;
+            height: 20px;
+            margin-left: -45%;
+            box-shadow: 0 15px 10px rgba(0, 0, 0, 0.5);
+        }
+        &:after {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 100%;
+            height: 100%;
+            border: solid 15px #200d2c;
+            background: #200d2c;
+        }
+        .cancel_binding {
+            z-index: 1;
+        }
+    }
+    #bind_users_bg {
+        overflow: hidden;
+    }
+    #bind_users {
+        position: relative;
+        margin: 15px 0;
+        padding: 15px;
+        height: 340px;
+    }
+    li {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 97px;
+        margin-bottom: 5px;
+        background: #3a3460;
+        img {
+            position: absolute;
+            top: 0;right: 0;bottom: 0;left: 0;
+            margin: auto 21px;
+        }
+        .user_anme {
+            position: absolute;
+            top: 0;left: 131px;bottom: 0;
+            margin: auto 0;
+            height: 24px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 390px;
+        }
+        .cancel_binding {
+            z-index: -1;
+            position: absolute;
+            top: 0;right: 0;bottom: 0;
+            margin: auto 21px;
+            height: 24px;
+        }
+        p {
+            margin-top: 10px;
+            width: 420px;
+            line-height: 1.3;
+        }
+        .user_anme_unbind {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 225px;
+            display: inline-block;
+            vertical-align: bottom;
+        }
+        .unbind_confirm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #200d2c;
+        }
+        .unbind_confirm_box {
+            position: absolute;
+            top: 0;right: 0;bottom: 0;
+            margin: auto 0;
+            height: 97px;
+            div {
+                width: 128px;
+                height: 80px;
+                background: #3a3460;
+                text-align: center;
+                &:before {
+                    content: "";
+                    width: 0;
+                    height: 100%;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+            .unbind_focus {
+                background: #6f18ab;
+            }
+            .unbind_1 {
+                position: absolute;
+                top: 0;right: 0;bottom: 0;
+                margin: auto 140px;
+                height: 80px;
+            }
+            .unbind_2 {
+                position: absolute;
+                top: 0;right: 0;bottom: 0;
+                margin: auto 0;
+                height: 80px;
+            }
+        }
     }
 }
 
@@ -434,7 +562,7 @@ h1 span {
     height: 720px;
     overflow: hidden;
 }
-#menu_title li {
+.menu_title li {
     padding: 10px;
     * {
         vertical-align: middle;
@@ -447,10 +575,10 @@ h1 span {
         width: 340px;
     }
 }
-#channel_list_bg {
+.channel_list_bg {
     overflow: hidden;
 }
-#channel_list {
+.channel_list {
     position: relative;
     top: 0;
     .menu_focus {
@@ -478,6 +606,16 @@ h1 span {
                 white-space: nowrap;
                 width: 250px;
             }
+        }
+    }
+    .moreChannel {
+        text-align: center;
+        &:before {
+            content: "";
+            width: 0;
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
         }
     }
 }
@@ -521,9 +659,14 @@ h1 span {
 .info_bar:before {
     /*background: rgba(0, 0, 0, 0.9);*/
 }
-#video_list_bg {
+#video_list_area {
     position: relative;
-    top: 0;
+    top: 50px;
+    overflow: hidden;
+    #video_list_bg {
+        position: relative;
+        top: 50px;
+    }
 }
 .cell {
     float: left;
@@ -639,7 +782,7 @@ h1 span {
         padding: 25px 0;
         background: #3a3460;
     }
-    .confirm_focus:before {
+    .exit_focus:before {
         content: "";
         z-index: -1;
         position: absolute;
@@ -651,22 +794,27 @@ h1 span {
         background: #6f18ab;
     }
 }
-#no_videos_view {
+#no_videos_view, #remove_videos_view, #private_videos_view {
     position: absolute;
     top: 0;
     left: 0;
     background: #333;
     width: 100%;
     height: 100%;
-    #no_videos {
+    .msg {
         margin: auto;
         position: absolute;
         top: 0; left: 0; bottom: 0; right: 0;
         width: 480px;
-        height: 30px;
+        height: 100px;
         padding: 10px;
-        background: #666;
         text-align: center;
+        line-height: 1.5;
+    }
+    p {
+        position: absolute;
+        top: 430px;
+        left: 490px;
     }
 }
 #pause {
