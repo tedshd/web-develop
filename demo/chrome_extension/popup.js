@@ -17,7 +17,7 @@ if (localStorage.accessToken) {
             node('#loading').setAttribute('class', 'hide');
             node('#login').setAttribute('class', '');
             node('#content').setAttribute('class', 'hide');
-            localStorage.accessToken = '';
+            localStorage.clear();
         } else {
             node('#loading').setAttribute('class', 'hide');
             node('#content').setAttribute('class', '');
