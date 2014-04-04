@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name":    "m01 Extension",
+    "version": "0.1",
+    "background": {
+        "persistent": false,
+        "scripts": ["background.js"]
+    },
+    "content_scripts": [{
+        "matches": ["http://www.mobile01.com/*"],
+        // "matches": ["*://*.stackoverflow.com/*"],
+        "js":      ["content.js"]
+    }],
+    "browser_action": {
+        "default_title": "m01 Extension"
+    },
+
+    "permissions": ["activeTab"]
+}
