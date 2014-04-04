@@ -3,17 +3,29 @@
 <head>
 <meta charset="utf-8">
 <title>gdata_get_youtube_channel</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
 <script src="../../lib/jquery-1.10.1.js"></script>
 <style>
     .hide {
         display: none;
+    }
+    #video_data .title {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    #video_data input {
+        width: 100%;
     }
 </style>
 </head>
 <body>
     <h1>Use gdata get YouTube Channel video</h1>
     <input type="text" placeholder="Channel author">
-    <button>Get</button>
+    <button class="btn">Get</button>
     <div id="result" class="hide">Loading...</div>
     <div id="video_data" class="hide"></div>
 </body>
@@ -43,7 +55,13 @@
                                         console.log(data.data.items[i].player.default);
                                         var div = document.createElement('div');
                                         div.innerHTML = data.data.items[i].player.default;
+                                        var input = document.createElement('input');
+                                        input.setAttribute('class', 'title');
+                                        input.setAttribute('placeholder', data.data.items[i].title);
+                                        input.setAttribute('disabled', '');
+                                        // input.innerHTML = data.data.items[i].title;
                                         document.querySelector('#video_data').appendChild(div);
+                                        document.querySelector('#video_data').appendChild(input);
                                     };
                                 }
                             );
