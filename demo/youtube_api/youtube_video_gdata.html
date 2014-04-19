@@ -39,6 +39,13 @@
     function run () {
         var xmlHttpRequest = new XMLHttpRequest();
         var id = document.querySelector('input').value;
+        var format = '';
+        id = id.split('v=')[1];
+        var ampersandPosition = id.indexOf('&');
+        if(ampersandPosition != -1) {
+          id = id.substring(0, ampersandPosition);
+        }
+        console.log(id);
         xmlHttpRequest.open('GET', 'http://gdata.youtube.com/feeds/api/videos/' + id + '?alt=json');
         xmlHttpRequest.onload = function(e) {
             if (xmlHttpRequest.status == 200) {
@@ -49,6 +56,10 @@
                 // console.log(xmlHttpRequest.responseText);
                 console.log(JSON.parse(xmlHttpRequest.responseText));
                 console.log(data.entry.media$group.media$content);
+                for (x in data.entry.media$group.media$content) {
+                    format = format + data.entry.media$group.media$content[x].yt$format;
+                };
+                document.querySelector('#media').innerHTML = format;
             } else {
                 document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status ;
             }
