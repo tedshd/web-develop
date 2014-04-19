@@ -108,7 +108,7 @@
             if (4 >= currentFocus) {
                 listTop = 0;
             }
-                document.querySelector('#video_list_bg').style.top = '-' + listTop + 'px';
+            document.querySelector('#video_list_bg').style.top = '-' + listTop + 'px';
         }
         if (status === 'advance') {
             if (currentFocus > (((listTop)/180)*4 + 12)) {
@@ -117,6 +117,17 @@
                 console.log(listTop);
                 document.querySelector('#video_list_bg').style.top = '-' + listTop + 'px';
             }
+        }
+        if (status === 'pgUp') {
+            console.log(listTop);
+            console.log((listTop/180)*4);
+            if (((listTop)/180)*4 >= currentFocus) {
+                listTop = listTop - 180*2;
+            }
+            if (4 >= currentFocus) {
+                listTop = 0;
+            }
+            document.querySelector('#video_list_bg').style.top = '-' + listTop + 'px';
         }
     }
 
@@ -153,6 +164,30 @@
             console.log('down');
             lastFocus = currentFocus;
             currentFocus += rowView;
+            currentFocus = Math.min(l, currentFocus);
+            updateUI(lastFocus, currentFocus, 'advance');
+        }
+        if (e.keyCode === 81) {
+            console.log('PGup');
+            console.log('Q');
+            if (currentFocus > rowView) {
+                lastFocus = currentFocus;
+                currentFocus -= 8;
+                if (0 >= currentFocus) {
+                    currentFocus = 1;
+                }
+                updateUI(lastFocus, currentFocus, 'pgUp');
+            } else {
+                lastFocus = currentFocus;
+                currentFocus = 1;
+                updateUI(lastFocus, currentFocus, 'pgUp');
+            }
+        }
+        if (e.keyCode === 65) {
+            console.log('PGdown');
+            console.log('A');
+            lastFocus = currentFocus;
+            currentFocus += 12;
             currentFocus = Math.min(l, currentFocus);
             updateUI(lastFocus, currentFocus, 'advance');
         }
