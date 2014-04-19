@@ -1,0 +1,174 @@
+/**
+ *
+ * @authors Ted Shiu (you@example.org)
+ * @date    2014-04-17 17:48:05
+ * @version $Id$
+ */
+/* line 17, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* define */
+/* line 28, ../sass/bubble.scss */
+.fade_out {
+  -webkit-animation-name: fade;
+  -moz-animation-name: fade;
+  -ms-animation-name: fade;
+  -o-animation-name: fade;
+  animation-name: fade;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -ms-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  opacity: 0;
+}
+
+/* use */
+/* line 36, ../sass/bubble.scss */
+.bubble {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border: solid 3px;
+  border-color: rgba(200, 200, 200, 0.1);
+  border-radius: 10px;
+  background: rgba(252, 252, 252, 0.5);
+  -webkit-box-shadow: 1px 1px #eeeeee, -15px -15px 10px 1px rgba(200, 200, 200, 0.2) inset;
+  -moz-box-shadow: 1px 1px #eeeeee, -15px -15px 10px 1px rgba(200, 200, 200, 0.2) inset;
+  box-shadow: 1px 1px #eeeeee, -15px -15px 10px 1px rgba(200, 200, 200, 0.2) inset;
+}
+
+@-webkit-keyframes fade {
+  /* line 48, ../sass/bubble.scss */
+  0% {
+    opacity: 0.8;
+  }
+
+  /* line 51, ../sass/bubble.scss */
+  50% {
+    opacity: 0.5;
+  }
+
+  /* line 54, ../sass/bubble.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes fade {
+  /* line 48, ../sass/bubble.scss */
+  0% {
+    opacity: 0.8;
+  }
+
+  /* line 51, ../sass/bubble.scss */
+  50% {
+    opacity: 0.5;
+  }
+
+  /* line 54, ../sass/bubble.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes fade {
+  /* line 48, ../sass/bubble.scss */
+  0% {
+    opacity: 0.8;
+  }
+
+  /* line 51, ../sass/bubble.scss */
+  50% {
+    opacity: 0.5;
+  }
+
+  /* line 54, ../sass/bubble.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  /* line 48, ../sass/bubble.scss */
+  0% {
+    opacity: 0.8;
+  }
+
+  /* line 51, ../sass/bubble.scss */
+  50% {
+    opacity: 0.5;
+  }
+
+  /* line 54, ../sass/bubble.scss */
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,57 @@
+/**
+ *
+ * @authors Ted Shiu (you@example.org)
+ * @date    2014-04-17 17:48:05
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+/* define */
+$animation-support: webkit, moz, o, ms, not khtml;
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+.fade_out {
+    @include experimental('animation-name', fade, $animation-support);
+    @include experimental('animation-duration', 1s, $animation-support);
+    @include experimental('animation-iteration-count', 1, $animation-support);
+    opacity: 0;
+}
+
+/* use */
+.bubble {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border: solid 3px;
+    border-color: rgba(200, 200, 200, 0.1);
+    border-radius: 10px;
+    background: rgba(252, 252, 252, 0.5);
+    @include box-shadow(1px 1px #eee, -15px -15px 10px 1px rgba(200, 200, 200, 0.2) inset);
+}
+
+@include keyframes(fade) {
+    0% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
