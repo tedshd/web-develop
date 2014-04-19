@@ -8,6 +8,16 @@
 @import "compass";
 @import "compass/reset";
 
+/* vertical centering */
+%vertical-centering {
+  content: "";
+  display: inline-block;
+  vertical-align: middle ;
+  width: 0;
+  height: 100%;
+}
+
+
 *
 {
     line-height: 1.3;
@@ -229,7 +239,7 @@ h1 span {
 .loading {
     display: block;
     position: absolute;
-    width: 200px;
+    width: 300px;
     height: 20px;
     opacity: 0.6;
     #outerCircle {
@@ -469,11 +479,7 @@ h1 span {
                 background: #3a3460;
                 text-align: center;
                 &:before {
-                    content: "";
-                    width: 0;
-                    height: 100%;
-                    display: inline-block;
-                    vertical-align: middle;
+                    @extend %vertical-centering;
                 }
             }
             .unbind_focus {
@@ -611,11 +617,7 @@ h1 span {
     .moreChannel {
         text-align: center;
         &:before {
-            content: "";
-            width: 0;
-            height: 100%;
-            display: inline-block;
-            vertical-align: middle;
+            @extend %vertical-centering;
         }
     }
 }
@@ -689,6 +691,14 @@ h1 span {
         padding: 5px;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+    .video_format_error {
+        height: 100%;
+        text-align: center;
+        background: #333;
+        &:before {
+            @extend %vertical-centering;
+        }
     }
 }
 .list_focus {
@@ -794,7 +804,7 @@ h1 span {
         background: #6f18ab;
     }
 }
-#no_videos_view, #remove_videos_view, #private_videos_view {
+#no_videos_view, #remove_videos_view, #private_videos_view, #video_error_view {
     position: absolute;
     top: 0;
     left: 0;
