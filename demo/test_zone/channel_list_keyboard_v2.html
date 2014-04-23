@@ -125,20 +125,20 @@ ul, li {
                 Main.channelsCount--;
                 if (Main.menuCount < 0) {
                     Main.menuCount = 0;
-                    if (Main.channelsCount >= 0) {
-                        var view = document.createElement('ul');
-                        for (var i = Main.channelsCount; i < Main.channelsCount + 8; i++) {
-                            if (i === tmpArr.length) {
-                                console.log('break');
-                                break;
-                            }
-                            var viewList = tmpArr[i];
-                            view.appendChild(viewList);
-                        }
-                        document.querySelector('#channel_list').innerHTML = view.innerHTML;
-                    } else {
+                    if (Main.channelsCount < 0) {
                         Main.channelsCount = 0;
+                        break;
                     }
+                    var view = document.createElement('ul');
+                    for (var i = Main.channelsCount; i < Main.channelsCount + 8; i++) {
+                        if (i === tmpArr.length) {
+                            console.log('break');
+                            break;
+                        }
+                        var viewList = tmpArr[i];
+                        view.appendChild(viewList);
+                    }
+                    document.querySelector('#channel_list').innerHTML = view.innerHTML;
                 }
             break;
             case 'down':
@@ -146,20 +146,20 @@ ul, li {
                 Main.channelsCount++;
                 if (Main.menuCount > menuView - 1) {
                     Main.menuCount = menuView - 1;
-                    if (Main.channelsCount < tmpArr.length) {
-                        var view = document.createElement('ul');
-                        for (var i = Main.channelsCount - 6; i < Main.channelsCount + 2; i++) {
-                            if (i === tmpArr.length) {
-                                console.log('break');
-                                break;
-                            }
-                            var viewList = tmpArr[i];
-                            view.appendChild(viewList);
-                        }
-                        document.querySelector('#channel_list').innerHTML = view.innerHTML;
-                    } else {
+                    if (Main.channelsCount >= tmpArr.length) {
                         Main.channelsCount = tmpArr.length - 1;
+                        break;
                     }
+                    var view = document.createElement('ul');
+                    for (var i = Main.channelsCount - 6; i < Main.channelsCount + 2; i++) {
+                        if (i === tmpArr.length) {
+                            console.log('break');
+                            break;
+                        }
+                        var viewList = tmpArr[i];
+                        view.appendChild(viewList);
+                    }
+                    document.querySelector('#channel_list').innerHTML = view.innerHTML;
                 }
             break;
             case 'pgUp':
