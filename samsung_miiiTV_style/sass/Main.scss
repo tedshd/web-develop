@@ -119,6 +119,9 @@ h1 span {
         background: #999;
     }
 }
+#info_bar {
+    bottom: 0;
+}
 .color_key {
     display: inline-block;
     float: right;
@@ -561,7 +564,7 @@ h1 span {
 #menu {
     position: absolute;
     top: 0;
-    left: 50px;
+    left: 0;
     width: 420px;
     height: 100%;
     background: rgba(32, 7, 46, 0.8);
@@ -804,7 +807,7 @@ h1 span {
         background: #6f18ab;
     }
 }
-#no_videos_view, #remove_videos_view, #private_videos_view, #video_error_view {
+#no_videos_view, #remove_videos_view, #private_videos_view, #video_error_view, #network_error_view {
     position: absolute;
     top: 0;
     left: 0;
@@ -826,6 +829,9 @@ h1 span {
         top: 430px;
         left: 490px;
     }
+}
+#network_error_view {
+    z-index: 999;
 }
 #pause {
     margin: auto;
