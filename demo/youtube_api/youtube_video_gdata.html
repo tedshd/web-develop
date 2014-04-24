@@ -19,6 +19,12 @@
         </pre>
     </code>
     <div id="media"></div>
+    <br>
+    <code>
+        <pre>
+            <div id="data"></div>
+        </pre>
+    </code>
 </body>
 <script>
 // var util = {
@@ -63,6 +69,7 @@
                     format = format + data.entry.media$group.media$content[x].yt$format;
                 };
                 document.querySelector('#media').innerHTML = format;
+                document.querySelector('#data').innerHTML = JSON.stringify(data);
             } else {
                 document.getElementById('result').innerHTML = 'Error ' + xmlHttpRequest.status ;
             }
