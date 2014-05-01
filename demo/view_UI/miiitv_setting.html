@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+</head>
+<style>
+    body {
+        width: 1280px;
+        height: 720px;
+        background: #ddd;
+    }
+    #setting_con {
+        margin: auto;
+        width: 310px;
+    }
+    #setting_grid {
+        margin-top: 50px;
+    }
+    #setting_grid span {
+        position: relative;
+        display: inline-block;
+        width: 150px;
+        height: 150px;
+        background: #0088ff;
+    }
+    #setting_grid .setting_focus:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: -5px;
+        left: -5px;
+        background: #0088ff;
+        border: solid 5px #0088ff;
+    }
+</style>
+<body>
+    <div id="setting_con">
+        <h1>Setting</h1>
+        <div id="setting_grid">
+            <span class="setting_focus"></span>
+            <span></span>
+        </div>
+    </div>
+    <div id="setting_info"></div>
+</body>
+</html>
