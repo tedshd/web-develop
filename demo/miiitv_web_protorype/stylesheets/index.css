@@ -129,39 +129,44 @@ a:hover {
 }
 
 /* line 71, ../sass/index.scss */
+#app, #product {
+  height: 300px;
+}
+
+/* line 75, ../sass/index.scss */
 #footer {
   bottom: 20px;
   margin: 0 auto;
   max-width: 490px;
 }
-/* line 77, ../sass/index.scss */
+/* line 81, ../sass/index.scss */
 #footer ul * {
   display: inline-block;
 }
-/* line 80, ../sass/index.scss */
+/* line 84, ../sass/index.scss */
 #footer ul li {
   float: left;
 }
-/* line 83, ../sass/index.scss */
+/* line 87, ../sass/index.scss */
 #footer ul a {
   color: #ff8800;
 }
 
 @media only screen and (min-width: 481px) {
   /* Styles */
-  /* line 94, ../sass/index.scss */
+  /* line 98, ../sass/index.scss */
   #header * {
     display: inline-block;
   }
-  /* line 97, ../sass/index.scss */
+  /* line 101, ../sass/index.scss */
   #header #nav {
     padding-right: 10px;
   }
-  /* line 99, ../sass/index.scss */
+  /* line 103, ../sass/index.scss */
   #header #nav ul li {
     float: left;
   }
-  /* line 102, ../sass/index.scss */
+  /* line 106, ../sass/index.scss */
   #header #nav a {
     padding: 0 10px;
     background: #444;
@@ -169,21 +174,21 @@ a:hover {
 }
 @media only screen and (max-width: 480px) {
   /* Styles */
-  /* line 113, ../sass/index.scss */
+  /* line 117, ../sass/index.scss */
   #header {
     height: auto;
   }
-  /* line 115, ../sass/index.scss */
+  /* line 119, ../sass/index.scss */
   #header #menu {
     float: right;
     display: inline-block;
   }
-  /* line 119, ../sass/index.scss */
+  /* line 123, ../sass/index.scss */
   #header #nav {
     float: right;
     width: 100%;
   }
-  /* line 122, ../sass/index.scss */
+  /* line 126, ../sass/index.scss */
   #header #nav a {
     display: inline-block;
     padding: 0 10px;
@@ -192,7 +197,7 @@ a:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
-  /* line 127, ../sass/index.scss */
+  /* line 131, ../sass/index.scss */
   #header #nav a:hover {
     background: #666;
   }
