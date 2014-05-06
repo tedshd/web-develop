@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css">
+<style>
+</style>
+<script src="/lib/angular_v1.2.16.js"></script>
+<!-- <script src="../../lib/angular.js"></script> -->
+<script>
+    function DeathrayMenuController($scope){
+        $scope.menuState = {};
+        console.log($scope.menuState);
+        $scope.menuState.show = false;
+
+        $scope.toggleMenu = function(){
+            $scope.menuState.show = !$scope.menuState.show;
+        };
+
+        // death ray functions left as exercise to reader
+    };
+</script>
+</head>
+<body>
+    <div ng-controller="DeathrayMenuController">
+        <p><button ng-click="toggleMenu()">Toggle Menu</button></p>
+        <ul ng-show="menuState.show">
+            <li ng-click="stun()">Stun</li>
+            <li ng-click="disintegrate()">Disintegrate</li>
+            <li ng-click="erase()">Erase from history</li>
+        </ul>
+    </div>
+</body>
+
+</html>
