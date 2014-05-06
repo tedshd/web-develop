@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<style>
+    /*--把 input 藏起來--*/
+    #file-style, #file-style_2 {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        display: none;
+    }
+    .btn {
+        background: #00aaff;
+        padding: 10px;
+        border: solid #0088ff;
+    }
+    .btn:hover {
+        background: #ff8800;
+    }
+    .btn:active {
+        background: #0088ff;
+        padding: 10px;
+        border: solid #00aaff;
+    }
+    input[type='checkbox'] {
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        width: 40px;
+        height: 20px;
+    }
+    .check {
+        position: relative;
+        z-index: 0;
+        text-align: center;
+    }
+    input[type='checkbox']+.check:after {
+        content: "OFF";
+        display: inline-block;
+        background: #ddd;
+        width: 40px;
+        height: 20px;
+    }
+    input[type='checkbox']:checked+.check:after {
+        content: "ON";
+        display: inline-block;
+        background: #df002f;
+        width: 40px;
+        height: 20px;
+    }
+    input[type='radio'] {
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        width: 40px;
+        height: 20px;
+    }
+    input[type='radio']+.check:after {
+        content: "";
+        display: inline-block;
+        background: #ddd;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+    }
+    input[type='radio']:checked+.check:after {
+        content: "";
+        display: inline-block;
+        background: #df002f;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+    <form action="" method='post' enctype='multipart/form-data'>
+        For IE9 up
+         <!-- <label for="file-style">
+            <input type="button" class="btn" value="Select file">
+        </label> -->
+        <input type="file" name="file" id="file-style">
+        <br>
+        <br>
+        <label for="file-style_2" class="btn">
+            <span>Select file to upload</span>
+        </label>
+        <input type="file" name="file_2" id="file-style_2">
+        <br>
+        <br>
+        Checkboxes <input type="checkbox" name="check" value="1"><span class="check"></span>
+        <br>
+        <br>
+        <input type="radio" name="sex" value="male"><span class="check"></span>Male<br>
+        <input type="radio" name="sex" value="female"><span class="check"></span>Female
+        <br>
+        <br>
+        <input type="submit" class="">
+    </form>
+</body>
+</html>
