@@ -20,6 +20,10 @@
         width: 0;
         background: #ff0000;
     }
+    :-webkit-full-screen #player {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <body>
     <div id="player"></div>
@@ -77,6 +81,7 @@
     <button class="btn" id="mute">Mute</button>
     <button class="btn" id="prevChannel">prevChannel</button>
     <button class="btn" id="nextChannel">nextChannel</button>
+    <button class="btn" id="full_screen">Full screen</button>
 </body>
 <script>
 /**
@@ -159,6 +164,7 @@ function toHHMMSS(sec_num) {
         ];
     Main.channelList = [channel_01, channel_02, channel_03];
     console.log('channel', Main.channelList);
+
     var player,
         loadPlayer,
         playLoop,
@@ -456,6 +462,32 @@ function toHHMMSS(sec_num) {
                 });
                 document.querySelector('#nextChannel').addEventListener('click', function () {
                     switchChannel(1);
+                });
+                document.querySelector('#full_screen').addEventListener('click', function() {
+                    // full screen
+                      if (!document.fullscreenElement &&    // alternative standard method
+                          !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+                        if (document.documentElement.requestFullscreen) {
+                          document.querySelector('#player').requestFullscreen();
+                        } else if (document.documentElement.msRequestFullscreen) {
+                          document.querySelector('#player').msRequestFullscreen();
+                        } else if (document.documentElement.mozRequestFullScreen) {
+                          document.querySelector('#player').mozRequestFullScreen();
+                        } else if (document.documentElement.webkitRequestFullscreen) {
+                          document.querySelector('#player').webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                        }
+                      } else {
+                        if (document.exitFullscreen) {
+                          document.exitFullscreen();
+                        } else if (document.msExitFullscreen) {
+                          document.msExitFullscreen();
+                        } else if (document.mozCancelFullScreen) {
+                          document.mozCancelFullScreen();
+                        } else if (document.webkitExitFullscreen) {
+                          document.webkitExitFullscreen();
+                        }
+                      }
+
                 });
                 window.onkeydown = keyboard;
                 function keyboard (e) {
