@@ -1,0 +1,360 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-05-07 01:23:46
+ * @version $Id$
+ */
+/* line 17, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 11, ../sass/share.scss */
+.clearfix {
+  *zoom: 1;
+}
+
+/* line 14, ../sass/share.scss */
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+  clear: both;
+}
+
+/* line 21, ../sass/share.scss */
+.vertical-centering:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+/* line 28, ../sass/share.scss */
+.hide {
+  display: none;
+}
+
+/* line 32, ../sass/share.scss */
+.hide_scroll_y {
+  overflow-y: hidden;
+}
+
+/* line 36, ../sass/share.scss */
+body {
+  background: #242424;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* line 43, ../sass/share.scss */
+#bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #242424;
+}
+/* line 50, ../sass/share.scss */
+#bg .cube {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: #232323;
+  box-shadow: 5px 0 5px #222;
+}
+/* line 57, ../sass/share.scss */
+#bg .cube_1 {
+  top: 50%;
+  left: 60%;
+}
+/* line 61, ../sass/share.scss */
+#bg .cube_2 {
+  top: 33%;
+  left: 15%;
+}
+/* line 65, ../sass/share.scss */
+#bg .cube_3 {
+  top: 10%;
+  left: 55%;
+}
+/* line 69, ../sass/share.scss */
+#bg .cube_4 {
+  top: 5%;
+  left: 10%;
+}
+/* line 73, ../sass/share.scss */
+#bg .cube_5 {
+  top: 80%;
+  left: 3%;
+}
+/* line 77, ../sass/share.scss */
+#bg .cube_6 {
+  top: 45%;
+  left: 30%;
+}
+/* line 81, ../sass/share.scss */
+#bg .cube_7 {
+  top: 55%;
+  left: 10%;
+}
+/* line 85, ../sass/share.scss */
+#bg .cube_8 {
+  top: 15%;
+  left: 35%;
+}
+/* line 89, ../sass/share.scss */
+#bg .cube_9 {
+  top: 3%;
+  left: 50%;
+}
+/* line 93, ../sass/share.scss */
+#bg .cube_10 {
+  top: 15%;
+  left: 3%;
+}
+/* line 97, ../sass/share.scss */
+#bg .cube_11 {
+  top: 20%;
+  left: 60%;
+}
+/* line 101, ../sass/share.scss */
+#bg .cube_12 {
+  top: 25%;
+  left: 80%;
+}
+/* line 105, ../sass/share.scss */
+#bg .cube_13 {
+  top: 55%;
+  left: 75%;
+}
+/* line 109, ../sass/share.scss */
+#bg .cube_14 {
+  top: 65%;
+  left: 70%;
+}
+/* line 113, ../sass/share.scss */
+#bg .cube_15 {
+  top: 65%;
+  left: 85%;
+}
+
+/* line 120, ../sass/share.scss */
+#masthead {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* line 130, ../sass/share.scss */
+#view_1, #view_2, #view_3 {
+  position: absolute;
+  top: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: dotted red;
+}
+
+/* line 137, ../sass/share.scss */
+#author {
+  padding-top: 50px;
+}
+/* line 139, ../sass/share.scss */
+#author * {
+  vertical-align: middle;
+}
+/* line 142, ../sass/share.scss */
+#author #avatar {
+  height: 100px;
+}
+/* line 144, ../sass/share.scss */
+#author #avatar * {
+  display: inline-block;
+}
+/* line 148, ../sass/share.scss */
+#author #author_info {
+  display: inline-block;
+}
+/* line 150, ../sass/share.scss */
+#author #author_info span {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: green;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+}
+/* line 158, ../sass/share.scss */
+#author #channels {
+  margin: 0 auto;
+}
+
+/* line 163, ../sass/share.scss */
+#player {
+  border: solid;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 170, ../sass/share.scss */
+#video_list_bg {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 50px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.3);
+  overflow-y: auto;
+}
+/* line 181, ../sass/share.scss */
+#video_list_bg #video_list_title {
+  height: 50px;
+  background: green;
+}
+/* line 185, ../sass/share.scss */
+#video_list_bg #video_list_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 24px;
+}
+/* line 192, ../sass/share.scss */
+#video_list_bg #video_list {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* line 198, ../sass/share.scss */
+#player_control {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 206, ../sass/share.scss */
+#player_control #info_bar {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: rgba(36, 36, 36, 0.9);
+}
+/* line 215, ../sass/share.scss */
+#player_control #control_btn {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+}
+/* line 220, ../sass/share.scss */
+#player_control #control_btn li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #ff8800;
+}
+
+/* line 231, ../sass/share.scss */
+.grid {
+  width: 320px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.2);
+  float: left;
+}
+
+/* line 238, ../sass/share.scss */
+.arrow {
+  position: fixed;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* line 245, ../sass/share.scss */
+.arrow_left {
+  left: 0;
+}
+
+/* line 248, ../sass/share.scss */
+.arrow_right {
+  right: 0;
+}

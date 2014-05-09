@@ -1,0 +1,250 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-05-07 01:23:46
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+.clearfix {
+        *zoom: 1;
+}
+.clearfix:after {
+        display: table;
+        content: "";
+        line-height: 0;
+        clear: both;
+}
+
+.vertical-centering:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle ;
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.hide_scroll_y {
+  overflow-y: hidden;
+}
+
+body {
+  background: #242424;
+  color: #fff;
+  // overflow: hidden;
+  overflow-x: hidden;
+}
+
+#bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #242424;
+    .cube {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: #232323;
+        box-shadow: 5px 0 5px #222;
+    }
+    .cube_1 {
+        top: 50%;
+        left: 60%;
+    }
+    .cube_2 {
+        top: 33%;
+        left: 15%;
+    }
+    .cube_3 {
+        top: 10%;
+        left: 55%;
+    }
+    .cube_4 {
+        top: 5%;
+        left: 10%;
+    }
+    .cube_5 {
+        top: 80%;
+        left: 3%;
+    }
+    .cube_6 {
+        top: 45%;
+        left: 30%;
+    }
+    .cube_7 {
+        top: 55%;
+        left: 10%;
+    }
+    .cube_8 {
+        top: 15%;
+        left: 35%;
+    }
+    .cube_9 {
+        top: 3%;
+        left: 50%;
+    }
+    .cube_10 {
+        top: 15%;
+        left: 3%;
+    }
+    .cube_11 {
+        top: 20%;
+        left: 60%;
+    }
+    .cube_12 {
+        top: 25%;
+        left: 80%;
+    }
+    .cube_13 {
+        top: 55%;
+        left: 75%;
+    }
+    .cube_14 {
+        top: 65%;
+        left: 70%;
+    }
+    .cube_15 {
+        top: 65%;
+        left: 85%;
+    }
+}
+
+
+#masthead {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: rgba(0,0,0,.5);
+}
+
+#view_1, #view_2, #view_3 {
+    position: absolute;
+    top: 0;
+    @include box-sizing(border-box);
+    border: dotted red;
+}
+
+#author {
+    padding-top: 50px;
+    * {
+        vertical-align: middle;
+    }
+    #avatar {
+        height: 100px;
+        * {
+            display: inline-block;
+        }
+    }
+    #author_info {
+        display: inline-block;
+        span {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background: green;
+            @include border-radius(50px);
+        }
+    }
+    #channels {
+        margin: 0 auto;
+    }
+}
+
+#player {
+    // max-width: 1280px;
+    // height: 720px;
+    border: solid;
+    background: rgba(255,255,255,.2);
+    @include box-sizing(border-box);
+}
+#video_list_bg {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 50px;
+    @include box-sizing(border-box);
+    background: rgba(255,255,255,.3);
+    overflow-y: auto;
+    #video_list_title {
+        height: 50px;
+        background: green;
+    }
+    #video_list_close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        font-size: 24px;
+    }
+    #video_list {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+    }
+}
+#player_control {
+    // display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // width: 1280px;
+    // height: 720px;
+    // background: rgba(18,52,33,.5);
+    #info_bar {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        width: 100%;
+        background: rgba(36,36,36, .9);
+    }
+    #control_btn {
+        display: none;
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        li {
+            // display: inline-block;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #ff8800;
+        }
+    }
+}
+
+
+
+.grid {
+    width: 320px;
+    height: 180px;
+    background: rgba(255,255,255,.2);
+    float: left;
+}
+
+.arrow {
+    position: fixed;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+.arrow_left {
+    left: 0;
+}
+.arrow_right {
+    right: 0;
+}
