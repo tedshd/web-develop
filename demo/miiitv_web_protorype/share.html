@@ -9,10 +9,11 @@
 <!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
 <script src="/lib/angular_v1.2.16.js"></script>
 <script src="/lib/angular-scroll.js"></script>
+<script src="http://www.youtube.com/iframe_api"></script>
 <link rel="stylesheet" href="stylesheets/share.css">
 </head>
 <body>
-    <div id="bg" onmousemove="showControl()">
+    <div id="bg" onmousemove="showControl()" ng-controller="globalControl">
         <div class="cube cube_1"></div>
         <div class="cube cube_2"></div>
         <div class="cube cube_3"></div>
@@ -34,110 +35,108 @@
         </div>
         <!-- view -->
 
-        <div id="view_1">
+        <div id="view_1" ng-controller="authorControl">
             <div id="author">
                 <span id="avatar" class="vertical-centering">
-                    <img src="" alt="Author" width="100" height="100">
+                    <img ng-src={{icon}} alt="{{author}}" width="100" height="100">
                     <span>
                         頻道製作人
                         <br>
-                        {{author.name
+                        {{author}}
                     </span>
                 </span>
                 <span id="author_info">
-                    <span id="author_chnnels"></span>
-                    <span id="author_pv"></span>
-                    <span id="author_sub"></span>
+                    <span id="author_chnnels">
+                        頻道數
+                        <br>
+                        {{totalChannel}}
+                    </span>
+                    <span id="author_pv">
+                        總觀看數
+                        <br>
+                        {{totalPv}}
+                    </span>
+                    <span id="author_sub">
+                        總訂閱數
+                        <br>
+                        {{totalSubs}}
+                    </span>
                 </span>
                 <br>
-                <div id="channels_desc">{{author.name 建立的頻道</div>
+                <div id="channels_desc">{{author}} 建立的頻道</div>
                 <div id="channels" class="clearfix">
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
+                    <div class="grid channel" ng-repeat="list in channels" ng-click="loadAuthorChannel($event)">
+                        <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
+                        <div class="title">{{list.ch_name}}</div>
+                        <div class="info">
+                            {{list.subscribe}}/{{list.pv}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="view_2" ng-controller="playerControl">
             <div id="player"></div>
-            <div id="video_list_bg" class="hide">
-                <div id="video_list_title">
-                    {{channel.name&nbsp;影片列表({{channel_count)
-                    <span id="video_list_close" ng-click="closeVideoList()">X</span>
-                </div>
-                <div id="video_list">
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
-                    <div class="grid"></div>
+            <div id="video_list_area" class="hide" ng-click="closeVideoList($event)">
+                <div id="video_list_bg" ng-click="$event.stopPropagation();">
+                    <div id="video_list_title">
+                        {{channel.name&nbsp;影片列表({{channel_count)
+                        <span id="video_list_close" ng-click="closeVideoList($event)">X</span>
+                    </div>
+                    <div id="video_list">
+                        <div class="grid" id="video_{{videoCount}}" ng-repeat="list in videos" ng-click="loadVideo($event, $index)">
+                            <img ng-src={{list.cover}} alt="{{list.title}}" width="320" height="180">
+                            <div class="title">{{list.title}}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="player_control" onmousemove="showPlayerControl()">
                 <div id="info_bar">
-                    Info_bar
+                    <div id="video_time">
+                        <span id="current_time">00:00:00</span>/<span id="total_time">00:00:00</span>
+                    </div>
+                    <div id="video_title"></div>
+                    <div id="progress">
+                        <div id="progress_bar"></div>
+                    </div>
+                    <div id="channel_info">
+                        <span>
+                            <h2>{{channelName}}</h2>
+                            <h3>{{channelDesc}}</h3>
+                        </span>
+                    </div>
                 </div>
+                <div id="play_pause" ng-click="togglePause()"></div>
                 <ul id="control_btn">
-                    <li>下一部影片</li>
+                    <li ng-click="nextVideo()">下一部影片</li>
                     <li ng-click="toggleVideList()">影片清單</li>
-                    <li ng-click="toggleFullScreen()">全螢幕</li>
+                    <li id="full_screen" ng-click="toggleFullScreen()">全螢幕</li>
                 </ul>
             </div>
         </div>
-        <div id="view_3">
+        <div id="view_3" ng-controller="recommendControl">
             <div id="category" class="clearfix">
                 <h2 style="font-size:48px">你可能也喜歡的頻道</h2>
-                <div class="grid"></div>
-                <div class="grid"></div>
-                <div class="grid"></div>
-                <div class="grid"></div>
-                <div class="grid"></div>
+                <div class="grid channel" ng-repeat="list in categoryChannels" ng-click="loadRecommendChannel($event)">
+                    <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
+                    <div class="title">{{list.ch_name}}</div>
+                    <div class="info author">
+                        <img ng-src={{list.creater.icon}} alt="{{list.creater.author_name}}" width="80" height="80" />
+                        {{list.subscribe}}/{{list.pv}}
+                    </div>
+                </div>
+            </div>
+            <div id="editor_choice">
+                <h2 style="font-size:48px">編輯精選頻道</h2>
+                <div class="grid channel" ng-repeat="list in editsChannels" ng-click="loadRecommendChannel($event)">
+                    <img ng-src={{list.cover}} alt="{{list.ch_name}}" width="320" height="180">
+                    <div class="title">{{list.ch_name}}</div>
+                    <div class="info author">
+                        <img ng-src={{list.author_icon}} alt="{{list.author_name}}" width="80" height="80" />
+                        {{list.subscribe}}/{{list.pv}}
+                    </div>
+                </div>
             </div>
         </div>
         <!-- arrow -->
@@ -149,35 +148,60 @@
         </div>
     </div>
 </body>
-<script src="/develop/yt_iframe_api_player/javascripts/yt_iframe_api_player.js"></script>
 
 <script>
-    var widthView = window.document.documentElement.clientWidth - 250,
-        gridWidth = 320;
+    // handle time
+    function toHHMMSS(sec_num) {
+        var hours   = Math.floor(sec_num / 3600),
+            minutes = Math.floor((sec_num - (hours * 3600)) / 60),
+            seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60));
+
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+        var time    = hours+':'+minutes+':'+seconds;
+        return time;
+    }
+
+</script>
+<script>
+    var apiUrl = 'http://www.miiitv.com';
+        widthView = window.document.documentElement.clientWidth - 250,
+        gridWidth = 320,
+        player;
     // init view
     document.querySelector('#view_1').style.width = widthView + 'px';
     document.querySelector('#view_2').style.width = widthView + 'px';
     document.querySelector('#view_3').style.width = widthView + 'px';
-    document.querySelector('#view_4').style.width = widthView + 'px';
     document.querySelector('#view_2').style.left = widthView + 'px';
     document.querySelector('#view_3').style.left = 2*widthView + 'px';
     document.querySelector('#bg').style.width = 3*widthView + 'px';
+    document.querySelector('#bg').style.height = document.querySelector('#view_1').offsetHeight + 'px';
     document.querySelector('#player_control').style.width = widthView + 'px';
     document.querySelector('#player_control').style.height = (widthView*9)/16 + 'px';
     document.querySelector('#channels').style.width = Math.floor(widthView/gridWidth)*gridWidth + 'px';
 
+    if (!document.documentElement.requestFullscreen ||
+        !document.documentElement.msRequestFullscreen ||
+        !document.documentElement.mozRequestFullScreen ||
+        !document.documentElement.webkitRequestFullscreen) {
+        document.querySelector('#full_screen').setAttribute('class', 'hide')
+    }
+
     fitVideoList();
-    window.addEventListener('resize', fitVideoList);
+    window.onresize = fitVideoList;
+
     function fitVideoList() {
         var windowWidth = window.document.documentElement.clientWidth;
         console.log(Math.floor(windowWidth/gridWidth)*gridWidth);
         document.querySelector('#video_list').style.width = Math.floor(windowWidth/gridWidth)*gridWidth + 'px';
+        document.querySelector('#video_list_bg').style.width = Math.floor(windowWidth/gridWidth)*gridWidth + 18 + 'px';
     }
 
 
     function checkArrowStatue() {
         var position = window.pageXOffset;
-        if (position > 2*widthView) {
+        if (position > widthView) {
             document.querySelector('.arrow_right').style.display = 'none';
         } else {
             document.querySelector('.arrow_right').style.display = 'block';
@@ -189,6 +213,8 @@
         }
     }
 
+
+    var viewCount = 0; // for stupid ie8
     // angular scroll slide
     angular.module('myApp', ['duScroll']).controller(
         'slideControl',
@@ -197,26 +223,42 @@
                 var position = window.pageXOffset;
                 checkArrowStatue();
                 if (direction === 'left') {
-                    position = (Math.ceil(position/widthView) - 1)*widthView;
+                    if (!position) {
+                        viewCount--;
+                        if (viewCount < 0) {
+                            viewCount = 0;
+                        }
+                        position = widthView*viewCount;
+                    } else {
+                        position = (Math.ceil(position/widthView) - 1)*widthView;
+                    }
                 } else {
-                    position = (Math.floor(position/widthView) + 1)*widthView;
+                    if (!position) {
+                        viewCount++;
+                        if (viewCount > 3) {
+                            viewCount = 2;
+                        }
+                        position = widthView*viewCount;
+                    } else {
+                        position = (Math.floor(position/widthView) + 1)*widthView;
+                    }
                 }
-                $document.scrollTo(position, window.pageYOffset, 900);
+                $document.scrollTo(position, 0, 900);
             }
             var hash = parseInt(location.hash.slice(1), 10);
             $document.scrollTo(widthView*hash, 0, 900);
         }
     );
 
-
-
     var timeOutToHidePlayerControl;
     function showPlayerControl() {
         clearTimeout(timeOutToHidePlayerControl);
         document.querySelector('#info_bar').style.display = 'block';
+        document.querySelector('#play_pause').style.display = 'block';
         document.querySelector('#control_btn').style.display = 'block';
         timeOutToHidePlayerControl = setTimeout(function() {
             document.querySelector('#info_bar').style.display = 'none';
+            document.querySelector('#play_pause').style.display = 'none';
             document.querySelector('#control_btn').style.display = 'none';
         }, 2000);
     }
@@ -234,19 +276,151 @@
         }, 2000);
     }
 
+    function globalControl($scope, $http) {
+        $scope.loadAuthor = function(uid) {
+            $http.jsonp(apiUrl + '/service/q/getUserProfile/' + uid + '?callback=JSON_CALLBACK').
+            success(function(data, status, headers, config) {
+                $scope.channels = data.channels;
+                $scope.icon = data.owner_info.icon;
+                $scope.author = data.owner_info.show_name;
+                $scope.totalChannel = data.total_channel;
+                $scope.totalPv = data.total_pv;
+                $scope.totalSubs = data.total_subs;
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                console.error(data);
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        };
+
+        $scope.loadCategory = function(category) {
+            $http.jsonp(apiUrl + '/service/q/getCategoryChannelsTopList/' + category + '?callback=JSON_CALLBACK').
+            success(function(data, status, headers, config) {
+                var categoryChannelsArr = data.channel_data;
+                function randOrd(){
+                    return (Math.round(Math.random())-0.5);
+                }
+                categoryChannelsArr.sort(randOrd);
+                categoryChannelsArr = categoryChannelsArr.slice(0, 4);
+                $scope.categoryChannels = categoryChannelsArr;
+                console.log($scope.categoryChannels);
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                console.error(data);
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+
+        // $http.jsonp(apiUrl + '/service/q/getChannelList/300?callback=JSON_CALLBACK').
+        $http.jsonp(apiUrl + '/service/q/getChannelList/11440?callback=JSON_CALLBACK').
+        success(function(data, status, headers, config) {
+            console.log(data);
+            console.log(data.category);
+            $scope.channelName = data.name;
+            $scope.channelDesc = data.description;
+            $scope.icon = data.author_fb_icon;
+            $scope.authorName = data.author_name;
+            $scope.subscribe = data.subscribe;
+            $scope.pv = data.pv;
+            $scope.videos = data.videos;
+            $scope.videoCount = 0;
+
+            youtubeApi('init', data);
+            $scope.loadAuthor(data.author_uid);
+            $scope.loadCategory(data.category);
+            // this callback will be called asynchronously
+            // when the response is available
+        }).
+        error(function(data, status, headers, config) {
+            console.error(data);
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
+        $scope.loadAuthorChannel = function(e) {
+            console.log(e);
+            console.log(this);
+            $http.jsonp(apiUrl + '/service/q/getChannelList/' + this.list.pid + '?callback=JSON_CALLBACK').
+            success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.channelName = data.ch_name;
+                $scope.channelDesc = data.description;
+                youtubeApi('', data);
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                console.error(data);
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+
+        $scope.loadRecommendChannel = function(e) {
+            console.log(e);
+            console.log(this.list.pid);
+            // console.log(e.getAttribute('id'));
+            $http.jsonp(apiUrl + '/service/q/getChannelList/' + this.list.pid + '?callback=JSON_CALLBACK').
+            success(function(data, status, headers, config) {
+                console.log(data);
+                console.log(data.author_uid);
+                youtubeApi('', data);
+                $scope.channelName = data.ch_name;
+                $scope.channelDesc = data.description;
+                $scope.loadAuthor(data.author_uid);
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                console.error(data);
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+
+    }
+
+
+    /**
+     * authorControl
+     */
+    function authorControl($scope, $http) {
+
+    }
+
 
     /**
      * playerControl
      */
-    function playerControl($scope) {
+    function playerControl($scope, $http) {
         $scope.toggleVideList = function() {
-            document.querySelector('#video_list_bg').setAttribute('class', '');
-            document.querySelector('body').setAttribute('class', 'hide_scroll_y');
+            // document.querySelector('body').setAttribute('class', 'hide_scroll_y');
+            document.querySelector('#video_list_area').setAttribute('class', '');
         };
         $scope.closeVideoList = function() {
-            document.querySelector('#video_list_bg').setAttribute('class', 'hide');
-            document.querySelector('body').setAttribute('class', '');
+            // document.querySelector('body').setAttribute('class', '');
+            document.querySelector('#video_list_area').setAttribute('class', 'hide');
         };
+        $scope.togglePause = function() {
+            if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+        $scope.nextVideo = function() {
+            switchVideo(1);
+        }
+        $scope.loadVideo = function(e, index) {
+            loadListVideo(index);
+            $scope.closeVideoList();
+        }
         $scope.toggleFullScreen = function() {
             var playerElement = document.querySelector('#player');
             // full screen
@@ -275,45 +449,217 @@
                 }
             }
         }
-        window.addEventListener('resize', function() {
-            // body...
-        });
+
     }
 
-    var videos = [
-        '9COe8DCV0O8',
-        'zebShorVev4',
-        'zMpuwAbQcM4',
-        '2_BSVWMiojU',
-        'EcsoYwO83aw',
-        'SquQpiztDME',
-        'Qb57Ddj8VRA',
-        'tIfjrmkxvYw',
-        'Ef2Hfc1Ya9w',
-        'Ug3Y3eesePA'
-    ];
-    var parameters = {
-        rel: 1,
-        autoplay: 0,
-        disablekb: 0,
-        showsearch: 0,
-        showinfo: 0,
-        controls: 0,
-        autohide: 0,
-        modestbranding: 0,
-        wmode: 'opaque',
-        hd: 1,
-        html5: 1,
-        iv_load_policy: 3
-    };
-    var YTPlayer = new YTPlayer(
-    {
-        videoList: videos,
-        parameters: parameters,
-        width: widthView,
-        height: (widthView*9)/16
+    function recommendControl($scope, $http) {
+
+        $http.jsonp(apiUrl + '/service/q/getTopicList?callback=JSON_CALLBACK').
+        success(function(data, status, headers, config) {
+            console.log('getTopicList');
+            console.log(data);
+            var editsChoiceArr = [];
+            for (var i = 0; i < data.topics.length; i++) {
+                for (var j = 0; j < data.topics[i]['channels'].length; j++) {
+                    editsChoiceArr.push(data.topics[i]['channels'][j]);
+                };
+            };
+            function randOrd(){
+                return (Math.round(Math.random())-0.5);
+            }
+            editsChoiceArr.sort(randOrd);
+            editsChoiceArr = editsChoiceArr.slice(0, 6);
+            $scope.editsChannels = editsChoiceArr;
+            console.log($scope.editsChannels);
+
+            // this callback will be called asynchronously
+            // when the response is available
+        }).
+        error(function(data, status, headers, config) {
+            console.error(data);
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
+
     }
-    );
+
+    function youtubeApi(init, data) {
+        var progressTimeUI = document.querySelector('#progress_time');
+        var skipBufferTimeout,
+            skipSwitchVideoTimeout,
+            Main = {
+                bufferTime: 3000,
+                playCount: 0,
+                videosList: []
+            };
+
+        if (document.querySelector('#player')) {
+            Main.videosList = data.videos;
+            console.log(Main.videosList);
+            document.querySelector('#video_title').innerHTML = Main.videosList[Main.playCount].title;
+            // check dailymotion or youtube
+            if (init) {
+                youtubePlayer();
+            } else {
+                console.log(player);
+                clearsPlaying();
+                player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Main.videoBeginTime, 'hd720');
+            }
+        } else {
+            console.error('no player id element');
+        }
+        function youtubePlayer() {
+
+            setTimeout(function() {
+                console.log('onYouTubeIframeAPIReady');
+                onYouTubeIframeAPIReady();
+            }, 1200);
+
+            function onYouTubeIframeAPIReady() {
+                playChannel(0);
+            }
+
+            function playChannel(count) {
+                console.log('initPlayer');
+                player = new YT.Player('player', {
+                    width: widthView,
+                    height: (widthView * 9) / 16,
+                    videoId: '',
+                    playerVars: {
+                        rel: 1,
+                        autoplay: 0,
+                        disablekb: 0,
+                        showsearch: 0,
+                        showinfo: 0,
+                        controls: 1,
+                        autohide: 0,
+                        modestbranding: 0,
+                        wmode: 'opaque',
+                        hd: 1,
+                        html5: 1,
+                        iv_load_policy: 3
+                    },
+                    events: {
+                        'onReady'        : onPlayerReady,
+                        'onStateChange'  : onPlayerStateChange,
+                        'onError'        : onError
+                    }
+                });
+
+                // play video
+                function onPlayerReady() {
+                    console.log('player ready');
+                    // check video in channel
+                    if (Main.videosList.length !== 0) {
+                        console.log('play video');
+                        player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Main.videoBeginTime, 'hd720');
+                        // player.pauseVideo();
+                    }
+                }
+
+                function onPlayerStateChange(event) {
+                    console.log('onPlayerStateChange:' + event.data);
+                    switch (event.data) {
+                    case YT.PlayerState.ENDED:
+                        playLoop();
+                        break;
+
+                    case YT.PlayerState.PLAYING:
+                    case YT.PlayerState.PAUSED:
+                        document.querySelector('#total_time').innerHTML = toHHMMSS(player.getDuration());
+                        clearTimeout(skipBufferTimeout);
+                        break;
+
+                    case YT.PlayerState.BUFFERING:
+                        console.log('BUFFER');
+                        skipBufferTimeout = setTimeout(skipBuffer, Main.bufferTime);
+                        break;
+
+                    default:
+                        console.log(event.data);
+                        break;
+                    }
+                }
+
+                function onError(e) {
+                    console.log('ERROR', e);
+                    setTimeout(playLoop, 3000);
+                }
+            }
+        }
+
+        function playLoop() {
+            console.log('play loop');
+            // progressTimeUI.style.width = 0;
+            Main.playCount++;
+            if (Main.playCount > (Main.videosList.length - 1)) {
+                Main.playCount = 0;
+            }
+            clearsPlaying();
+            // infoBarVideoTitleUI.innerHTML = Main.videosList[Main.playCount].title;
+            player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, 0, 'hd720');
+        }
+
+        function switchVideo(switching) {
+            console.log('switchVideo');
+            clearTimeout(skipSwitchVideoTimeout);
+            switch (switching) {
+            case 0:
+                Main.playCount--;
+                if (Main.playCount < 0) {
+                    Main.playCount = Main.videosList.length - 1;
+                }
+                break;
+            case 1:
+                Main.playCount++;
+                if (Main.playCount > (Main.videosList.length - 1)) {
+                    Main.playCount = 0;
+                }
+                break;
+            }
+            skipSwitchVideoTimeout = setTimeout(
+                function () {
+                    console.log('play switch video');
+                    clearsPlaying();
+                    player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, 0, 'hd720');
+                    document.querySelector('#video_title').innerHTML = Main.videosList[Main.playCount].title;
+                },
+                900
+            );
+        }
+
+        function loadListVideo(count) {
+            Main.playCount = count;
+            player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, 0, 'hd720');
+        }
+
+        function skipBuffer() {
+            console.log('run skipBuffer');
+            clearTimeout(skipBufferTimeout);
+            if (player.getPlayerState() === YT.PlayerState.PLAYING ||
+                    player.getPlayerState() === YT.PlayerState.PAUSED) {
+                return;
+            }
+            var t = player.getCurrentTime();
+            if (t > 10) {
+                console.log('buffer reload');
+                player.stopVideo();
+                player.clearVideo();
+                player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Math.max(t, 0), 'hd720');
+            }
+        }
+
+        function clearsPlaying() {
+            console.log('clearsPlaying');
+            player.stopVideo();
+            player.clearVideo();
+        }
+
+        window.loadListVideo = loadListVideo;
+        window.switchVideo = switchVideo;
+    }
+
 
 </script>
 <script src="/lib/jquery-1.10.1.js"></script>

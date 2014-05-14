@@ -33,11 +33,12 @@
   overflow-y: hidden;
 }
 
+
 body {
   background: #242424;
   color: #fff;
-  // overflow: hidden;
   overflow-x: hidden;
+  // overflow-x: auto \9;
 }
 
 #bg {
@@ -124,7 +125,7 @@ body {
     left: 0;
     width: 100%;
     height: 25px;
-    background: rgba(0,0,0,.5);
+    background: rgb(0,136,255);
 }
 
 #view_1, #view_2, #view_3 {
@@ -143,6 +144,9 @@ body {
         height: 100px;
         * {
             display: inline-block;
+        }
+        img {
+            @include border-radius(50px);
         }
     }
     #author_info {
@@ -167,18 +171,25 @@ body {
     background: rgba(255,255,255,.2);
     @include box-sizing(border-box);
 }
-#video_list_bg {
+#video_list_area {
     z-index: 999;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding-bottom: 50px;
     @include box-sizing(border-box);
-    background: rgba(255,255,255,.3);
-    overflow-y: auto;
+    background: rgba(0,0,0,.5);
+    overflow: hidden;
+    #video_list_bg {
+        max-height: 900px;
+        max-width: 1920px;
+        margin: 0 auto;
+        overflow: auto;
+        // padding-right: 18px;
+    }
     #video_list_title {
+        position: relative;
         height: 50px;
         background: green;
     }
@@ -210,7 +221,17 @@ body {
         left: 0;
         height: 50px;
         width: 100%;
-        background: rgba(36,36,36, .9);
+        background: #666;
+    }
+    #play_pause {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -25px 0 0 -25px;
+        width: 50px;
+        height: 50px;
+        background: green;
     }
     #control_btn {
         display: none;
@@ -229,10 +250,45 @@ body {
 
 
 .grid {
+    position: relative;
     width: 320px;
     height: 180px;
     background: rgba(255,255,255,.2);
     float: left;
+    .title, .info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        /* height: 50px; */
+        background: rgba(0,0,0,.5);
+        @include box-sizing(border-box);
+        padding: 10px;
+    }
+    .info {
+        display: none;
+        text-align: center;
+        img {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            margin-left: -40px;
+            @include border-radius(40px);
+        }
+    }
+    .author {
+        padding-top: 50px;
+    }
+}
+.grid.channel {
+    &:hover {
+        .title {
+            display: none;
+        }
+        .info {
+            display: block;
+        }
+    }
 }
 
 .arrow {
@@ -240,6 +296,7 @@ body {
     top: 0;
     width: 50px;
     height: 100%;
+    background: red \9;
     background: rgba(0,0,0,.5);
 }
 .arrow_left {
