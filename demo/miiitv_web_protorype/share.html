@@ -14,27 +14,13 @@
 </head>
 <body>
     <div id="bg" onmousemove="showControl()" ng-controller="globalControl">
-        <div class="cube cube_1"></div>
-        <div class="cube cube_2"></div>
-        <div class="cube cube_3"></div>
-        <div class="cube cube_4"></div>
-        <div class="cube cube_5"></div>
-        <div class="cube cube_6"></div>
-        <div class="cube cube_7"></div>
-        <div class="cube cube_8"></div>
-        <div class="cube cube_9"></div>
-        <div class="cube cube_10"></div>
-        <div class="cube cube_11"></div>
-        <div class="cube cube_12"></div>
-        <div class="cube cube_13"></div>
-        <div class="cube cube_14"></div>
-        <div class="cube cube_15"></div>
         <!-- masthead -->
         <div id="masthead">
-            <img src="" alt="LOGO" width="80" height="25">
+            <a href="/">
+                <img src="" alt="miiiTV" width="80" height="25">
+            </a>
         </div>
         <!-- view -->
-
         <div id="view_1" ng-controller="authorControl">
             <div id="author">
                 <span id="avatar" class="vertical-centering">
@@ -65,7 +51,7 @@
                 <br>
                 <div id="channels_desc">{{author}} 建立的頻道</div>
                 <div id="channels" class="clearfix">
-                    <div class="grid channel" ng-repeat="list in channels" ng-click="loadAuthorChannel($event)">
+                    <div class="grid channel" ng-repeat="list in channels" ng-click="loadChannel()">
                         <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
                         <div class="title">{{list.ch_name}}</div>
                         <div class="info">
@@ -80,7 +66,7 @@
             <div id="video_list_area" class="hide" ng-click="closeVideoList($event)">
                 <div id="video_list_bg" ng-click="$event.stopPropagation();">
                     <div id="video_list_title">
-                        {{channel.name&nbsp;影片列表({{channel_count)
+                        {{channelName}}&nbsp;影片列表({{videosVolume}})
                         <span id="video_list_close" ng-click="closeVideoList($event)">X</span>
                     </div>
                     <div id="video_list">
@@ -105,6 +91,16 @@
                             <h2>{{channelName}}</h2>
                             <h3>{{channelDesc}}</h3>
                         </span>
+                        <span>
+                            <img ng-src={{icon}} alt="authorName" width="30" height="30">
+                            {{authorName}}
+                        </span>
+                        <span id="">
+                            觀看數{{pv}}
+                        </span>
+                        <span id="">
+                            總訂閱數{{subscribe}}
+                        </span>
                     </div>
                 </div>
                 <div id="play_pause" ng-click="togglePause()"></div>
@@ -118,7 +114,7 @@
         <div id="view_3" ng-controller="recommendControl">
             <div id="category" class="clearfix">
                 <h2 style="font-size:48px">你可能也喜歡的頻道</h2>
-                <div class="grid channel" ng-repeat="list in categoryChannels" ng-click="loadRecommendChannel($event)">
+                <div class="grid channel" ng-repeat="list in categoryChannels" ng-click="loadChannel('recommend')">
                     <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
                     <div class="title">{{list.ch_name}}</div>
                     <div class="info author">
@@ -129,7 +125,7 @@
             </div>
             <div id="editor_choice">
                 <h2 style="font-size:48px">編輯精選頻道</h2>
-                <div class="grid channel" ng-repeat="list in editsChannels" ng-click="loadRecommendChannel($event)">
+                <div class="grid channel" ng-repeat="list in editsChannels" ng-click="loadChannel('recommend')">
                     <img ng-src={{list.cover}} alt="{{list.ch_name}}" width="320" height="180">
                     <div class="title">{{list.ch_name}}</div>
                     <div class="info author">
@@ -140,10 +136,10 @@
             </div>
         </div>
         <!-- arrow -->
-        <div class="arrow arrow_left vertical-centering" ng-controller="slideControl" ng-click="slideTo('left')">
+        <div class="arrow arrow_left vertical-centering" ng-click="slideTo('left')">
             <span class="arrow_ico">&#9664;</span>
         </div>
-        <div class="arrow arrow_right vertical-centering" ng-controller="slideControl" ng-click="slideTo('right')">
+        <div class="arrow arrow_right vertical-centering" ng-click="slideTo('right')">
             <span class="arrow_ico">&#9654;</span>
         </div>
     </div>
@@ -176,14 +172,14 @@
     document.querySelector('#view_2').style.left = widthView + 'px';
     document.querySelector('#view_3').style.left = 2*widthView + 'px';
     document.querySelector('#bg').style.width = 3*widthView + 'px';
-    document.querySelector('#bg').style.height = document.querySelector('#view_1').offsetHeight + 'px';
+    // document.querySelector('#bg').style.height = document.querySelector('#view_1').offsetHeight + 'px';
     document.querySelector('#player_control').style.width = widthView + 'px';
     document.querySelector('#player_control').style.height = (widthView*9)/16 + 'px';
     document.querySelector('#channels').style.width = Math.floor(widthView/gridWidth)*gridWidth + 'px';
 
-    if (!document.documentElement.requestFullscreen ||
-        !document.documentElement.msRequestFullscreen ||
-        !document.documentElement.mozRequestFullScreen ||
+    if (!document.documentElement.requestFullscreen &&
+        !document.documentElement.msRequestFullscreen &&
+        !document.documentElement.mozRequestFullScreen &&
         !document.documentElement.webkitRequestFullscreen) {
         document.querySelector('#full_screen').setAttribute('class', 'hide')
     }
@@ -192,10 +188,11 @@
     window.onresize = fitVideoList;
 
     function fitVideoList() {
-        var windowWidth = window.document.documentElement.clientWidth;
-        console.log(Math.floor(windowWidth/gridWidth)*gridWidth);
-        document.querySelector('#video_list').style.width = Math.floor(windowWidth/gridWidth)*gridWidth + 'px';
-        document.querySelector('#video_list_bg').style.width = Math.floor(windowWidth/gridWidth)*gridWidth + 18 + 'px';
+        var windowWidth = window.document.documentElement.clientWidth,
+            videoListCol = (Math.floor(windowWidth/gridWidth) > 5)? 5: Math.floor(windowWidth/gridWidth);
+            videoListWidth = videoListCol*gridWidth;
+        document.querySelector('#video_list').style.width = videoListWidth + 'px';
+        document.querySelector('#video_list_bg').style.width = videoListWidth + 18 + 'px';
     }
 
 
@@ -214,41 +211,9 @@
     }
 
 
-    var viewCount = 0; // for stupid ie8
     // angular scroll slide
-    angular.module('myApp', ['duScroll']).controller(
-        'slideControl',
-        function($scope, $document){
-            $scope.slideTo = function(direction) {
-                var position = window.pageXOffset;
-                checkArrowStatue();
-                if (direction === 'left') {
-                    if (!position) {
-                        viewCount--;
-                        if (viewCount < 0) {
-                            viewCount = 0;
-                        }
-                        position = widthView*viewCount;
-                    } else {
-                        position = (Math.ceil(position/widthView) - 1)*widthView;
-                    }
-                } else {
-                    if (!position) {
-                        viewCount++;
-                        if (viewCount > 3) {
-                            viewCount = 2;
-                        }
-                        position = widthView*viewCount;
-                    } else {
-                        position = (Math.floor(position/widthView) + 1)*widthView;
-                    }
-                }
-                $document.scrollTo(position, 0, 900);
-            }
-            var hash = parseInt(location.hash.slice(1), 10);
-            $document.scrollTo(widthView*hash, 0, 900);
-        }
-    );
+    angular.module('myApp', ['duScroll']);
+
 
     var timeOutToHidePlayerControl;
     function showPlayerControl() {
@@ -276,7 +241,11 @@
         }, 2000);
     }
 
-    function globalControl($scope, $http) {
+    function globalControl($scope, $http, $document) {
+        $scope.moveToPlayer = function() {
+            $document.scrollTo(widthView, 0, 900);
+        }
+
         $scope.loadAuthor = function(uid) {
             $http.jsonp(apiUrl + '/service/q/getUserProfile/' + uid + '?callback=JSON_CALLBACK').
             success(function(data, status, headers, config) {
@@ -329,6 +298,7 @@
             $scope.subscribe = data.subscribe;
             $scope.pv = data.pv;
             $scope.videos = data.videos;
+            $scope.videosVolume = data.videos.length;
             $scope.videoCount = 0;
 
             youtubeApi('init', data);
@@ -343,6 +313,33 @@
             // or server returns response with an error status.
         });
 
+        $scope.loadChannel = function(type) {
+            $http.jsonp(apiUrl + '/service/q/getChannelList/' + this.list.pid + '?callback=JSON_CALLBACK').
+            success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.channelName = data.ch_name;
+                $scope.channelDesc = data.description;
+                $scope.authorName = data.author_name;
+                $scope.subscribe = data.subscribe;
+                $scope.pv = data.pv;
+                $scope.videos = data.videos;
+                $scope.videosVolume = data.videos.length;
+                if (type === 'recommend') {
+                    $scope.loadAuthor(data.author_uid);
+                }
+                loadSelectChannel(data);
+                $scope.moveToPlayer();
+                $scope.loadCategory(data.category);
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                console.error(data);
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+
         $scope.loadAuthorChannel = function(e) {
             console.log(e);
             console.log(this);
@@ -351,7 +348,11 @@
                 console.log(data);
                 $scope.channelName = data.ch_name;
                 $scope.channelDesc = data.description;
+                $scope.videos = data.videos;
+                $scope.videosVolume = data.videos.length;
                 youtubeApi('', data);
+                $scope.moveToPlayer();
+                $scope.loadCategory(data.category);
                 // this callback will be called asynchronously
                 // when the response is available
             }).
@@ -369,11 +370,14 @@
             $http.jsonp(apiUrl + '/service/q/getChannelList/' + this.list.pid + '?callback=JSON_CALLBACK').
             success(function(data, status, headers, config) {
                 console.log(data);
-                console.log(data.author_uid);
-                youtubeApi('', data);
                 $scope.channelName = data.ch_name;
                 $scope.channelDesc = data.description;
+                $scope.videos = data.videos;
+                $scope.videosVolume = data.videos.length;
                 $scope.loadAuthor(data.author_uid);
+                youtubeApi('', data);
+                $scope.moveToPlayer();
+                $scope.loadCategory(data.category);
                 // this callback will be called asynchronously
                 // when the response is available
             }).
@@ -384,6 +388,37 @@
             });
         }
 
+        var viewCount = 0; // for stupid ie8
+
+        $scope.slideTo = function(direction) {
+            var position = window.pageXOffset;
+            checkArrowStatue();
+            if (direction === 'left') {
+                if (position === undefined) {
+                    viewCount--;
+                    if (viewCount < 0) {
+                        viewCount = 0;
+                    }
+                    position = widthView*viewCount;
+                } else {
+                    position = (Math.ceil(position/widthView) - 1)*widthView;
+                }
+            } else {
+                if (position === undefined) {
+                    viewCount++;
+                    if (viewCount > 3) {
+                        viewCount = 2;
+                    }
+                    position = widthView*viewCount;
+                } else {
+                    position = (Math.floor(position/widthView) + 1)*widthView;
+                }
+            }
+            $document.scrollTo(position, 0, 900);
+        }
+
+        var hash = parseInt(location.hash.slice(1), 10);
+        $document.scrollTo(widthView*hash, 0, 900);
     }
 
 
@@ -406,6 +441,7 @@
         $scope.closeVideoList = function() {
             // document.querySelector('body').setAttribute('class', '');
             document.querySelector('#video_list_area').setAttribute('class', 'hide');
+            $scope.moveToPlayer();
         };
         $scope.togglePause = function() {
             if (player.getPlayerState() === YT.PlayerState.PLAYING) {
@@ -499,13 +535,7 @@
             console.log(Main.videosList);
             document.querySelector('#video_title').innerHTML = Main.videosList[Main.playCount].title;
             // check dailymotion or youtube
-            if (init) {
-                youtubePlayer();
-            } else {
-                console.log(player);
-                clearsPlaying();
-                player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Main.videoBeginTime, 'hd720');
-            }
+            youtubePlayer();
         } else {
             console.error('no player id element');
         }
@@ -537,7 +567,7 @@
                         modestbranding: 0,
                         wmode: 'opaque',
                         hd: 1,
-                        html5: 1,
+                        html5: 0,
                         iv_load_policy: 3
                     },
                     events: {
@@ -554,7 +584,7 @@
                     if (Main.videosList.length !== 0) {
                         console.log('play video');
                         player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Main.videoBeginTime, 'hd720');
-                        // player.pauseVideo();
+                        player.pauseVideo();
                     }
                 }
 
@@ -584,6 +614,7 @@
 
                 function onError(e) {
                     console.log('ERROR', e);
+                    console.log(Main.videosList);
                     setTimeout(playLoop, 3000);
                 }
             }
@@ -591,15 +622,17 @@
 
         function playLoop() {
             console.log('play loop');
+            console.log(Main.videosList);
             // progressTimeUI.style.width = 0;
             Main.playCount++;
             if (Main.playCount > (Main.videosList.length - 1)) {
                 Main.playCount = 0;
             }
             clearsPlaying();
-            // infoBarVideoTitleUI.innerHTML = Main.videosList[Main.playCount].title;
+            document.querySelector('#video_title').innerHTML = Main.videosList[Main.playCount].title;
             player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, 0, 'hd720');
         }
+
 
         function switchVideo(switching) {
             console.log('switchVideo');
@@ -631,6 +664,14 @@
 
         function loadListVideo(count) {
             Main.playCount = count;
+            document.querySelector('#video_title').innerHTML = Main.videosList[Main.playCount].title;
+            player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, 0, 'hd720');
+        }
+
+        function loadSelectChannel(data) {
+            Main.videosList = data.videos;
+            Main.playCount = 0;
+            document.querySelector('#video_title').innerHTML = Main.videosList[Main.playCount].title;
             player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, 0, 'hd720');
         }
 
@@ -656,6 +697,7 @@
             player.clearVideo();
         }
 
+        window.loadSelectChannel = loadSelectChannel;
         window.loadListVideo = loadListVideo;
         window.switchVideo = switchVideo;
     }
