@@ -69,12 +69,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 11, ../sass/share.scss */
+/* line 18, ../sass/share.scss */
 .clearfix {
   *zoom: 1;
 }
 
-/* line 14, ../sass/share.scss */
+/* line 21, ../sass/share.scss */
 .clearfix:after {
   display: table;
   content: "";
@@ -82,7 +82,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   clear: both;
 }
 
-/* line 21, ../sass/share.scss */
+/* line 28, ../sass/share.scss */
 .vertical-centering:before {
   content: '';
   display: inline-block;
@@ -90,179 +90,30 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   height: 100%;
 }
 
-/* line 28, ../sass/share.scss */
+/* line 35, ../sass/share.scss */
+.ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 42, ../sass/share.scss */
 .hide {
   display: none;
 }
 
-/* line 32, ../sass/share.scss */
+/* line 47, ../sass/share.scss */
 .hide_scroll_y {
   overflow-y: hidden;
 }
 
-/* line 36, ../sass/share.scss */
-body {
-  background: #242424;
-  color: #fff;
-  overflow-x: hidden;
+/* line 51, ../sass/share.scss */
+h2 {
+  font-size: 1.5em;
 }
 
-/* line 43, ../sass/share.scss */
-#bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #242424;
-}
-
-/* line 52, ../sass/share.scss */
-#masthead {
-  z-index: 10;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 25px;
-  background: #0088ff;
-}
-
-/* line 62, ../sass/share.scss */
-#view_1, #view_2, #view_3 {
-  position: absolute;
-  top: 0;
-}
-
-/* line 67, ../sass/share.scss */
-#author {
-  padding-top: 50px;
-}
-/* line 69, ../sass/share.scss */
-#author * {
-  vertical-align: middle;
-}
-/* line 72, ../sass/share.scss */
-#author #avatar {
-  height: 100px;
-}
-/* line 74, ../sass/share.scss */
-#author #avatar * {
-  display: inline-block;
-}
-/* line 77, ../sass/share.scss */
-#author #avatar img {
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-  border-radius: 50px;
-}
-/* line 81, ../sass/share.scss */
-#author #author_info {
-  display: inline-block;
-}
-/* line 83, ../sass/share.scss */
-#author #author_info span {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  background: green;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
-  border-radius: 50px;
-}
-/* line 91, ../sass/share.scss */
-#author #channels {
-  margin: 0 auto;
-}
-
-/* line 99, ../sass/share.scss */
-#video_list_area {
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-}
-/* line 109, ../sass/share.scss */
-#video_list_area #video_list_bg {
-  max-height: 900px;
-  max-width: 1900px;
-  margin: 0 auto;
-  overflow: auto;
-}
-/* line 116, ../sass/share.scss */
-#video_list_area #video_list_title {
-  position: relative;
-  height: 50px;
-  background: green;
-}
-/* line 121, ../sass/share.scss */
-#video_list_area #video_list_close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  font-size: 24px;
-}
-/* line 128, ../sass/share.scss */
-#video_list_area #video_list {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-}
-
-/* line 134, ../sass/share.scss */
-#player_control {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-/* line 142, ../sass/share.scss */
-#player_control #info_bar {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 50px;
-  width: 100%;
-  background: #666;
-}
-/* line 151, ../sass/share.scss */
-#player_control #play_pause {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -25px 0 0 -25px;
-  width: 50px;
-  height: 50px;
-  background: green;
-}
-/* line 161, ../sass/share.scss */
-#player_control #control_btn {
-  display: none;
-  position: absolute;
-  top: 30px;
-  right: 10px;
-}
-/* line 166, ../sass/share.scss */
-#player_control #control_btn li {
-  margin-bottom: 10px;
-  padding: 10px;
-  background: #ff8800;
-}
-
-/* line 177, ../sass/share.scss */
+/* line 56, ../sass/share.scss */
 .grid {
   position: relative;
   width: 320px;
@@ -270,7 +121,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   float: left;
 }
-/* line 183, ../sass/share.scss */
+/* line 62, ../sass/share.scss */
 .grid .title, .grid .info {
   position: absolute;
   bottom: 0;
@@ -283,14 +134,16 @@ body {
   box-sizing: border-box;
   padding: 10px;
 }
-/* line 193, ../sass/share.scss */
+/* line 72, ../sass/share.scss */
 .grid .info {
   display: none;
   text-align: center;
 }
-/* line 196, ../sass/share.scss */
+/* line 75, ../sass/share.scss */
 .grid .info img {
   position: absolute;
+  width: 80px;
+  height: 80px;
   top: -40px;
   left: 50%;
   margin-left: -40px;
@@ -300,21 +153,309 @@ body {
   -o-border-radius: 40px;
   border-radius: 40px;
 }
-/* line 204, ../sass/share.scss */
+/* line 84, ../sass/share.scss */
+.grid .info span {
+  vertical-align: top;
+  max-width: 170px;
+}
+/* line 89, ../sass/share.scss */
 .grid .author {
   padding-top: 50px;
 }
 
-/* line 210, ../sass/share.scss */
+/* line 95, ../sass/share.scss */
 .grid.channel:hover .title {
   display: none;
 }
-/* line 213, ../sass/share.scss */
+/* line 98, ../sass/share.scss */
 .grid.channel:hover .info {
   display: block;
 }
 
+/* line 105, ../sass/share.scss */
+body {
+  background: #2f2f2f;
+  color: #fff;
+  overflow-x: hidden;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+/* line 114, ../sass/share.scss */
+#bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 640px;
+  height: 100%;
+  background: #2f2f2f;
+}
+
+/* line 124, ../sass/share.scss */
+#masthead {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background: #262626;
+}
+
+/* line 134, ../sass/share.scss */
+#view_1, #view_2, #view_3 {
+  position: absolute;
+  top: 0;
+}
+
+/* line 139, ../sass/share.scss */
+#view_1, #view3 {
+  padding-bottom: 50px;
+}
+
+/* line 143, ../sass/share.scss */
+#author {
+  padding-top: 50px;
+}
+/* line 145, ../sass/share.scss */
+#author * {
+  vertical-align: middle;
+}
+/* line 148, ../sass/share.scss */
+#author #avatar {
+  height: 100px;
+}
+/* line 150, ../sass/share.scss */
+#author #avatar * {
+  display: inline-block;
+}
+/* line 153, ../sass/share.scss */
+#author #avatar img {
+  width: 130px;
+  height: 130px;
+  -webkit-border-radius: 65px;
+  -moz-border-radius: 65px;
+  -ms-border-radius: 65px;
+  -o-border-radius: 65px;
+  border-radius: 65px;
+}
+/* line 158, ../sass/share.scss */
+#author #avatar span {
+  margin-left: 20px;
+}
+/* line 162, ../sass/share.scss */
+#author #author_info {
+  display: inline-block;
+}
+/* line 164, ../sass/share.scss */
+#author #author_info span {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  border-radius: 40px;
+  text-align: center;
+}
+/* line 171, ../sass/share.scss */
+#author #author_info #author_chnnels {
+  background: #d8b553;
+}
+/* line 174, ../sass/share.scss */
+#author #author_info #author_pv {
+  background: #c85da3;
+}
+/* line 177, ../sass/share.scss */
+#author #author_info #author_sub {
+  background: #66c6c2;
+}
+/* line 181, ../sass/share.scss */
+#author #channels_desc {
+  margin: 20px 0;
+}
+/* line 184, ../sass/share.scss */
+#author #channels {
+  margin: 0 auto;
+}
+
+/* line 192, ../sass/share.scss */
+#video_list_area {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+/* line 202, ../sass/share.scss */
+#video_list_area #video_list_bg {
+  max-width: 1900px;
+  margin: 0 auto;
+  margin-top: 85px;
+}
+/* line 208, ../sass/share.scss */
+#video_list_area #video_list_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 40px 15px 0 0;
+  font-size: 24px;
+}
+/* line 215, ../sass/share.scss */
+#video_list_area #video_list_title {
+  position: relative;
+  height: 50px;
+  background: #343434;
+}
 /* line 219, ../sass/share.scss */
+#video_list_area #video_list_title h2 {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+}
+/* line 225, ../sass/share.scss */
+#video_list_area #video_list {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+/* line 234, ../sass/share.scss */
+#player_control {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 242, ../sass/share.scss */
+#player_control #info_bar {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+/* line 250, ../sass/share.scss */
+#player_control #info_bar #progress_time_bg {
+  height: 5px;
+  width: 100%;
+  background: #666;
+}
+/* line 254, ../sass/share.scss */
+#player_control #info_bar #progress_time_bg #progress_time {
+  height: 100%;
+  width: 0;
+  background: #ff0000;
+}
+/* line 260, ../sass/share.scss */
+#player_control #info_bar #channel_info {
+  position: relative;
+  display: table;
+  width: 100%;
+  height: 135px;
+  padding-left: 25px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6);
+}
+/* line 268, ../sass/share.scss */
+#player_control #info_bar #channel_info * {
+  vertical-align: middle;
+}
+/* line 271, ../sass/share.scss */
+#player_control #info_bar #channel_info #channel_intro, #player_control #info_bar #channel_info #author_info {
+  display: table-cell;
+}
+/* line 275, ../sass/share.scss */
+#player_control #info_bar #channel_info #channel_intro div {
+  max-width: 400px;
+}
+/* line 278, ../sass/share.scss */
+#player_control #info_bar #channel_info #channel_intro div p {
+  position: relative;
+  display: inline-block;
+  height: 3em;
+  overflow: hidden;
+}
+/* line 286, ../sass/share.scss */
+#player_control #info_bar #channel_info #author_info {
+  width: 600px;
+}
+/* line 288, ../sass/share.scss */
+#player_control #info_bar #channel_info #author_info span {
+  display: inline-block;
+}
+/* line 291, ../sass/share.scss */
+#player_control #info_bar #channel_info #author_info #avatar_info {
+  height: 80px;
+}
+/* line 293, ../sass/share.scss */
+#player_control #info_bar #channel_info #author_info #avatar_info img {
+  margin-left: 24px;
+  width: 80px;
+  height: 80px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  border-radius: 40px;
+}
+/* line 300, ../sass/share.scss */
+#player_control #info_bar #channel_info #author_info #avatar_info #name {
+  width: 150px;
+  margin-left: 12px;
+}
+/* line 303, ../sass/share.scss */
+#player_control #info_bar #channel_info #author_info #avatar_info #name span {
+  margin-left: 2px;
+  width: 130px;
+}
+/* line 312, ../sass/share.scss */
+#player_control #play_pause {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  width: 50px;
+  height: 50px;
+  background: green;
+}
+/* line 322, ../sass/share.scss */
+#player_control #control_btn {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+}
+/* line 327, ../sass/share.scss */
+#player_control #control_btn li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #ff8800;
+}
+
+/* line 336, ../sass/share.scss */
+#recommend {
+  margin-left: 80px;
+}
+/* line 338, ../sass/share.scss */
+#recommend h3 {
+  margin: 20px 0;
+}
+
+/* line 343, ../sass/share.scss */
 .arrow {
   position: fixed;
   top: 0;
@@ -324,12 +465,19 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* line 227, ../sass/share.scss */
+/* line 351, ../sass/share.scss */
 .arrow_left {
   left: 0;
 }
 
-/* line 230, ../sass/share.scss */
+/* line 354, ../sass/share.scss */
 .arrow_right {
   right: 0;
+}
+
+@media only screen and (max-width: 900px) {
+  /* line 364, ../sass/share.scss */
+  #player_control #info_bar #channel_info #author_info #name {
+    display: none;
+  }
 }

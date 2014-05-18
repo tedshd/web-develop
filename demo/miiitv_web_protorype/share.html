@@ -28,32 +28,33 @@
                     <span>
                         頻道製作人
                         <br>
-                        {{author}}
+                        <h2>{{author}}</h2>
                     </span>
                 </span>
                 <span id="author_info">
                     <span id="author_chnnels">
-                        頻道數
-                        <br>
-                        {{totalChannel}}
+                        <div>
+                            {{totalChannel}}
+                            <br>
+                            頻道數
+                        </div>
                     </span>
                     <span id="author_pv">
-                        總觀看數
-                        <br>
                         {{totalPv}}
+                        <br>
+                        總觀看數
                     </span>
                     <span id="author_sub">
-                        總訂閱數
-                        <br>
                         {{totalSubs}}
+                        <br>
+                        總訂閱數
                     </span>
                 </span>
-                <br>
                 <div id="channels_desc">{{author}} 建立的頻道</div>
                 <div id="channels" class="clearfix">
-                    <div class="grid channel" ng-repeat="list in channels" ng-click="loadChannel()">
+                    <div class="grid channel" ng-repeat="list in channels" ng-click="loadChannel()" on-last-repeat>
                         <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
-                        <div class="title">{{list.ch_name}}</div>
+                        <div class="title ellipsis">{{list.ch_name}}</div>
                         <div class="info">
                             {{list.subscribe}}/{{list.pv}}
                         </div>
@@ -64,15 +65,17 @@
         <div id="view_2" ng-controller="playerControl">
             <div id="player"></div>
             <div id="video_list_area" class="hide" ng-click="closeVideoList($event)">
+                <span id="video_list_close" ng-click="closeVideoList($event)">&#9587;</span>
                 <div id="video_list_bg" ng-click="$event.stopPropagation();">
-                    <div id="video_list_title">
-                        {{channelName}}&nbsp;影片列表({{videosVolume}})
-                        <span id="video_list_close" ng-click="closeVideoList($event)">X</span>
+                    <div id="video_list_title" class="vertical-centering">
+                        <h2>
+                            {{channelName}}&nbsp;影片總覽({{videosVolume}})
+                        </h2>
                     </div>
                     <div id="video_list">
                         <div class="grid" id="video_{{videoCount}}" ng-repeat="list in videos" ng-click="loadVideo($event, $index)">
                             <img ng-src={{list.cover}} alt="{{list.title}}" width="320" height="180">
-                            <div class="title">{{list.title}}</div>
+                            <div class="title ellipsis">{{list.title}}</div>
                         </div>
                     </div>
                 </div>
@@ -82,24 +85,28 @@
                     <div id="video_time">
                         <span id="current_time">00:00:00</span>/<span id="total_time">00:00:00</span>
                     </div>
-                    <div id="video_title"></div>
-                    <div id="progress">
-                        <div id="progress_bar"></div>
+                    <div id="progress_time_bg">
+                        <div id="progress_time"></div>
                     </div>
-                    <div id="channel_info">
-                        <span>
-                            <h2>{{channelName}}</h2>
-                            <h3>{{channelDesc}}</h3>
+                    <div id="video_title"></div>
+                    <div id="channel_info" class="vertical-centering">
+                        <span id="channel_intro">
+                            <div>
+                                <h2>{{channelName}}</h2>
+                                <p>{{channelDesc}}</p>
+                            </div>
                         </span>
-                        <span>
-                            <img ng-src={{icon}} alt="authorName" width="30" height="30">
-                            {{authorName}}
-                        </span>
-                        <span id="">
-                            觀看數{{pv}}
-                        </span>
-                        <span id="">
-                            總訂閱數{{subscribe}}
+                        <span id="author_info">
+                            <span id="avatar_info" class="vertical-centering">
+                                <img ng-src={{icon}} alt="{{authorName}}" title="{{authorName}}" width="80" height="80">
+                                <span id="name">
+                                    由<span class="ellipsis">{{authorName}}</span>
+                                    <br>所建立的頻道
+                                </span>
+                            </span>
+                            <span id="sub">觀看數{{pv}}</span>
+                            <span id="pv">總訂閱數{{subscribe}}</span>
+                            <span id="fb">分享這個頻道</span>
                         </span>
                     </div>
                 </div>
@@ -112,25 +119,31 @@
             </div>
         </div>
         <div id="view_3" ng-controller="recommendControl">
-            <div id="category" class="clearfix">
-                <h2 style="font-size:48px">你可能也喜歡的頻道</h2>
-                <div class="grid channel" ng-repeat="list in categoryChannels" ng-click="loadChannel('recommend')">
-                    <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
-                    <div class="title">{{list.ch_name}}</div>
-                    <div class="info author">
-                        <img ng-src={{list.creater.icon}} alt="{{list.creater.author_name}}" width="80" height="80" />
-                        {{list.subscribe}}/{{list.pv}}
+            <div id="recommend">
+                <div id="category" class="clearfix">
+                    <h3>你可能也喜歡的頻道</h3>
+                    <div class="grid channel" ng-repeat="list in categoryChannels" ng-click="loadChannel('recommend')">
+                        <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
+                        <div class="title ellipsis">{{list.ch_name}}</div>
+                        <div class="info author">
+                            <img ng-src={{list.creater.icon}} alt="{{list.creater.author_name}}" width="80" height="80" />
+                            由 <span class="ellipsis">{{list.creater.author_name}}</span> 所建立的頻道
+                            <br>
+                            {{list.subscribe}}/{{list.pv}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="editor_choice">
-                <h2 style="font-size:48px">編輯精選頻道</h2>
-                <div class="grid channel" ng-repeat="list in editsChannels" ng-click="loadChannel('recommend')">
-                    <img ng-src={{list.cover}} alt="{{list.ch_name}}" width="320" height="180">
-                    <div class="title">{{list.ch_name}}</div>
-                    <div class="info author">
-                        <img ng-src={{list.author_icon}} alt="{{list.author_name}}" width="80" height="80" />
-                        {{list.subscribe}}/{{list.pv}}
+                <div id="editor_choice">
+                    <h3>編輯精選頻道</h3>
+                    <div class="grid channel" ng-repeat="list in editsChannels" ng-click="loadChannel('recommend')">
+                        <img ng-src={{list.cover}} alt="{{list.ch_name}}" width="320" height="180">
+                        <div class="title ellipsis">{{list.ch_name}}</div>
+                        <div class="info author">
+                            <img ng-src={{list.author_icon}} alt="{{list.author_name}}" width="80" height="80" />
+                            由 <span class="ellipsis">{{list.author_name}}</span> 所建立的頻道
+                            <br>
+                            {{list.subscribe}}/{{list.pv}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,6 +174,10 @@
 
 </script>
 <script>
+    var playingTimeUI = document.querySelector('#current_time'),
+        playingTotalTimeUI = document.querySelector('#total_time'),
+        progressTimeUI = document.querySelector('#progress_time'),
+        updateCurrentTimeInterval;
     var apiUrl = 'http://www.miiitv.com';
         widthView = window.document.documentElement.clientWidth - 250,
         gridWidth = 320,
@@ -191,9 +208,10 @@
         var windowWidth = window.document.documentElement.clientWidth,
             videoListCol = (Math.floor(windowWidth/gridWidth) > 5)? 5: Math.floor(windowWidth/gridWidth);
             videoListWidth = videoListCol*gridWidth;
-        document.querySelector('#video_list').style.width = videoListWidth + 'px';
         document.querySelector('#video_list_bg').style.width = videoListWidth + 18 + 'px';
+        document.querySelector('#video_list').style.width = videoListWidth + 18 + 'px';
     }
+    document.onmousemove = showControl;
 
 
     function checkArrowStatue() {
@@ -212,7 +230,16 @@
 
 
     // angular scroll slide
-    angular.module('myApp', ['duScroll']);
+    var module = angular.module('myApp', ['duScroll']);
+    module.directive('onLastRepeat', function() {
+        return function(scope, element, attrs) {
+            if (scope.$last) {
+                setTimeout(function(){
+                    scope.$emit('onRepeatLast', element, attrs);
+                }, 1);
+            }
+        };
+    })
 
 
     var timeOutToHidePlayerControl;
@@ -247,6 +274,9 @@
         }
 
         $scope.loadAuthor = function(uid) {
+            $scope.$on('onRepeatLast', function(scope, element, attrs){
+                console.error(document.body.scrollHeight);
+            });
             $http.jsonp(apiUrl + '/service/q/getUserProfile/' + uid + '?callback=JSON_CALLBACK').
             success(function(data, status, headers, config) {
                 $scope.channels = data.channels;
@@ -266,6 +296,9 @@
         };
 
         $scope.loadCategory = function(category) {
+            $scope.$on('onRepeatLast', function(scope, element, attrs){
+                console.error(document.body.scrollHeight);
+            });
             $http.jsonp(apiUrl + '/service/q/getCategoryChannelsTopList/' + category + '?callback=JSON_CALLBACK').
             success(function(data, status, headers, config) {
                 var categoryChannelsArr = data.channel_data;
@@ -418,7 +451,13 @@
         }
 
         var hash = parseInt(location.hash.slice(1), 10);
-        $document.scrollTo(widthView*hash, 0, 900);
+        if (hash === 1) {
+            $document.scrollTo(0, 0, 900);
+        } else if (hash === 2) {
+            $document.scrollTo(widthView*2, 0, 900);
+        } else {
+            $document.scrollTo(widthView, 0, 900);
+        }
     }
 
 
@@ -437,16 +476,22 @@
         $scope.toggleVideList = function() {
             // document.querySelector('body').setAttribute('class', 'hide_scroll_y');
             document.querySelector('#video_list_area').setAttribute('class', '');
+            clearInterval(updateCurrentTimeInterval);
+            player.pauseVideo();
         };
         $scope.closeVideoList = function() {
             // document.querySelector('body').setAttribute('class', '');
             document.querySelector('#video_list_area').setAttribute('class', 'hide');
             $scope.moveToPlayer();
+            updateCurrentTime(player.getCurrentTime());
+            player.playVideo();
         };
         $scope.togglePause = function() {
             if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                clearInterval(updateCurrentTimeInterval);
                 player.pauseVideo();
             } else {
+                updateCurrentTime(player.getCurrentTime());
                 player.playVideo();
             }
         }
@@ -562,7 +607,7 @@
                         disablekb: 0,
                         showsearch: 0,
                         showinfo: 0,
-                        controls: 1,
+                        controls: 0,
                         autohide: 0,
                         modestbranding: 0,
                         wmode: 'opaque',
@@ -584,6 +629,7 @@
                     if (Main.videosList.length !== 0) {
                         console.log('play video');
                         player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Main.videoBeginTime, 'hd720');
+                        updateCurrentTime(player.getCurrentTime());
                         player.pauseVideo();
                     }
                 }
@@ -597,6 +643,11 @@
 
                     case YT.PlayerState.PLAYING:
                     case YT.PlayerState.PAUSED:
+                        // if (YT.PlayerState.PAUSED) {
+                        //     clearInterval(updateCurrentTimeInterval);
+                        // } else {
+                        //     updateCurrentTime(player.getCurrentTime());
+                        // }
                         document.querySelector('#total_time').innerHTML = toHHMMSS(player.getDuration());
                         clearTimeout(skipBufferTimeout);
                         break;
@@ -697,9 +748,41 @@
             player.clearVideo();
         }
 
+        function updateCurrentTime(time) {
+            console.log('updateCurrentTime:' + toHHMMSS(time));
+            clearInterval(updateCurrentTimeInterval);
+            if (toHHMMSS(time) === 'NaN:NaN:NaN' || player.getPlayerState() === YT.PlayerState.UNSTARTED) {
+                resetPlayerTime();
+            } else {
+                playingTimeUI.innerHTML = toHHMMSS(time);
+                progressTimeUI.style.width = (time / player.getDuration()) * 100 + '%';
+            }
+            updateCurrentTimeInterval = setInterval(
+                function () {
+                    console.log('time loop');
+                    var currentTime = parseInt(player.getCurrentTime(), 10);
+                    if (isNaN(currentTime) || player.getPlayerState() === YT.PlayerState.UNSTARTED) {
+                        resetPlayerTime();
+                        return;
+                    }
+                    // alert('update current time:' + currentTime);
+                    playingTimeUI.innerHTML = toHHMMSS(currentTime);
+                    progressTimeUI.style.width = (currentTime / player.getDuration()) * 100 + '%';
+                },
+                1000
+            );
+        }
+
+        function resetPlayerTime() {
+            playingTimeUI.innerHTML = '00:00:00';
+            playingTotalTimeUI.innerHTML = '00:00:00';
+            progressTimeUI.style.width = 0;
+        }
+
         window.loadSelectChannel = loadSelectChannel;
         window.loadListVideo = loadListVideo;
         window.switchVideo = switchVideo;
+        window.updateCurrentTime = updateCurrentTime;
     }
 
 
