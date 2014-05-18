@@ -1,0 +1,76 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-05-15 10:53:38
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+$mircoSize: 40px;
+$smallSize: 60px;
+$midSize: 80px;
+$largeSize: 130px;
+
+.vertical-centering:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle ;
+  height: 100%;
+}
+
+.ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+#channel_info {
+    position: relative;
+    background: gray;
+    height: 135px;
+    #channel_intro {
+        vertical-align: top;
+        display: inline-block;
+        max-width: 425px;
+        background: #0088ff;
+    }
+    #author {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -$midSize/2;
+        height: $midSize;
+        span {
+            display: inline-block;
+        }
+        #avatar {
+            height: $midSize;
+            background: red;
+            img {
+            // float: left;
+                margin-left: 24px;
+                vertical-align: top;
+                width: $midSize;
+                height: $midSize;
+                @include border-radius($midSize/2);
+            }
+            #name {
+                width: 150px;
+                margin-left: 12px;
+                vertical-align: middle;
+                span {
+                    width: 130px;
+                }
+            }
+        }
+        #sub, #pv {
+        }
+        #fb {
+
+        }
+    }
+}
