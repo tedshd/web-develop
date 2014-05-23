@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FB_share</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css">
+<style>
+    .custom {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: #0099ff;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 40px;
+    }
+</style>
+</head>
+<body>
+    test fb share
+    <img src="http://www.synermous.com/data/images/fb-icon.svg" alt="fb" width="50" height="50">
+    <a href="http://www.facebook.com/share.php?url=www.google.com/&title=HIHI" class="custom">
+        click
+    </a>
+<div id="fb-root"></div>
+<a href="http://www.google.com/" data-image="http://www.synermous.com/data/images/fb-icon.svg" data-title="Article Title" data-desc="Some description for this article" class="btnShare">Share</a>
+</body>
+<script>
+// (function(d, s, id) {
+//   var js, fjs = d.getElementsByTagName(s)[0];
+//   if (d.getElementById(id)) return;
+//   js = d.createElement(s); js.id = id;
+//   js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&appId=428293247270957&version=v2.0";
+//   fjs.parentNode.insertBefore(js, fjs);
+// }(document, 'script', 'facebook-jssdk'));
+</script>
+<script>
+window.fbAsyncInit = function(){
+FB.init({
+    appId: 428293247270957, status: true, cookie: true, xfbml: true });
+};
+(function(d, debug){var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];if   (d.getElementById(id)) {return;}js = d.createElement('script'); js.id = id; js.async = true;js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";ref.parentNode.insertBefore(js, ref);}(document, /*debug*/ false));
+function postToFeed(title, desc, url, image){
+var obj = {method: 'feed',link: url, picture: image,name: title,description: desc};
+function callback(response){}
+FB.ui(obj, callback);
+}
+
+    document.querySelector('.btnShare').addEventListener('click', function(e) {
+        e.preventDefault();
+        elem = document.querySelector('.btnShare');
+postToFeed(elem.getAttribute('data-title'), elem.getAttribute('data-desc'), elem.getAttribute('href'), elem.getAttribute('data-image'));
+
+return false;
+    })
+
+</script>
+</html>
