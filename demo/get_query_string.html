@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>get_querystring</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<body>
+    set query string on url and reload
+</body>
+<script>
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+alert(getParameterByName('u'));
+alert(getParameterByName('id'));
+</script>
+</html>
