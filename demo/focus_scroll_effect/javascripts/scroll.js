@@ -40,6 +40,7 @@ $(document).ready(function () {
     $("a:eq(0)").focus();
 
     $("a").focus(function (e) {
+        console.log(document.activeElement);
         // console.log("offsetheight:" + $("#doc-main").get(0).offsetHeight);
         // console.log(e);
         // console.log("nodeheigh:" + $(this).get(0).offsetTop);
@@ -58,4 +59,5 @@ $(document).ready(function () {
             }
         );
     });
+    console.log(document.activeElement);
 });
