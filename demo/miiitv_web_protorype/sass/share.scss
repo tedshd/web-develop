@@ -233,12 +233,14 @@ body {
 
 #player_control {
     // display: none;
+    z-index: 99;
     position: absolute;
     top: 0;
     left: 0;
     // width: 1280px;
     // height: 720px;
-    // background: rgba(18,52,33,.5);
+    background: rgba(0,0,0,.1) left top no-repeat\0;
+    // background:transparent left top no-repeat;
     #info_bar {
         display: none;
         position: absolute;
@@ -345,8 +347,8 @@ body {
     top: 0;
     width: 50px;
     height: 100%;
-    background: red \9;
     background: rgba(0,0,0,.5);
+    background: red\0;
 }
 .arrow_left {
     left: 0;

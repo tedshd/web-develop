@@ -9,11 +9,13 @@
 <!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
 <script src="/lib/angular_v1.2.16.js"></script>
 <script src="/lib/angular-scroll.js"></script>
-<script src="http://www.youtube.com/iframe_api"></script>
+<script src="/lib/ngProgress/build/ngProgress.js"></script>
+<!-- <script src="http://www.youtube.com/iframe_api"></script> -->
+<link rel="stylesheet" href="/lib/ngProgress/ngProgress.css">
 <link rel="stylesheet" href="stylesheets/share.css">
 </head>
 <body>
-    <div id="bg" onmousemove="showControl()" ng-controller="globalControl">
+    <div id="bg" onmousemove="showControl()" ng-controller="globalControl" class="">
         <!-- masthead -->
         <div id="masthead">
             <a href="/">
@@ -21,7 +23,7 @@
             </a>
         </div>
         <!-- view -->
-        <div id="view_1" ng-controller="authorControl">
+        <div id="view_1" class="hide" ng-controller="authorControl">
             <div id="author">
                 <span id="avatar" class="vertical-centering">
                     <img ng-src={{icon}} alt="{{author}}" width="100" height="100">
@@ -62,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div id="view_2" ng-controller="playerControl">
+        <div id="view_2" class="hide" ng-controller="playerControl">
             <div id="player"></div>
             <div id="video_list_area" class="hide" ng-click="closeVideoList($event)">
                 <span id="video_list_close" ng-click="closeVideoList($event)">&#9587;</span>
@@ -118,7 +120,7 @@
                 </ul>
             </div>
         </div>
-        <div id="view_3" ng-controller="recommendControl">
+        <div id="view_3" class="hide" ng-controller="recommendControl">
             <div id="recommend">
                 <div id="category" class="clearfix">
                     <h3>你可能也喜歡的頻道</h3>
@@ -174,6 +176,16 @@
 
 </script>
 <script>
+function isIE () {
+  var myNav = navigator.userAgent.toLowerCase();
+  return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+}
+if (isIE () == 8) {
+ // IE8 code
+ alert('IE8');
+} else {
+ // Other versions IE or not IE
+}
     var playingTimeUI = document.querySelector('#current_time'),
         playingTotalTimeUI = document.querySelector('#total_time'),
         progressTimeUI = document.querySelector('#progress_time'),
@@ -230,7 +242,7 @@
 
 
     // angular scroll slide
-    var module = angular.module('myApp', ['duScroll']);
+    var module = angular.module('myApp', ['duScroll', 'ngProgress']);
     module.directive('onLastRepeat', function() {
         return function(scope, element, attrs) {
             if (scope.$last) {
@@ -268,7 +280,9 @@
         }, 2000);
     }
 
-    function globalControl($scope, $http, $document) {
+    function globalControl($scope, $http, $document, ngProgress) {
+        ngProgress.height('3px');
+        ngProgress.start();
         $scope.moveToPlayer = function() {
             $document.scrollTo(widthView, 0, 900);
         }
@@ -276,6 +290,10 @@
         $scope.loadAuthor = function(uid) {
             $scope.$on('onRepeatLast', function(scope, element, attrs){
                 console.error(document.body.scrollHeight);
+                ngProgress.complete();
+                document.querySelector('#view_1').setAttribute('class', '');
+                document.querySelector('#view_2').setAttribute('class', '');
+                document.querySelector('#view_3').setAttribute('class', '');
             });
             $http.jsonp(apiUrl + '/service/q/getUserProfile/' + uid + '?callback=JSON_CALLBACK').
             success(function(data, status, headers, config) {
@@ -566,6 +584,12 @@
     }
 
     function youtubeApi(init, data) {
+var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
         var progressTimeUI = document.querySelector('#progress_time');
         var skipBufferTimeout,
             skipSwitchVideoTimeout,
@@ -592,10 +616,10 @@
             }, 1200);
 
             function onYouTubeIframeAPIReady() {
-                playChannel(0);
+                playChannel();
             }
 
-            function playChannel(count) {
+            function playChannel() {
                 console.log('initPlayer');
                 player = new YT.Player('player', {
                     width: widthView,
@@ -611,7 +635,7 @@
                         autohide: 0,
                         modestbranding: 0,
                         wmode: 'opaque',
-                        hd: 1,
+                        hd: 0,
                         html5: 0,
                         iv_load_policy: 3
                     },
@@ -630,7 +654,7 @@
                         console.log('play video');
                         player.loadVideoById(Main.videosList[Main.playCount].youtube_hash, Main.videoBeginTime, 'hd720');
                         updateCurrentTime(player.getCurrentTime());
-                        player.pauseVideo();
+                        // player.pauseVideo();
                     }
                 }
 
