@@ -10,6 +10,7 @@
 <script src="/lib/angular_v1.2.16.js"></script>
 <script src="/lib/angular-scroll.js"></script>
 <script src="/lib/ngProgress/build/ngProgress.js"></script>
+<script src="/lib/angular-route.js"></script>
 <!-- <script src="http://www.youtube.com/iframe_api"></script> -->
 <link rel="stylesheet" href="/lib/ngProgress/ngProgress.css">
 <link rel="stylesheet" href="stylesheets/share.css">
@@ -55,11 +56,13 @@
                 <div id="channels_desc">{{author}} 建立的頻道</div>
                 <div id="channels" class="clearfix">
                     <div class="grid channel" ng-repeat="list in channels" ng-click="loadChannel()" on-last-repeat>
-                        <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
-                        <div class="title ellipsis">{{list.ch_name}}</div>
-                        <div class="info">
-                            {{list.subscribe}}/{{list.pv}}
-                        </div>
+                        <a href="#/demo/miiitv_web_protorype/share/{{list.pid}}">
+                            <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
+                            <div class="title ellipsis">{{list.ch_name}}</div>
+                            <div class="info">
+                                {{list.subscribe}}/{{list.pv}}
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -242,7 +245,7 @@ if (isIE () == 8) {
 
 
     // angular scroll slide
-    var module = angular.module('myApp', ['duScroll', 'ngProgress']);
+    var module = angular.module('myApp', ['duScroll', 'ngProgress', 'ngRoute']);
     module.directive('onLastRepeat', function() {
         return function(scope, element, attrs) {
             if (scope.$last) {
@@ -251,6 +254,18 @@ if (isIE () == 8) {
                 }, 1);
             }
         };
+    });
+    module.config(function($routeProvider, $locationProvider){
+        $routeProvider.
+        when('/:id', {
+            // controller: DetailController,
+            // templateUrl: 'detail.html'
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
+
+        // $locationProvider.html5Mode(true);
     })
 
 
@@ -297,6 +312,7 @@ if (isIE () == 8) {
             });
             $http.jsonp(apiUrl + '/service/q/getUserProfile/' + uid + '?callback=JSON_CALLBACK').
             success(function(data, status, headers, config) {
+                console.log(data);
                 $scope.channels = data.channels;
                 $scope.icon = data.owner_info.icon;
                 $scope.author = data.owner_info.show_name;
