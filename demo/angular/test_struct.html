@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<title>Angular</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+    <div ng-controller="globalControl" onmousemove="over()">
+        <div class="pc">
+            {{type}}
+        </div>
+    </div>
+</body>
+<script src="/lib/angular_v1.2.16.js"></script>
+<script src="/lib/angular-scroll.js"></script>
+<script>
+    var module = angular.module('myApp', ['duScroll']);
+    if (document.querySelector('.pc')) {
+        console.log('PC');
+        function globalControl($scope) {
+            $scope.type = 'PC version';
+        }
+        pcver();
+        function over() {
+            console.log('over')
+        }
+    } else {
+        console.log('mobile');
+    }
+    function pcver() {
+        console.log('init');
+    }
+</script>
+</html>
