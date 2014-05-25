@@ -128,27 +128,31 @@
                 <div id="category" class="clearfix">
                     <h3>你可能也喜歡的頻道</h3>
                     <div class="grid channel" ng-repeat="list in categoryChannels" ng-click="loadChannel('recommend')">
-                        <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
-                        <div class="title ellipsis">{{list.ch_name}}</div>
-                        <div class="info author">
-                            <img ng-src={{list.creater.icon}} alt="{{list.creater.author_name}}" width="80" height="80" />
-                            由 <span class="ellipsis">{{list.creater.author_name}}</span> 所建立的頻道
-                            <br>
-                            {{list.subscribe}}/{{list.pv}}
-                        </div>
+                        <a href="#/demo/miiitv_web_protorype/share/{{list.pid}}">
+                            <img ng-src={{list.shot}} alt="{{list.ch_name}}" width="320" height="180">
+                            <div class="title ellipsis">{{list.ch_name}}</div>
+                            <div class="info author">
+                                <img ng-src={{list.creater.icon}} alt="{{list.creater.author_name}}" width="80" height="80" />
+                                由 <span class="ellipsis">{{list.creater.author_name}}</span> 所建立的頻道
+                                <br>
+                                {{list.subscribe}}/{{list.pv}}
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div id="editor_choice">
                     <h3>編輯精選頻道</h3>
                     <div class="grid channel" ng-repeat="list in editsChannels" ng-click="loadChannel('recommend')">
-                        <img ng-src={{list.cover}} alt="{{list.ch_name}}" width="320" height="180">
-                        <div class="title ellipsis">{{list.ch_name}}</div>
-                        <div class="info author">
-                            <img ng-src={{list.author_icon}} alt="{{list.author_name}}" width="80" height="80" />
-                            由 <span class="ellipsis">{{list.author_name}}</span> 所建立的頻道
-                            <br>
-                            {{list.subscribe}}/{{list.pv}}
-                        </div>
+                        <a href="#/demo/miiitv_web_protorype/share/{{list.pid}}">
+                            <img ng-src={{list.cover}} alt="{{list.ch_name}}" width="320" height="180">
+                            <div class="title ellipsis">{{list.ch_name}}</div>
+                            <div class="info author">
+                                <img ng-src={{list.author_icon}} alt="{{list.author_name}}" width="80" height="80" />
+                                由 <span class="ellipsis">{{list.author_name}}</span> 所建立的頻道
+                                <br>
+                                {{list.subscribe}}/{{list.pv}}
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
