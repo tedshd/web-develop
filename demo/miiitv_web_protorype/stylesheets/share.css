@@ -459,6 +459,7 @@ body {
 
 /* line 345, ../sass/share.scss */
 .arrow {
+  z-index: 999;
   position: fixed;
   top: 0;
   width: 50px;
@@ -467,18 +468,18 @@ body {
   background: red\0;
 }
 
-/* line 353, ../sass/share.scss */
+/* line 354, ../sass/share.scss */
 .arrow_left {
   left: 0;
 }
 
-/* line 356, ../sass/share.scss */
+/* line 357, ../sass/share.scss */
 .arrow_right {
   right: 0;
 }
 
 @media only screen and (max-width: 900px) {
-  /* line 366, ../sass/share.scss */
+  /* line 367, ../sass/share.scss */
   #player_control #info_bar #channel_info #author_info #name {
     display: none;
   }

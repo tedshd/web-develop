@@ -343,6 +343,7 @@ body {
 }
 
 .arrow {
+    z-index: 999;
     position: fixed;
     top: 0;
     width: 50px;
