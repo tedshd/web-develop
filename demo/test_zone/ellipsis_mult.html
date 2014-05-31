@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ellipsis</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<style>
+.ellipsis-mult {
+  width: 300px;
+  height: 5em;
+  overflow: hidden;
+}
+p {
+    margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="ellipsis-mult">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nisi ligula, dapibus a volutpat sit amet, mattis et dui. Nunc porttitor accumsan orci id luctus. Phasellus ipsum metus, tincidunt non rhoncus id, dictum a lectus. Nam sed ipsum a lacus sodales eleifend. Vestibulum lorem felis, rhoncus elementum vestibulum eget, dictum ut velit. Nullam venenatis, elit in suscipit imperdiet, orci purus posuere mauris, quis adipiscing ipsum urna ac quam.</p>
+</div>
+</body>
+<script>
+console.log(document.querySelector('.ellipsis-mult p'))
+    var h = document.querySelector('.ellipsis-mult').clientHeight;
+    console.log(h)
+while (document.querySelector('.ellipsis-mult p').clientHeight > h) {
+    var text = document.querySelector('.ellipsis-mult p').textContent;
+    console.log(text);
+    console.log(text.replace(/\W*\s(\S)*$/, '...'));
+    document.querySelector('.ellipsis-mult p').innerHTML = text.replace(/\W*\s(\S)*$/, '...');
+
+}
+</script>
+</html>
