@@ -1,0 +1,50 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-05-28 23:42:05
+ * @version $Id$
+ */
+
+// clear float
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+}
+
+// text vertical center
+// area must display: inline-block & vertical-align: middle
+.vertical-centering:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+// area vertical horizon center
+// add width & height
+.v-h-centering {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+// ellipsis text
+// add width
+.ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hide {
+    display: none !important;
+}
