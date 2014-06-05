@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>nav_responsive</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<style>
+    .vertical-centering:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+    }
+    ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #masthead {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /*height: 50px;*/
+        background: #666;
+    }
+    #head-bar {
+        width: 100%;
+        height: 50px;
+        background: #666;
+        display: table;
+    }
+    #masthead * {
+        vertical-align: middle;
+    }
+    #masthead a, #nav-switch {
+        display: table-cell;
+    }
+    #nav ul {
+        display: inline-block;
+    }
+    #nav ul li {
+        background: #444;
+        height: 50px;
+        padding: 0 10px;
+    }
+    #nav ul li:hover {
+        background: #555;
+    }
+    #nav-switch {
+        width: 50px;
+        height: 50px;
+        background: red;
+    }
+    @media only screen
+    and (min-width : 641px) {
+        #nav-switch {
+            display: none;
+        }
+        #masthead #nav {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            display: block !important;
+        }
+        #nav ul li {
+            float: left;
+            display: inline-block;
+        }
+    }
+    @media only screen
+    and (max-width : 640px) {
+        #nav {
+            position: relative;
+            display: none;
+        }
+        #nav ul {
+            width: 100%;
+        }
+        #nav ul li {
+            text-align: right;
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="masthead">
+        <div id="head-bar">
+            <a href="">
+                <img src="" alt="logo" width="100" height="30">
+            </a>
+            <div id="nav-switch">O</div>
+        </div>
+        <div id="nav">
+            <ul>
+                <li class="vertical-centering">About</li>
+                <li class="vertical-centering">Product</li>
+                <li class="vertical-centering">Contact</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    if (document.querySelector('#nav-switch')) {
+        document.querySelector('#nav-switch').addEventListener('click', function() {
+            var menuState = document.querySelector('#nav').style.display;
+            if (menuState === 'none' || !menuState) {
+                document.querySelector('#nav').style.display = 'block';
+            } else {
+                document.querySelector('#nav').style.display = 'none';
+            }
+        })
+    }
+</script>
+</html>
