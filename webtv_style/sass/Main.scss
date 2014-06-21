@@ -56,12 +56,9 @@
 /* Layout */
 body
 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1280px;
-    height: 720px;
+    position: relative;
     color: #fff;
+    background: #000;
 }
 #view {
     margin: 0 auto;
@@ -70,10 +67,11 @@ body
     position: absolute;
     top: 0;
     left: 0;
-    width: 1280px;
-    height: 720px;
+    width: 100%;
+    height: 100%;
     background: #000;
-    background: url(../../img/bg_welcome.png);
+    background: url(../../img/bg_welcome.png) center center no-repeat;
+    background-size: 100%;
 }
 .shadow {
     text-shadow: 3px 3px rgba(0, 0, 0, 0.5);
@@ -134,91 +132,23 @@ h1 span {
 .ico_enter {
     display: inline-block;
     position: relative;
-    width: 25px;
-    height: 15px;
-}
-.ico_box {
-    position: relative;
-    width: 70%;
-    height: 90%;
-    border: solid 2px #fff;
-}
-.ico_arrow {
-    position: absolute;
-    top: 50%;
-    margin-top: -4px;
-    left: 50%;
-    margin-left: -2px;
-    width: 0;
-    height: 0;
-    border-top: solid 4px transparent;
-    border-bottom: solid 4px transparent;
-    border-left: 0;
-    border-right: solid 5px #fff;
-}
-.ico_h_line {
-    position: absolute;
-    top: 50%;
-    left: 75%;
-    margin-left: -25%;
-    width: 50%;
-    border-top: solid 2px #fff;
-}
-.ico_v_line {
-    position: absolute;
-    top: 50%;
-    left: 99%;
-    margin-top: -39%;
-    height: 50%;
-    border-left: solid 2px #fff;
+    width: 45px;
+    height: 24px;
+    background:transparent url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjI1IiBoZWlnaHQ9IjE1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogPCEtLSBDcmVhdGVkIHdpdGggU1ZHLWVkaXQgLSBodHRwOi8vc3ZnLWVkaXQuZ29vZ2xlY29kZS5jb20vIC0tPgogPHRpdGxlPmljb19lbnRlcjwvdGl0bGU+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPGxpbmUgc3Ryb2tlPSIjZmZmZmZmIiBpZD0ic3ZnXzEiIHkyPSI4LjI5MTY2NyIgeDI9IjIyLjQ1ODMzMyIgeTE9IjEuODMzMzMzIiB4MT0iMjIuNSIgZmlsbD0ibm9uZSIvPgogIDxyZWN0IHN0cm9rZT0iI2ZmZmZmZiIgaWQ9InN2Z180IiBoZWlnaHQ9IjEwLjQ1ODMzMyIgd2lkdGg9IjE4LjQxNjY2NiIgeT0iMi4yNSIgeD0iMS41ODMzMzMiIHN0cm9rZS1saW5lY2FwPSJudWxsIiBzdHJva2UtbGluZWpvaW49Im51bGwiIHN0cm9rZS1kYXNoYXJyYXk9Im51bGwiIHN0cm9rZS13aWR0aD0ibnVsbCIgZmlsbD0ibm9uZSIvPgogIDxsaW5lIGlkPSJzdmdfNiIgeTI9IjcuODMzMzMzIiB4Mj0iMTIuNzUiIHkxPSI3LjgzMzMzMyIgeDE9IjIyLjc1IiBzdHJva2UtbGluZWNhcD0ibnVsbCIgc3Ryb2tlLWxpbmVqb2luPSJudWxsIiBzdHJva2UtZGFzaGFycmF5PSJudWxsIiBzdHJva2U9IiNmZmZmZmYiIGZpbGw9Im5vbmUiLz4KICA8cGF0aCB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTAuNDI2NDU3NDA1MDkwMzMyLDcuODI4MzMyOTAxMDAwOTc2KSAiIGlkPSJzdmdfMTIiIGQ9Im04LjA5MzEyNSw5Ljg3bDIuMzMzMzI4LC00LjA4MzMzM2wyLjMzMzMzNiw0LjA4MzMzM2wtNC42NjY2NjQsMHoiIHN0cm9rZS1saW5lY2FwPSJudWxsIiBzdHJva2UtbGluZWpvaW49Im51bGwiIHN0cm9rZS1kYXNoYXJyYXk9Im51bGwiIHN0cm9rZS13aWR0aD0ibnVsbCIgc3Ryb2tlPSIjZmZmZmZmIiBmaWxsPSIjZmZmZmZmIi8+CiA8L2c+Cjwvc3ZnPg==) left top no-repeat;
+    background-size: 100%;
 }
 .ico_enter.large {
     display: inline-block;
     position: relative;
-    width: 35px;
-    height: 25px;
-    .ico_box {
-        position: relative;
-        width: 70%;
-        height: 90%;
-        border: solid 4px #fff;
-    }
-    .ico_arrow {
-        position: absolute;
-        top: 50%;
-        margin-top: -6px;
-        left: 50%;
-        margin-left: -6px;
-        width: 0;
-        height: 0;
-        border-top: solid 6px transparent;
-        border-bottom: solid 6px transparent;
-        border-left: 0;
-        border-right: solid 12px #fff;
-    }
-    .ico_h_line {
-        position: absolute;
-        top: 50%;
-        left: 80%;
-        margin-left: -23%;
-        width: 50%;
-        border-top: solid 4px #fff;
-    }
-    .ico_v_line {
-        position: absolute;
-        top: 55%;
-        left: 101%;
-        margin-top: -38%;
-        height: 50%;
-        border-left: solid 4px #fff;
-    }
+    width: 58px;
+    height: 30px;
+    background:transparent url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjI1IiBoZWlnaHQ9IjE1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogPCEtLSBDcmVhdGVkIHdpdGggU1ZHLWVkaXQgLSBodHRwOi8vc3ZnLWVkaXQuZ29vZ2xlY29kZS5jb20vIC0tPgogPHRpdGxlPmljb19lbnRlcjwvdGl0bGU+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPGxpbmUgc3Ryb2tlPSIjZmZmZmZmIiBpZD0ic3ZnXzEiIHkyPSI4LjI5MTY2NyIgeDI9IjIyLjQ1ODMzMyIgeTE9IjEuODMzMzMzIiB4MT0iMjIuNSIgZmlsbD0ibm9uZSIvPgogIDxyZWN0IHN0cm9rZT0iI2ZmZmZmZiIgaWQ9InN2Z180IiBoZWlnaHQ9IjEwLjQ1ODMzMyIgd2lkdGg9IjE4LjQxNjY2NiIgeT0iMi4yNSIgeD0iMS41ODMzMzMiIHN0cm9rZS1saW5lY2FwPSJudWxsIiBzdHJva2UtbGluZWpvaW49Im51bGwiIHN0cm9rZS1kYXNoYXJyYXk9Im51bGwiIHN0cm9rZS13aWR0aD0ibnVsbCIgZmlsbD0ibm9uZSIvPgogIDxsaW5lIGlkPSJzdmdfNiIgeTI9IjcuODMzMzMzIiB4Mj0iMTIuNzUiIHkxPSI3LjgzMzMzMyIgeDE9IjIyLjc1IiBzdHJva2UtbGluZWNhcD0ibnVsbCIgc3Ryb2tlLWxpbmVqb2luPSJudWxsIiBzdHJva2UtZGFzaGFycmF5PSJudWxsIiBzdHJva2U9IiNmZmZmZmYiIGZpbGw9Im5vbmUiLz4KICA8cGF0aCB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTAuNDI2NDU3NDA1MDkwMzMyLDcuODI4MzMyOTAxMDAwOTc2KSAiIGlkPSJzdmdfMTIiIGQ9Im04LjA5MzEyNSw5Ljg3bDIuMzMzMzI4LC00LjA4MzMzM2wyLjMzMzMzNiw0LjA4MzMzM2wtNC42NjY2NjQsMHoiIHN0cm9rZS1saW5lY2FwPSJudWxsIiBzdHJva2UtbGluZWpvaW49Im51bGwiIHN0cm9rZS1kYXNoYXJyYXk9Im51bGwiIHN0cm9rZS13aWR0aD0ibnVsbCIgc3Ryb2tlPSIjZmZmZmZmIiBmaWxsPSIjZmZmZmZmIi8+CiA8L2c+Cjwvc3ZnPg==) left top no-repeat;
+    background-size: 100%;
 }
 
 /* player */
 #player {
     position: absolute;
-    top: 0;
-    left: 0;
 }
 
 /* loader view */
@@ -226,9 +156,9 @@ h1 span {
     position: absolute;
     top: 0;
     left: 0;
-    width: 1280px;
-    height: 720px;
-    background: url(../../img/bg_boot.png);
+    width: 100%;
+    height: 100%;
+    background: url(../../img/bg_boot.png) center center no-repeat;
     h1 {
         text-align: center;
         margin-top: 35%;
@@ -633,8 +563,8 @@ h1 span {
     position: absolute;
     top: 0;
     left: 0;
-    width: 1280px;
-    height: 720px;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.9);
     overflow: hidden;
     #video_list_title {
@@ -844,4 +774,11 @@ h1 span {
     height: 50px;
     background: #666;
     text-align: center;
+}
+#cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
