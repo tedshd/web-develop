@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>Vertical scrollbar with jQuery UI</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.mousewheel.min.js"></script>
+
+<style type="text/css">
+// a:active, a:focus{outline:none}
+/* css for scrollbar below here*/
+#scroll-pane {
+float:left;overflow:
+auto; width:
+780px;
+height:535px;
+position:relative;
+border:1px solid #aaaaaa;
+margin-left:50px;
+margin-bottom:25px;
+display:inline;
+}
+#scroll-content {
+position:absolute;
+top:0;
+left:0;
+}
+ .scroll-content-item{ 
+ background:#969696;
+ width:760px;
+ float:left;
+ margin:10px 10px 0 10px;
+ padding:10px 0 10px 0;
+ font-size:20px;
+ text-align:center;
+ border:1px solid #ffffff;
+ display:inline;
+ }
+#slider-wrap{
+float:left;
+background-color:lightgrey;
+width:20px;
+border:1px solid gray;
+border-left:none;
+}
+#slider-vertical{
+position:relative;
+height:100%
+}
+.ui-slider-handle{
+width:20px;
+height:10px;
+margin:0 auto;
+background-color:darkgray;
+display:block;
+position:absolute
+}
+</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="vertical.slider.js"></script>
+
+
+
+
+<div id="scroll-pane">
+	<div id="scroll-content">
+		<div class="scroll-content-item">
+		    <a href="http://www.tedse.0fees.net/opencart_v1.5.0.5/" target="_blank">OpenCart</a>
+			<hr>
+			<div>利用開源購物商城系統OpenCart所架設的購物網站</div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank">RSS reader</a>
+			<hr>
+			<div>利用Ajax技術抓取rss資料,目前IE only</div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+		<div class="scroll-content-item ">
+		    <a href="#" target="_blank"></a>
+			<hr>
+			<div></div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
