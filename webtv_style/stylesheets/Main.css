@@ -807,14 +807,15 @@ h1 span {
   position: relative;
   top: 50px;
   overflow: hidden;
+  margin: 0 auto;
 }
-/* line 604, ../sass/Main.scss */
+/* line 605, ../sass/Main.scss */
 #video_list_area #video_list_bg {
   position: relative;
   top: 50px;
 }
 
-/* line 609, ../sass/Main.scss */
+/* line 610, ../sass/Main.scss */
 .cell {
   float: left;
   position: relative;
@@ -827,7 +828,7 @@ h1 span {
   border: solid 5px #000;
   overflow: hidden;
 }
-/* line 620, ../sass/Main.scss */
+/* line 621, ../sass/Main.scss */
 .cell .list_video_title {
   position: absolute;
   bottom: 0;
@@ -839,48 +840,48 @@ h1 span {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* line 631, ../sass/Main.scss */
+/* line 632, ../sass/Main.scss */
 .cell .video_format_error {
   height: 100%;
   text-align: center;
   background: #333;
 }
 
-/* line 640, ../sass/Main.scss */
+/* line 641, ../sass/Main.scss */
 .list_focus {
   border: solid 5px #ff8800;
 }
 
 /**/
-/* line 645, ../sass/Main.scss */
+/* line 646, ../sass/Main.scss */
 #sync_ok {
   text-align: center;
 }
-/* line 647, ../sass/Main.scss */
+/* line 648, ../sass/Main.scss */
 #sync_ok .info_bar {
   bottom: 30px;
 }
 
-/* line 653, ../sass/Main.scss */
+/* line 654, ../sass/Main.scss */
 #video_info #progress_time_bg {
   height: 5px;
   width: 100%;
   background: #666;
 }
-/* line 657, ../sass/Main.scss */
+/* line 658, ../sass/Main.scss */
 #video_info #progress_time_bg #progress_time {
   height: 100%;
   width: 0;
   background: #ff0000;
 }
-/* line 663, ../sass/Main.scss */
+/* line 664, ../sass/Main.scss */
 #video_info #num_time {
   margin: auto;
   width: 180px;
 }
 
 /* control info */
-/* line 669, ../sass/Main.scss */
+/* line 670, ../sass/Main.scss */
 #control_info {
   border-top: 1px solid;
   border-top-color: #ccc;
@@ -890,7 +891,7 @@ h1 span {
 }
 
 /* channel info */
-/* line 678, ../sass/Main.scss */
+/* line 679, ../sass/Main.scss */
 #channel_info {
   position: absolute;
   top: 25px;
@@ -904,13 +905,13 @@ h1 span {
   z-index: 100;
 }
 
-/* line 690, ../sass/Main.scss */
+/* line 691, ../sass/Main.scss */
 #channel_number {
   text-align: right;
   line-height: 1;
 }
 
-/* line 694, ../sass/Main.scss */
+/* line 695, ../sass/Main.scss */
 #channel_title {
   line-height: 1;
   overflow: hidden;
@@ -922,7 +923,7 @@ h1 span {
 }
 
 /* exit confirm */
-/* line 706, ../sass/Main.scss */
+/* line 707, ../sass/Main.scss */
 #exit_confirm {
   margin: auto;
   position: absolute;
@@ -936,19 +937,19 @@ h1 span {
   text-align: center;
 }
 
-/* line 715, ../sass/Main.scss */
+/* line 716, ../sass/Main.scss */
 #exit_confirm h2 {
   margin: 25px 10px;
 }
 
-/* line 718, ../sass/Main.scss */
+/* line 719, ../sass/Main.scss */
 #confirm_select {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
 }
-/* line 723, ../sass/Main.scss */
+/* line 724, ../sass/Main.scss */
 #confirm_select div {
   z-index: 0;
   float: left;
@@ -957,7 +958,7 @@ h1 span {
   padding: 25px 0;
   background: #3a3460;
 }
-/* line 731, ../sass/Main.scss */
+/* line 732, ../sass/Main.scss */
 #confirm_select .exit_focus:before {
   content: "";
   z-index: -1;
@@ -969,7 +970,7 @@ h1 span {
   background: #6f18ab;
 }
 
-/* line 743, ../sass/Main.scss */
+/* line 744, ../sass/Main.scss */
 #no_videos_view, #remove_videos_view, #private_videos_view, #video_error_view, #network_error_view {
   position: absolute;
   top: 0;
@@ -978,7 +979,7 @@ h1 span {
   width: 100%;
   height: 100%;
 }
-/* line 750, ../sass/Main.scss */
+/* line 751, ../sass/Main.scss */
 #no_videos_view .msg, #remove_videos_view .msg, #private_videos_view .msg, #video_error_view .msg, #network_error_view .msg {
   margin: auto;
   position: absolute;
@@ -992,19 +993,19 @@ h1 span {
   text-align: center;
   line-height: 1.5;
 }
-/* line 760, ../sass/Main.scss */
+/* line 761, ../sass/Main.scss */
 #no_videos_view p, #remove_videos_view p, #private_videos_view p, #video_error_view p, #network_error_view p {
   position: absolute;
   top: 430px;
   left: 490px;
 }
 
-/* line 766, ../sass/Main.scss */
+/* line 767, ../sass/Main.scss */
 #network_error_view {
   z-index: 999;
 }
 
-/* line 769, ../sass/Main.scss */
+/* line 770, ../sass/Main.scss */
 #pause {
   margin: auto;
   position: absolute;
@@ -1018,7 +1019,7 @@ h1 span {
   text-align: center;
 }
 
-/* line 778, ../sass/Main.scss */
+/* line 779, ../sass/Main.scss */
 #cover {
   position: absolute;
   top: 0;
