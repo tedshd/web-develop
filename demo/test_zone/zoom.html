@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>zoom</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<style>
+    div {
+        width: 1000px;
+        position: absolute;
+        top: 0;
+    }
+    #v_1 {
+        left: 0;
+        background: #0088ff;
+    }
+    #v_2 {
+        left: 1000px;
+        background: #ff8800;
+    }
+    #v_3 {
+        left: 2000px;
+        background: #dfdd3f;
+    }
+</style>
+</head>
+<body>
+    <div id="v_1">1000px</div>
+    <div id="v_2">1000px</div>
+    <div id="v_3">1000px</div>
+</body>
+<script>
+    $('div').on('click', function(e) {
+        console.log(e);
+        console.log($(this).index());
+        var index = $(this).index();
+        scrollTo(index*1000, 0);
+    });
+</script>
+</html>
