@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iframe</title>
+<link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<style>
+    .info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.8);
+    }
+    #progress_bar {
+        height: 5px;
+        width: 0;
+        background: #ff0000;
+    }
+    :-webkit-full-screen #player {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+    <iframe id="player" type="text/html" width="824" height="463.5" src="https://www.youtube.com/embed/ArRhIohEuvk?enablejsapi=1&playerapiid=ytplayer&rel=1&autoplay=0&disablekb=1&showsearch=0&showinfo=0&controls=1&wmode=opaque&hd=1" frameborder="0"></iframe>
+    <div class="info">
+        Vol:
+        <div id="vol">50</div>
+        <ul>
+            <li>
+                getVideoLoadedFraction-<span id="getVideoLoadedFraction"></span>
+            </li>
+            <li>
+                getPlayerState-<span id="getPlayerState"></span>
+            </li>
+            <li>
+                getPlaybackRate-<span id="getPlaybackRate"></span>
+            </li>
+            <li>
+                getAvailablePlaybackRates-<span id="getAvailablePlaybackRates"></span>
+            </li>
+            <li>
+                getVideoBytesLoaded-<span id="getVideoBytesLoaded"></span>
+            </li>
+            <li>
+                Width: <sapn id="width"></sapn>
+            </li>
+            <li>
+                Hight: <span id="height"></span>
+            </li>
+            <li>
+                getPlaybackQuality-<span id="getPlaybackQuality"></span>
+            </li>
+            <li>
+                getDuration-<span id="getDuration"></span>
+            </li>
+            <li>
+                getPlaylist-<span id="getPlaylist"></span>
+            </li>
+            <li>
+                getCurrentTime-<span id="getCurrentTime"></span>
+            </li>
+            <li>
+                totalTime-<span id="totalTime"></span>
+            </li>
+            <li>
+                playTime-<span id="playTime"></span>
+            </li>
+        </ul>
+        <div id="progress_bar"></div>
+    </div>
+    <button class="btn" id="play">Pause</button>
+    <button class="btn" id="prev">&lt; Prev</button>
+    <button class="btn" id="next">Next &gt;</button>
+    <button class="btn" id="vol_up">Vol+</button>
+    <button class="btn" id="vol_down">Vol-</button>
+    <button class="btn" id="mute">Mute</button>
+    <button class="btn" id="prevChannel">prevChannel</button>
+    <button class="btn" id="nextChannel">nextChannel</button>
+    <button class="btn" id="full_screen">Full screen</button>
+</body>
+<script>
+/**
+ * second to time
+ * @param  {[type]} sec_num [description]
+ * @return {[type]}         [description]
+ */
+function toHHMMSS(sec_num) {
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60));
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    var time    = hours+':'+minutes+':'+seconds;
+    return time;
+}
+    var Main = {
+        vol: 50,
+        videoList: [],
+        playCount: 0,
+        channelList: [],
+        channelCount: 0
+    };
+    // var channel_01 = {
+    //         'v_0': '7wvNwOPprBE',
+    //         'v_2': 'V8BTsiMxyaQ',
+    //         'v_1': 'mTSuiGubCHE',
+    //         'v_8': 'DDs5bXh4erM',
+    //         'v_3': 'n-BXNXvTvV4',
+    //         'v_4': 'CRJDQQXS4uE',
+    //         'v_5': 'ASO_zypdnsQ',
+    //         'v_6': 'IZkYdqRWKaY',
+    //         'v_7': '9Y15es8OY0U',
+    //         'v_9': 'LWV-f6dMN3Q'
+    //     },
+    //     channel_02 = {
+    //         'v_10': '0lfDNu-k6oo',
+    //         'v_11': 'pWhXUuTX3co',
+    //         'v_12': 'COZIk_dhSK4',
+    //         'v_13': 'QJjpWSwTagc',
+    //         'v_14': '-reqZIE_DSg',
+    //         'v_15': 'bbqY1P6KJmI',
+    //         'v_16': 'QfVpg0IQ8rk',
+    //         'v_17': '8wWuH7MIeCA',
+    //         'v_18': 'i3eSt6UFnVY',
+    //         'v_19': '7dtHVkm4i6o'
+    //     };
+    var channel_01 = [
+            'mTSuiGubCHE',
+            'uEVVJ8b2b-E',
+            'DDs5bXh4erM',
+            '7wvNwOPprBE',
+            'n-BXNXvTvV4',
+            'CRJDQQXS4uE',
+            'ASO_zypdnsQ',
+            'IZkYdqRWKaY',
+            '9Y15es8OY0U',
+            'LWV-f6dMN3Q'
+        ],
+        channel_02 = [
+            '9COe8DCV0O8',
+            'zebShorVev4',
+            'zMpuwAbQcM4',
+            '2_BSVWMiojU',
+            'EcsoYwO83aw',
+            'SquQpiztDME',
+            'Qb57Ddj8VRA',
+            'tIfjrmkxvYw',
+            'Ef2Hfc1Ya9w',
+            'Ug3Y3eesePA'
+        ],
+        channel_03 = [
+            '21DbYMPTtW0',
+            'rOBXXnZmnls',
+            'jnzVLMS7AUE',
+            '-5rd_GONWH0',
+            'R_gkPBTozCM'
+        ];
+    Main.channelList = [channel_01, channel_02, channel_03];
+    console.log('channel', Main.channelList);
+
+    var player,
+        loadPlayer,
+        playLoop,
+        switchVideo,
+        switchChannel,
+        skipContinue,
+        currentTime;
+
+    function loadPlayer() {
+        // alert('2 - load player');
+        if (document.querySelector('#player')) {
+            // alert('3 - check player DOM');
+            // get API
+            var tag = document.createElement('script'),
+            firstScriptTag = document.getElementsByTagName('script')[0];
+            tag.src = 'https://www.youtube.com/iframe_api';
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            var video_ID;
+
+            // var videoList = [];
+                // playCount = 0;
+                // player;
+
+            // var video_ID = {
+            //     'v_0': '7wvNwOPprBE',
+            //     'v_2': 'V8BTsiMxyaQ',
+            //     'v_1': 'mTSuiGubCHE',
+            //     'v_8': 'DDs5bXh4erM',
+            //     'v_3': 'n-BXNXvTvV4',
+            //     'v_4': 'CRJDQQXS4uE',
+            //     'v_5': 'ASO_zypdnsQ',
+            //     'v_6': 'IZkYdqRWKaY',
+            //     'v_7': '9Y15es8OY0U',
+            //     'v_9': 'LWV-f6dMN3Q'
+            //     'v_10': '0lfDNu-k6oo',
+            //     'v_11': 'pWhXUuTX3co',
+            //     'v_12': 'COZIk_dhSK4',
+            //     'v_13': 'QJjpWSwTagc',
+            //     'v_14': '-reqZIE_DSg',
+            //     'v_15': 'bbqY1P6KJmI',
+            //     'v_16': 'QfVpg0IQ8rk',
+            //     'v_17': '8wWuH7MIeCA',
+            //     'v_18': 'i3eSt6UFnVY',
+            //     'v_19': '7dtHVkm4i6o'
+            // };
+
+            // video_ID = Main.channelList[0];
+            // // videoList array
+            // for(var key in video_ID) {
+            //     var value = video_ID[key];
+            //     Main.videoList.push(value);
+            // }
+            Main.videoList = Main.channelList[1];
+            // channelList[0] = videoList;
+
+            function playChannel() {
+                // init player
+                // alert('5 - init player');
+                player = new YT.Player(
+                    'player',
+                    {
+                        width: '1280',
+                        height: '720',
+                        videoId: Main.videoList[0],
+                        playerVars: {
+                            rel: 1,
+                            autoplay: 0,
+                            disablekb: 0,
+                            showsearch: 0,
+                            showinfo: 0,
+                            controls: 1,
+                            autohide: 0,
+                            modestbranding: 0,
+                            wmode: 'opaque',
+                            // hd: 1,
+                            html5: 1,
+                            iv_load_policy: 3
+                        },
+                        events: {
+                            'onReady'        : onPlayerReady,
+                            'onStateChange'  : onPlayerStateChange,
+                            'onError'        : error
+                        }
+                    }
+                );
+
+                function error(e) {
+                    console.log('Error');
+                    console.log(e);
+                    // player.nextVideo();
+                }
+
+                // play video
+                function onPlayerReady(event) {
+                    // alert('onPlayerReady');
+                    event.target.playVideo();
+                    // player.loadPlaylist(videoList);
+                    // player.setLoop(true);
+                    // player.playVideo();
+                }
+                // alert('player--' + player);
+                // Main.player = player;
+            }
+
+            // play list loop
+            function playLoop() {
+                Main.playCount++;
+                if (Main.playCount > (Main.videoList.length -1)) {
+                    Main.playCount = 0;
+                }
+                player.loadVideoById(Main.videoList[Main.playCount]);
+                player.playVideo();
+                setTimeout(
+                    function() {
+                        if (player.getDuration() === 0) {
+                            playLoop();
+                        }
+                    },
+                    3000
+                );
+            }
+            function onPlayerStateChange(event) {
+                // get state
+                document.querySelector('#getPlayerState').innerHTML = player.getPlayerState();
+                document.querySelector('#getPlaybackRate').innerHTML = player.getPlaybackRate();
+                document.querySelector('#getAvailablePlaybackRates').innerHTML = player.getAvailablePlaybackRates();
+                document.querySelector('#getVideoBytesLoaded').innerHTML = player.getVideoBytesLoaded();
+                document.querySelector('#width').innerHTML = document.querySelector('#player').getAttribute('width');
+                document.querySelector('#height').innerHTML = document.querySelector('#player').getAttribute('height');
+                document.querySelector('#getPlaybackQuality').innerHTML = player.getPlaybackQuality();
+                document.querySelector('#getDuration').innerHTML = player.getDuration();
+                document.querySelector('#getPlaylist').innerHTML = player.getPlaylist();
+                document.querySelector('#getCurrentTime').innerHTML = player.getCurrentTime();
+                document.querySelector('#totalTime').innerHTML = toHHMMSS(player.getDuration());
+                // Math.floor(player.getDuration()/60) + ':' + Math.floor(player.getDuration()%60);
+
+                clearInterval(currentTime);
+                setInterval(function() {
+                    document.querySelector('#getVideoLoadedFraction').innerHTML = player.getVideoLoadedFraction();
+                }, 1000);
+                // if (player.getPlaybackQuality() !== 'hd1080') {
+                //     player.setPlaybackQuality('highres');
+                // }
+                if (event.data === 0) {
+                    // alert('Next');
+                    playLoop();
+                }
+                if (event.data === 1) {
+                    currentTime = setInterval(
+                        function () {
+                            document.querySelector('#getCurrentTime').innerHTML = player.getCurrentTime();
+                            document.querySelector('#playTime').innerHTML = toHHMMSS(player.getCurrentTime());
+                            // Math.floor(player.getCurrentTime()/60) + ':' + Math.floor(player.getCurrentTime()%60);
+                            document.querySelector('#progress_bar').style.width = (player.getCurrentTime()/player.getDuration())*100 + '%';
+                            // console.log(player.getCurrentTime()/player.getDuration());
+                        },
+                        1000
+                    );
+                }
+                if (event.data === -1) {
+                 // alert('ERROR');
+                 // player.nextVideo();
+                }
+            }
+
+            function switchVideo(switching) {
+                clearTimeout(skipContinue);
+                switch(switching) {
+                    case 0:
+                    Main.playCount--;
+                    if (Main.playCount < 0) {
+                        Main.playCount = Main.videoList.length -1;
+                    }
+                    break;
+                    case 1:
+                    Main.playCount++;
+                    if (Main.playCount > (Main.videoList.length -1)) {
+                        Main.playCount = 0;
+                    }
+                    break;
+                }
+                skipContinue = setTimeout(
+                    function () {
+                        player.loadVideoById(Main.videoList[Main.playCount]);
+                        player.playVideo();
+                        setTimeout(
+                            function() {
+                                if (player.getDuration() === 0) {
+                                    playLoop();
+                                }
+                            },
+                            3000
+                        );
+                    },
+                    900
+                );
+            }
+            function switchChannel(switching) {
+                clearTimeout(skipContinue);
+                switch(switching) {
+                    case 0:
+                    Main.channelCount--;
+                    if (Main.channelCount < 0) {
+                        Main.channelCount = Main.channelList.length -1;
+                    }
+                    break;
+                    case 1:
+                    Main.channelCount++;
+                    if (Main.channelCount > (Main.channelList.length -1)) {
+                        Main.channelCount = 0;
+                    }
+                    break;
+                }
+                skipContinue = setTimeout(
+                    function () {
+                        console.log(Main.channelCount);
+                        Main.videoList = [];
+                        Main.videoList = Main.channelList[Main.channelCount];
+                        player.loadVideoById(Main.videoList[0]);
+                        player.playVideo();
+                        setTimeout(
+                            function() {
+                                if (player.getDuration() === 0) {
+                                    playLoop();
+                                }
+                            },
+                            3000
+                        );
+                    },
+                    900
+                );
+            }
+
+            function onYouTubeIframeAPIReady() {
+                playChannel();
+
+                // set control
+                document.querySelector('#play').addEventListener('click', function() {
+                    if (player.getPlayerState() === 2) {
+                        player.playVideo();
+                        document.querySelector('#play').innerHTML = 'Pause';
+                    }
+                    if (player.getPlayerState() === 1) {
+                        player.pauseVideo();
+                        document.querySelector('#play').innerHTML = 'Play';
+                    }
+                });
+                document.querySelector('#prev').addEventListener('click', function() {
+                    // player.previousVideo();
+                    // Main.playCount--;
+                    // if (Main.playCount < 0) {
+                    //     Main.playCount = Main.videoList.length -1;
+                    // }
+                    // player.loadVideoById(Main.videoList[Main.playCount]);
+                    // player.playVideo();
+                    switchVideo(0);
+                });
+                document.querySelector('#next').addEventListener('click', function() {
+                    // player.nextVideo();
+                    // Main.playCount++;
+                    // if (Main.playCount > (Main.videoList.length -1)) {
+                    //     Main.playCount = 0;
+                    // }
+                    // player.loadVideoById(Main.videoList[Main.playCount]);
+                    // player.playVideo();
+                    switchVideo(1);
+                });
+                document.querySelector('#vol_up').addEventListener('click', function () {
+                    if (player.isMuted()) {
+                        player.unMute();
+                    }
+                    if (100 > Main.vol) {
+                        player.setVolume(Main.vol++);
+                        document.querySelector('#vol').innerHTML = Main.vol;
+                    }
+                });
+                document.querySelector('#vol_down').addEventListener('click', function () {
+                    if (player.isMuted()) {
+                        player.unMute();
+                    }
+                    if (Main.vol > 0) {
+                        player.setVolume(Main.vol--);
+                        document.querySelector('#vol').innerHTML = Main.vol;
+                    }
+                });
+                document.querySelector('#mute').addEventListener('click', function () {
+                    if (player.isMuted()) {
+                        player.unMute();
+                    } else {
+                        player.mute();
+                    }
+                });
+                document.querySelector('#prevChannel').addEventListener('click', function () {
+                    switchChannel(0);
+                });
+                document.querySelector('#nextChannel').addEventListener('click', function () {
+                    switchChannel(1);
+                });
+                document.querySelector('#full_screen').addEventListener('click', function() {
+                    // full screen
+                      if (!document.fullscreenElement &&    // alternative standard method
+                          !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+                        if (document.documentElement.requestFullscreen) {
+                          document.querySelector('#player').requestFullscreen();
+                        } else if (document.documentElement.msRequestFullscreen) {
+                          document.querySelector('#player').msRequestFullscreen();
+                        } else if (document.documentElement.mozRequestFullScreen) {
+                          document.querySelector('#player').mozRequestFullScreen();
+                        } else if (document.documentElement.webkitRequestFullscreen) {
+                          document.querySelector('#player').webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                        }
+                      } else {
+                        if (document.exitFullscreen) {
+                          document.exitFullscreen();
+                        } else if (document.msExitFullscreen) {
+                          document.msExitFullscreen();
+                        } else if (document.mozCancelFullScreen) {
+                          document.mozCancelFullScreen();
+                        } else if (document.webkitExitFullscreen) {
+                          document.webkitExitFullscreen();
+                        }
+                      }
+
+                });
+                window.onkeydown = keyboard;
+                function keyboard (e) {
+                    if (e.keyCode === 37) {
+                        // player.pauseVideo();
+                        player.seekTo(player.getCurrentTime() - 3, true);
+                        document.querySelector('#progress_bar').style.width = ((player.getCurrentTime() - 3)/player.getDuration())*100 + '%';
+                        console.log(player.getCurrentTime() - 3);
+                        // player.playVideo();
+                    }
+                    if (e.keyCode === 39) {
+                        // player.pauseVideo();
+                        player.seekTo(player.getCurrentTime() + 3, true);
+                        document.querySelector('#progress_bar').style.width = ((player.getCurrentTime() + 3)/player.getDuration())*100 + '%';
+                        console.log(player.getCurrentTime() + 3);
+                        // player.playVideo();
+                    }
+                    if (e.keyCode === 90) {
+                        console.log('z');
+                        player.pauseVideo();
+                        player.setPlaybackRate(2);
+                        player.playVideo();
+                    }
+                    if (e.keyCode === 88) {
+                        console.log('x');
+                        player.pauseVideo();
+                        player.setPlaybackRate(1);
+                        player.playVideo();
+                    }
+                    if (e.keyCode === 67) {
+                        console.log('c');
+                        player.pauseVideo();
+                        player.setPlaybackRate(0.25);
+                        player.playVideo();
+                    }
+                }
+            }
+
+            setTimeout(function() {
+                onYouTubeIframeAPIReady();
+                // alert('4 - iframe api ready');
+            }, 1200);
+        }
+    }
+
+    loadPlayer();
+</script>
+</html>
