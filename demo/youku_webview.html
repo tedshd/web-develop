@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>youku_webview</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+    <div>Ting Master</div>
+    <div id="youkuplayer" style=""></div>
+    <script type="text/javascript" src="http://player.youku.com/jsapi">
+    function runPlayer(vid) {
+        player = new YKU.Player('youkuplayer',{
+        styleid: '2',
+        client_id: 'a3660779c8b57c32',
+        vid: vid,
+        autoplay: true,
+        show_related: false,
+        width: '100%',
+        height: '100%',
+        isMobile: true,
+        playerType: 'h5',
+        // winType: 1,
+        // canWide: 0,
+        events:{
+        onPlayerReady: function(){ /*your code*/ },
+        onPlayStart: function(){ /*your code*/ },
+        onPlayEnd: function(){ /*your code*/ }
+        }
+        });
+        function playVideo(){
+            player.playVideo();
+        }
+        function pauseVideo(){
+            player.pauseVideo();
+        }
+        function seekTo(s){
+            player.seekTo(s);
+        }
+        function currentTime(){
+        return player.currentTime();
+        }
+    }
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    var vid = getParameterByName('hash');
+    if (!vid) {
+        vid = 'XNzIyNDcxMjU2';
+    }
+    runPlayer(vid);
+    </script>
+</body>
+</html>

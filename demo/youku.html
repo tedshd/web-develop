@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>youku</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+    <div id="youkuplayer" style=""></div>
+    <button>Next</button>
+    <script type="text/javascript" src="http://player.youku.com/jsapi">
+    function runPlayer(vid) {
+        player = new YKU.Player('youkuplayer',{
+        styleid: '2',
+        client_id: 'a3660779c8b57c32',
+        vid: vid,
+        autoplay: true,
+        show_related: false,
+        width: 640,
+        height: 480,
+        // winType: 1,
+        // canWide: 0,
+        events:{
+        onPlayerReady: function(){ /*your code*/ },
+        onPlayStart: function(){ /*your code*/ },
+        onPlayEnd: function(){ /*your code*/ }
+        }
+        });
+        function playVideo(){
+        player.playVideo();
+        }
+        function pauseVideo(){
+        player.pauseVideo();
+        }
+        function seekTo(s){
+        player.seekTo(s);
+        }
+        function currentTime(){
+        return player.currentTime();
+        }
+    }
+    runPlayer('XNzIyNDcxMjU2');
+    document.querySelector('button').addEventListener('click', function() {
+        runPlayer('XNzM3MDY3NzQ0');
+    })
+    </script>
+</body>
+</html>
