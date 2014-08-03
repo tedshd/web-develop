@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>table_2</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<style>
+.vertical-centering:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+    #table {
+        display: table;
+        background: green;
+        width: 100%;
+        height: 50px;
+    }
+    #table * {
+        vertical-align: middle;
+    }
+    #click_area, #info {
+        display: table-cell;
+    }
+    #info {
+        width: 10px;
+        background: gray;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: right;
+    }
+    #info div {
+        display: inline-block;
+    }
+</style>
+<body>
+    <div id="table">
+        <div id="click_area">
+            <span>
+                <span>PLAY</span>
+                <span>PAUSE</span>
+            </span>
+            <span id="title">Title</span>
+        </div>
+        <div id="info">
+            <div id="sub">SUB</div>
+            <div id="pv">PV</div>
+        </div>
+    </div>
+</body>
+</html>
