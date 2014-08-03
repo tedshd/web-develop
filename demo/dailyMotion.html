@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>dailyMotion</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="/lib/angular_v1.2.16.js"></script>
+<link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<body>
+    <!-- This <div> tag will be replaced the <iframe> video player -->
+    <div id="player"></div>
+
+<script>
+    var player;
+    // This code loads the Dailymotion Javascript SDK asynchronously.
+    (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol + '//api.dmcdn.net/all.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
+    }());
+
+    // This function init the player once the SDK is loaded
+    window.dmAsyncInit = function()
+    {
+        // PARAMS is a javascript object containing parameters to pass to the player if any (eg: {autoplay: 1})
+        var PARAMS = {};
+        player = DM.player(
+            "player", {
+                video: "x1dm3ds_microsoft-xbox-one-drm-reversal-playstation-3-4-45-patch-fail_fun",
+                width: 1280,
+                height: 720,
+                params: PARAMS});
+
+        // 4. We can attach some events on the player (using standard DOM events)
+        player.addEventListener("apiready", function(e)
+        {
+            e.target.play();
+        });
+    };
+</script>
+</body>
+</html>
