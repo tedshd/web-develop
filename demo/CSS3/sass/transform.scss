@@ -1,0 +1,66 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-07-19 10:06:48
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+div {
+    // margin: 100px;
+}
+
+h2 {
+    // transform: rotateY(60deg);
+    // -webkit-animation-duration: 3s;
+    // -webkit-animation-name: title;
+    // -webkit-animation-play-state: running;
+    // -webkit-animation-direction: alternate;
+    transition: all 0.5s;
+    -webkit-animation: title 30s;
+    &:hover {
+        // -webkit-animation-play-state: paused;
+        // -webkit-animation: titlehover 10s;
+        -webkit-animation: titlehover 30s;
+    }
+}
+.no {
+    -webkit-animation: title 30s;
+}
+.hover {
+    -webkit-animation: titlehover 30s;
+}
+@-webkit-keyframes title {
+    from {
+        // transform: scaleX(0);
+        // transform: scaleY(0);
+        // transform: rotateY(-90deg);
+        // transform: translate3d(12px, 50%, 3em);
+        // transform: rotate3d(0, 100, 0, 60deg)
+        // transform: translateX(50%);
+    }
+    to {
+        transform: translateX(0);
+        // transform: rotateY(0deg);
+        // transform: translateX(0);
+    }
+}
+@-webkit-keyframes titlehover {
+    from {
+        // transition: all 0.5s;
+        // transform: scaleX(0);
+        // transform: scaleY(0);
+        // transform: rotateY(-90deg);
+        transform: translateX(0);
+        // transform: translate3d(12px, 50%, 3em);
+        // transform: rotate3d(0, 100, 0, 60deg)
+    }
+    to {
+        // transform: translateX(50%);
+        transform: translateX(50%);
+        // transform: rotateY(0deg);
+        // transform: translateX(0);
+    }
+}
