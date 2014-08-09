@@ -16,7 +16,7 @@
     var str = navigator.userAgent;
     document.querySelector('#str').innerHTML = str;
     var parse = navigator.userAgent.search('Windows Phone');
-    if (parse) {
+    if (parse > -1) {
         alert('Win Phone');
     }
 </script>
