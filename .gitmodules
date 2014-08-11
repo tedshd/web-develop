@@ -1,6 +1,3 @@
-[submodule "lab/personal_website"]
-	path = lab/personal_website
-	url = git@github.com:tedshd/personal_intro.git
 [submodule "lab/keyboard_test_page"]
 	path = lab/keyboard_test_page
 	url = git@github.com:tedshd/keyboard_test_page.git
