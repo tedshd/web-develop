@@ -1,0 +1,53 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-08-13 02:45:56
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+$gridsWidth: 300px;
+// $gridsWidth: 120px;
+
+#con {
+    margin: 0 auto;
+    .grids {
+        float: left;
+    }
+}
+
+// $columns: 4;
+$columns: 10;
+
+@for $i from 1 through $columns {
+    @media only screen and (min-width : $gridsWidth*$i) {
+        #con {
+            width: $gridsWidth*$i;
+        }
+    }
+}
+
+// @media only screen and (min-width : $gridsWidth) {
+//     #con {
+//         width: $gridsWidth;
+//     }
+// }
+
+// @media only screen and (min-width : $gridsWidth*2) {
+//     #con {
+//         width: $gridsWidth*2;
+//     }
+// }
+
+// @media only screen and (min-width : $gridsWidth*3) {
+//     #con {
+//         width: $gridsWidth*3;
+//     }
+// }
+// @media only screen and (min-width : $gridsWidth*4) {
+//     #con {
+//         width: $gridsWidth*4;
+//     }
+// }

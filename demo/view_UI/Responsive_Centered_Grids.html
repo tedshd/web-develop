@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>Responsive_Centered_Grids</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<script src="/lib/angular_v1.2.16.js"></script>
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<link rel="stylesheet" href="stylesheets/responsive_centered_grids.css">
+</head>
+<body ng-controller="screenShotController">
+<!-- <body ng-controller="pixnetController"> -->
+    <div id="con">
+        <div class="grids" ng-repeat="list in data">
+            <img ng-src="{{list.content.src}}" alt="{{list.title.$t}}" width="300">
+            <!-- <a href="{{list.link}}" target="_blank">
+                <img ng-src="{{list.thumb}}" alt="{{list.title}}" width="">
+            </a> -->
+        </div>
+    </div>
+</body>
+<script>
+function pixnetController ($scope, $http) {
+  // var apiUrl = 'http://picasaweb.google.com/data/feed/base/user/TEDsHD/albumid/5263807088660719009?alt=json';
+  var apiUrl = 'http://emma.pixnet.cc/album/elements?set_id=12721258&user=sinoharaizumi';
+  $http.jsonp(
+    apiUrl + '&callback=JSON_CALLBACK').success(
+    function(data) {
+      console.log(data);
+      // console.log(data.elements);
+      $scope.data = data.elements;
+      // $scope.data = data.feed.entry;
+    }
+  );
+}
+function screenShotController ($scope, $http) {
+  var apiUrl = 'http://picasaweb.google.com/data/feed/base/user/TEDsHD/albumid/5263807088660719009?alt=json';
+  $http.jsonp(
+    apiUrl + '&callback=JSON_CALLBACK').success(
+    function(data) {
+      console.log(data);
+      $scope.data = data.feed.entry;
+    }
+  );
+}
+</script>
+</html>
