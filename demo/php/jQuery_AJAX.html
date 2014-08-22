@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery_AJAX</title>
+<script src="../../lib/jquery-1.10.1.js"></script>
+</head>
+<body>
+    <div id="data"></div>
+</body>
+<script>
+    $.ajax({
+        url: '/login/signup',
+        type: 'POST',
+        data: {
+        },
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+</script>
+</html>
