@@ -1,5 +1,5 @@
 <?php
-    // echo 'test<br>';
+    echo 'test<br>';
     if (isset($_POST['str'])) {
         // echo $_POST['str'];
         // echo '<br>';
