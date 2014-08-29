@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>footer</title>
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<!-- <link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.1/normalize.css"> -->
+<!-- <link rel="stylesheet" href="stylesheets/footer.css"> -->
+<style>
+    html, body {
+        height: 100%;
+    }
+    html, body, div, h1, h2 {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        font-size: 100%;
+        vertical-align: baseline;
+    }
+    #hd {
+        height: 50px;
+        background: #aaa;
+        /*display: none;*/
+    }
+    #bd {
+        text-align: center;
+        min-height: calc(100% - 50px);
+        /*min-height: 100%;*/
+        background: #ccc;
+    }
+    #footer {
+        position: relative;
+        bottom: 50px;
+        text-align: center;
+        height: 50px;
+        background: #999;
+    }
+</style>
+</head>
+<body>
+    <header id="hd">
+        <h1>Head</h1>
+    </header>
+    <article id="bd">
+        <button>build content</button>
+        <h1>Content</h1>
+        <div id="loop"></div>
+    </article>
+    <footer id="footer">
+        <h2>Footer</h2>
+    </footer>
+</body>
+<script>
+    document.querySelector('button').addEventListener('click', function() {
+        document.querySelector('#loop').innerHTML = '';
+        for (var i = 0; i < 90; i++) {
+            var div = document.createElement('div');
+            div.innerHTML = 'content-'+ i;
+            document.querySelector('#loop').appendChild(div);
+        };
+    })
+</script>
+</html>
