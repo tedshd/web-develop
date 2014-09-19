@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="/lib/angular_v1.2.16.js"></script>
+<link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css">
+<script src="socket.js"></script>
+</head>
+<body>
+    <input type="text">
+    <button id="add">Add list</button>
+    <button id="move">Move item</button>
+    <ul>
+        <li>Default</li>
+    </ul>
+</body>
+<script>
+      var socket = io.connect('192.168.79.31:3000');
+      $('form').submit(function(){
+        socket.emit('InsertData', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+      socket.on('GetData', function(msg){
+        console.log(msg);
+        for (var i = 0; i < msg.length; i++) {
+            $('ul').append('<li>create_time: '+ msg[i].video.create_time + '<br>name:: <span class="name">' + msg[i].video.name +'</span></li>');
+        };
+      });
+    socket.on('NeedUpdate', function(msg) {
+        console.log('needupdate');
+        location.reload();
+    });
+    $('#add').on('click', function() {
+        $('ul').append('<li>'+ $('input').val() +'</li>');
+        var json = {
+          name: $('input').val()
+        };
+        socket.emit('InsertData', JSON.stringify(json));
+    });
+    $('ul').on('click', 'li', function() {
+        console.log($(this)[0].lastChild.innerHTML);
+        var json = {
+          name: $(this)[0].lastChild.innerHTML
+        };
+        socket.emit('DeleteData', JSON.stringify(json));
+    });
+    $('#move').on('click' , function() {
+        console.log($(this)[0].lastChild.innerHTML);
+        var json = {
+          name: $('li')[2].lastChild.innerHTML,
+          position: 0
+        };
+        socket.emit('MoveData', JSON.stringify(json));
+    });
+</script>
+</html>
