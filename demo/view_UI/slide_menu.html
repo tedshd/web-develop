@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>slider_menu</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<link rel="stylesheet" href="stylesheets/slide_menu.css">
+<style>
+/*html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}*/
+    /*body {
+        overflow: hidden;
+    }
+    .slide-push {
+        position: absolute;
+    }
+    #slide-menu {
+        width: 300px;
+        height: 100%;
+        background: #ccc;
+        overflow: auto;
+    }
+    #slide-container {
+        background: #666;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    #slide-menu-bg, #slide-container-bg {
+        position: relative;
+    }
+    #slide-menu.slide-menu-close {
+        left: -300px;
+    }
+    #slide-container.slide-menu-open {
+        left: 300px;
+    }
+*/
+    .head {
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: rgba(0, 128, 0, .5);
+    }
+    .slide-menu-open .head {
+        left: 300px;
+    }
+    .bd {
+        position: relative;
+    }
+    .haha {
+        position: relative;
+        height: 300px;
+        background: pink;
+    }
+    .hihi {
+        position: relative;
+        background: #228866;
+    }
+    .left {
+        position: absolute;
+        top:  0;
+        left: 0;
+        width: 50%;
+        height: 50px;
+        background: yellow;
+    }
+    .right {
+        position: absolute;
+        top:  0;
+        right: 0;
+        width: 50%;
+        background: gray;
+    }
+    .ft {
+        background: #0066ff;
+    }
+    #slide-container-bg {
+        background: #ff8800;
+    }
+</style>
+</head>
+<body class="">
+    <div id="slide-menu" class="slide-menu-close">
+        <div id="slide-menu-bg"></div>
+    </div>
+    <div id="slide-container" class="">
+        <div id="slide-container-bg">
+            <div class="hd">
+                <div class="head">
+                    <button class="open">open</button>
+                    <button class="close">close</button>
+                </div>
+            </div>
+            <div class="bd">
+                <div class="haha"></div>
+                <div class="hihi">
+                    <div class="left">
+                        LLL
+                    </div>
+                    <div class="right">RRR</div>
+                </div>
+            </div>
+            <div class="ft">
+                <h1>FTTTT</h1>
+            </div>
+            <div id="push-open-alyer"></div>
+        </div>
+    </div>
+</body>
+<script>
+    for (var i = 0; i < 100; i++) {
+        var div = document.createElement('div');
+        div.innerHTML = 'menu-' + i;
+        document.querySelector('#slide-menu').appendChild(div);
+    }
+    for (var i = 0; i < 100; i++) {
+        var div = document.createElement('div');
+        div.innerHTML = 'content-' + i;
+        document.querySelector('.bd').appendChild(div);
+    }
+
+    document.querySelector('.open').addEventListener('click', function () {
+        initSlideMenu.openMenu();
+        // document.querySelector('#slide-menu').classList.remove('slide-menu-close');
+        // document.querySelector('#slide-container').classList.add('slide-menu-open');
+        // document.querySelector('body').classList.add('push-open');
+    });
+    // document.querySelector('.close').addEventListener('click', function () {
+    //     document.querySelector('#slide-menu').classList.add('slide-menu-close');
+    //     document.querySelector('#slide-container').classList.remove('slide-menu-open');
+    // });
+    // document.querySelector('#push-open-alyer').addEventListener('click', function () {
+    //     document.querySelector('#slide-menu').classList.add('slide-menu-close');
+    //     document.querySelector('#slide-container').classList.remove('slide-menu-open');
+    //     // document.querySelector('body').classList.remove('push-open');
+    // });
+
+
+
+    (function () {
+        function initSlideMenu(option) {
+            var d4 = {
+                type: 'slide-push',
+                addFixedElement: ''
+            }
+            var option = option || d4;
+            var type = option.type,
+                addFixedElement = option.addFixedElement;
+
+            document.querySelector('body').classList.add(type);
+
+            function openMenu() {
+                document.querySelector('#slide-menu').classList.remove('slide-menu-close');
+                document.querySelector('#slide-container').classList.add('slide-menu-open');
+                document.querySelector('body').classList.add('push-open');
+            }
+            // function closeMenu() {
+            //     document.querySelector('#slide-menu').classList.add('slide-menu-close');
+            //     document.querySelector('#slide-container').classList.remove('slide-menu-open');
+            // }
+            document.querySelector('#push-open-alyer').addEventListener('click', function () {
+                document.querySelector('#slide-menu').classList.add('slide-menu-close');
+                document.querySelector('#slide-container').classList.remove('slide-menu-open');
+                // document.querySelector('body').classList.remove('push-open');
+            });
+            document.querySelector('#slide-container').addEventListener('transitionend', function (e) {
+                console.log(e);
+                if (document.querySelector('#slide-container').classList.contains('slide-menu-open')) {
+                    document.querySelector('body').classList.add('push-open');
+                } else {
+                    document.querySelector('body').classList.remove('push-open');
+                }
+            }, false);
+
+            this.openMenu = openMenu;
+        }
+        window.initSlideMenu = initSlideMenu;
+    })();
+    var initSlideMenu = new initSlideMenu({type: 'slide-over'});
+</script>
+</html>

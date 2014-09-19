@@ -1,0 +1,30 @@
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2014-09-04 11:44:24
+ * @version $Id$
+ */
+
+@import "compass";
+@import "compass/reset";
+
+.videos {
+    height: 100px;
+    * {
+        vertical-align: middle;
+    }
+    h4 {
+        display: inline-block;
+    }
+    .provider-avatar {
+        @include border-radius(50%);
+    }
+    .videos-items-more {
+        float: right;
+        display: inline-block;
+        height: 100%;
+        .more-drop-menu {
+            margin-top: 50%;
+        }
+    }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<script src="/lib/Dropit-master/dropit.js"></script>
+<link rel="stylesheet" href="/lib/Dropit-master/dropit.css" type="text/css" />
+<link rel="stylesheet" href="stylesheets/basic.css">
+<link rel="stylesheet" href="stylesheets/video_list.css">
+<style>
+</style>
+</head>
+<body>
+    <ul id="sortable">
+        <!-- <li>
+            <div id="video-1" class="videos" data-video-tag="1">
+                <input type="checkbox">
+                <span class="tag">1</span>
+                <img src="http://cloneprint.com/sites/cloneprint.com/files/upload/Adobe_InDesign_CS4_icon1.png" alt="No pic" width="100" height="100">
+                <h4>Title</h4>
+                <img class="avatar" src="http://www.gravatar.com/avatar/4a867d2c11c031308e2f1abf0220c403?s=150" alt="No pic" width="60" height="60">
+                <span class="user">Ted Shiu</span>
+                <span class="more">
+                    <ul class="menu">
+                        <li class="list">
+                            <a href="javascript:void(0)">Dropdown</a>
+                            <ul>
+                                <li><a href="#">Some Action 1</a></li>
+                                <li><a href="#">Some Action 2</a></li>
+                                <li><a href="#">Some Action 3</a></li>
+                                <li><a href="#">Some Action 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+        </li>
+        <li>
+            <div id="video-2" class="videos" data-video-tag="1">
+                <input type="checkbox">
+                <span class="tag">2</span>
+                <img src="http://cloneprint.com/sites/cloneprint.com/files/upload/Adobe_InDesign_CS4_icon1.png" alt="No pic" width="100" height="100">
+                <h4>Title</h4>
+                <img class="avatar" src="http://www.gravatar.com/avatar/4a867d2c11c031308e2f1abf0220c403?s=150" alt="No pic" width="60" height="60">
+                <span class="user">Ted Shiu</span>
+                <span class="more">
+                    <ul class="menu">
+                        <li class="list">
+                            <a href="javascript:void(0)">Dropdown</a>
+                            <ul>
+                                <li><a href="#">Some Action 1</a></li>
+                                <li><a href="#">Some Action 2</a></li>
+                                <li><a href="#">Some Action 3</a></li>
+                                <li><a href="#">Some Action 4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+        </li> -->
+    </ul>
+</body>
+<script>
+    $( "#sortable" ).sortable();
+    var ul = document.createElement('ul');
+    for (var i = 0; i < 10; i++) {
+        var li = document.createElement('li');
+        li.innerHTML =
+            '<div id="video-' + i + '" class="videos" data-video-tag="1">' +
+                '<input type="checkbox">' +
+                '<span class="tag">' + i + '</span>' +
+                    '<img src="http://cloneprint.com/sites/cloneprint.com/files/upload/Adobe_InDesign_CS4_icon1.png" alt="No pic" width="100" height="100">' +
+                    '<h4 class="video-title">Title</h4>' +
+                    '<img class="provider-avatar" src="http://www.gravatar.com/avatar/4a867d2c11c031308e2f1abf0220c403?s=150" alt="No pic" width="60" height="60">' +
+                    '<span class="provider-user">Ted Shiu</span>' +
+                    '<span class="videos-items-more vertical-centering">' +
+                    '<ul class="more-drop-menu">' +
+                        '<li class="more-drop-menu-list">' +
+                            '<a href="javascript:void(0)">Dropdown</a>' +
+                            '<ul>' +
+                                '<li><a href="javascript:void(0)">移至最上方</a></li>' +
+                                '<li><a href="javascript:void(0)">移至最下方</a></li>' +
+                                '<li><a href="javascript:void(0)">設成封面</a></li>' +
+                                '<li><a href="javascript:void(0)">刪除</a></li>' +
+                            '</ul>' +
+                        '</li>' +
+                    '</ul>' +
+                '</span>' +
+            '</div>';
+        ul.appendChild(li);
+    }
+    $('#sortable').append(ul.innerHTML);
+    $('.more-drop-menu').dropit({triggerParentEl: '.more-drop-menu-list'});
+    function editable(editItem, doSomething) {
+        var originContent;
+        $('body').on('click', editItem, function(e) {
+            originContent = this.innerHTML;
+            this.innerHTML = '';
+            $(this).after('<input class="edit-input" type="text" value="' + originContent + '">');
+            $('.edit-input').focus();
+        });
+        $('body').on('blur', '.edit-input', function() {
+            if (!$('.edit-input').val() || !$('.edit-input').val().match(/[\S]/)) {
+                var newContent = originContent;
+            } else {
+                var newContent = $('.edit-input').val();
+            }
+            $(editItem, $(this).parent()).append(newContent);
+            $(this).remove();
+            doSomething(newContent);
+        });
+        $('body').on('click', function(e) {
+            if (e.target.className !== 'video-title' && e.target.className !== 'edit-input') {
+                $('.edit-input').blur();
+            }
+        });
+        $('body').on('keydown', '.edit-input', function(e) {
+            if (e.keyCode === 13) {
+                $('.edit-input').blur();
+            }
+        });
+    }
+    editable('.video-title', function(data) {
+        console.log(data);
+    });
+</script>
+</html>

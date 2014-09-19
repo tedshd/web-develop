@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iframe_dialog</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<link rel="stylesheet" href="stylesheets/iframe_dialog.css">
+<style>
+
+</style>
+</head>
+<body>
+    <div id="box" class="init">
+        <!-- <iframe src="form.html" frameborder="0"></iframe> -->
+        <div id="close">close</div>
+    </div>
+</body>
+<script>
+    setTimeout(function() {
+        $('#box').addClass('show');
+    }, 3000);
+    $('#box').on('click', '#close', function() {
+        $('#box').removeClass('show');
+        $('#box').addClass('hide');
+    });
+    // $('#box').on('click', function() {
+    //     $(this).addClass('show');
+    //     // transform(document.querySelector('#box'), 0.1, 1, 1000);
+    // });
+    function transform (dom, start, end, t) {
+        var count = (t/100),
+            v = (end - start)/count;
+        var run = setInterval(function() {
+            dom.style.msTransform = 'scale(' + v + ')';
+            v += v;
+            console.log(v);
+            if (v > end) {
+                document.querySelector('#box').style.msTransform = 'scale(' + end + ')';
+                clearInterval(run);
+            }
+        }, 100);
+    }
+</script>
+</html>

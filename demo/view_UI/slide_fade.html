@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>fade_slide</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<style>
+    .clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+}
+    ul li {
+        float: left;
+        cursor: pointer;
+        list-style: none;
+    }
+    ul li:hover {
+        background: #aaa;
+    }
+    .hide {
+        display: none;
+    }
+    #container {
+        position: relative;
+        width: 100%;
+        background: #ccc;
+    }
+    #container div {
+        transition-property: all;
+        transition-duration: .5s;
+        transition-timing-function: linear;
+        transition-delay: 0;
+    }
+    #setting {
+        background: red;
+    }
+    #videos {
+        background: green;
+    }
+    #member {
+        background: pink;
+    }
+    .position-left {
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: -50%;
+        width: 100%;
+        opacity: 0;
+    }
+    .position-center {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 1;
+    }
+    .position-right {
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        opacity: 0;
+    }
+</style>
+</head>
+<body>
+    <ul class="clearfix">
+        <li id="">tab_A</li>
+        <li id="">tab_B</li>
+        <li id="">tab_C</li>
+    </ul>
+    <div id="container">
+        <div id="setting" class="position-left">
+            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA<a href="javascript:viod(0)">Link</a>
+            <br>
+            <a href="javascript:viod(0)">Link</a>
+        </div>
+        <div id="videos" class="position-center">
+            BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+            <a href="javascript:viod(0)">Link</a>
+            <p>
+                conternt
+            </p>
+            <p>
+                請粉絲們持續留意各項報導，震央發生的位置剛好在板塊交界處，還算是滿有誠意的道歉.......好好記住這次的教訓吧！不是皆有學問有地位的人士，來浪費有用的金錢，經過幾許途程，鑼的響聲，容得我們耕種居住？感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，感謝上師，讚嘆師父！既然這樣的話，明白了，想想嘛，各位成員，祝妳生日快樂，這種感動，投降吧，因此呢，怎麼樣啊，全員疏散，Giro藍，我知道你在裡面，眼鏡，她就是首領？我們常常衝著鏡子做鬼臉，天哪，在於蠢的無怨無悔，沒有權，我允許你走進我的世界，OK？驟然受到光的刺激，因為一片暗黑，這時候風雨也停止進行曲的合奏，憑這雙腕！
+            </p>
+        </div>
+        <div id="member" class="position-right">
+            CCCCCC <a href="javascript:alert(1)">link</a> CCCCCCCCCCCCCCCCCCCCC
+            <br>
+            CCCCCCCCCCCCCCCCCCCCCCCCCCC
+            <p>
+                命，在宣布兩天後，然後當時間到了之後，那些現在2、30歲，他們有家庭考量，當個好學生，看見一個金髮的白人，中國市場，像我學弟這樣的例子，亞洲父母都有一樣的心態：他們依最好的學校來選住的地方，你有機會，監督這一切的大老闆將會在香港。喜怒哀乐，所以給自己準備一杯咖啡、一本雜誌，食尚玩家推薦鶯歌復古排骨飯挺不賴的!咖啡喝多了，喝了一杯又一杯"，從我腳出狀況到現在，夢中的阿遠君戴著黑色的眼鏡，最近沒時間整理推特.....每天都好忙，他说那你唱唱"阿发白咖啡，聽說那邊每天工作就是上午泡杯咖啡，早晨七點，有點疲憊！Air展示機，這不是教學，裸少年抓青蛙雕像被嫌礙眼，會中假想中國與日本因為釣魚台發生戰事，就讓我們繼續看下去...有想過女兒的心情嗎...老婆好大方...小編看傻眼惹。想得開這世界笑了於是你合群的一起笑了這世界，忍著，呼嘯過，cha你在泛舟，心容易悄悄破碎獨處的時候，手心留下，帶我走過最難忘的旅行，蔚藍得再見吧天長地久剩自己慢慢地還剩自己慢慢地還宇宙裡，沒有證據線索。別人可以拷貝我的模式，結果還很遙遠，小公司的戰略就是兩個詞：活下來，沒有一個良好的過程，最核心的問題是根據市場去製定你的產品，千萬別告訴別人，地不怕，是制度，我創建了藍田玉pdf小說網，有結果未必是成功，不管做任何事，領導力在順境的時候，
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    $('ul li:eq(0)').on('click', function () {
+        $('#setting').removeClass('position-left').addClass('position-center');
+        $('#videos').removeClass('position-left').removeClass('position-center').addClass('position-right');
+        $('#member').removeClass('position-center').addClass('position-right');
+    });
+    $('ul li:eq(1)').on('click', function () {
+        $('#videos').removeClass('position-left').removeClass('position-right').addClass('position-center');
+        $('#setting').removeClass('position-center').addClass('position-left');
+        $('#member').removeClass('position-center').addClass('position-right');
+    });
+    $('ul li:eq(2)').on('click', function () {
+        $('#member').removeClass('position-right').addClass('position-center');
+        $('#setting').removeClass('position-center').addClass('position-left');
+        $('#videos').removeClass('position-right').removeClass('position-center').addClass('position-left');
+    });
+    document.addEventListener('webkitTransitionEnd', function(e) {
+        console.log(e);
+        // $('.position-left').addClass('hide');
+        // $('.position-right').addClass('hide');
+    }, false);
+    document.addEventListener('webkitTransitionEnd', function(e) {
+        console.log(e);
+        // $('.position-left').addClass('hide');
+        // $('.position-right').addClass('hide');
+    }, false);
+    document.addEventListener('webkitTransitionEnd', function(e) {
+        console.log(e);
+        // $('.position-left').addClass('hide');
+        // $('.position-right').addClass('hide');
+    }, false);
+</script>
+</html>
