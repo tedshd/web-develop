@@ -74,7 +74,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   overflow: hidden;
 }
 /* line 14, ../sass/slide_menu.scss */
-.push-open #push-open-alyer {
+.push-open #push-open-layer {
   z-index: 100;
   position: absolute;
   top: 0;
@@ -95,10 +95,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -moz-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -webkit-transition-duration: 0.5s;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
   -webkit-transition-timing-function: ease;
   -moz-transition-timing-function: ease;
   -o-transition-timing-function: ease;
@@ -134,13 +134,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   left: -300px;
 }
 
-/* line 60, ../sass/slide_menu.scss */
+/* line 57, ../sass/slide_menu.scss */
 .slide-push #slide-container.slide-menu-open {
   left: 300px;
 }
 
 /* ---- */
-/* line 69, ../sass/slide_menu.scss */
+/* line 64, ../sass/slide_menu.scss */
 .slide-menu-open .head {
   left: 300px;
 }

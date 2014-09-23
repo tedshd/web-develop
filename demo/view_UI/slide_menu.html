@@ -115,7 +115,7 @@
             <div class="ft">
                 <h1>FTTTT</h1>
             </div>
-            <div id="push-open-alyer"></div>
+            <div id="push-open-layer"></div>
         </div>
     </div>
 </body>
@@ -170,7 +170,7 @@
             //     document.querySelector('#slide-menu').classList.add('slide-menu-close');
             //     document.querySelector('#slide-container').classList.remove('slide-menu-open');
             // }
-            document.querySelector('#push-open-alyer').addEventListener('click', function () {
+            document.querySelector('#push-open-layer').addEventListener('click', function () {
                 document.querySelector('#slide-menu').classList.add('slide-menu-close');
                 document.querySelector('#slide-container').classList.remove('slide-menu-open');
                 // document.querySelector('body').classList.remove('push-open');
@@ -188,6 +188,6 @@
         }
         window.initSlideMenu = initSlideMenu;
     })();
-    var initSlideMenu = new initSlideMenu({type: 'slide-over'});
+    var initSlideMenu = new initSlideMenu({type: 'slide-push'});
 </script>
 </html>
