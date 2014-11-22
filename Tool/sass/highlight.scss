@@ -6,7 +6,6 @@
  */
 
 @import "compass";
-@import "compass/reset";
 
 *:hover {
     outline: solid 2px red;
@@ -43,4 +42,89 @@
 }
 * * * * * * * * * * * *:hover {
     outline: solid 2px #4f6c88;
+}
+* * * * * * * * * * * *:hover {
+    outline: solid 2px #4f6c88;
+}
+* * * * * * * * * * * *:hover {
+    outline: solid 2px #4f6c88;
+}
+* * * * * * * * * * * *:hover {
+    outline: solid 2px #4f6c88;
+}
+* * * * * * * * * * * *:hover {
+    outline: solid 2px #4f6c88;
+}
+* * * * * * * * * * * *:hover {
+    outline: solid 2px #4f6c88;
+}
+* * * * * * * * * * * * * {
+    &:hover {
+        outline: solid 2px #4f6c88;
+    }
+    * {
+        &:hover {
+            outline: solid 2px #4f6c88;
+        }
+        * {
+            &:hover {
+                outline: solid 2px #4f6c88;
+            }
+            * {
+                &:hover {
+                    outline: solid 2px #4f6c88;
+                }
+                * {
+                    &:hover {
+                        outline: solid 2px #4f6c88;
+                    }
+                    * {
+                        &:hover {
+                            outline: solid 2px #4f6c88;
+                        }
+                        * {
+                            &:hover {
+                                outline: solid 2px #4f6c88;
+                            }
+                            * {
+                                &:hover {
+                                    outline: solid 2px #4f6c88;
+                                }
+                                * {
+                                    &:hover {
+                                        outline: solid 2px #4f6c88;
+                                    }
+                                    * {
+                                        &:hover {
+                                            outline: solid 2px #4f6c88;
+                                        }
+                                        * {
+                                            &:hover {
+                                                outline: solid 2px #4f6c88;
+                                            }
+                                            * {
+                                                &:hover {
+                                                    outline: solid 2px #4f6c88;
+                                                }
+                                                * {
+                                                    &:hover {
+                                                        outline: solid 2px #00a1cd;
+                                                    }
+                                                    * {
+                                                        &:hover {
+                                                            outline: solid 2px #00a1cd;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -4,127 +4,144 @@
  * @date    2013-08-23 22:59:23
  * @version $Id$
  */
-/* line 17, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-
-/* line 22, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-html {
-  line-height: 1;
-}
-
-/* line 24, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-ol, ul {
-  list-style: none;
-}
-
-/* line 26, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* line 28, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-/* line 30, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-q, blockquote {
-  quotes: none;
-}
-/* line 103, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-q:before, q:after, blockquote:before, blockquote:after {
-  content: "";
-  content: none;
-}
-
-/* line 32, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-a img {
-  border: none;
-}
-
-/* line 116, ../../../../../../Applications/Fire.app/Contents/Resources/lib/ruby/compass_0.12/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
-  display: block;
-}
-
-/* line 11, ../sass/highlight.scss */
+/* line 10, ../sass/highlight.scss */
 *:hover {
   outline: solid 2px red;
 }
 
-/* line 14, ../sass/highlight.scss */
+/* line 13, ../sass/highlight.scss */
 * *:hover {
   outline: solid 2px green;
 }
 
-/* line 17, ../sass/highlight.scss */
+/* line 16, ../sass/highlight.scss */
 * * *:hover {
   outline: solid 2px blue;
 }
 
-/* line 20, ../sass/highlight.scss */
+/* line 19, ../sass/highlight.scss */
 * * * *:hover {
   outline: solid 2px gray;
 }
 
-/* line 23, ../sass/highlight.scss */
+/* line 22, ../sass/highlight.scss */
 * * * * *:hover {
   outline: solid 2px #0088ff;
 }
 
-/* line 26, ../sass/highlight.scss */
+/* line 25, ../sass/highlight.scss */
 * * * * * *:hover {
   outline: solid 2px #ff8800;
 }
 
-/* line 29, ../sass/highlight.scss */
+/* line 28, ../sass/highlight.scss */
 * * * * * * *:hover {
   outline: solid 2px #de3c4a;
 }
 
-/* line 32, ../sass/highlight.scss */
+/* line 31, ../sass/highlight.scss */
 * * * * * * * *:hover {
   outline: solid 2px #8100de;
 }
 
-/* line 35, ../sass/highlight.scss */
+/* line 34, ../sass/highlight.scss */
 * * * * * * * * *:hover {
   outline: solid 2px #00a1cd;
 }
 
-/* line 38, ../sass/highlight.scss */
+/* line 37, ../sass/highlight.scss */
 * * * * * * * * * *:hover {
   outline: solid 2px #884800;
 }
 
-/* line 41, ../sass/highlight.scss */
+/* line 40, ../sass/highlight.scss */
 * * * * * * * * * * *:hover {
   outline: solid 2px #88287f;
 }
 
-/* line 44, ../sass/highlight.scss */
+/* line 43, ../sass/highlight.scss */
 * * * * * * * * * * * *:hover {
   outline: solid 2px #4f6c88;
+}
+
+/* line 46, ../sass/highlight.scss */
+* * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+
+/* line 49, ../sass/highlight.scss */
+* * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+
+/* line 52, ../sass/highlight.scss */
+* * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+
+/* line 55, ../sass/highlight.scss */
+* * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+
+/* line 58, ../sass/highlight.scss */
+* * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+
+/* line 62, ../sass/highlight.scss */
+* * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 66, ../sass/highlight.scss */
+* * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 70, ../sass/highlight.scss */
+* * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 74, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 78, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 82, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 86, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 90, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 94, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 98, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 102, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 106, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #4f6c88;
+}
+/* line 110, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #00a1cd;
+}
+/* line 114, ../sass/highlight.scss */
+* * * * * * * * * * * * * * * * * * * * * * * * * *:hover {
+  outline: solid 2px #00a1cd;
 }
