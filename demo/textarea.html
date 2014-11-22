@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>textarea</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="../../lib/jquery-1.10.1.js"></script>
+<script src="/lib/angular_v1.2.16.js"></script>
+<link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css">
+</head>
+<body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>Click</button>
+</body>
+<script>
+    document.querySelector('button').addEventListener('click', function () {
+        var textarea = document.querySelector('textarea').value.replace(/\n/g, '<br>');
+        alert(textarea);
+    })
+</script>
+</html>
