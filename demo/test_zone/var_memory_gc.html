@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>var_memory_gc</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+    <h1>HIHI</h1>
+</body>
+<script>
+    var test = 'run test',
+        test1 = 'run test1',
+        test2 = 'run test2',
+        test3 = 'run test3',
+        test4 = 'run test4',
+        test5 = 'run test5',
+        test6 = 'run test6',
+        test7 = 'run test7',
+        test8 = 'run test8',
+        test9 = 'run test9';
+    function run() {
+        console.log(test);
+        console.log(test1);
+        console.log(test2);
+        console.log(test3);
+        console.log(test4);
+        console.log(test5);
+        console.log(test6);
+        console.log(test7);
+        console.log(test8);
+        console.log(test9);
+    }
+    run();
+    setInterval(function () {
+        run();
+    }, 3000);
+</script>
+</html>

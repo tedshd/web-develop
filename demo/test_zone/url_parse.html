@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>url_parse</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>parse</button>
+</body>
+<script>
+    var addVideoTimeout = 10000,
+        watchVideosResult,
+        addVideosArray,
+        videosCount,
+        videosObj = {},
+        videosArray = [],
+        invalidUrl = 0,
+        invalidUrlArray = [];
+    $('button').on('click', function() {
+        console.log($('textarea').val().replace(/\n/g, '<br>').split('<br>'));
+        var urlArray = $('textarea').val().replace(/\n/g, '<br>').split('<br>');
+        addVideosArray = urlArray;
+        videosCount = urlArray.length;
+        for (var i = 0; i < urlArray.length; i++) {
+            getYoutubeVideoInfo(parseYoutubeId(urlArray[i]), i);
+            getDailymotionVideoInfo(parseDailymotionId(urlArray[i]), i);
+            getYoukuVideoInfo(parseYoukuId(urlArray[i]), i);
+            // console.log(parseYoukuId(urlArray[i]));
+            if (invalidUrl === 3) {
+                videosCount--;
+                invalidUrlArray.push(urlArray[i]);
+            }
+            invalidUrl = 0;
+        }
+    });
+
+    watchVideosResult = setTimeout(function() {
+        videosCount = 0;
+        addVideos();
+    }, 15000);
+    function addVideos() {
+        if (videosCount === 0) {
+            clearTimeout(watchVideosResult);
+            console.log(videosObj);
+            for (x in videosObj) {
+                if (videosObj.hasOwnProperty(x)) {
+                    videosArray.push(videosObj[x]);
+                }
+            }
+            console.log(videosArray);
+            console.log(invalidUrlArray);
+            // post
+            // reset
+            videosArray = [];
+            videosObj = {};
+            invalidUrlArray = [];
+        }
+    }
+
+    function parseYoutubeId(url) {
+        if (url.match('youtube')) {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/,
+                match = url.match(regExp);
+            if (match && match[2].length === 11) {
+                video_hash = match[2];
+                return match[2];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+    function parseDailymotionId(url) {
+        var m = url.match(/^.+dailymotion.com\/((video|hub)\/([^_]+))?[^#]*(#video=([^_&]+))?/);
+        return m ? m[5] || m[3] : null;
+    }
+    function parseYoukuId(url) {
+        var m = url.match(/^.*v_show\/id_([0-9a-zA-Z\-\_]+).html/);
+        if (m && m[1].search('_') !== -1) {
+            m[1] = m[1].slice(0, m[1].search('_'));
+        }
+        return m ? m[1]: null;
+    }
+
+    function getYoutubeVideoInfo(vid, count) {
+        if (!vid) {
+            invalidUrl++;
+            return;
+        }
+        $.ajax({
+            url: 'http://gdata.youtube.com/feeds/api/videos/' + vid + '?v=2&alt=json',
+            type: 'GET',
+            data: {
+            },
+            timeout: addVideoTimeout,
+            success: function(data) {
+                // console.log('youtube');
+                // console.log(data);
+                // get max youtube video cover
+                var youtubeVideoCovers = data.entry.media$group.media$thumbnail,
+                    maxCover,
+                    maxWidth = 0;
+                for (var i = 0; i < youtubeVideoCovers.length; i++) {
+                    if (youtubeVideoCovers[i].width > maxWidth) {
+                        maxCover = i;
+                    }
+                    maxWidth = youtubeVideoCovers[i].width;
+                }
+                var youtubeVideoObject = {
+                    pid: '',
+                    name: data.entry.title.$t,
+                    author: data.entry.author[0].name.$t,
+                    source: 0, //0: yt, 1: dm, 2: yk
+                    url: data.entry.link[0].href,
+                    hash: data.entry.media$group.yt$videoid.$t,
+                    cover_url: data.entry.media$group.media$thumbnail[maxCover].url
+                }
+                console.log(youtubeVideoObject);
+                videosObj[count] = youtubeVideoObject;
+                // videosArray.push(youtubeVideoObject);
+                videosCount--;
+                addVideos();
+            },
+            error: function(e) {
+                console.log(e);
+                videosCount--;
+                invalidUrlArray.push(addVideosArray[count]);
+            }
+        });
+    }
+
+    function getDailymotionVideoInfo(vid, count) {
+        if (!vid) {
+            invalidUrl++;
+            return;
+        }
+        $.ajax({
+            url: 'https://api.dailymotion.com/video/' + vid,
+            type: 'GET',
+            data: {
+            },
+            timeout: addVideoTimeout,
+            success: function(data) {
+                // console.log('youtube');
+                // console.log(data);
+                var dailymotionVideoObject = {
+                    pid: '',
+                    name: data.title,
+                    author: data.owner,
+                    source: 1, //0: yt, 1: dm, 2: yk
+                    url: 'http://www.dailymotion.com/video/'+ data.id,
+                    hash: data.id
+                    // cover_url: data.entry.media$group.media$thumbnail[2].url
+                }
+                $.ajax({
+                    url: 'https://api.dailymotion.com/video/' + data.id + '?fields=thumbnail_720_url',
+                    type: 'GET',
+                    data: {
+                    },
+                    timeout: addVideoTimeout,
+                    success: function(data) {
+                        dailymotionVideoObject.cover_url = data.thumbnail_720_url;
+                        console.log(dailymotionVideoObject);
+                        videosObj[count] = dailymotionVideoObject;
+                        // videosArray.push(dailymotionVideoObject);
+                        videosCount--;
+                        addVideos();
+                    },
+                    error: function(e) {
+                        console.log(e);
+                        videosCount--;
+                        invalidUrlArray.push(addVideosArray[count]);
+                    }
+                });
+            },
+            error: function(e) {
+                console.log(e);
+                videosCount--;
+                invalidUrlArray.push(addVideosArray[count]);
+            }
+        });
+    }
+
+    function getYoukuVideoInfo(vid, count) {
+        if (!vid) {
+            invalidUrl++;
+            return;
+        }
+        $.ajax({
+            url: 'https://openapi.youku.com/v2/videos/show.json',
+            type: 'GET',
+            data: {
+                client_id: 'a3660779c8b57c32',
+                video_id: vid
+            },
+            timeout: addVideoTimeout,
+            success: function(data) {
+                // console.log('youtube');
+                // console.log(data);
+                var youkuVideoObject = {
+                    pid: '',
+                    name: data.title,
+                    author: data.user.name,
+                    source: 2, //0: yt, 1: dm, 2: yk
+                    url: data.link,
+                    hash: data.id,
+                    cover_url: data.bigThumbnail
+                }
+                console.log(youkuVideoObject);
+                videosObj[count] = youkuVideoObject;
+                // videosArray.push(youkuVideoObject);
+                videosCount--;
+                addVideos();
+            },
+            error: function(e) {
+                console.log(e);
+                videosCount--;
+                invalidUrlArray.push(addVideosArray[count]);
+            }
+        });
+    }
+</script>
+</html>

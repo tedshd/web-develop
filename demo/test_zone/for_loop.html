@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>for-loop-reduce</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+
+</body>
+<script>
+    var n = 1245;
+    n = n.toString();
+    function thousandSeparate(num) {
+        if (typeof(num) !== 'string') {
+            num = num.toString();
+        }
+        var newNum = '';
+        if (3 >= num.length) {
+            newNum = num;
+            return newNum;
+        }
+        for (var i = num.length - 3; i >= 0; i = i - 3) {
+            newNum = ',' + num.slice(i) + newNum;
+            num = num.slice(0, i);
+            if (num.length === 0) {
+                newNum = newNum.slice(1);
+            }
+            if (num.length < 3) {
+                newNum = num + newNum;
+            }
+        }
+        return newNum;
+    }
+    console.log(thousandSeparate(n));
+    // var newNum = '';
+    // for (var i = n.length - 3; i >= 0; i = i - 3) {
+    //     console.log(i);
+    //     console.log(n.slice(i));
+    //     newNum = ',' + n.slice(i) + newNum;
+    //     n = n.slice(0, i);
+    //     console.log(n);
+    //     if (n.length < 3) {
+    //         newNum = n + newNum;
+    //     }
+    // }
+    // console.log(newNum);
+</script>
+</html>
