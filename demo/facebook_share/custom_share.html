@@ -29,17 +29,19 @@ function postToFeed(title, desc, url, image) {
     FB.ui(obj, callback);
 }
 
-var fbShareBtn = document.querySelector('.fb_share');
-document.querySelector('.fb_share').addEventListener('click', function(e) {
-    e.preventDefault();
-    var title = fbShareBtn.getAttribute('data-title'),
-        desc = fbShareBtn.getAttribute('data-desc'),
-        url = fbShareBtn.getAttribute('href'),
-        image = fbShareBtn.getAttribute('data-image');
-    postToFeed(title, desc, url, image);
+var fbShareBtn = document.querySelectorAll('.fb_share');
+for (var i = 0; i < fbShareBtn.length; i++) {
+    fbShareBtn[i].addEventListener('click', function(e) {
+        e.preventDefault();
+        var title = fbShareBtn[i].getAttribute('data-title'),
+            desc = fbShareBtn[i].getAttribute('data-desc'),
+            url = fbShareBtn[i].getAttribute('href'),
+            image = fbShareBtn[i].getAttribute('data-image');
+        postToFeed(title, desc, url, image);
 
-    return false;
-});
+        return false;
+    });
+}
 
 </script>
 </html>
