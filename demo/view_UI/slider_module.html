@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>slider_module</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<link rel="stylesheet" href="stylesheets/slider_module.css">
+<link rel="stylesheet" href="/Tool/stylesheets/highlight.css">
+<style>
+    body {
+        overflow: hidden;
+    }
+    ul {
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+    .hide {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <ul>
+        <li>good</li>
+        <li data-id="player-comment">comment</li>
+        <li data-id="player-addVideo">add</li>
+        <li data-id="player-share">sahare</li>
+        <li data-id="player-report">post</li>
+    </ul>
+    <div id="slider-module" class="">
+        <div id="slider-module-close">X</div>
+        <div id="player-comment" class="module hide">
+            player-comment
+        </div>
+        <div id="player-addVideo" class="module hide">
+            player-addVideo
+        </div>
+        <div id="player-share" class="module hide">
+            player-share
+        </div>
+        <div id="player-report" class="module hide">
+            player-report
+        </div>
+    </div>
+</body>
+<script>
+    $('ul').on('click', 'li', function (e) {
+        console.log(e);
+        var module = e.target.getAttribute('data-id');
+        if (module) {
+            $('#' + module).removeClass('hide');
+            $('#slider-module').addClass('slider-module-show');
+        }
+        e.target.getAttribute('data-id');
+    });
+    $('#slider-module-close').on('click', function () {
+        $('#slider-module').removeClass('slider-module-show');
+        $('.module').addClass('hide');
+    });
+</script>
+</html>
