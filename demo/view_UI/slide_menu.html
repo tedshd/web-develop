@@ -164,7 +164,7 @@
             function openMenu() {
                 document.querySelector('#slide-menu').classList.remove('slide-menu-close');
                 document.querySelector('#slide-container').classList.add('slide-menu-open');
-                document.querySelector('body').classList.add('push-open');
+                // document.querySelector('body').classList.add('push-open');
             }
             // function closeMenu() {
             //     document.querySelector('#slide-menu').classList.add('slide-menu-close');
@@ -188,6 +188,6 @@
         }
         window.initSlideMenu = initSlideMenu;
     })();
-    var initSlideMenu = new initSlideMenu({type: 'slide-push'});
+    var initSlideMenu = new initSlideMenu({type: 'slide-over'});
 </script>
 </html>

@@ -11,7 +11,7 @@
 
 .push-open {
     overflow: hidden;
-    #push-open-alyer {
+    #push-open-layer {
         z-index: 100;
         position: absolute;
         top: 0;
@@ -27,7 +27,7 @@
 
 #slide-menu, #slide-container, .head {
     @include transition-property(all);
-    @include transition-duration(.5s);
+    @include transition-duration(.3s);
     @include transition-timing-function(ease);
     // @include transition-timing-function(cubic-bezier(0, .1, .2, 1));
 }
@@ -54,18 +54,14 @@
     left: -300px;
 }
 .slide-push {
-    #slide-container {
-        // overflow: auto;
-    }
     #slide-container.slide-menu-open {
         left: 300px;
     }
 }
-.slide-over {
-    #slide-menu {
-    }
-}
+
 /* ---- */
-.slide-menu-open .head {
-    left: 300px;
+.slide-menu-open {
+    .head {
+        left: 300px;
+    }
 }
