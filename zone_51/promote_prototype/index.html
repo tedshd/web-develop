@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="stylesheets/index.css">
+</head>
+<body>
+    <div id="point">
+        <a id="point_1" href="javascript:void(0)" data-count="0">1</a>
+        <a id="point_2" href="javascript:void(0)" data-count="1">2</a>
+        <a id="point_3" href="javascript:void(0)" data-count="2">3</a>
+        <a id="point_4" href="javascript:void(0)" data-count="3">4</a>
+    </div>
+    <div id="page_1" class="page">red</div>
+    <div id="page_2" class="page">yellow</div>
+    <div id="page_3" class="page">green</div>
+    <div id="page_4" class="page">blue</div>
+</body>
+<script>
+    var count = 0;
+    window.onkeydown = runFunction;
+    function runFunction (e) {
+        if (e.keyCode === 38) {
+            count--;
+            if (count < 0) {
+                count = 0;
+            }
+            console.log(count);
+            runScroll();
+        }
+        if (e.keyCode === 40) {
+            count++;
+            if (count > 3) {
+                count = 3;
+            }
+            console.log(count);
+            runScroll();
+        }
+    }
+    function runScroll () {
+        $('body').stop().animate(
+            {
+                scrollTop: document.body.clientHeight*count + 'px'
+            },
+            1200
+        );
+    }
+    $('#point').find('a').on('click', function (e) {
+        console.log(e.target.getAttribute('data-count'));
+        count = e.target.getAttribute('data-count');
+        runScroll();
+    })
+</script>
+</html>
