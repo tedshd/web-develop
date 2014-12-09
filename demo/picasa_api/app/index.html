@@ -1,0 +1,159 @@
+<!doctype html>
+<html ng-app="route">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Starter Kit</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="196x196" href="images/touch/chrome-touch-icon-196x196.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+  <link rel="stylesheet" href="/lib/Effeckt.css/css/modules/list-items.autoprefixed.css">
+    <!-- build:css styles/components/main.min.css -->
+    <link rel="stylesheet" href="styles/h5bp.css">
+    <link rel="stylesheet" href="styles/components/components.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/loader.css">
+    <!-- endbuild -->
+    <style>
+      .hide {
+        display: none;
+      }
+      .fade_out {
+        opacity: 0;
+      }
+      .fade_in {
+        -webkit-animation: fade 1s ease;
+        animation: fade 1s ease;
+      }
+      .active {
+        background: #b7cdf4;
+      }
+      .blog ul {
+        /*transform: translate(-200px, -350px) skew(0deg, -60deg) rotateY(60deg);*/
+        /*opacity: .5;*/
+        transition:transform 1s;
+        transition-timing-function:linear;
+        -webkit-transition: transform 1s;
+        -webkit-transition-timing-function: linear;
+      }
+      .move_to_back {
+        /*-webkit-animation: move 1s linear;*/
+        /*animation: move 1s linear;*/
+        transform: translate(-200px, -350px) skew(0deg, -60deg) rotateY(60deg);
+        opacity: .5;
+      }
+
+      @-webkit-keyframes fade {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+      }
+      @keyframes fade {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+      }
+      .blog .content_layer {
+        z-index: 999;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .9);
+        overflow: auto;
+        padding: 50px;
+        transition:opacity .3s;
+        transition-timing-function:linear;
+        -webkit-transition: opacity .3s;
+        -webkit-transition-timing-function: linear;
+      }
+      .blog .content_layer h2 {
+        text-align: center;
+      }
+      .blog .content_layer .icon-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .blog .content_layer .icon-close:hover {
+        color: #ff4437;
+      }
+      .blog .content {
+        margin: 0 auto;
+        width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="app-bar promote-layer">
+      <div class="app-bar-container">
+        <button class="menu"><img src="images/hamburger.svg" alt="Menu"></button>
+        <h1 class="logo">Ted's Log</h1>
+        <section class="app-bar-actions">
+        <!-- Put App Bar Buttons Here -->
+        </section>
+      </div>
+    </header>
+
+    <nav id="nav_bar" class="navdrawer-container promote-layer">
+      <h4>Navigation</h4>
+      <ul>
+        <li class="active"><a href="#/blog">Blog</a></li>
+        <li><a href="#/dev_note">Dev Note</a></li>
+        <li><a href="#/screen_shot">Screen Shot</a></li>
+        <li><a href="#/logo_design">Lego Design</a></li>
+        <li><a href="styleguide/index.html">About Ted</a></li>
+      </ul>
+      <a id="routing" class="hide" href="">routing</a>
+    </nav>
+
+    <main>
+      <div ng-view></div>
+    </main>
+    <div id="loader" class="loading">
+      <span class="item-1"></span>
+      <span class="item-2"></span>
+      <span class="item-3"></span>
+      <span class="item-4"></span>
+      <span class="item-5"></span>
+      <span class="item-6"></span>
+      <span class="item-7"></span>
+      <div></div>
+    </div>
+  </body>
+  <script src="/lib/modernizr-latest.js"></script>
+  <script src="/lib/CSS3-event.js"></script>
+  <script src="/lib/angular_v1.2.16.js"></script>
+  <script src="/lib/angular-route.js"></script>
+  <script src="/lib/angular-resource.js"></script>
+  <script src="/lib/angular-sanitize.js"></script>
+  <script src="/lib/modernizr-latest.js"></script>
+  <script src="scripts/main.js"></script>
+</html>

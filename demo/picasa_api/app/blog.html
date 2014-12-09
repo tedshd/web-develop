@@ -1,0 +1,19 @@
+<div class="blog">
+    <h2 class="xlarge title">Blogger</h2>
+    <h4>
+        <a href="http://tysh310246.blogspot.tw/" target="_blank">BlueSpace</a>
+    </h4>
+    <!-- <div class="effeckt-list" data-effeckt-type="fall-in" ng-repeat="list in data">
+        <img class="new-item" ng-src="{{list.content.src}}" alt="{{list.title.$t}}" width="512">
+    </div> -->
+    <ul>
+        <li class="new-item" ng-repeat="list in data">
+            <a href="{{list.url}}" ng-click="showContent($index, $event)">{{list.title}}</a>
+        </li>
+    </ul>
+    <div class="content_layer fade_out hide">
+        <i class="icon icon-close color--danger"></i>
+        <h2 class="color--gray-background">{{title}}</h2>
+        <div class="content color--gray-background" ng-bind-html="renderHtml()"></div>
+    </div>
+</div>

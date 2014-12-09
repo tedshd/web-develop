@@ -1,0 +1,15 @@
+<div>
+    <h2 class="xlarge title">Dev Note</h2>
+    <h4>
+        <a href="http://tedshd.logdown.com/" target="_blank">tedshd's DevNote</a>
+    </h4>
+    <div class="content"></div>
+    <!-- <div class="effeckt-list" data-effeckt-type="fall-in" ng-repeat="list in data">
+        <img class="new-item" ng-src="{{list.content.src}}" alt="{{list.title.$t}}" width="512">
+    </div> -->
+    <ul>
+        <li ng-repeat="list in data">
+            <a href="{{list.link.href}}">{{list.title}}</a>
+        </li>
+    </ul>
+</div>
