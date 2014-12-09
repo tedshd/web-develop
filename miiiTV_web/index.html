@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <title>Samsung_miiiTV</title>
+
+                <!-- TODO : Style sheets code -->
+                <link rel="stylesheet" href="app/stylesheets/Main.css" type="text/css">
+                <link rel="stylesheet" href="app/stylesheets/font-awesome.css" type="text/css">
+
+                <!-- TODO: Plugins -->
+                <!-- // <script src="app/javascript/analytics.js"></script> -->
+                <script>
+//                     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+// (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+// m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+// })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+// (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+// (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+// m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+// })(window,document,'script','app/javascript/analytics.js','ga');
+
+                    // ga('create', 'UA-49247550-3', 'auto');
+                    // ga('create', 'UA-49247550-3', {
+                    //       'cookieDomain': 'none'
+                    //     });
+//                     ga('send', 'pageview');
+                    // ga('send', 'event', 'watch', 'official_<num>', '<channel_name>');
+                    // ga('send', 'event', 'watch', 'normal_<num>', '<channel_name>');
+                    // ga('send', 'event', 'feature', 'binding_ok');
+
+                    // var _gaq = _gaq || [];
+                    // _gaq.push(['_setAccount', 'UA-49247550-3']);
+                    // _gaq.push(['_trackPageview','web_miiiTV']);
+                    // var fakeDocument = {};
+                    // for (var p in document) fakeDocument[p] = p;
+                    // fakeDocument.domain = 'localhost';
+                </script>
+                <!-- // <script src="app/javascript/ga.js"></script> -->
+
+        </head>
+
+        <body onload="Main.onLoad();" onunload="Main.onUnload();">
+
+                <!-- Dummy anchor as focus for key events -->
+
+                <!-- for volume SOD -->
+                <object id="pluginObjectNNavi" border="0" classid="clsid:SAMSUNG-INFOLINK-NNAVI" style="opacity:0.0;background-color:#000000;width:0px;height:0px;"></object>
+                <object id="pluginObjectTVMW" border="0" classid="clsid:SAMSUNG-INFOLINK-TVMW"  style="opacity:0.0;background-color:#000000;width:0px;height:0px;"></object>
+
+                <!-- TODO: your code here -->
+                <!-- video player -->
+                <div id="player"></div>
+                <!-- no video tip -->
+                <div id="no_videos_view" class="hide">
+                        <div id="no_videos" class="normal">抱歉,這個頻道無法在此裝置上播放</div>
+                </div>
+                <!-- video list -->
+                <div id="video_list" class="hide">
+                        <div id="video_list_bg" class="large">
+                                <!-- <div class="cell list_focus" id="video_1">1</div>
+                                <div class="cell" id="video_2">
+                                        <img src="http://i.ytimg.com/vi/RWBW2q8QmEk/mqdefault.jpg" width="320" height="180">
+                                        <div class="list_video_title normal">
+                                                testabcdefghikld test hahaha ok
+                                        </div>
+                                </div>
+                                <div class="cell" id="video_38">38</div> -->
+                        </div>
+                        <div id="video_list_title" class="info_bar normal">
+                                <span id="video_list_channel_title"></span><span></span>
+                        </div>
+                        <div id="video_list_info" class="info_bar">
+                                <div id="" class="normal">
+                                        <span>
+                                                <div class="ico_enter">
+                                                <div class="ico_box">
+                                                    <div class="ico_arrow"></div>
+                                                </div>
+                                                <div class="ico_h_line"></div>
+                                                <div class="ico_v_line"></div>
+                                            </div>
+                                            選擇
+                                        </span>
+                                        <span class="color_key">
+                                                <span><span style="color:red;">&#9605;</span> 關閉影片列表</span>
+                                        </span>
+                                </div>
+                        </div>
+                </div>
+                <!-- menu -->
+                <div id="menu" class="hide">
+                    <span id="channels_default">
+                        <ul class="menu_title" class="normal">
+                            <li>
+                                <span>miiiTV 預設</span>
+                                <img src="img/ico_defult_bighead.png" alt="img" width="50" height="50">
+                            </li>
+                        </ul>
+                        <div class="channel_list_bg">
+                            <ul class="channel_list">
+                                <!-- <li class="menu_focus">
+                                    <img src="" alt="img" width="90" height="90">
+                                    <span>
+                                        <div>
+                                                channel namechannel name channelnamechannel name
+                                        </div>
+                                            <div>
+                                                channel num
+                                            </div>
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="" alt="img" width="90" height="90">
+                                    <span>
+                                        2
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>更多頻道</span>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </span>
+                </div>
+                <!-- infomation -->
+                <div id="info_bar" class="info_bar hide">
+                        <div id="video_info">
+                                <div id="time_info">
+                                        <div id="progress_time_bg">
+                                                <div id="progress_time"></div>
+                                        </div>
+                                        <div id="num_time">
+                                                <span id="playTime">00:00:00</span>
+                                                /
+                                                <span id="totalTime">00:00:00</span>
+                                        </div>
+                                </div>
+                                <div id="video_title" class="normal"></div>
+                        </div>
+                        <div id="control_info" class="normal">
+                                <!-- <span>&#9664; Prev video</span> -->
+                                <!-- <span>&#9650; Select up</span> -->
+                                <span>
+                                        <div class="ico_enter">
+                                        <div class="ico_box">
+                                            <div class="ico_arrow"></div>
+                                        </div>
+                                        <div class="ico_h_line"></div>
+                                        <div class="ico_v_line"></div>
+                                    </div>
+                                        暫停/播放
+                                </span>
+                                &nbsp;
+                                <span>&#9660; 跳下個影片</span>
+                                &nbsp;
+                                <span>&#9654; 快轉</span>
+                                <!-- <span><i class="fa fa-undo"></i> back</span> -->
+                                <span class="color_key">
+                                        <span><span style="color:red;">&#9605;</span> 影片列表</span>
+                                        &nbsp;
+                                        <span><span style="color:green;">&#9605;</span> 關閉影片資訊</span>
+                                        &nbsp;
+                                        <span><span style="color:yellow;">&#9605;</span> 更多頻道</span>
+                                        &nbsp;
+                                        <span><span style="color:blue;">&#9605;</span> 選單</span>
+                                </span>
+                        </div>
+                </div>
+                <div id="channel_info" class="hide">
+                        <div id="channel_number" class="x-large"></div>
+                        <div id="channel_title" class="large"></div>
+                </div>
+                <!-- loader -->
+                <div id="loader_view" class="">
+                        <h1 class="large">
+                                隨你免費看　隨時都好看
+                        </h1>
+                        <span id="loading" class="loading">
+                <span id="loading_msg" class="normal">連線中...</span>
+                <span id="outerCircle"></span>
+                </span>
+                </div>
+                <!-- ewlcome page -->
+                <div id="welcome_view" class="hide">
+                        <h1 class="x-large">現在就享受 miiiTV 帶來的無限精彩內容!</h1>
+                        <div class="welcome_con">
+                                <img src="img/ico_welcome.png" alt="miiiTV" width="273" height="325">
+                        </div>
+                        <div class="welcome_footer">
+                                <div>
+                                        <img src="img/ico_qr_code.png" alt="http://www.miiitv.com/apps" width="125" height="125">
+                                        <span class="normal">
+                                                <h3 class="large">App 下載</h3>
+                                                想擁有更多看不完的影片和節目<br>
+                                                立即下載 miiiTV APP應用程式，打造你的頻道內容！
+                                        </span>
+                                </div>
+                        </div>
+                        <div id="" class="info">
+                                <div id="" class="large">
+                                        <span>
+                                                <div class="ico_enter large">
+                                                <div class="ico_box">
+                                                    <div class="ico_arrow"></div>
+                                                </div>
+                                                <div class="ico_h_line"></div>
+                                                <div class="ico_v_line"></div>
+                                            </div>
+                                            繼續
+                                        </span>
+                                </div>
+                        </div>
+                </div>
+                <!-- setting -->
+                <div id="setting_view" class="hide">
+                        <h1 class="x-large">設定</h1>
+                        <div id="setting_grid" class="clearfix normal">
+                                <span id="setting_1" class="setting_focus">
+                                        <h3>使用者列表</h3>
+                                        <img src="img/ico_defult_bighead.png" alt="avatar" width="128" height="128">
+                                        <p>無</p>
+                                </span>
+                                <!-- <span id="setting_2">
+                                        <h3>同步 miiiTV App</h3>
+                                </span> -->
+                                <span id="setting_2">
+                                        <h3>同步更多頻道</h3>
+                                        <img src="img/ico_sync_l.png" alt="avatar" width="128" height="128">
+                                </span>
+                        </div>
+                        <div class="setting_footer">
+                                <img src="img/ico_logo.png" alt="logo" width="117" height="41">
+                                <span class="normal">
+                                        版本: 1.0.0.20140304
+                                </span>
+                        </div>
+                        <div id="" class="info">
+                                <div id="" class="normal">
+                                        <span>
+                                            <div class="ico_enter">
+                                                <div class="ico_box">
+                                                    <div class="ico_arrow"></div>
+                                                </div>
+                                                <div class="ico_h_line"></div>
+                                                <div class="ico_v_line"></div>
+                                            </div>
+                                            選擇
+                                        </span>
+                                        &nbsp;
+                                        <span><i class="fa fa-undo"></i> 返回</span>
+                                        <span class="color_key">
+                                                <span><span style="color:blue;" class="shadow">&#9605;</span> 服務條款</span>
+                                        </span>
+                                </div>
+                        </div>
+                </div>
+                <!-- user list -->
+                <div id="users_view" class="hide">
+                        <h1 class="x-large"><span>設定</span> 使用者列表</h1>
+                        <div id="default_view" class="hide">
+                                <span class="con normal">
+                                        <h2>你還沒有與 miiiTV 電視相關產品同步頻道列表</h2>
+                                        <br>
+                                        <div>
+                                                還想收看更多影片和節目？立即下載 miiiTV 手機應用程式，自己選擇自己的頻道內容！就可將自己的頻道同步到 miiiTV 電視相關產品喔！
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <img src="img/ico_qr_code.png" alt="http://www.miiitv.com/apps" width="125" height="125">
+                                </span>
+                                <span class="app_img">
+                                        <img src="img/ico_setting_users_default.png" alt="app" width="650" height="405">
+                                </span>
+                        </div>
+                        <div id="users_list" class="hide">
+                                <div class="arrow large">
+                                        <i class="fa fa-chevron-up"></i>
+                                </div>
+                                <div id="bind_users_bg">
+                                    <ul id="bind_users" class="normal">
+                                        <!-- <li class="users_list_focus">
+                                            <img src="" alt="avatar" width="62px" height="62px">
+                                            <span class="user_anme">HAHAHAHA!jkadshfkjsdf askdjhfkjashdf</span>
+                                            <span class="cancel_binding hide">
+                                                <div class="ico_enter">
+                                                    <div class="ico_box">
+                                                        <div class="ico_arrow"></div>
+                                                    </div>
+                                                    <div class="ico_h_line"></div>
+                                                    <div class="ico_v_line"></div>
+                                                </div>
+                                                取消同步
+                                            </span>
+                                            <span class="unbind_confirm">
+                                                <p>
+                                                    確定要取消同步
+                                                    <span class="user_anme_unbind">HAHAHAHA!jkadshfkjsdf askdjhfkjashdf</span>
+                                                    的頻道列表？
+                                                </p>
+                                                <span class="unbind_confirm_box">
+                                                    <div id="unbind_1" class="unbind_focus">是</div>
+                                                    <div id="unbind_2">否</div>
+                                                </span>
+                                            </span>
+
+                                        </li>
+                                        <li class="">
+                                            <img src="" alt="avatar" width="62px" height="62px">
+                                            <span class="user_anme">HAHAHAHA!jkadshfkjsdf askdjhfkjashdf</span>
+                                            <span class="cancel_binding">
+                                                <div class="ico_enter">
+                                                    <div class="ico_box">
+                                                        <div class="ico_arrow"></div>
+                                                    </div>
+                                                    <div class="ico_h_line"></div>
+                                                    <div class="ico_v_line"></div>
+                                                </div>
+                                                取消同步
+                                            </span>
+                                        </li>
+                                        <li class="">
+                                            <img src="" alt="avatar" width="62px" height="62px">
+                                            <span class="user_anme">HAHAHAHA!jkadshfkjsdf askdjhfkjashdf</span>
+                                            <span class="cancel_binding">
+                                                <div class="ico_enter">
+                                                    <div class="ico_box">
+                                                        <div class="ico_arrow"></div>
+                                                    </div>
+                                                    <div class="ico_h_line"></div>
+                                                    <div class="ico_v_line"></div>
+                                                </div>
+                                                取消同步
+                                            </span>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <div class="arrow large">
+                                        <i class="fa fa-chevron-down"></i>
+                                </div>
+                        </div>
+                        <div id="default_info" class="info hide">
+                                <div id="" class="normal">
+                                        <span>
+                                                <div class="ico_enter">
+                                                <div class="ico_box">
+                                                    <div class="ico_arrow"></div>
+                                                </div>
+                                                <div class="ico_h_line"></div>
+                                                <div class="ico_v_line"></div>
+                                            </div>
+                                            下一步
+                                        </span>
+                                        &nbsp;
+                                        <span><i class="fa fa-undo"></i> 返回</span>
+                                </div>
+                        </div>
+                        <div id="users_info" class="info hide">
+                                <div id="" class="normal">
+                                        <span><i class="fa fa-undo"></i> 返回</span>
+                                </div>
+                        </div>
+                </div>
+                <!-- sync user -->
+                <div id="sync_view" class="hide">
+                        <h1 class="x-large"><span>設定</span> 同步更多頻道</h1>
+                        <div id="" class="info">
+                                <div id="" class="normal">
+                                        <span><i class="fa fa-undo"></i> 返回</span>
+                                        <span class="color_key">
+                                                <span><span style="color:#246719;" class="shadow">&#9605;</span> 重新產生</span>
+                                        </span>
+                                </div>
+                        </div>
+                </div>
+                <div id="gen_ping_code" class="hide">
+                        <span class="con normal">
+                                已產生 PIN 碼 !<br>
+                                <h1 id="sett"></h1>
+                                <h1 id="settt"></h1>
+                                1. 開啟 miiiTV 手機應用程式<br>
+                                2. 點擊「一鍵上電視」功能<br>
+                                3. 輸入下列 6 個數字<br>
+                                4. 按下「開始同步」<br>
+                                <br>
+                                <div>
+                                        PIN 碼:
+                                        <span id="ping_code" class="large">loading...</span>
+                                </div>
+                                <div id="ping_code_msg" class="">
+                                        有效期間為 3 分鐘，若失效請再重新產生
+                                </div>
+                        </span>
+                        <span class="app_img">
+                                <img src="img/ico_setting_pincode.png" alt="app" width="650" height="405">
+                        </span>
+                </div>
+                <div id="terms_view" class="hide">
+                        <h1 class="x-large"><span>設定</span> 服務條款</h1>
+                        <h6></h6>
+                        <div id="terms_iframe" class="normal">
+                                <iframe src="http://www.miiitv.com/miiitvbox/tos/" frameborder="0"></iframe>
+                        </div>
+                        <div id="" class="info">
+                                <div id="" class="normal">
+                                        <span><i class="fa fa-undo"></i> 返回</span>
+                                        &nbsp;
+                                        <span>&#9650; 向上滾動</span>
+                                        &nbsp;
+                                        <span>&#9660; 向下滾動</span>
+                                </div>
+                        </div>
+                </div>
+                <div id="sync_ok" class="info_bar large hide">恭喜 <span class="user_name"></span> 一鍵上電視成功</div>
+
+                <div id="exit_confirm" class="hide">
+                        <h2 class="large">你確定要退出 miiiTV APP 嗎？</h2>
+                        <div id="confirm_select" class="large">
+                                <div id="exit_1" class="exit_focus">否</div>
+                                <div id="exit_2">是</div>
+                        </div>
+                </div>
+                <!-- <div id="pause"></div> -->
+                <!-- <h1 id="gett" style="position:absolute;top:0;left:0;z-index:999;font-size:100px"></h1> -->
+                <!-- <h1 id="get"></h1> -->
+        </body>
+        <!-- TODO : Common API -->
+        <script type='text/javascript' language='javascript' src='$MANAGER_WIDGET/Common/API/Plugin.js'></script>
+        <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
+        <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/webapi/1.0/webapis.js"></script>
+
+        <!-- TODO : Javascript code -->
+        <script>
+        var test ={
+                app: false
+        };
+        </script>
+        <script src="http://www.youtube.com/iframe_api"></script>
+        <script language="javascript" type="text/javascript" src="app/javascript/jsonp.js"></script>
+        <script language="javascript" type="text/javascript" src="app/javascript/hmac-sha1.js"></script>
+        <script language="javascript" type="text/javascript" src="app/javascript/Main.js"></script>
+</html>
