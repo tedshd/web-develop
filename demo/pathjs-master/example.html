@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+</head>
+<body>
+<a href="#!posts">posts</a>
+<a href="#!comments">comments</a>
+<a href="#!users">users</a>
+</body>
+<script src="path.js"></script>
+<script>
+function clearPanel(){
+// You can put some code in here to do fancy DOM transitions, such as fade-out or slide-in.
+document.querySelector('body').style.background = 'red';
+// clear
+}
+
+Path.map("#!users").to(function(){
+    alert("Users!");
+});
+
+Path.map("#!comments").to(function(){
+    alert("Comments!");
+}).enter(clearPanel);
+
+Path.map("#!posts").to(function(){
+    alert("Posts!");
+}).enter(clearPanel);
+
+Path.root("#!users");
+
+Path.listen();
+</script>
+</html>
