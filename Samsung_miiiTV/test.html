@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Samsung_miiiTV</title>
+
+		<!-- TODO : Style sheets code -->
+		<link rel="stylesheet" href="app/stylesheets/Main.css" type="text/css">
+		<link rel="stylesheet" href="app/stylesheets/font-awesome.css" type="text/css">
+
+		<!-- TODO: Plugins -->
+
+	</head>
+
+	<body onload="Main.onLoad();" onunload="Main.onUnload();">
+
+		<!-- Dummy anchor as focus for key events -->
+		<a href="javascript:void(0);" id="anchor" onkeydown="Main.keyDown();"></a>
+
+		<!-- for volume SOD -->
+		<object id="pluginObjectNNavi" border="0" classid="clsid:SAMSUNG-INFOLINK-NNAVI" style="opacity:0.0;background-color:#000000;width:0px;height:0px;"></object>
+		<object id="pluginObjectTVMW" border="0" classid="clsid:SAMSUNG-INFOLINK-TVMW"  style="opacity:0.0;background-color:#000000;width:0px;height:0px;"></object>
+
+		<!-- TODO: your code here -->
+		<h2></h2>
+		<div id="loader_view" class="">
+			<h1 class="large">
+				隨你免費看　隨時都好看
+			</h1>
+			<span id="loading" class="loading">
+                <span id="loading_msg" class="normal">頻道更新中...</span>
+                <span id="outerCircle"></span>
+       		</span>
+		</div>
+		<div id="welcome_view" class="hide">
+			<h1 class="x-large">現在就享受 miiiTV 帶來的無限精彩內容!</h1>
+			<div class="welcome_con">
+				<img src="img/ico_welcome.png" alt="miiiTV" width="273" height="325">
+			</div>
+			<div class="welcome_footer">
+				<div>
+					<img src="img/ico_qr_code.png" alt="http://www.miiitv.com/apps" width="125" height="125">
+					<span class="normal">
+						<h3 class="large">App 下載</h3>
+						想擁有更多看不完的影片和節目<br>
+						立即下載 miiiTVAPP應用程式，打造你的頻道內容！
+					</span>
+				</div>
+			</div>
+			<div id="" class="info">
+				<div id="" class="large">
+					<span>
+						<div class="ico_enter large">
+					        <div class="ico_box">
+					            <div class="ico_arrow"></div>
+					        </div>
+					        <div class="ico_h_line"></div>
+					        <div class="ico_v_line"></div>
+					    </div>
+					    繼續
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="setting_view" class="hide">
+			<h1 class="x-large">設定</h1>
+			<div id="setting_grid" class="clearfix normal">
+				<span id="setting_1" class="setting_focus">
+					<h3>使用者</h3>
+					<img src="img/ico_defult_bighead.png" alt="avatar" width="128" height="128">
+					<p>Ted_shiu</p>
+				</span>
+				<!-- <span id="setting_2">
+					<h3>同步 miiiTV App</h3>
+				</span> -->
+				<span id="setting_2">
+					<h3>同步 APP 頻道</h3>
+				</span>
+			</div>
+			<div class="setting_footer">
+				<img src="img/ico_logo.png" alt="logo" width="117" height="41">
+				<span class="normal">
+					版本: 1.0.0
+				</span>
+			</div>
+			<div id="" class="info">
+				<div id="" class="normal">
+					<span>
+						<div class="ico_enter">
+					        <div class="ico_box">
+					            <div class="ico_arrow"></div>
+					        </div>
+					        <div class="ico_h_line"></div>
+					        <div class="ico_v_line"></div>
+					    </div>
+					    選擇
+					</span>
+					&nbsp;
+					<span><i class="fa fa-undo"></i> back</span>
+					<span class="color_key">
+						<span><span style="color:blue;">&#9605;</span> 服務條款</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="users_view" class="hide">
+			<h1 class="x-large"><span>設定</span> 使用者列表</h1>
+			<div id="users_list" class="hide"></div>
+			<div id="" class="info">
+				<div id="" class="normal">
+					<span>
+						<div class="ico_enter">
+					        <div class="ico_box">
+					            <div class="ico_arrow"></div>
+					        </div>
+					        <div class="ico_h_line"></div>
+					        <div class="ico_v_line"></div>
+					    </div>
+					    我知道了
+					</span>
+					<span class="color_key">
+						<span><span style="color:green;">&#9605;</span> 重新產生</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="sync_view" class="hide">
+			<h1 class="x-large"><span>設定</span> 產生 Pin 碼</h1>
+			<div id="" class="info">
+				<div id="" class="normal">
+					<span><i class="fa fa-undo"></i> back</span>
+					<span class="color_key">
+						<span><span style="color:green;">&#9605;</span> 重新產生</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="gen_ping_code" class="hide">
+			<span class="con small">
+				<span class="normal">你還沒有與 miiiTV 電視相關產品同步頻道列表。</span>
+				<br>
+				還想收看更多影片和節目？立即下載 miiiTV 手機應用程式，自己選擇自己的頻道內容！就可將自己的頻道同步到 miiiTV 電視相關產品喔！
+				<br>
+				完成 miiiTV APP 安裝後，請直接開啟 APP：<br>
+				1. 點擊「一鍵上電視」功能<br>
+				2. 在手機中輸入下列 6 組號碼後，再按下「開始同步」<br>
+				<br>
+				<div>
+					ping 碼: <span id="ping_code">593470</span>
+					<div id="ping_code_error" class="">
+						無法產生 Pin 碼，<br>
+						請按 <span style="color:green;">&#9605;</span> 再重新產生一次
+					</div>
+				</div>
+				<img src="img/ico_qr_code.png" alt="http://www.miiitv.com/apps" width="125" height="125">
+			</span>
+			<span class="app_img">
+				<img src="img/ico_setting_users_default.png" alt="app" width="720" height="405">
+			</span>
+		</div>
+		<div id="terms_view" class="hide">
+			<h1 class="x-large"><span>設定</span> 服務條款</h1>
+			<h6></h6>
+			<div id="terms_iframe" class="normal">
+				<iframe src="http://www.miiitv.com/miiitvbox/tos/" frameborder="0"></iframe>
+			</div>
+			<div id="" class="info">
+				<div id="" class="normal">
+					<span><i class="fa fa-undo"></i> back</span>
+					&nbsp;
+					<span>&#9650; 向上滾動</span>
+					&nbsp;
+					<span>&#9660; 向下滾動</span>
+				</div>
+			</div>
+		</div>
+		<div id="sync_ok" class="info_bar large hide">恭喜 雅玲 一鍵上電視成功</div>
+		<div id="video_list" class="">
+			<div id="video_list_bg" class="large">
+				<div class="cell list_focus" id="video_1">1</div>
+				<div class="cell" id="video_2">
+					<img src="http://i.ytimg.com/vi/RWBW2q8QmEk/mqdefault.jpg" width="320" height="180">
+					<div class="list_video_title normal">
+						testabcdefghikld test hahaha ok
+					</div>
+				</div>
+				<div class="cell" id="video_3">3</div>
+				<div class="cell" id="video_4">4</div>
+				<div class="cell" id="video_5">5</div>
+				<div class="cell" id="video_6">6</div>
+				<div class="cell" id="video_7">7</div>
+				<div class="cell" id="video_8">8</div>
+				<div class="cell" id="video_9">9</div>
+				<div class="cell" id="video_10">10</div>
+				<div class="cell" id="video_11">11</div>
+				<div class="cell" id="video_12">12</div>
+				<div class="cell" id="video_13">13</div>
+				<div class="cell" id="video_14">14</div>
+				<div class="cell" id="video_15">15</div>
+				<div class="cell" id="video_16">16</div>
+				<div class="cell" id="video_17">17</div>
+				<div class="cell" id="video_18">18</div>
+				<div class="cell" id="video_19">19</div>
+				<div class="cell" id="video_20">20</div>
+				<div class="cell" id="video_21">21</div>
+				<div class="cell" id="video_22">22</div>
+				<div class="cell" id="video_23">23</div>
+				<div class="cell" id="video_24">24</div>
+				<div class="cell" id="video_25">25</div>
+				<div class="cell" id="video_26">26</div>
+				<div class="cell" id="video_27">27</div>
+				<div class="cell" id="video_28">28</div>
+				<div class="cell" id="video_29">29</div>
+				<div class="cell" id="video_30">30</div>
+				<div class="cell" id="video_31">31</div>
+				<div class="cell" id="video_32">32</div>
+				<div class="cell" id="video_33">33</div>
+				<div class="cell" id="video_34">34</div>
+				<div class="cell" id="video_35">35</div>
+				<div class="cell" id="video_36">36</div>
+				<div class="cell" id="video_37">37</div>
+				<div class="cell" id="video_38">38</div>
+			</div>
+			<div id="" class="info">
+				<div id="" class="normal">
+					<span>
+						<div class="ico_enter">
+					        <div class="ico_box">
+					            <div class="ico_arrow"></div>
+					        </div>
+					        <div class="ico_h_line"></div>
+					        <div class="ico_v_line"></div>
+					    </div>
+					    選擇
+					</span>
+					<span class="color_key">
+						<span><span style="color:red;">&#9605;</span> 關閉影片列表</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="menu" class="">
+			<ul id="menu_title" class="normal">
+	            <li>
+	                <img src="images/icon.png" alt="img" width="50" height="50">
+	                <span>miiiTV</span>的頻道列表
+	            </li>
+	        </ul>
+			<div id="channel_list_bg">
+	            <ul id="channel_list">
+	                <!-- <li class="menu_focus">
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                    	<div>
+	                    		channel namechannel name channelnamechannel name
+	                    	</div>
+		                    <div>
+		                    	channel num
+		                    </div>
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        2
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        3
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        4
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        5
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        6
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        7
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        8
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        9
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        10
+	                    </span>
+	                </li>
+	                <li>
+	                    <img src="" alt="img" width="90" height="90">
+	                    <span>
+	                        11
+	                    </span>
+	                </li>
+	                <li>
+	                    <span>更多頻道</span>
+	                </li> -->
+	        	</ul>
+			</div>
+		</div>
+		<div id="info_bar" class="info_bar hide">
+			<div id="video_info">
+				title
+			</div>
+			<div id="control_info" class="normal">
+				<!-- <span>&#9664; Prev video</span> -->
+				<!-- <span>&#9650; Select up</span> -->
+				<span>
+					<div class="ico_enter">
+				        <div class="ico_box">
+				            <div class="ico_arrow"></div>
+				        </div>
+				        <div class="ico_h_line"></div>
+				        <div class="ico_v_line"></div>
+				    </div>
+					暫停/播放
+				</span>
+				&nbsp;
+				<span>&#9660; 跳下個影片</span>
+				&nbsp;
+				<!-- <span>&#9654; 快轉</span> -->
+				<!-- <span><i class="fa fa-undo"></i> back</span> -->
+				<span class="color_key">
+					<span><span style="color:red;">&#9605;</span> 影片列表</span>
+					&nbsp;
+					<span><span style="color:green;">&#9605;</span> 關閉影片資訊</span>
+					&nbsp;
+					<span><span style="color:yellow;">&#9605;</span> 更多頻道</span>
+					&nbsp;
+					<span><span style="color:blue;">&#9605;</span> 選單</span>
+				</span>
+			</div>
+		</div>
+		<div id="channel_info" class="hide">
+			<div id="channel_number"></div>
+			<div id="channel_title"></div>
+		</div>
+		<div id="player"></div>
+		<div id="exit_confirm" class="hide">
+			<h2 class="large">你確定要退出 miiiTV APP 嗎？</h2>
+			<div id="confirm_select" class="large">
+				<span id="confirm_1" class="confirm_focus">否</span>
+				<span id="confirm_2">是</span>
+			</div>
+		</div>
+		<h1 id="data"></h1>
+		<h1 id="get"></h1>
+	</body>
+	<!-- TODO : Common API -->
+	<!-- // <script type='text/javascript' language='javascript' src='$MANAGER_WIDGET/Common/API/Plugin.js'></script> -->
+	<!-- // <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/Widget.js"></script> -->
+	<!-- // <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/TVKeyValue.js"></script> -->
+	<!-- // <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/webapi/1.0/webapis.js"></script> -->
+
+	<!-- TODO : Javascript code -->
+	<script>
+	var test ={
+		app: true
+	}
+	</script>
+	<script language="javascript" type="text/javascript" src="app/javascript/jsonp.js"></script>
+	<!-- // <script language="javascript" type="text/javascript" src="app/javascript/utf8_encode.js"></script> -->
+	<!-- // <script language="javascript" type="text/javascript" src="app/javascript/sha1.js"></script> -->
+	<!-- // <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script> -->
+	<script language="javascript" type="text/javascript" src="app/javascript/hmac-sha256.js"></script>
+	<script language="javascript" type="text/javascript" src="app/javascript/Main.js"></script>
+</html>
