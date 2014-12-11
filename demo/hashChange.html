@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>hashChange</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    div {
+        width: 300px;
+        height: 300px;
+        background: #ccc;
+    }
+    .v_1 {
+        background: #000;
+    }
+    .v_2 {
+        background: #666;
+    }
+    .v_3 {
+        background: red;
+    }
+</style>
+</head>
+<body>
+    <div id="test"></div>
+    <button id="b_1">HASH_1</button>
+    <button id="b_2">HASH_2</button>
+    <button id="b_3">HASH_3</button>
+</body>
+<script>
+    window.onhashchange = function () {
+        console.log('change');
+        var hash = location.hash;
+        console.log(hash);
+        switch (hash) {
+            case '#1':
+                console.log(1);
+                document.querySelector('#test').setAttribute('class', 'v_1');
+            break;
+            case '#2':
+                console.log(2);
+                document.querySelector('#test').setAttribute('class', 'v_2');
+            break;
+            case '#3':
+                console.log(3);
+                document.querySelector('#test').setAttribute('class', 'v_3');
+            break;
+        }
+    }
+    document.querySelector('#b_1').addEventListener('click', function () {
+        location.href ='/demo/hashChange.html#1';
+    });
+    document.querySelector('#b_2').addEventListener('click', function () {
+        location.href ='/demo/hashChange.html#2';
+    });
+    document.querySelector('#b_3').addEventListener('click', function () {
+        location.href ='/demo/hashChange.html#3';
+    });
+</script>
+</html>
