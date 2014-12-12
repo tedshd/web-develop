@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>slide_bar</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script src="../../lib/jquery-1.10.1.js"></script>
+<!-- <script src="/lib/angular_v1.2.16.js"></script> -->
+<!-- <link rel="stylesheet" href="/lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<script src="sGlide-1.10.0.js"></script>
+<script src="simple-slider.js"></script>
+<link href="simple-slider.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="slider"></div>
+    <input id="my-input" type="text">
+</body>
+<script>
+    $('#slider').sGlide({
+    startAt: 60,            // start slider knob at - default: 0
+    image: 'images/slider-knob.png',               // string - image path
+    width: 200,             // integer - default: 100
+    height: 20,             // integer - default: 40
+    unit: 'px',             // 'px' or '%' (default; doesn't apply to height)
+    pill: false,            // boolean - default: true
+    snap: {
+        points: 5,
+        markers: true,
+        onlyOnDrop: true
+    },
+    buttons: true,
+    disabled: true,         // boolean - default: false
+    colorStart: '#0066ff',            // css value
+    colorEnd:   '#ff6600',            // css value
+    // vertical:               // boolean - default: false
+    // showKnob:               // boolean - default: true
+    drop: function(o){
+        console.log(o.guid+': '+o.value+'%');
+    },
+    onButton: function(o){
+        var pct = Math.round(o.value)+'%';
+        $('#percentage').html(pct);
+    }
+});
+</script>
+<script>
+    $("#my-input").simpleSlider();
+    $("#my-input").bind("slider:ready", function (event, data) {
+
+    })
+    $("#my-input").bind("slider:changed", function (event, data) {
+  // The currently selected value of the slider
+  console.log(data.value);
+
+  // The value as a ratio of the slider (between 0 and 1)
+  // alert(data.ratio);
+});
+</script>
+</html>
