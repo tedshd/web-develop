@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var i;
+
     //create li list
     for (i = 1; 19 >= i; i++) {
         $("ul").append(
