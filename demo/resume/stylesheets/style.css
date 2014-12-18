@@ -91,102 +91,108 @@ body {
 /* line 25, ../sass/style.scss */
 body h2 {
   font-size: 32px;
+  color: #000;
+}
+/* line 29, ../sass/style.scss */
+body a, body p {
+  color: #242424;
 }
 
-/* line 30, ../sass/style.scss */
+/* line 34, ../sass/style.scss */
 .active {
   background: #aaa;
 }
 
-/* line 35, ../sass/style.scss */
+/* line 39, ../sass/style.scss */
 .nav-layout {
   z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: #fff;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
-  opacity: 0.3;
+  background: rgba(0, 0, 0, 0.5);
 }
-/* line 43, ../sass/style.scss */
+/* line 46, ../sass/style.scss */
 .nav-layout ul {
   float: right;
   margin-right: 5px;
 }
-/* line 46, ../sass/style.scss */
+/* line 49, ../sass/style.scss */
 .nav-layout ul li {
   float: left;
   padding: 5px;
   cursor: pointer;
 }
-/* line 50, ../sass/style.scss */
+/* line 53, ../sass/style.scss */
 .nav-layout ul li:hover {
   background: #aaa;
 }
 
-/* line 57, ../sass/style.scss */
+/* line 60, ../sass/style.scss */
 #con {
   position: relative;
   padding-top: 40px;
 }
 
-/* line 64, ../sass/style.scss */
+/* line 67, ../sass/style.scss */
 .layout-full #layout {
   margin: 10px;
 }
 
-/* line 70, ../sass/style.scss */
+/* line 73, ../sass/style.scss */
 .layout-card {
   background: #eee;
 }
-/* line 72, ../sass/style.scss */
+/* line 75, ../sass/style.scss */
 .layout-card #layout {
-  margin-left: 10px;
+  margin: 40px 5px 0 5px;
 }
-/* line 74, ../sass/style.scss */
+/* line 80, ../sass/style.scss */
 .layout-card #layout .resume {
   display: none;
 }
-/* line 77, ../sass/style.scss */
+/* line 83, ../sass/style.scss */
 .layout-card #layout .thumb, .layout-card #layout .desc {
-  float: left;
-  margin: 0 10px 10px 0;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 5px 10px 5px;
   padding: 10px;
   width: 300px;
   background: #dcdcdc;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.4);
 }
 
-/* line 90, ../sass/style.scss */
+/* line 140, ../sass/style.scss */
 .layout-list #layout {
   max-width: 960px;
   margin: 0 auto;
   background: #ddd;
 }
-/* line 91, ../sass/style.scss */
+/* line 141, ../sass/style.scss */
 .layout-list #layout .resume {
   display: none;
 }
-/* line 98, ../sass/style.scss */
+/* line 148, ../sass/style.scss */
 .layout-list #layout #avatar img {
   display: block;
   margin: 0 auto;
 }
-/* line 103, ../sass/style.scss */
+/* line 153, ../sass/style.scss */
 .layout-list #layout .desc {
   margin-top: 10px;
-  padding: 0 10px;
 }
-/* line 106, ../sass/style.scss */
+/* line 156, ../sass/style.scss */
 .layout-list #layout .desc h2 {
   background: #ccc;
   padding: 5px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
 }
-/* line 110, ../sass/style.scss */
+/* line 161, ../sass/style.scss */
 .layout-list #layout .desc hr {
   display: none;
 }
-/* line 113, ../sass/style.scss */
+/* line 164, ../sass/style.scss */
 .layout-list #layout .desc p {
   padding: 10px;
   color: #666;
