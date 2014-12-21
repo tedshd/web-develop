@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Miii</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="jquery.pagepiling.css" />
+<style>
+    #s_1 {
+        background: green;
+    }
+    #s_2 {
+        background: gray;
+    }
+    #s_3 {
+        background: red;
+    }
+    #s_4 {
+        background: yellow;
+    }
+    #s_5 {
+        background: pink;
+    }
+    #s_6 {
+        background: blue;
+    }
+</style>
+</head>
+<body>
+    <div id="pagepiling">
+        <div id="s_1" class="section">Some section 1</div>
+        <div id="s_2" class="section">Some section 2</div>
+        <div id="s_3" class="section">Some section 3</div>
+        <div id="s_4" class="section">Some section 4</div>
+        <div id="s_5" class="section">Some section 5</div>
+        <div id="s_6" class="section">Some section 6</div>
+    </div>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.pagepiling.js"></script>
+<script>
+    $('#pagepiling').pagepiling({
+        menu: null,
+        direction: 'vertical',
+        verticalCentered: true,
+        sectionsColor: [],
+        anchors: [],
+        scrollingSpeed: 700,
+        easing: 'swing',
+        loopBottom: false,
+        loopTop: false,
+        css3: true,
+        navigation: {
+            'textColor': '#000',
+            'bulletsColor': '#000',
+            'position': 'right',
+            'tooltips': ['section1', 'section2', 'section3', 'section4', 'section5', 'section6']
+        },
+        normalScrollElements: null,
+        normalScrollElementTouchThreshold: 5,
+        touchSensitivity: 5,
+        keyboardScrolling: true,
+        sectionSelector: '.section',
+        animateAnchor: false,
+
+        //events
+        onLeave: function(index, nextIndex, direction){},
+        afterLoad: function(anchorLink, index){},
+        afterRender: function(){},
+    });
+</script>
+</html>
