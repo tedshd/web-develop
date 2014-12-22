@@ -9,6 +9,18 @@ $(function() {
     $('form').on('change', function() {
         var str = $("form").serialize();
         $("body").append('<div>' + str + '</div>');
+        $.ajax({
+            type: "POST",
+            url: "test.php",
+            data: str,
+            timeout: 15000,
+            success: function(data) {
+                console.log(str);
+            },
+            complete: function() {
+                alert(updateStatus);
+            }
+        });
     });
 });
 </script>
