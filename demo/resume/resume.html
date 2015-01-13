@@ -7,17 +7,21 @@
     <link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body class="layout-full">
+<body class="layout-list">
     <div class="nav-layout">
+        <svg id="print" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+        <path d="M8 2h16v4h-16v-4z" fill="#444444"></path>
+        <path d="M30 8h-28c-1.1 0-2 0.9-2 2v10c0 1.1 0.9 2 2 2h6v8h16v-8h6c1.1 0 2-0.9 2-2v-10c0-1.1-0.9-2-2-2zM4 14c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM22 28h-12v-10h12v10z" fill="#444444"></path>
+        </svg>
         <ul>
-            <li id="layout-full" class="layout-option active">
-                <i class="fa fa-square" title="layoutFull"></i>
+            <li id="layout-list" class="layout-option active">
+                <i class="fa fa-align-justify" title="layoutList"></i>
             </li>
             <li id="layout-card" class="layout-option">
                 <i class="fa fa-th-large" title="layoutCard"></i>
             </li>
-            <li id="layout-list" class="layout-option">
-                <i class="fa fa-align-justify" title="layoutList"></i>
+            <li id="layout-full" class="layout-option">
+                <i class="fa fa-square" title="layoutFull"></i>
             </li>
         </ul>
     </div>
@@ -31,7 +35,7 @@
                     <img src="http://en.gravatar.com/userimage/53136425/fbabf08d777248bf25850ae910ccf8ce.jpg?size=150" alt="Ted" width="150px" height='150px'>
                 </div>
             </div>
-            <div class="desc">
+            <div class="desc print_grid">
                 <h2>Profile</h2>
                 <hr color="#ff8800">
                 <p>
@@ -42,21 +46,23 @@
                     前端攻城獅<br>
                 </p>
             </div>
-            <div class="desc">
+            <div class="desc print_grid">
                 <h2>Introduction</h2>
                 <hr color="#ff8800">
                 <p>
                     國立台灣海洋大學河海工程系學士<br>
                     國立台灣海洋大學宿舍網路維護小組<br>
-                    miiiCasa 超文件標示語言與層疊樣式表兼爪哇腳本打字員<br>
+                    miiiCasa.Inc 超文件標示語言與層疊樣式表兼爪哇腳本打字員<br>
                 </p>
             </div>
-            <div class="desc">
+            <div class="desc print_grid">
                 <h2>Skill</h2>
                 <hr color="#ff8800">
                 <p>
                     HTML<br>
+                    HTML5<br>
                     CSS<br>
+                    CSS3<br>
                     Sass<br>
                     compass<br>
                     Bootstrap<br>
@@ -70,19 +76,18 @@
                     Laravel<br>
                 </p>
             </div>
-            <div class="desc">
+            <div class="desc print_grid">
                 <h2>Specialty</h2>
                 <hr color="#ff8800">
                 <p>
-                    File upload<br>
+                    Ajax file upload<br>
                     Layout Design<br>
-                    Response Web Design<br>
+                    Responsive Web Design<br>
                     Samsung Smart TV app<br>
-                    YouTube API<br>
                     Single Page<br>
                 </p>
             </div>
-            <div class="desc">
+            <div class="desc print_grid">
                 <h2>Develop Tool</h2>
                 <hr color="#ff8800">
                 <p>
@@ -94,7 +99,7 @@
                     gulp<br>
                 </p>
             </div>
-            <div class="desc">
+            <div class="desc print_grid">
                 <h2>OS</h2>
                 <hr color="#ff8800">
                 <p>
@@ -110,15 +115,74 @@
                     <a href="http://github.com/tedshd" target="_blank">
                         GitHub
                     </a>
+                    <span class="link">http://github.com/tedshd</span>
                     <br>
                     <a href="http://tysh310246.blogspot.tw/" target="_blank">
                         Blog
                     </a>
+                    <span class="link">http://tysh310246.blogspot.tw/</span>
                     <br>
                     <a href="http://tedshd.logdown.com" target="_blank">
                         DevelopNote
                     </a>
+                    <span class="link">http://tedshd.logdown.com</span>
                     <br>
+                    <a href="https://www.linkedin.com/pub/ted-shiu/90/62b/ab7" target="_blank">
+                        Linkedin
+                    </a>
+                    <span class="link">https://www.linkedin.com/pub/ted-shiu/90/62b/ab7</span>
+                    <br>
+                    <a href="http://www.slideshare.net/tysh310246/presentations" target="_blank">
+                        slideshare
+                    </a>
+                    <span class="link">http://www.slideshare.net/tysh310246/presentations</span>
+                    <br>
+                </p>
+            </div>
+            <div class="desc print_grid">
+                <h2>Entertainment</h2>
+                <hr color="#ff8800">
+                <p>
+                    Bike<br>
+                    Badminton<br>
+                    Reading<br>
+                    A.C.G(Anime, Comics, Games)<br>
+                </p>
+            </div>
+            <div class="desc">
+                <h2>Experience in miiiCasa.Inc</h2>
+                <hr color="#ff8800">
+                <p>
+                    導入 Responsive Web Design 觀念<br>
+                    miiicloud 專案架構 Ajax File upload 功能<br>
+                    開發 Samsung Smart TV app(miiiTV)<br>
+                    開發 miiiTV chrome extension(未上架)<br>
+                    <a href="https://www.youtube.com/watch?v=f1T9q5V3s48" target="_blank">
+                        參加 2014 Samsung App develop 大賽(獲得第二名與最佳 Smart TV 開發)<br>
+                    </a>
+                    導入 AngularJS<br>
+                    導入 CSS3 transition & transform<br>
+                    導入 SVG<br>
+                    <a href="https://www.youtube.com/watch?v=vr5HtuNX4p4" target="_blank">
+                        受邀 FED Party 12 擔任講者
+                    </a><br>
+                    設計 <a href="http://miii.tv" target="_blank">Miii</a> 主站 layout 架構<br>
+                    設計 <a href="http://miii.tv" target="_blank">Miii</a> 主站元件(
+                    <a href="https://github.com/tedshd/material_design_for_web" target="_blank">
+                        material design for web
+                    </a> /
+                    <a href="https://github.com/tedshd/simple_form_validation" target="_blank">
+                        simple form validation
+                    </a> /
+                    <a href="https://github.com/tedshd/slider_preview" target="_blank">
+                        slider preview
+                    </a> /
+                    <a href="https://github.com/tedshd/notification_top" target="_blank">
+                        notification
+                    </a>)<br>
+                    實作第三方 video api 串接混用<br>
+                    利用 JavaScript 實作 Single Page 與處理 Facebook og in SPA<br>
+                    撰寫 <a href="https://github.com/tedshd/hooks" target="_blank">git hook</a> 來維持 code quality<br>
                 </p>
             </div>
         </div>
@@ -150,5 +214,9 @@ function changeLayout() {
 node('#layout-list').addEventListener('click', changeLayout);
 node('#layout-card').addEventListener('click', changeLayout);
 node('#layout-full').addEventListener('click', changeLayout);
+
+node('#print').addEventListener('click', function () {
+    window.print();
+})
 </script>
 </html>
