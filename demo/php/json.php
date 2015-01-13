@@ -1,6 +1,9 @@
 <?php
 // var_dump($_POST['json']);
 // echo $_POST['val'];
+$request = file_get_contents("php://input");
+var_dump($request);
+echo '<br>';
 var_dump($_POST);
 echo '<br>';
 echo $_POST['json'];

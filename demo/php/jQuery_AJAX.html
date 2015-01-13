@@ -10,9 +10,11 @@
 </body>
 <script>
     $.ajax({
-        url: '/login/signup',
+        url: 'test.php',
         type: 'POST',
         data: {
+            a: 111,
+            b: 'str'
         },
         success: function(data) {
             console.log(data);

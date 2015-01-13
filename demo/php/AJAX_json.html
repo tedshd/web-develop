@@ -17,15 +17,16 @@ function json () {
         jsonData;
     jsonData = JSON.stringify(obj);
     var xmlHttpRequest = new XMLHttpRequest();
-    xmlHttpRequest.open('POST', 'json.php', true);
+    xmlHttpRequest.open('PUT', 'json.php', true);
     // xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
-    xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xmlHttpRequest.onreadystatechange = function(e) {
         if (xmlHttpRequest.status == 200) {
             document.getElementById('info').innerHTML = xmlHttpRequest.responseText;
         }
     };
-    xmlHttpRequest.send('json=' + jsonData);
+    // xmlHttpRequest.send('json=' + jsonData);
+    xmlHttpRequest.send(jsonData);
 }
 </script>
 </html>

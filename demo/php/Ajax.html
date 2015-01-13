@@ -13,6 +13,7 @@
 function ajax () {
     var formData = new FormData();
     formData.append('str', 'string');
+    formData.append('num', 123);
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open('POST', 'test.php');
     xmlHttpRequest.onload = function(e) {
