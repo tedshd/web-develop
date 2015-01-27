@@ -25,7 +25,7 @@
 
     function publish(action, doSomething) {
         if (hub[action]) {
-            console.error('action existed!!');
+            console.error(action + ' - action existed!!');
             return;
         }
         // var obj = {
@@ -35,9 +35,19 @@
         // hub.push(obj);
         hub[action] = doSomething;
     }
-    function fire(action) {
+    function fire(action, doSomething) {
+        if (action instanceof Array) {
+            for (var i = 0; i < action.length; i++) {
+                if (!hub[action[i]]) {
+                    console.error(action + ' - action not exist!!');
+                    break;
+                }
+                hub[action[i]]();
+            }
+            return;
+        }
         if (!hub[action]) {
-            console.error('action not exist!!');
+            console.error(action + ' - action not exist!!');
             return;
         }
         // for (var i = 0; i < hub.length; i++) {
@@ -45,11 +55,11 @@
         //         hub[i].doSomething();
         //     }
         // }
-        hub[action]();
+        hub[action](doSomething);
     }
     function unPublish(action) {
         if (!hub[action]) {
-            console.error('action not exist!!');
+            console.error(action + ' - action not exist!!');
             return;
         }
         // var obj = {
@@ -65,13 +75,14 @@
         console.log('log GG');
     });
 
+
     setTimeout(function () {
         fire('log');
         fire('alarm');
     }, 3000);
     document.querySelector('a').addEventListener('click', function (e) {
         e.preventDefault();
-        fire('alarm');
+        fire(['log', 'alarm']);
     });
     // setTimeout(function () {
     //     unPublish('alarm');
