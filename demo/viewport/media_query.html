@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.2/normalize.css">
+<script src="/lib/jquery-1.10.1.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+<style>
+    #landscape, #portrait {
+        display: none;
+    }
+    @media only screen and (orientation : landscape) {
+        #landscape {
+            display: block;
+            background: #0088ff;
+        }
+    }
+    @media only screen and (orientation : portrait) {
+        #portrait {
+            display: block;
+            background: #ff8800;
+        }
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+        body {
+            background: #339933;
+        }
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio : 2), only screen and (min-device-pixel-ratio : 2) {
+        body {
+            background: #ccc;
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="landscape">landscape</div>
+    <div id="portrait">portrait</div>
+    <div id="devicePixelRatio"></div>
+</body>
+<script>
+    document.querySelector('#devicePixelRatio').innerHTML = window.devicePixelRatio;
+</script>
+</html>
