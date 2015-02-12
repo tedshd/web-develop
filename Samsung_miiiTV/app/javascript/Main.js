@@ -53,8 +53,6 @@ var welcomeUI = node('#welcome_view'),
     exitUI = node('#exit_confirm'),
     settingGridL = document.querySelectorAll('#setting_grid span').length;
 
-    document.querySelector('#video_list_area').style.width = (Main.row)*320 + 'px';
-
 // time out or interval var
 var menuTimeoutToHide,
     updateCurrentTimeInterval,
@@ -443,7 +441,8 @@ Main.errorHandleReRegApp = errorHandleReRegApp;
 
 Main.onLoad = function()
 {
-
+    // Enable key event processing
+    this.enableKeys();
     widgetAPI.sendReadyEvent();
     // set volume OSD(On Screen Display)
     window.onShow = Main.volumeOSD;
@@ -1129,27 +1128,27 @@ Main.onLoad = function()
             }
             document.querySelector('#video_' + lastFocus).setAttribute('class', 'cell');
             document.querySelector('#video_' + currentFocus).setAttribute('class', 'cell list_focus');
-            console.error(Main.row*(Main.col - 1));
+
             if (status === 'retreat') {
-                if (((Main.videoListTop)/180)*Main.col >= Main.currentFocus) {
+                if (((Main.videoListTop)/180)*4 >= Main.currentFocus) {
                     Main.videoListTop = Main.videoListTop - 180;
                 }
-                if (Main.col >= Main.currentFocus) {
+                if (4 >= Main.currentFocus) {
                     Main.videoListTop = 0;
                 }
                 document.querySelector('#video_list_bg').style.top = '-' + Main.videoListTop + 'px';
             }
             if (status === 'advance') {
-                if (Main.currentFocus > (((Main.videoListTop)/180)*Main.col + Main.row*(Main.col - 1))) {
-                    Main.videoListTop = Math.ceil((Main.currentFocus - Main.row*(Main.col - 1))/Main.row)*180;
+                if (Main.currentFocus > (((Main.videoListTop)/180)*4 + 12)) {
+                    Main.videoListTop = Math.ceil((Main.currentFocus - 12)/Main.row)*180;
                     document.querySelector('#video_list_bg').style.top = '-' + Main.videoListTop + 'px';
                 }
             }
             if (status === 'pageup') {
-                if (((Main.videoListTop)/180)*Main.col >= Main.currentFocus) {
-                    Main.videoListTop = Main.videoListTop - 180*(Math.ceil(Main.col/2));
+                if (((Main.videoListTop)/180)*4 >= Main.currentFocus) {
+                    Main.videoListTop = Main.videoListTop - 180*2;
                 }
-                if (Main.col >= Main.currentFocus) {
+                if (4 >= Main.currentFocus) {
                     Main.videoListTop = 0;
                 }
                 document.querySelector('#video_list_bg').style.top = '-' + Main.videoListTop + 'px';
@@ -1230,24 +1229,29 @@ Main.onUnload = function()
     }
 };
 
-window.onkeydown = keyboardControl
+Main.enableKeys = function()
+{
+    document.getElementById("anchor").focus();
+};
 
-function keyboardControl(e) {
-    // e.preventDefault();
-    switch(e.keyCode) {
-        case 27:
-        case 88:
-        case 8:
+Main.keyDown = function()
+{
+    var keyCode = event.keyCode;
+    alert("Key pressed: " + keyCode);
+
+    switch(keyCode)
+    {
+        case tvKey.KEY_RETURN:
+        case tvKey.KEY_PANEL_RETURN:
             alert("RETURN");
             if (!Main.loadState) {
-                // widgetAPI.blockNavigation(event);
+                widgetAPI.blockNavigation(event);
                 alert('settingState:'+Main.settingState);
                 alert('videoListView:'+Main.videoListView);
                 if (Main.networkError) {
                     return;
                 }
                 if (!Main.settingState) {
-                    e.preventDefault();
                     if (Main.videoListState) {
                         alert('videoList return');
                         // video list
@@ -1266,10 +1270,13 @@ function keyboardControl(e) {
                         document.querySelector('#exit_2').setAttribute('class', '');
                     } else {
                         alert('app return');
+
+                        // confirm exit
                         viewOpen(exitUI, 'exitState');
+
+                        // widgetAPI.sendReturnEvent();
                     }
                 } else {
-                    e.preventDefault();
                     alert('setting return');
                     if (Object.keys(Main.users).length === 0) {
                         if (Main.usersListState) {
@@ -1360,7 +1367,7 @@ function keyboardControl(e) {
                 widgetAPI.blockNavigation(event);
             }
         break;
-        case 80:
+        case tvKey.KEY_PANEL_POWER:
             alert('POWER');
             widgetAPI.blockNavigation(event);
             Main.channelBreakLog('w');
@@ -1368,7 +1375,7 @@ function keyboardControl(e) {
             Main.clearsPlaying();
             widgetAPI.sendReturnEvent();
         break;
-        case 37:
+        case tvKey.KEY_LEFT:
             alert("LEFT");
             if (Main.networkError) {
                 return;
@@ -1424,7 +1431,7 @@ function keyboardControl(e) {
                 document.querySelector('#exit_' + Main.exitFocus).setAttribute('class', 'exit_focus');
             }
         break;
-        case 39:
+        case tvKey.KEY_RIGHT:
             alert("RIGHT");
             if (Main.networkError) {
                 return;
@@ -1479,7 +1486,7 @@ function keyboardControl(e) {
                 document.querySelector('#exit_' + Main.exitFocus).setAttribute('class', 'exit_focus');
             }
         break;
-        case 38:
+        case tvKey.KEY_UP:
             alert("UP");
             if (Main.networkError) {
                 return;
@@ -1521,7 +1528,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 40:
+        case tvKey.KEY_DOWN:
             alert("DOWN");
             if (Main.networkError) {
                 return;
@@ -1555,15 +1562,16 @@ function keyboardControl(e) {
                     }
                     if (Main.termsState) {
                         Main.scrollCount++;
-                        if (Main.scrollCount > 11) {
-                            Main.scrollCount = 10;
+                        if (Main.scrollCount > 8) {
+                            Main.scrollCount = 7;
                         }
                         document.querySelector('#terms_iframe').scrollTop = 300*Main.scrollCount;
                     }
                 }
             }
         break;
-        case 13:
+        case tvKey.KEY_ENTER:
+        case tvKey.KEY_PANEL_ENTER:
             alert("ENTER");
             if (Main.networkError) {
                 return;
@@ -1631,12 +1639,10 @@ function keyboardControl(e) {
                                 Main.saveCurrentChannel();
                                 Main.clearsPlaying();
                                 widgetAPI.sendReturnEvent();
-                                window.history.back();
                             break;
                             default:
                                 Main.clearsPlaying();
                                 widgetAPI.sendReturnEvent();
-                                window.history.back();
                             break;
                         }
                     } else {
@@ -1729,8 +1735,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 82:
-        case 120:
+        case tvKey.KEY_RED:
             alert("Red");
             if (Main.networkError) {
                 return;
@@ -1752,8 +1757,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 71:
-        case 121:
+        case tvKey.KEY_GREEN:
             alert("Green");
             if (Main.networkError) {
                 return;
@@ -1768,8 +1772,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 89:
-        case 122:
+        case tvKey.KEY_YELLOW:
             alert("Yellow");
             if (Main.networkError) {
                 return;
@@ -1782,8 +1785,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 66:
-        case 123:
+        case tvKey.KEY_BLUE:
             alert("Blue");
             if (Main.networkError) {
                 return;
@@ -1796,7 +1798,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 33:
+        case tvKey.KEY_CH_UP:
             alert("ch up");
             if (Main.networkError) {
                 return;
@@ -1808,7 +1810,7 @@ function keyboardControl(e) {
                 } else if (Main.videoListState) {
                    if (Main.currentFocus > Main.row) {
                         Main.lastFocus = Main.currentFocus;
-                        Main.currentFocus -= Main.row*(Main.col - 2);
+                        Main.currentFocus -= 8;
                         if (0 >= Main.currentFocus) {
                             Main.currentFocus = 1;
                         }
@@ -1824,7 +1826,7 @@ function keyboardControl(e) {
                 }
             }
         break;
-        case 34:
+        case tvKey.KEY_CH_DOWN:
             alert("ch down");
             if (Main.networkError) {
                 return;
@@ -1836,7 +1838,7 @@ function keyboardControl(e) {
                 } else if (Main.videoListState) {
                     var l = document.querySelectorAll('.cell').length;
                     Main.lastFocus = Main.currentFocus;
-                    Main.currentFocus += Main.row*(Main.col - 1);
+                    Main.currentFocus += 12;
                     Main.currentFocus = Math.min(l, Main.currentFocus);
                     Main.videoSelect(Main.lastFocus, Main.currentFocus, 'advance');
                 } else if (!Main.settingState) {
@@ -1848,62 +1850,52 @@ function keyboardControl(e) {
         case 259:
             alert("switch return");
         break;
-        case 49:
-        case 97:
+        case tvKey.KEY_1:
             alert("1");
             var num = 1;
             Main.NumSwitchChannel(num);
         break;
-        case 50:
-        case 98:
+        case tvKey.KEY_2:
             alert("2");
             var num = 2;
             Main.NumSwitchChannel(num);
         break;
-        case 51:
-        case 99:
+        case tvKey.KEY_3:
             alert("3");
             var num = 3;
             Main.NumSwitchChannel(num);
         break;
-        case 52:
-        case 100:
+        case tvKey.KEY_4:
             alert("4");
             var num = 4;
             Main.NumSwitchChannel(num);
         break;
-        case 53:
-        case 101:
+        case tvKey.KEY_5:
             alert("5");
             var num = 5;
             Main.NumSwitchChannel(num);
         break;
-        case 54:
-        case 102:
+        case tvKey.KEY_6:
             alert("6");
             var num = 6;
             Main.NumSwitchChannel(num);
         break;
-        case 55:
-        case 103:
+        case tvKey.KEY_7:
             alert("7");
             var num = 7;
             Main.NumSwitchChannel(num);
         break;
-        case 56:
-        case 104:
+        case tvKey.KEY_8:
             alert("8");
             var num = 8;
             Main.NumSwitchChannel(num);
         break;
-        case 57:
-        case 105:
+        case tvKey.KEY_9:
             alert("9");
             var num = 9;
             Main.NumSwitchChannel(num);
         break;
-        case 48:
-        case 96:
+        case tvKey.KEY_0:
             alert("0");
             var num = 0;
             Main.NumSwitchChannel(num);
@@ -1913,25 +1905,25 @@ function keyboardControl(e) {
         break;
     }
 
-    if (e.keyCode === 38 && Main.keyCount === 0) {
+    if (keyCode === tvKey.KEY_UP && Main.keyCount === 0) {
         Main.keyCount++;
-    } else if (e.keyCode === 38 && Main.keyCount === 1) {
+    } else if (keyCode === tvKey.KEY_UP && Main.keyCount === 1) {
         Main.keyCount++;
-    } else if (e.keyCode === 40 && Main.keyCount === 2) {
+    } else if (keyCode === tvKey.KEY_DOWN && Main.keyCount === 2) {
         Main.keyCount++;
-    } else if (e.keyCode === 40 && Main.keyCount === 3) {
+    } else if (keyCode === tvKey.KEY_DOWN && Main.keyCount === 3) {
         Main.keyCount++;
-    } else if (e.keyCode === 37 && Main.keyCount === 4) {
+    } else if (keyCode === tvKey.KEY_LEFT && Main.keyCount === 4) {
         Main.keyCount++;
-    } else if (e.keyCode === 39 && Main.keyCount === 5) {
+    } else if (keyCode === tvKey.KEY_RIGHT && Main.keyCount === 5) {
         Main.keyCount++;
-    } else if (e.keyCode === 37 && Main.keyCount === 6) {
+    } else if (keyCode === tvKey.KEY_LEFT && Main.keyCount === 6) {
         Main.keyCount++;
-    } else if (e.keyCode === 39 && Main.keyCount === 7) {
+    } else if (keyCode === tvKey.KEY_RIGHT && Main.keyCount === 7) {
         Main.keyCount++;
-    } else if (e.keyCode === 71 && Main.keyCount === 8) {
+    } else if (keyCode === tvKey.KEY_GREEN && Main.keyCount === 8) {
         Main.keyCount++;
-    } else if (e.keyCode === 82 && Main.keyCount === 9) {
+    } else if (keyCode === tvKey.KEY_RED && Main.keyCount === 9) {
         Main.keyCount = 0;
         alert('打密技阿你');
         console.error('打密技阿你');
@@ -1944,4 +1936,4 @@ function keyboardControl(e) {
     } else {
         Main.keyCount = 0;
     }
-}
+};

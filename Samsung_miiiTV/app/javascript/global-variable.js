@@ -1,4 +1,4 @@
-/*global $, jQuery, alert, console, angular, window*/
+/*global $, jQuery, alert, console, angular*/
 /**
  *
  * @authors Ted Shiu (ted_shiu@miiicasa.com)
@@ -52,8 +52,7 @@ var Main = {
     videoListTop: 0,
     lastFocus: 1,
     currentFocus: 1,
-    row: Math.floor(window.document.documentElement.clientWidth / 320),
-    col: Math.ceil((window.document.documentElement.clientHeight - 50) / 180),
+    row: 4,
     videoTotalTime: 0,
     // exit
     exitState: 0,
