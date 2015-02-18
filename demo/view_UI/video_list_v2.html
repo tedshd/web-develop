@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>video_list_v2</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.2/normalize.css"> -->
+<!-- <script src="/lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-2.1.1.js"></script> -->
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .focus {
+        background: red;
+    }
+    ul, li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    li {
+        float: left;
+        width: 320px;
+        height: 180px;
+    }
+</style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li class="focus">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+        </ul>
+    </div>
+</body>
+<script>
+    var domList = document.querySelectorAll('li');
+
+    var gridW = 320,
+        gridH = 180,
+        gridsSum = domList.length;
+
+    function gridDPad() {
+        var focusCount = 0,
+            gridSum = gridsSum,
+            viewW,
+            viewH,
+            viewXCount,
+            viewYCount;
+        function initView() {
+            viewW = window.document.documentElement.clientWidth;
+            viewH = window.document.documentElement.clientHeight;
+            viewXCount = Math.floor(viewW/gridW);
+            viewYCount = Math.floor(viewH/gridH);
+            console.log(viewXCount);
+        }
+        function moveUp() {
+            focusCount = focusCount - viewXCount;
+            if (0 >= focusCount) {
+                focusCount = 0;
+            }
+            domList[focusCount].classList.add('focus');
+        }
+        function moveDown() {
+            focusCount = focusCount + viewXCount;
+            if (focusCount >= gridsSum - 1) {
+                focusCount = gridsSum - 1;
+            }
+            console.log(focusCount);
+            domList[focusCount].classList.add('focus');
+        }
+        function moveLeft() {
+            focusCount--;
+            if (0 >= focusCount) {
+                focusCount = 0;
+            }
+            domList[focusCount].classList.add('focus');
+        }
+        function moveRight() {
+            focusCount++;
+            if (focusCount >= gridsSum) {
+                focusCount = gridsSum - 1;
+            }
+            domList[focusCount].classList.add('focus');
+        }
+        function move(type) {
+            domList[focusCount].classList.remove('focus');
+            switch (type) {
+                case 'up':
+                    moveUp();
+                    console.log(focusCount);
+                    break;
+                case 'down':
+                    moveDown();
+                    console.log(focusCount);
+                    break;
+                case 'left':
+                    moveLeft();
+                    console.log(focusCount);
+                    break;
+                case 'right':
+                    moveRight();
+                    console.log(focusCount);
+                    break;
+                default:
+                    console.error('gridDPad move type error');
+                    break;
+            }
+        }
+        initView();
+        window.onresize = initView;
+        this.move = move;
+    }
+
+var gridDPad = new gridDPad();
+window.onkeydown = keyboard;
+function keyboard(e) {
+    if (e.keyCode === 37) {
+        gridDPad.move('left');
+    }
+    if (e.keyCode === 38) {
+        gridDPad.move('up');
+    }
+    if (e.keyCode === 39) {
+        gridDPad.move('right');
+    }
+    if (e.keyCode === 40) {
+        gridDPad.move('down');
+    }
+}
+
+</script>
+</html>
