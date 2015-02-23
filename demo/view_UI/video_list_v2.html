@@ -74,6 +74,9 @@
             viewYCount = Math.floor(viewH/gridH);
             console.log(viewXCount);
         }
+        function resetCount(count) {
+            focusCount = count || 0;
+        }
         function moveUp() {
             focusCount = focusCount - viewXCount;
             if (0 >= focusCount) {
@@ -129,6 +132,8 @@
         }
         initView();
         window.onresize = initView;
+        this.initView = initView;
+        this.resetCount = resetCount;
         this.move = move;
     }
 
