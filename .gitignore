@@ -10,3 +10,4 @@ fire_app_log.txt
 widgetlist.xml
 demo/.phpintel/*
 wordpress/*
+demo/php/vendor/*
