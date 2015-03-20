@@ -195,6 +195,7 @@ function timeJumps(status) {
     }
     if (Main.player.getPlayerState() === YT.PlayerState.PLAYING) {
         Main.player.pauseVideo();
+        sf.service.setScreenSaver(false);
     }
     Main.keyKeepDown = 1;
     switch(status) {
@@ -224,6 +225,7 @@ function timeJumps(status) {
         Main.player.seekTo(Main.jumpTime, true);
         Main.player.setPlaybackQuality('hd720');
         Main.player.playVideo();
+        sf.service.setScreenSaver(true, 100);
         Main.keyKeepDown = 0;
     }, 900);
 }
@@ -249,6 +251,7 @@ Main.skipBuffer = skipBuffer;
 function enterMoreChannel() {
     if (Main.player.getPlayerState() === YT.PlayerState.PLAYING || Main.player) {
         Main.player.pauseVideo();
+        sf.service.setScreenSaver(false);
     }
     // reset UI
     infoBarUI.setAttribute('class', 'hide');
@@ -799,6 +802,7 @@ Main.onLoad = function()
                             clearTimeout(skipBufferTimeout);
                             if (Main.videoListState || Main.settingState) {
                                 player.pauseVideo();
+                                sf.service.setScreenSaver(false);
                             }
                             break;
 
@@ -1205,7 +1209,7 @@ Main.volumeOSD=function()
 {
     var NNaviPlugin = document.getElementById("pluginObjectNNavi");
     pluginAPI.SetBannerState(1);
-    NNaviPlugin.SetBannerState(2);
+    NNaviPlugin.SetBannerState(1);
     pluginAPI.unregistKey(tvKey.KEY_VOL_UP);
     pluginAPI.unregistKey(tvKey.KEY_VOL_DOWN);
     pluginAPI.unregistKey(tvKey.KEY_MUTE);
@@ -1259,6 +1263,7 @@ Main.keyDown = function()
                         Main.videoListView = 0;
                             if (Main.videosList.length !== 0) {
                                 Main.player.playVideo();
+                                sf.service.setScreenSaver(true, 100);
                             }
                     } else if (Main.menuOpen) {
                         alert('menu return');
@@ -1292,6 +1297,7 @@ Main.keyDown = function()
                                 Main.settingState = 0;
                                 if (Main.videosList.length !== 0) {
                                     Main.player.playVideo();
+                                    sf.service.setScreenSaver(true, 100);
                                 }
                             }
                         }
@@ -1312,6 +1318,7 @@ Main.keyDown = function()
                             viewClose(settingUI, 'settingState');
                             if (Main.videosList.length !== 0) {
                                 Main.player.playVideo();
+                                sf.service.setScreenSaver(true, 100);
                             }
                         }
                     } else {
@@ -1358,6 +1365,7 @@ Main.keyDown = function()
                             viewClose(settingUI, 'settingState');
                             if (Main.videosList.length !== 0) {
                                 Main.player.playVideo();
+                                sf.service.setScreenSaver(true, 100);
                             }
                         }
                     }
@@ -1608,6 +1616,7 @@ Main.keyDown = function()
                     } else if (Main.videoListState) {
                         if (Main.player.getPlayerState() === YT.PlayerState.PLAYING) {
                             Main.player.pauseVideo();
+                            sf.service.setScreenSaver(false);
                         }
                         if (document.querySelector('.list_focus .video_format_error') || !Main.videosList.length) {
                             return;
@@ -1651,9 +1660,11 @@ Main.keyDown = function()
                         if (playerState === YT.PlayerState.PLAYING) {
                             alert('pause');
                             Main.player.pauseVideo();
+                            sf.service.setScreenSaver(false);
                         }else if (playerState === YT.PlayerState.PAUSED) {
                             alert('play');
                             Main.player.playVideo();
+                            sf.service.setScreenSaver(true, 100);
                         } else {
                             alert('skip enter playerState'+playerState);
                         }
@@ -1748,10 +1759,12 @@ Main.keyDown = function()
                     channelInfoUI.setAttribute('class', 'hide');
                     Main.infoBarOpen = 0;
                     Main.player.pauseVideo();
+                    sf.service.setScreenSaver(false);
                     viewOpen(videoListUI, 'videoListState');
                 } else {
                     if (Main.videosList.length !== 0) {
                         Main.player.playVideo();
+                        sf.service.setScreenSaver(true, 100);
                     }
                     viewClose(videoListUI, 'videoListState');
                 }
@@ -1822,7 +1835,7 @@ Main.keyDown = function()
                     }
                 } else if (!Main.settingState) {
                     Main.channelBreakLog('w');
-                    Main.switchChannel('down');
+                    Main.switchChannel('up');
                 }
             }
         break;
@@ -1843,7 +1856,7 @@ Main.keyDown = function()
                     Main.videoSelect(Main.lastFocus, Main.currentFocus, 'advance');
                 } else if (!Main.settingState) {
                     Main.channelBreakLog('w');
-                    Main.switchChannel('up');
+                    Main.switchChannel('down');
                 }
             }
         break;
