@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.2/normalize.css">
+<script src="/lib/jquery-1.10.1.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+var polling,
+    pollingResponse = true;
+polling = setInterval(
+    function () {
+        if (pollingResponse) {
+            console.log('polling');
+            pollingResponse = false;
+            $.ajax({
+                url: 'test.php',
+                type: 'POST',
+                data: {
+                    // data
+                },
+                timeout: 5000,
+                success: function(data) {
+                    if (data.status === 'ok') {
+                        // do something
+                    } else {
+                        // do something
+                    }
+                    pollingResponse = true;
+                },
+                error: function(data) {
+                    // do something
+                    clearInterval(polling);
+                    pollingResponse = true;
+                }
+            });
+        }
+    },
+    5000
+);
+
+skip3minPolling = setTimeout(function() {
+    clearInterval(polling);
+}, 180000);
+</script>
+</html>
