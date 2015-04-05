@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>lazy_load</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!-- <link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.2/normalize.css"> -->
+<!-- <script src="/lib/jquery-1.10.1.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-2.1.1.js"></script> -->
+</head>
+<body>
+    1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+    1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+    1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+    2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>
+    2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>
+    2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>2<br>
+</body>
+<script>
+    (function () {
+        function lazyLoad (doSomething) {
+            var doSomething;
+            window.addEventListener('scroll', function () {
+                var positionY = window.pageYOffset,
+                    pageViewH = document.querySelector('body').scrollHeight - document.documentElement.clientHeight;
+                if (positionY === pageViewH) {
+                    console.log('GG');
+                    doSomething();
+                    // loadingStatus = false;
+                }
+            });
+            this.loadingStatus = loadingStatus;
+        }
+        window.lazyLoad = lazyLoad;
+    })();
+    var lazyLoad = new lazyLoad(fun);
+    function fun () {
+        alert(1);
+    }
+</script>
+</html>
