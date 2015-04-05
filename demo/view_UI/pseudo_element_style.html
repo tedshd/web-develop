@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>pseudo elements</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.2/normalize.css">
+</head>
+<style>
+#red::before {
+    content: attr(data-attr);
+    color: red;
+}
+</style>
+<body>
+    <p id="red" data-attr="red">Hi, this is plain-old, sad-looking paragraph tag.</p>
+</body>
+<script>
+    setTimeout(function (argument) {
+        document.querySelector('#red').setAttribute('data-attr', 'green');
+    }, 3000);
+</script>
+</html>
