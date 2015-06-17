@@ -13,14 +13,17 @@
 if (typeof UTIL == 'undefined' || !UTIL) {
     var UTIL = {};
 }
-    UTIL.createEl = {
-    get: function(sTag, oAttr, sHtml) {
+UTIL.createEl = {
+    get: function(sTag, oAttr, handleOnLoad, handleError) {
         var el = document.createElement(sTag);
         for (var i in oAttr) {
             el[i] = oAttr[i];
         }
-        if (sHtml) {
-            el.innerHTML = sHtml;
+        if (handleOnLoad) {
+            el.onload = handleOnLoad;
+        }
+        if (handleError) {
+            el.onerror = handleError;
         }
         this.append(el);
         return el;
@@ -35,22 +38,11 @@ if (typeof UTIL == 'undefined' || !UTIL) {
             dNode = null;
         }, 0);
     },
-    js: function(sUrl, sCharset, handleOnLoad, handleError) {
-            var dNode = this.get('script', {
-                src: sUrl,
-                type: 'text/javascript'
-            }, null);
-        if (sCharset) {
-            dNode.setAttribute('charset', sCharset);
-        }
-        if (handleError) {
-            dNode.onerror = handleError;
-        }
-        dNode.onreadystatechange = function () {
-            if (this.readyState === 'complete') {
-                handleOnLoad();
-            }
-        };
+    js: function(sUrl, handleOnLoad, handleError) {
+        var dNode = this.get('script', {
+            src: sUrl,
+            type: 'text/javascript'
+        }, handleOnLoad, handleError);
         return dNode;
     },
     css: function(sUrl, sMedia) {
@@ -62,14 +54,14 @@ if (typeof UTIL == 'undefined' || !UTIL) {
             'rel':'stylesheet',
             'type':'text/css',
             'media':sMedia
-        }, null, 'head');
+        });
     }
 };
 
 var run = function() {
     alert('OK');
 };
-UTIL.createEl.js('http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=myFunction', '', run());
+UTIL.createEl.js('http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=myFunction', '', run);
 
 function myFunction (data) {
     console.log(data);
