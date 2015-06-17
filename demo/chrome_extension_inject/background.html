@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>background</title>
+<!-- <link rel="stylesheet" href="../../lib/bootstrap-3.0.0/css/bootstrap.css"> -->
+<!-- <script src="../../lib/jquery-1.10.1.js"></script> -->
+<style>
+    ul, li {
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        list-style: none;
+    }
+    .hide {
+        display: none;
+    }
+    button[disabled] {
+        cursor: default;
+    }
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.428571429;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-user-select: none;
+    }
+    .btn:focus {
+        outline: thin dotted #333;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+
+    .btn:hover,
+    .btn:focus {
+        color: #333333;
+        text-decoration: none;
+    }
+    .btn:active,
+    .btn.active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+              box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    }
+    .btn-primary {
+        color: #ffffff;
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open .dropdown-toggle.btn-primary {
+        color: #ffffff;
+        background-color: #3276b1;
+        border-color: #285e8e;
+    }
+
+    .btn-primary:active,
+    .btn-primary.active,
+    .open .dropdown-toggle.btn-primary {
+        background-image: none;
+    }
+    .btn.disabled,
+    .btn[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.5;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .btn-success {
+        color: #ffffff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+    .btn-info {
+        color: #ffffff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+    button {
+        box-sizing: content-box;
+    }
+    .error {
+        color: #ff0000;
+    }
+    #avatar {
+        display: block;
+        margin: 0 auto;
+    }
+    #user {
+        text-align: center;
+    }
+    input[type="text"] {
+        width: 170px;
+    }
+    @keyframes add
+    {
+        from {
+        }
+        to {
+            opacity: 0;
+            top: -20px;
+        }
+    }
+
+    @-webkit-keyframes add /* Safari and Chrome */
+    {
+        from {
+        }
+        to {
+            opacity: 0;
+            top: -20px;
+        }
+    }
+    #animation {
+        background: #ddd;
+        text-align: center;
+        position: relative;
+        margin-top: -20px;
+        top: 20px;
+    }
+    .add {
+        animation: add 1s;
+        -webkit-animation: add 1s;
+    }
+    #choice, #create {
+        width: 150px;
+    }
+    #option {
+        background: #ddd;
+    }
+    .channel {
+        width: 150px;
+        padding: 0 12px;
+        text-align: center;
+        border-bottom: solid 1px #aaa;
+    }
+    .channel:hover {
+        background: #999;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <div id="loading">Loading...</div>
+    <div id="login" class="hide">
+        <h2>Fackbook Connect</h2>
+        <a href="https://www.facebook.com/dialog/oauth?client_id=446014568822675&response_type=token&scope=email&redirect_uri=http://www.facebook.com/connect/login_success.html" class="btn btn-primary" target="_blank">Connect</a>
+    </div>
+    <div id="content" class="hide">
+        <div id="data"></div>
+        <div>
+            <img id="avatar" src="" alt="">
+            <p id="user"></p>
+        </div>
+        <div id="ch">
+            <div id="choice" class="btn btn-primary">Select</div>
+            <div id="option" class="hide">
+                <ul id="channel_list">
+<!--
+                    <li class="channel">CH1</li>
+                    <li class="channel">Ch2</li>
+                    <li class="channel">Ch3</li>
+                    <li class="channel">CH4</li>
+-->
+                </ul>
+            </div>
+            or<br>
+        </div>
+        <div id="animation" class="hide"></div>
+        <input type="text" id="channel_name" placeholder="Enter new channel name">
+        <button id="create" class="btn">Create New</button>
+        <div id="error_msg" class="error hide">
+            Please enter your channel name
+        </div>
+        <button id="add" class="btn btn-info" disabled>Add</button>
+        <br>
+        <div id="share_link" class="hide">
+            <h3>For spaced video share</h3>
+            <input type="text" placeholder="Enter share video url">
+            <button class="btn">Push</button>
+        </div>
+    </div>
+</body>
+<script src="background.js"></script>
+<script src="popup.js"></script>
+<script src="app.js"></script>
+</html>
