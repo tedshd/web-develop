@@ -53,4 +53,4 @@ UTIL.createEl = {
     }
 };
 
-UTIL.createEl.js('http://ad.sitemaji.com/native/juksy_mobile_source.js');
+UTIL.createEl.js('http://ad.sitemaji.com/native/juksy.js');

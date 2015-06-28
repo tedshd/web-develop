@@ -17,7 +17,13 @@
         // "http://tw.running.biji.co/*"
         // "http://*/*"
         // "http://iask.tw/feed"
-        "http://m.juksy.com/*"
+        // "http://m.juksy.com/*"
+        // "http://www.findprice.com.tw/*",
+        // "http://m.findprice.com.tw/*"
+        // "http://kuso.kikinote.com/*",
+        // "http://app.kikinote.com/*"
+        // "http://tw.running.biji.co/*"
+        "http://www.juksy.com/*"
       ],
       "js": ["inject.js"],
       "run_at": "document_idle"
