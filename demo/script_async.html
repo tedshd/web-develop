@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+<script>
+if (typeof UTIL == 'undefined' || !UTIL) {
+    var UTIL = {};
+}
+UTIL.createEl = {
+    get: function(sTag, oAttr, handleOnLoad, handleError) {
+        var el = document.createElement(sTag);
+        for (var i in oAttr) {
+            el[i] = oAttr[i];
+        }
+        if (handleOnLoad) {
+            el.onload = handleOnLoad;
+        }
+        if (handleError) {
+            el.onerror = handleError;
+        }
+        this.append(el);
+        return el;
+    },
+    append: function(dNode) {
+        var dHead = document.getElementsByTagName('head')[0] || document.body;
+        dHead.appendChild(dNode);
+    },
+    remove: function(dNode) {
+        setTimeout(function() {
+            dNode.parentNode.removeChild(dNode);
+            dNode = null;
+        }, 0);
+    },
+    js: function(sUrl, handleOnLoad, handleError) {
+        var dNode = this.get('script', {
+            src: sUrl,
+            type: 'text/javascript'
+        }, handleOnLoad, handleError);
+        return dNode;
+    },
+    css: function(sUrl, sMedia) {
+        if (!sMedia) {
+            sMedia = 'all';
+        }
+        return this.get('link', {
+            'href':sUrl,
+            'rel':'stylesheet',
+            'type':'text/css',
+            'media':sMedia
+        });
+    }
+};
+
+var run = function() {
+    alert('OK');
+};
+UTIL.createEl.js('http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=myFunction', '', run);
+
+function myFunction (data) {
+    console.log(data);
+}
+</script>
+</html>

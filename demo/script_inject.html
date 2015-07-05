@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>script inject</title>
+</head>
+<body>
+    <!-- <div><script>alert("work")</script></div> -->
+    <div></div>
+    <button id="btn_1">append</button>
+    <button id="btn_2">document.write</button>
+    <button id="btn_3">innerHTML</button>
+    <button id="btn_4">jsonp</button>
+    <button id="btn_5">api</button>
+</body>
+<script>
+    document.querySelector('#btn_1').addEventListener('click', function () {
+        var script = document.querySelector('script');
+        script.innerHTML = 'alert("work")';
+        document.querySelector('div').appendChild(script);
+    });
+    document.querySelector('#btn_2').addEventListener('click', function () {
+        document.write('<script>alert("work")<\/script>');
+    });
+    document.querySelector('#btn_3').addEventListener('click', function () {
+        document.querySelector('div').innerHTML = '<script>alert("work")<\/script>';
+    });
+    document.querySelector('#btn_4').addEventListener('click', function () {
+        var scriptEl = document.createElement("script");
+        scriptEl.src = "http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=myFunction";
+        document.getElementsByTagName("head")[0].appendChild(scriptEl);
+    });
+    document.querySelector('#btn_5').addEventListener('click', function () {
+        var scriptEl = document.createElement("script");
+        scriptEl.src = "api.php";
+        document.getElementsByTagName("head")[0].appendChild(scriptEl);
+    });
+</script>
+</html>
