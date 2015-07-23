@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>popup</title>
+<link href="" rel="stylesheet">
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .pop_up {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .5);
+        transform: scale(1) rotate(0) translate(0, 0) skew(0, 0);
+        transition-property: transform, opacity;
+        transition-duration: .3s;
+    }
+    .popup_hide {
+        opacity: 0;
+        transform: scale(0.5) rotate(0) translate(0, -200%) skew(0, 0);
+    }
+    .pop_up_close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 20px 20px 0 0;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+    .pop_up_close:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: #fff;
+        transform: rotate(45deg) translate(10px, 10px);
+    }
+    .pop_up_close:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: #fff;
+        transform: rotate(-45deg) translate(-10px, 10px);
+    }
+</style>
+</head>
+<body>
+    <button>Click</button>
+    <div class="pop_up popup_hide">
+        <div class="pop_up_close"></div>
+    </div>
+</body>
+<script>
+(function () {
+    var popup = function(option) {
+        var initDom;
+        console.log(option);
+        console.log(option === '');
+        console.log(Object.keys(option));
+        if (Object.keys(option).length) {
+            var w = option.width || '100%',
+                h = option.height || '100%',
+                top = option.top || '0',
+                left = option.left || '0',
+                marginTop = option.marginTop || '0',
+                marginLeft = option.marginLeft || '0';
+            if (!option.dom) {
+                console.error('not set dom parameters when you new popup()');
+                return;
+            }
+            initDom = option.dom;
+            initDom.style.width = w;
+            initDom.style.height = h;
+            initDom.style.top = top;
+            initDom.style.left = left;
+            initDom.style.marginTop = marginTop;
+            initDom.style.marginLeft = marginLeft;
+        }
+        function hide(dom, dosomething) {
+            if (!initDom && !dom) {
+                console.error('hide function not set dom object');
+                return;
+            }
+            if (dosomething) {
+                dosomething();
+            }
+            var currentDom = dom || initDom;
+            currentDom.className += ' ' + 'popup_hide';
+        }
+        function show(dom, dosomething) {
+            if (!initDom && !dom) {
+                console.error('show function not set dom object');
+                return;
+            }
+            if (dosomething) {
+                dosomething();
+            }
+            var currentDom = dom || initDom;
+            var className = 'popup_hide',
+                reg = new RegExp('(^|\\b)' +
+                    className.split(' ').join('|') +
+                    '(\\b|$)', 'gi');
+            currentDom.className = currentDom.className.replace(reg, ' ');
+            var nodes = currentDom.childNodes;
+            for (var i = nodes.length - 1; i >= 0; i--) {
+                console.log(nodes[i]);
+                if (nodes[i].className === 'pop_up_close') {
+                    nodes[i].addEventListener('click', function () {
+                        currentDom.className += ' ' + 'popup_hide';
+                    });
+                    break;
+                }
+            }
+        }
+        this.show = show;
+    };
+    window.popup = popup;
+})();
+
+var popup = new popup({
+    // dom: document.querySelector('.pop_up'),
+    // width: '50%',
+    // height: '50%',
+    // marginTop: '25%',
+    // marginLeft: '25%'
+});
+
+document.querySelector('button').addEventListener('click', function () {
+    console.log('click');
+    popup.show(document.querySelector('.pop_up'));
+    // popup.show();
+});
+
+</script>
+</html>
