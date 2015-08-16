@@ -53,4 +53,9 @@ UTIL.createEl = {
     }
 };
 
-UTIL.createEl.js('http://ad.sitemaji.com/native/juksy.js');
+// UTIL.createEl.js('http://ad.sitemaji.com/native/pixnet_mobile.js');
+// UTIL.createEl.js('http://ad.sitemaji.com/native/gigacircle_source.js');
+// UTIL.createEl.js('http://ad.sitemaji.com/native/runningbiji_tw_mobile.js');
+// UTIL.createEl.js('http://ad.sitemaji.com/native/clickme_mobile.js');
+// UTIL.createEl.js('http://tedshd.lionfree.net/demo/feebee.js');
+// UTIL.createEl.css('http://tedshd.lionfree.net/demo/feebee.css');
