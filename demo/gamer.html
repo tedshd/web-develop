@@ -5,13 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>巴哈預購 - page</title>
 <link href="" rel="stylesheet">
+<style>
+    /* http://meyerweb.com/eric/tools/css/reset/
+       v2.0 | 20110126
+       License: none (public domain)
+    */
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+        display: block;
+    }
+    body {
+        line-height: 1;
+    }
+    ol, ul {
+        list-style: none;
+    }
+    blockquote, q {
+        quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+/*reset end*/
+
+    html, body {
+        min-height: 100%;
+        height: 100%;
+    }
+    a {
+        color: #666;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #0088ff;
+        border-bottom: solid 2px #0088ff;
+    }
+    .hide {
+        display: none;
+    }
+    header {
+        margin-bottom: 0.5em;
+    }
+    header h1 {
+        font-size: 2em;
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+    header h2 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+    header h2 a {
+        color: #cc0000;
+    }
+    section {
+        min-height: calc(100% - 7.5em);
+        border: solid;
+        border-width: 1px 0;
+        border-color: #ddd;
+        box-shadow: 2px 5px 90px 0 rgba(0, 0, 0, .1);
+    }
+    #content {
+        padding-top: 0.5em;
+    }
+    #loading {
+        text-align: center;
+    }
+    #page ul {
+        margin-left: 1em;
+    }
+    #page li {
+        display: inline-block;
+        margin-right: 1em;
+        cursor: pointer;
+    }
+    #page li:hover {
+        color: #cc0000;
+    }
+    section ul {
+        margin-left: 10px;
+    }
+    section li {
+        margin-bottom: 10px;
+    }
+    footer:before {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+    }
+    footer {
+        position: relative;
+        /*bottom: 50px;*/
+        text-align: center;
+        height: 2em;
+    }
+</style>
 </head>
 <body>
-    <h1>巴哈 - 預購列表</h1>
-    <h2 id="page">
-        <a href="" target="_blank">巴哈 - 預購頁面</a>
-    </h2>
-    <div id="loading">Loading...</div>
+    <header>
+        <h1>巴哈 - 預購列表</h1>
+        <h2 id="gamer_page">
+            <a href="" target="_blank">巴哈 - 預購頁面</a>
+        </h2>
+    </header>
+    <section>
+        <div id="loading">Loading...</div>
+        <div id="content">
+            <div class="list" id="list_1"></div>
+            <div class="list" id="list_2"></div>
+            <div class="list" id="list_3"></div>
+            <div class="list" id="list_4"></div>
+            <div class="list" id="list_5"></div>
+            <div class="list" id="list_6"></div>
+        </div>
+        <div id="page"></div>
+    </section>
+    <footer id="footer">
+        built&nbsp;by&nbsp;
+        <a href="https://import.io/" target="_blank">import.io</a>
+    </footer>
 </body>
 <script>
     var apiUrl = 'https://api.import.io/store/data/97029d4f-c2d1-47e9-8636-841de4b441cd/_query?input/webpage/url=http%3A%2F%2Fbuy.gamer.com.tw%2FindexList.php%3Fgc1%3D998&_user=f014508a-1783-4428-9fe6-1673fdd28364&_apikey=f014508a178344289fe61673fdd283646ad5a4617842e18bdf46ecdbd9c2ae04b63032114bd15aab47c0c6cc96ca73c62cd0bec75a7f5d374d1bfb6d93ee34b9219c98f6578417995ddcce28b52ef34b';
@@ -20,8 +163,8 @@
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var data = JSON.parse(xhr.responseText);
-            console.log(data.results);
-            document.querySelector('#page a').setAttribute('href', data.pageUrl);
+            console.log(data);
+            document.querySelector('#gamer_page a').setAttribute('href', data.pageUrl);
             var ul = document.createElement('ul');
             for (var i = 0; i < data.results.length; i++) {
                 var li = document.createElement('li');
@@ -34,9 +177,10 @@
                 ul.appendChild(li);
             }
             document.querySelector('#loading').innerHTML = '';
-            document.body.appendChild(ul);
+            document.querySelector('#list_1').appendChild(ul);
             loadData(data.results);
             saveData(data.results);
+            buildPage();
         }
     };
     xhr.send();
@@ -51,6 +195,92 @@
         if (list !== localStorage.getItem('dataList')) {
             alert('有新的預購了');
         }
+    }
+
+    function buildPage() {
+        document.querySelector('#page').innerHTML = '<ul>' +
+            '<li id="page_1">1</li>' +
+            '<li id="page_2">2</li>' +
+            '<li id="page_3">3</li>' +
+            '<li id="page_4">4</li>' +
+            '<li id="page_5">5</li>' +
+            '<li id="page_6">6</li>' +
+        '</ul>';
+        bindApi();
+    }
+
+    function bindApi() {
+        console.log(1);
+        document.querySelector('#page_1').onclick = function (e) {
+            console.log(e);
+            getData(e.target.innerHTML);
+        };
+        document.querySelector('#page_2').onclick = function (e) {
+            console.log(e);
+            getData(e.target.innerHTML);
+        };
+        document.querySelector('#page_3').onclick = function (e) {
+            console.log(e);
+            getData(e.target.innerHTML);
+        };
+        document.querySelector('#page_4').onclick = function (e) {
+            console.log(e);
+            getData(e.target.innerHTML);
+        };
+        document.querySelector('#page_5').onclick = function (e) {
+            console.log(e);
+            getData(e.target.innerHTML);
+        };
+        document.querySelector('#page_6').onclick = function (e) {
+            console.log(e);
+            getData(e.target.innerHTML);
+        };
+    }
+    function getData (argument) {
+        var index = parseInt(argument, 10),
+            apiArray = ['http://buy.gamer.com.tw/indexList.php?page=1&gc1=998',
+                        'http://buy.gamer.com.tw/indexList.php?page=2&gc1=998',
+                        'http://buy.gamer.com.tw/indexList.php?page=3&gc1=998',
+                        'http://buy.gamer.com.tw/indexList.php?page=4&gc1=998',
+                        'http://buy.gamer.com.tw/indexList.php?page=5&gc1=998',
+                        'http://buy.gamer.com.tw/indexList.php?page=6&gc1=998'],
+            api = 'https://api.import.io/store/connector/_magic?url=' + encodeURIComponent(apiArray[index - 1]) +'&format=JSON&js=false&_user=f014508a-1783-4428-9fe6-1673fdd28364&_apikey=f014508a178344289fe61673fdd283646ad5a4617842e18bdf46ecdbd9c2ae04b63032114bd15aab47c0c6cc96ca73c62cd0bec75a7f5d374d1bfb6d93ee34b9219c98f6578417995ddcce28b52ef34b';
+        if (document.querySelector('#list_' + index).innerHTML !== '') {
+            for (var i = 0; i < document.querySelectorAll('#content .list').length; i++) {
+                document.querySelectorAll('#content .list')[i].setAttribute('class', 'hide list');
+            }
+            document.querySelector('#list_' + index).setAttribute('class', 'list');
+            return;
+        }
+        for (var i = 0; i < document.querySelectorAll('#content .list').length; i++) {
+            document.querySelectorAll('#content .list')[i].setAttribute('class', 'hide list');
+        }
+        document.querySelector('#loading').innerHTML = 'Loading...';
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', api, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                console.log(data.tables[0].results);
+                document.querySelector('#gamer_page a').setAttribute('href', data.pageUrl);
+                var ul = document.createElement('ul');
+                for (var i = 0; i < data.tables[0].results.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerHTML = '<span>' +
+                            '<a href="' + data.tables[0].results[i].link + '" target="_blank">' +
+                                data.tables[0].results[i]['es_link/_text'] +
+                            '</a>' +
+                        '</span>' +
+                        '<span>' + ' - ' + data.tables[0].results[i].value + '</span>';
+                    ul.appendChild(li);
+                }
+                document.querySelector('#loading').innerHTML = '';
+                document.querySelector('#list_' + index).setAttribute('class', 'list');
+                document.querySelector('#list_' + index).appendChild(ul);
+            }
+        };
+        xhr.send();
     }
 </script>
 </html>
