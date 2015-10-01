@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>巴哈預購 - page</title>
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <h1>巴哈 - 預購列表</h1>
+    <h2 id="page">
+        <a href="" target="_blank">巴哈 - 預購頁面</a>
+    </h2>
+    <div id="loading">Loading...</div>
+</body>
+<script>
+    var apiUrl = 'https://api.import.io/store/data/97029d4f-c2d1-47e9-8636-841de4b441cd/_query?input/webpage/url=http%3A%2F%2Fbuy.gamer.com.tw%2FindexList.php%3Fgc1%3D998&_user=f014508a-1783-4428-9fe6-1673fdd28364&_apikey=f014508a178344289fe61673fdd283646ad5a4617842e18bdf46ecdbd9c2ae04b63032114bd15aab47c0c6cc96ca73c62cd0bec75a7f5d374d1bfb6d93ee34b9219c98f6578417995ddcce28b52ef34b';
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', apiUrl, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            console.log(data.results);
+            document.querySelector('#page a').setAttribute('href', data.pageUrl);
+            var ul = document.createElement('ul');
+            for (var i = 0; i < data.results.length; i++) {
+                var li = document.createElement('li');
+                li.innerHTML = '<span>' +
+                        '<a href="' + data.results[i].link + '" target="_blank">' +
+                            data.results[i]['es_link/_text'] +
+                        '</a>' +
+                    '</span>' +
+                    '<span>' + ' - ' + data.results[i].value + '</span>';
+                ul.appendChild(li);
+            }
+            document.querySelector('#loading').innerHTML = '';
+            document.body.appendChild(ul);
+            loadData(data.results);
+            saveData(data.results);
+        }
+    };
+    xhr.send();
+
+    function saveData(data) {
+        var list = JSON.stringify(data);
+        localStorage.setItem('dataList', list);
+    }
+
+    function loadData(data) {
+        var list = JSON.stringify(data);
+        if (list !== localStorage.getItem('dataList')) {
+            alert('有新的預購了');
+        }
+    }
+</script>
+</html>
