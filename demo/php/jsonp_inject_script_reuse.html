@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<style>
+    div {
+        background: #ccc;
+    }
+</style>
+</head>
+<body>
+    <div id="content_1"></div>
+    <br>
+    <div id="content_2"></div>
+    <br>
+    <div id="content_3"></div>
+</body>
+<script>
+    function componentHTML(width, height, id, dom, count) {
+        if (!dom) {
+            console.error('not set dom');
+            return;
+        }
+        if (!count) {
+            var count = '';
+        }
+        var js = document.createElement('script');
+        js.setAttribute('id', 'component_' + id + '_' + count);
+        js.src = 'http://tedshd.io/demo/php/api_component.php?w=' + width + '&h=' + height + '&id=' + id;
+        dom.appendChild(js);
+        document.getElementById('component_' + id + '_' + count).onload = function () {
+            console.log(component[id]);
+            dom.style.width = component[id].w + 'px';
+            dom.style.height = component[id].h + 'px';
+            dom.innerHTML = component[id].id;
+        };
+    }
+
+    componentHTML(300, 200, 'id123', document.querySelector('#content_1'));
+    componentHTML(100, 150, 'id456', document.querySelector('#content_2'));
+    componentHTML(300, 200, 'id789', document.querySelector('#content_3'), 5);
+</script>
+</html>

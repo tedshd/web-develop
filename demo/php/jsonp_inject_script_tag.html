@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+</head>
+<body>
+
+</body>
+<script>
+    var script = document.createElement('script');
+    script.src = 'http://tedshd.io/demo/php/api.php?callback=run';
+    document.querySelectorAll('head')[0].appendChild(script);
+
+    function run (data) {
+        console.log(data);
+    }
+</script>
+</html>
