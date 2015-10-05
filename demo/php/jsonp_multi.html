@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+<script>
+    var fun = {},
+        id;
+    function componentHTML(w, h, id) {
+        var js = document.createElement('script');
+        rand = Math.floor((Math.random() * 100) + 1);
+        id = (rand === id) ? rand + 1: rand;
+        id = 'rand_' + id;
+        js.src = 'http://tedshd.io/demo/php/api.php?w=' + w + '&h=' + h + '&id=' + id + '&callback=fun.' + id;
+        fun[id] = function (data) {
+            console.log(data);
+        };
+        document.body.appendChild(js);
+        // document.getElementById('component_' + id + '_' + count).onload = function () {
+        //     // initUI
+        // };
+        // document.getElementById('component_' + id + '_' + count).onerror = function () {
+        //     // error handle
+        // };
+    }
+    componentHTML(300, 200);
+    componentHTML(300, 200);
+</script>
+</html>
