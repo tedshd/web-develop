@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Ted Shiu (ted@sitetag.us)
+ * @date    2015-10-19 12:28:13
+ */
+
+@import url('base_import.css');
+
+#import {
+	background: red;
+}
