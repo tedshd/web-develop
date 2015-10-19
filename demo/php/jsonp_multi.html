@@ -11,25 +11,28 @@
 </body>
 <script>
     var fun = {},
-        id;
+        idTable = [];
     function componentHTML(w, h, id) {
         var js = document.createElement('script');
-        rand = Math.floor((Math.random() * 100) + 1);
-        id = (rand === id) ? rand + 1: rand;
-        id = 'rand_' + id;
+        if (!id) {
+            var rand = Math.floor((Math.random() * 100) + 1),
+                id;
+            for (var i = idTable.length - 1; i >= 0; i--) {
+                if (idTable[i] === rand) {
+                    rand = rand + 1;
+                }
+            }
+            idTable.push(rand);
+            id = 'rand_' + rand;
+        }
         js.src = 'http://tedshd.io/demo/php/api.php?w=' + w + '&h=' + h + '&id=' + id + '&callback=fun.' + id;
         fun[id] = function (data) {
             console.log(data);
         };
         document.body.appendChild(js);
-        // document.getElementById('component_' + id + '_' + count).onload = function () {
-        //     // initUI
-        // };
-        // document.getElementById('component_' + id + '_' + count).onerror = function () {
-        //     // error handle
-        // };
     }
-    componentHTML(300, 200);
-    componentHTML(300, 200);
+    componentHTML(320, 50, 'id');
+    componentHTML(300, 250);
+    componentHTML(728, 90);
 </script>
 </html>
