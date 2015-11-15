@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>PS4</title>
+<style>
+@font-face {
+    font-family: playstation;
+    src: url(TRIIYP.otf);
+}
+@font-face {
+    font-family: sony;
+    src: url(sony.TTF);
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+  clear: both;
+}
+
+.ps4 {
+  width: 300px;
+}
+.ps4 div {
+  float: left;
+}
+
+.top_back, .bottom_back {
+  width: 25px;
+  background: #ccc;
+}
+
+.top_inside, .middle_inside, .bottom_inside {
+  width: 3px;
+  background: #000;
+}
+
+.top_front, .middle_front, .bottom_front {
+  width: 20px;
+  background: #ccc;
+}
+
+.top_back,
+.top_inside,
+.top_front,
+.top_front_panel {
+  height: 100px;
+}
+
+.top_front_panel, .bottom_front_panel {
+  border-left: solid 1px #aaa;
+  background: #ccc;
+  width: calc(100% - 49px);
+}
+.top_front span {
+    font-family: sony;
+    font-size: 12px;
+    display: inline-block;
+    -webkit-transform: rotate(90deg) translate(31px, 23px);
+    -moz-transform: rotate(90deg) translate(31px, 23px);
+    -ms-transform: rotate(90deg) translate(31px, 23px);
+}
+.top_inside {
+  box-sizing: border-box;
+  border-top: solid 3px #888;
+}
+.top_front_panel {
+    position: relative;
+}
+.panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(Metal-Gear-Solid-Legarcy-Collection.jpg) 0 0 no-repeat;
+    background-size: cover;
+
+}
+.top_front_panel span {
+    font-size: 24px;
+    font-family: sony;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.middle_back, .middle_inside, .middle_front, .middle_front_panel {
+  height: 5px;
+  background: #000;
+}
+.middle_back {
+  margin-left: 3px;
+  width: 22px;
+}
+.middle_front_panel {
+    border-left: solid 1px #000;
+    background: #0088ff;
+    width: calc(100% - 52px);
+    margin-right: 3px;
+}
+
+.bottom_back, .bottom_front, .bottom_inside, .bottom_front_panel {
+  height: 190px;
+  background: #ccc;
+}
+.bottom_inside {
+  background: #000;
+  box-sizing: border-box;
+  border-bottom: solid 3px #888;
+}
+.bottom_front span {
+    font-family: playstation;
+    font-size: 12px;
+    text-align: right;
+    width: 190px;
+    display: inline-block;
+    -webkit-transform: rotate(90deg) translate(70px, 85px);
+    -moz-transform: rotate(90deg) translate(70px, 85px);
+    -ms-transform: rotate(90deg) translate(70px, 85px);
+}
+.top_front span, .top_front_panel, .bottom_front span {
+  color: #aaa;
+}
+</style>
+</head>
+<body>
+    <div class="ps4 clearfix">
+        <div class="top_back"></div>
+        <div class="top_inside"></div>
+        <div class="top_front"><span>SONY</span></div>
+        <div class="top_front_panel">
+          <div class="panel"></div>
+          <span>P</span>
+        </div>
+        <div class="middle_back"></div>
+        <div class="middle_inside"></div>
+        <div class="middle_front"></div>
+        <div class="middle_front_panel"></div>
+        <div class="bottom_back"></div>
+        <div class="bottom_inside"></div>
+        <div class="bottom_front"><span>PS4</span></div>
+        <div class="bottom_front_panel"></div>
+    </div>
+</body>
+</html>
