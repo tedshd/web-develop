@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>data</title>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<link rel="stylesheet" href="loading.css">
+<style>
+	html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.hide {
+    display: none;
+}
+#map_canvas {
+    height: 100%;
+}
+#nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 320px;
+    background: #ddd;
+}
+</style>
+</head>
+<body>
+<!-- <div id="loading">
+    <div id="loader">
+        <span class="item-1"></span>
+        <span class="item-2"></span>
+        <span class="item-3"></span>
+        <span class="item-4"></span>
+        <span class="item-5"></span>
+        <span class="item-6"></span>
+        <span class="item-7"></span>
+        <div>初始化地圖</div>
+    </div>
+</div> -->
+<div id="map_canvas" style="width:100%; height:100%"></div>
+<div id="nav">
+    <div id="ico_1" data-status="on">1</div>
+    <div id="ico_2" data-status="on">2</div>
+    <div id="ico_3" data-status="on">3</div>
+    <div id="ico_4" data-status="on">4</div>
+</div>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script src="javascripts/markerclusterer.js"></script>
+<script>
+
+var latlng = new google.maps.LatLng(24.8067130, 120.9688410);
+var geocoder = new google.maps.Geocoder();
+var markerCluster,
+    markerClusterOk,
+    markerClusterLife,
+    markerClusterHome,
+    marker;
+    marks = [],
+    marksOk = [],
+    marksLife = [],
+    marksHome = [];
+var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var map = new google.maps.Map(
+    document.getElementById("map_canvas"),
+    myOptions
+);
+var renderCount = 0;
+var renderCountOk = 0;
+var renderCountLife = 0;
+var renderCountHome = 0;
+var parseData;
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showPositionError);
+
+    function showPosition(position) {
+        latituded4 = position.coords.latitude;
+        longituded4 = position.coords.longitude;
+        console.log(latituded4);
+        console.log(longituded4);
+        // google.maps.event.addDomListener(window, 'load', initialize(latituded4, longituded4));
+    }
+
+    function showPositionError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                console.log('User denied the request for Geolocation.');
+                break;
+            case error.POSITION_UNAVAILABLE:
+                console.log('Location information is unavailable.');
+                break;
+            case error.TIMEOUT:
+                console.log('The request to get user location timed out.');
+                break;
+            case error.UNKNOWN_ERROR:
+                console.log('An unknown error occurred.');
+                break;
+        }
+    }
+} else {
+    // google.maps.event.addDomListener(window, 'load', initialize(latituded4, longituded4));
+}
+
+var prev_infowindow =false;
+var la = [];
+function codeAddress(address, info, type) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+        // map.setCenter(results[0].geometry.location);
+        var infowindow = new google.maps.InfoWindow();
+        var geo = results[0].geometry.location;
+        la.push(geo);
+        if (type === 'danger') {
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: results[0].geometry.location,
+                icon: 'alert.png'
+            });
+        }
+        if (type === 'safe') {
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: results[0].geometry.location,
+                // icon: 'alert.png'
+            });
+        }
+        if (type === 'house') {
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: results[0].geometry.location,
+                // icon: 'alert.png'
+            });
+        }
+        if (type === 'life') {
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: results[0].geometry.location,
+                // icon: 'alert.png'
+            });
+        }
+        var content = info;
+        infowindow.setContent(content);
+        // infowindow.open(map, marker);
+        google.maps.event.addListener(
+            marker,
+            'click',
+            (function (marker, content, infowindow) {
+                return function() {
+	            	if(prev_infowindow) {
+						prev_infowindow.close();
+			        }
+                    infowindow.setContent(content);
+                    prev_infowindow = infowindow;
+                    infowindow.open(map, marker);
+                };
+            })(marker, content, infowindow)
+        );
+        marks.push(marker);
+        // console.log(results);
+        // console.log(results[0].geometry.location);
+        } else {
+            var geo = {
+                lat: '',
+                lng: ''
+            };
+            la.push(geo);
+            console.log('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+function cluster () {
+    renderCount++;
+    if (renderCount === 2) {
+        console.log('markerCluster');
+        markerCluster = new MarkerClusterer(map, marks);
+        markerCluster.setStyles([
+            {
+                height: 53,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m1_ic_l1.png',
+                width: 53
+            },
+            {
+                height: 56,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m2_ic_l1.png',
+                width: 56
+            },
+            {
+                height: 66,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m3_ic_l1.png',
+                width: 66
+            },
+            {
+                height: 78,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m4_ic_l1.png',
+                width: 78
+            },
+            {
+                height: 90,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m5_ic_l1.png',
+                width: 90
+            }
+        ]);
+        // $('#loading').addClass('hide');
+        // document.getElementById('loader').setAttribute('id', '');
+    }
+}
+
+function clusterOk () {
+    renderCountOk++;
+    if (renderCountOk === 2) {
+        console.log('markerCluster');
+        markerClusterOk = new MarkerClusterer(map, marksOk);
+        markerClusterOk.setStyles([
+            {
+                height: 53,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m1_ic_l3.png',
+                width: 53
+            },
+            {
+                height: 56,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m2_ic_l3.png',
+                width: 56
+            },
+            {
+                height: 66,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m3_ic_l3.png',
+                width: 66
+            },
+            {
+                height: 78,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m4_ic_l3.png',
+                width: 78
+            },
+            {
+                height: 90,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m5_ic_l3.png',
+                width: 90
+            }
+        ]);
+        // $('#loading').addClass('hide');
+        // document.getElementById('loader').setAttribute('id', '');
+    }
+}
+
+function clusterLife () {
+    renderCountLife++;
+    if (renderCountLife === 2) {
+        console.log('markerCluster');
+        markerClusterLife = new MarkerClusterer(map, marksLife);
+        markerClusterLife.setStyles([
+            {
+                height: 53,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m1_ic_l4.png',
+                width: 53
+            },
+            {
+                height: 56,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m2_ic_l4.png',
+                width: 56
+            },
+            {
+                height: 66,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m3_ic_l4.png',
+                width: 66
+            },
+            {
+                height: 78,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m4_ic_l4.png',
+                width: 78
+            },
+            {
+                height: 90,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m5_ic_l4.png',
+                width: 90
+            }
+        ]);
+        // $('#loading').addClass('hide');
+        // document.getElementById('loader').setAttribute('id', '');
+    }
+}
+
+function clusterHome () {
+    renderCountHome++;
+    console.log(renderCountHome);
+    if (renderCountHome === 2) {
+        console.log('markerCluster');
+        markerClusterHome = new MarkerClusterer(map, marksHome);
+        markerClusterHome.setStyles([
+            {
+                height: 53,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m1_ic_l5.png',
+                width: 53
+            },
+            {
+                height: 56,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m2_ic_l5.png',
+                width: 56
+            },
+            {
+                height: 66,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m3_ic_l5.png',
+                width: 66
+            },
+            {
+                height: 78,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m4_ic_l5.png',
+                width: 78
+            },
+            {
+                height: 90,
+                url: 'http://tedse.0fees.net/demo/2015hackthon/m5_ic_l5.png',
+                width: 90
+            }
+        ]);
+        // $('#loading').addClass('hide');
+        // document.getElementById('loader').setAttribute('id', '');
+    }
+}
+
+var apiUrl = {
+	// fireSafety: 'http://opendata.hccg.gov.tw/dataset/1f115cb9-ad53-4238-a044-7e74f3070a0a/resource/de7aebc1-2c0c-4c0d-a9cc-e3849f413483/download/20151118082736184.json',
+    fireSafety: 'fire_not_safety.json',
+	// 新竹市消防安全檢查重大不合格場所
+	// nettLoginBusiness: 'http://opendata.hccg.gov.tw/dataset/0a9e2a97-aec3-43eb-bd4c-393cf49a10fe/resource/6ee3c9a8-d1b4-4447-aed4-c9842f625baf/download/20151014164000618.json',
+    nettLoginBusiness: 'nettLoginbusiness.json',
+	// 實價登錄買賣
+	// nettLoginLease: 'http://opendata.hccg.gov.tw/dataset/37c1b14b-d260-4962-94d9-d27cc2d02801/resource/e75d2b54-f897-478c-a418-42a5c1326ea8/download/20151105154057757.json',
+    nettLoginLease: 'nettLoginlease.json',
+	// 實價登錄租賃
+	// crimeLocation: 'http://opendata.hccg.gov.tw/dataset/cc741b4f-c6fb-4c98-89ee-3e7560c117c5/resource/e194c680-c30f-4aeb-a8e4-5221e36283a4/download/20150317095202270.json',
+    crimeLocation: 'crimelocation.json',
+	// 婦幼被害犯罪地點
+    police: 'http://opendata.hccg.gov.tw/dataset/d5aeb805-4613-4f11-a943-6a3ec81f8f18/resource/95a08477-3fd0-43f3-ba19-8f3456c32c05/download/20150303093325178.json',
+    // 新竹市警察機關資料
+    // sport: 'http://opendata.hccg.gov.tw/dataset/d92616e8-0ede-4d1f-aa5d-c3fe78c41ce2/resource/96097f70-16ff-4c37-bfc3-fc1f02fdad4f/download/20150304155719601.json',
+    sport: 'sport.json',
+    // sightseeing: 'http://opendata.hccg.gov.tw/dataset/4333a8bd-04eb-4002-ae17-75cef483cd56/resource/752db426-c665-4a63-94ee-aa4c9ba630ec/download/20150303162745979.json',
+    sightseeing: 'sightseeing.json',
+    // firefighting: 'http://opendata.hccg.gov.tw/dataset/d275aa6b-3bf9-4eda-9823-73b5338988b4/resource/c2a59b45-d078-4404-8deb-f7b9b2558d19/download/20150303152533439.json',
+    firefighting: 'firefighting.json',
+};
+
+function fireSafetyFun () {
+	apiInterface(apiUrl.fireSafety, ui, fail);
+	function ui (data) {
+		// console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                icon: 'alert.png'
+            });
+            var content = data[i]['場所名稱'] + '-' + data[i]['檢查結果'];
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marks.push(marker);
+            marker.setMap(map);
+        }
+        cluster();
+		// var i = 0;
+		// var loop = setInterval(function () {
+		// 	var info = data[i]['場所名稱'] + '-' + data[i]['檢查結果'];
+		// 	codeAddress(data[i]['場所地點'], info, 'danger');
+		// 	i++;
+		// 	if (i === data.length) {
+		// 		clearInterval(loop);
+  //               cluster();
+		// 	}
+		// }, 900);
+	}
+	function fail (data) {
+		// body...
+	}
+}
+
+function nettLoginBusinessFun () {
+	apiInterface(apiUrl.nettLoginBusiness, ui, fail);
+	function ui (data) {
+		console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                // icon: 'alert.png'
+            });
+            var money = data[i]['單價(元/平方公尺)'];
+            var moneyL = money.length;
+            var m1 = money.slice(0, moneyL - 4);
+            var m2 = money.slice(moneyL - 4, moneyL);
+            var content = '土地區段位置/建物區段門牌: ' + data[i]['土地區段位置/建物區段門牌'] +
+                '<br>' +
+                '單價(元/平方公尺): ' + m1 + '萬' + m2 + '元';
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marksHome.push(marker);
+            marker.setMap(map);
+        }
+        clusterHome();
+        // parseData = data;
+        // var i = 0;
+        // var loop = setInterval(function () {
+        //  var info = '';
+        //  console.log(data[i]['土地區段位置/建物區段門牌']);
+        //  var s = trans(data[i]['土地區段位置/建物區段門牌']);
+        //  // console.log(trans(s));
+        //  console.log(s.match(/[0-9]/));
+        //  s = s.split(s.match(/[0-9]/))[0];
+        //  console.log(s);
+        //  codeAddress('新竹市 ' + s, info, 'danger');
+        //  i++;
+        //  if (i === data.length) {
+        //      clearInterval(loop);
+        //         cluster();
+        //  }
+        // }, 900);
+	}
+	function fail (data) {
+		// body...
+	}
+}
+nettLoginBusinessFun();
+
+function nettLoginLeaseFun () {
+	apiInterface(apiUrl.nettLoginLease, ui, fail);
+	function ui (data) {
+		console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                // icon: 'alert.png'
+            });
+            console.log(data[i]['單價(元/平方公尺)']);
+            var content = '土地區段位置/建物區段門牌: ' + data[i]['土地區段位置/建物區段門牌'] +
+                '<br>' +
+                '總價(元): ' + data[i]['總價(元)'] + '元';
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marksHome.push(marker);
+            marker.setMap(map);
+        }
+        clusterHome();
+        // parseData = data;
+        // var i = 0;
+        // var loop = setInterval(function () {
+        //  var info = '';
+        //  console.log(data[i]['土地區段位置/建物區段門牌']);
+        //  var s = trans(data[i]['土地區段位置/建物區段門牌']);
+        //  // console.log(trans(s));
+        //  console.log(s.match(/[0-9]/));
+        //  s = s.split(s.match(/[0-9]/))[0];
+        //  console.log(s);
+        //  codeAddress('新竹市 ' + s, info, 'danger');
+        //  i++;
+        //  if (i === data.length) {
+        //      clearInterval(loop);
+        //         cluster();
+        //  }
+        //  console.log(i);
+        // }, 900);
+	}
+	function fail (data) {
+		// body...
+	}
+}
+nettLoginLeaseFun();
+
+function crimeLocationFun () {
+	apiInterface(apiUrl.crimeLocation, ui, fail);
+	function ui (data) {
+		// console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                icon: 'alert.png'
+            });
+            var content = '曾發生過的犯罪地點';
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marks.push(marker);
+            marker.setMap(map);
+        }
+        cluster();
+		// var i = 0;
+		// var loop = setInterval(function () {
+		// 	// console.log(data);
+		// 	var info = '曾發生過的犯罪地點';
+		// 	codeAddress(data[i]['地點'], info, 'danger');
+		// 	i++;
+		// 	if (i === data.length) {
+		// 		clearInterval(loop);
+  //               cluster();
+		// 	}
+		// }, 900);
+	}
+	function fail (data) {
+		// body...
+	}
+}
+
+
+function policeFun () {
+    apiInterface(apiUrl.police, ui, fail);
+    function ui (data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['X軸座標']),
+                lng: Number(data[i]['Y軸座標'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                icon: 'ok.png'
+            });
+            var content = '單位: ' + data[i]['單位'] +
+                '<br>' +
+                '電話' + data[i]['電話'];
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marksOk.push(marker);
+            marker.setMap(map);
+        }
+        clusterOk();
+    }
+    function fail (data) {
+        // body...
+    }
+}
+
+function sportFun () {
+    // $.ajax({
+    //     url: 'sport.json',
+    //     type: 'GET',
+    //     data: {
+    //     },
+    //     success: function(data) {
+    //         console.log(data);
+    //     },
+    //     error: function(data) {
+    //         console.log(data);
+    //     }
+    // });
+    apiInterface(apiUrl.sport, ui, fail);
+    function ui (data) {
+        // console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                // icon: 'ok.png'
+            });
+            var content = '場館名稱: ' + data[i]['場館名稱'] +
+                '<br>' +
+                '費用: ' + data[i]['費用'] +
+                '<br>' +
+                '開放時間: ' + data[i]['開放時間'] +
+                '<br>' +
+                '電話: ' + data[i]['電話'];
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marksLife.push(marker);
+            marker.setMap(map);
+        }
+        clusterLife();
+        // var i = 0;
+        // var loop = setInterval(function () {
+        //     // console.log(data);
+        //     var info = '場館名稱: ' + data[i]['場館名稱'] +
+        //         '<br>' +
+        //         '費用: ' + data[i]['費用'] +
+        //         '<br>' +
+        //         '開放時間: ' + data[i]['開放時間'] +
+        //         '<br>' +
+        //         '電話: ' + data[i]['電話'];
+        //     codeAddress(data[i]['地址'], info, 'life');
+        //     i++;
+        //     if (i === data.length) {
+        //         clearInterval(loop);
+        //         cluster();
+        //     }
+        // }, 900);
+    }
+    function fail (data) {
+        // body...
+    }
+}
+
+function sightseeingFun (argument) {
+    apiInterface(apiUrl.sightseeing, ui, fail);
+    function ui (data) {
+        console.log(data);
+        // parseData = data;
+        for (var i = 0; i < data.length; i++) {
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                // icon: 'ok.png'
+            });
+            var content = '景點名稱: ' + data[i]['景點名稱'] +
+                '<br>' +
+                '景點介紹: ' + data[i]['景點介紹'];
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marksLife.push(marker);
+            marker.setMap(map);
+        }
+        clusterLife();
+        // var i = 0;
+        // var loop = setInterval(function () {
+        //     // console.log(data);
+        //     var info = '';
+        //     codeAddress(data[i]['景點名稱'], info, 'life');
+        //     i++;
+        //     if (i === data.length) {
+        //         clearInterval(loop);
+        //         // cluster();
+        //     }
+        // }, 900);
+    }
+    function fail (argument) {
+        // body...
+    }
+}
+
+function firefightingFun (argument) {
+    apiInterface(apiUrl.firefighting, ui, fail);
+    function ui (data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i]['geo']);
+            var pos = {
+                lat: Number(data[i]['geo']['lat']),
+                lng: Number(data[i]['geo']['lng'])
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                position: pos,
+                icon: 'ok.png'
+            });
+            var content = '單位名稱: ' + data[i]['單位名稱'];
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.setContent(content);
+            google.maps.event.addListener(
+                marker,
+                'click',
+                (function (marker, content, infowindow) {
+                    return function() {
+                        if(prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.setContent(content);
+                        prev_infowindow = infowindow;
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow)
+            );
+            marksOk.push(marker);
+            marker.setMap(map);
+        }
+        clusterOk();
+    }
+    function fail (data) {
+        // body...
+    }
+}
+
+fireSafetyFun();
+crimeLocationFun();
+policeFun();
+firefightingFun();
+sportFun();
+sightseeingFun();
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map, markersArray) {
+  for (var i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers(marksCurrent) {
+  setMapOnAll(null, marksCurrent);
+}
+
+// Shows any markers currently in the array.
+function showMarkers(marksCurrent) {
+  setMapOnAll(map, marksCurrent);
+}
+
+$('#ico_1').on('click', function () {
+    var attr = this.getAttribute('data-status');
+    if (attr === 'on') {
+        this.setAttribute('data-status', 'off');
+        clearMarkers(marks);
+        markerCluster.clearMarkers();
+    } else {
+        this.setAttribute('data-status', 'on');
+        showMarkers(marks);
+        markerCluster.addMarkers(marks, false);
+    }
+});
+$('#ico_2').on('click', function () {
+    var attr = this.getAttribute('data-status');
+    if (attr === 'on') {
+        this.setAttribute('data-status', 'off');
+        clearMarkers(marksOk);
+        markerClusterOk.clearMarkers();
+    } else {
+        this.setAttribute('data-status', 'on');
+        showMarkers(marksOk);
+        markerClusterOk.addMarkers(marksOk, false);
+    }
+});
+$('#ico_3').on('click', function () {
+    var attr = this.getAttribute('data-status');
+    if (attr === 'on') {
+        this.setAttribute('data-status', 'off');
+        clearMarkers(marksLife);
+        markerClusterLife.clearMarkers();
+    } else {
+        this.setAttribute('data-status', 'on');
+        showMarkers(marksLife);
+        markerClusterLife.addMarkers(marksLife, false);
+    }
+});
+$('#ico_4').on('click', function () {
+    var attr = this.getAttribute('data-status');
+    if (attr === 'on') {
+        this.setAttribute('data-status', 'off');
+        clearMarkers(marksHome);
+        markerClusterHome.clearMarkers();
+    } else {
+        this.setAttribute('data-status', 'on');
+        showMarkers(marksHome);
+        markerClusterHome.addMarkers(marksHome, false);
+    }
+});
+
+
+function apiInterface (url, ui, fail) {
+	$.ajax({
+	    url: url,
+	    type: 'GET',
+	    data: {
+	    },
+	    success: function(data) {
+	    	ui(data);
+	    },
+	    error: function(data) {
+	        fail(data);
+	    }
+	});
+}
+
+function save (argument) {
+    for (var i = 0; i < la.length; i++) {
+        parseData[i]['geo'] = la[i];
+    }
+    console.log(parseData);
+    $.ajax({
+        url: 'getdata.php',
+        type: 'POST',
+        data: {
+            data: JSON.stringify(parseData)
+        },
+        success: function(data) {
+            console.log('ok');
+        },
+        error: function(data) {
+            console.error(data);
+        }
+    });
+}
+
+function trans (value) {
+    var result = "";
+for(i=0; i<=value.length; i++){
+　　　　if(value.charCodeAt(i)== 12288){
+　　　　　　result += " ";
+　　　　}else{
+　　　　　　if(value.charCodeAt(i) > 65280 && value.charCodeAt(i) < 65375){
+　　　　　　　　result += String.fromCharCode(value.charCodeAt(i) - 65248);
+　　　　　　}else{
+　　　　　　　　result += String.fromCharCode(value.charCodeAt(i));
+　　　　　　}
+　　　　}
+　　}
+return result;
+}
+
+</script>
+</html>

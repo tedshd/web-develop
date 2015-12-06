@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.2/normalize.css">
+<link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">
+<script src="/lib/jquery-1.10.1.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+<script>
+var saveData;
+    var pageData = {
+        // news: 'https://api.import.io/store/connector/bb2f0d16-14f6-4a1d-9ffd-76984c2f275b/_query?input=webpage/url:http%3A%2F%2Fwww.hccg.gov.tw%2Fweb%2FNews%3FFP%3DD40000001852000008_0&&_apikey=f014508a178344289fe61673fdd283646ad5a4617842e18bdf46ecdbd9c2ae04b63032114bd15aab47c0c6cc96ca73c62cd0bec75a7f5d374d1bfb6d93ee34b9219c98f6578417995ddcce28b52ef34b',
+        news: 'news.json',
+    };
+    function apiInterface (url, ui, fail) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: {
+            },
+            success: function(data) {
+                ui(data);
+            },
+            error: function(data) {
+                fail(data);
+            }
+        });
+    }
+
+    apiInterface(pageData.news, ui, fail);
+    function ui (data) {
+        console.log(data);
+        var data = data.results;
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var items = {
+                data: data[i].dlarktext_number,
+                link: data[i].dlarktext_link,
+                title: data[i]['dlarktext_link/_title'],
+                department: data[i].dlarktext_value_1,
+                cat: data[i].dlarktext_value_2
+            };
+            console.log(items);
+        };
+        // saveData = data;
+        // save();
+    }
+    function fail (data) {
+        // body...
+    }
+
+
+    function save (argument) {
+        $.ajax({
+            url: 'savedata.php',
+            type: 'POST',
+            data: {
+                data: JSON.stringify(saveData)
+            },
+            success: function(data) {
+                console.log('ok');
+            },
+            error: function(data) {
+                console.error(data);
+            }
+        });
+    }
+</script>
+</html>
