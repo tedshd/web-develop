@@ -27,7 +27,7 @@ function apiInterface (url, ui, fail) {
 apiInterface(pageData.news, ui, fail);
 function ui (data) {
     console.log(data);
-    var data = data.results;
+    data = data.results;
     console.log(data);
     for (var i = 0; i < data.length; i++) {
         var items = {
@@ -38,7 +38,7 @@ function ui (data) {
             cat: data[i].dlarktext_value_2
         };
         console.log(items);
-    };
+    }
 }
 function fail (data) {
     // body...
