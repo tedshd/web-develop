@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2015-12-06 20:16:45
+ * @version $Id$
+ */
+
+:root {
+  --keyCapSize: 56px;
+  --keyCapBorder: 7px;
+}
+
+
+/*-- keycaps --*/
+.keycap_1,
+.keycap_1_25,
+.keycap_1_5,
+.keycap_1_75,
+.keycap_2,
+.keycap_2_25,
+.keycap_2_75,
+.keycap_5,
+.keycap_6,
+.keycap_6_25,
+.keycap_6_5,
+.keycap_7 {
+    height: var(--keyCapSize);
+}
+
+.keycap_1 {
+    width: calc(var(--keyCapSize) * 1);
+}
+.keycap_1_25 {
+    width: calc(var(--keyCapSize) * 1.25);
+}
+.keycap_1_5 {
+    width: calc(var(--keyCapSize) * 1.5);
+}
+.keycap_1_75 {
+    width: calc(var(--keyCapSize) * 1.75);
+}
+.keycap_2 {
+    width: calc(var(--keyCapSize) * 2);
+}
+.keycap_2_25 {
+    width: calc(var(--keyCapSize) * 2.25);
+}
+.keycap_2_75 {
+    width: calc(var(--keyCapSize) * 2.75);
+}
+.keycap_5 {
+    width: calc(var(--keyCapSize) * 5);
+}
+.keycap_6 {
+    width: calc(var(--keyCapSize) * 6);
+}
+.keycap_6_25 {
+    width: calc(var(--keyCapSize) * 6.25);
+}
+.keycap_6_5 {
+    width: calc(var(--keyCapSize) * 6.5);
+}
+.keycap_7 {
+    width: calc(var(--keyCapSize) * 7);
+}
+.keycaps {
+    position: relative;
+    border: solid var(--keyCapBorder) #ddd;
+    border-right: solid var(--keyCapBorder) #aaa;
+    border-bottom: solid var(--keyCapBorder) #aaa;
+    box-sizing: border-box;
+    text-align: center;
+    word-break: break-all;
+}
+.keycap_plus, .keycap_enter {
+    width: calc(var(--keyCapSize) * 1);
+    height: calc(var(--keyCapSize) * 2);
+}
+.keycap_enter_iso {
+    border-bottom: transparent;
+    width: calc(var(--keyCapSize) * 1.5);
+    height: var(--keyCapSize);
+}
+.keycap_enter_iso:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(var(--keyCapSize) - (var(--keyCapBorder) * 2));
+  left: calc(0 - var(--keyCapBorder));
+  width: calc((var(--keyCapSize) * 1.5) - (var(--keyCapSize) * 1.25) + var(--keyCapBorder));
+  box-sizing: border-box;
+  border-left: solid var(--keyCapBorder) #ddd;
+  border-bottom: solid var(--keyCapBorder) #aaa;
+}
+.keycap_enter_iso:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: calc(var(--keyCapSize) - var(--keyCapBorder));
+  right: calc(0 - var(--keyCapBorder));
+  width: calc(var(--keyCapSize) * 1.25);
+  height: var(--keyCapSize);
+  border: var(--keyCapBorder) solid #ddd;
+  border-top: transparent;
+  border-right: solid var(--keyCapBorder) #aaa;
+  border-bottom: solid var(--keyCapBorder) #aaa;
+  box-sizing: border-box;
+}
+.blank_1 {
+    position: relative;
+    width: calc(var(--keyCapSize) * 1);
+    height: calc(var(--keyCapSize) * 1);
+}

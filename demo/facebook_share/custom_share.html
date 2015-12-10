@@ -14,7 +14,7 @@
 <script>
 window.fbAsyncInit = function() {
     FB.init({
-        appId: 428293247270957,
+        appId: 1703964596491041,
         status: true,
         cookie: true,
         xfbml: true
@@ -33,10 +33,12 @@ var fbShareBtn = document.querySelectorAll('.fb_share');
 for (var i = 0; i < fbShareBtn.length; i++) {
     fbShareBtn[i].addEventListener('click', function(e) {
         e.preventDefault();
-        var title = fbShareBtn[i].getAttribute('data-title'),
-            desc = fbShareBtn[i].getAttribute('data-desc'),
-            url = fbShareBtn[i].getAttribute('href'),
-            image = fbShareBtn[i].getAttribute('data-image');
+        e.stopPropagation();
+        console.log(this);
+        var title = this.getAttribute('data-title'),
+            desc = this.getAttribute('data-desc'),
+            url = this.getAttribute('href'),
+            image = this.getAttribute('data-image');
         postToFeed(title, desc, url, image);
 
         return false;
