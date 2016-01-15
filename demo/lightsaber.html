@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>lightsaber</title>
+<link href="" rel="stylesheet">
+<style>
+body {
+    background: #141414;
+}
+    .lightsaber {
+        position: relative;
+        width: 588px;
+        height: 10px;
+        display: table;
+    }
+    .lightsaber:after {
+            display: table;
+            content: "";
+            line-height: 0;
+            clear: both;
+    }
+    .lightsaber div {
+        display: table-cell;
+    }
+    .lightsaber_light {
+        width: 80%;
+        background: #eee;
+        box-shadow: -3px 0 5px 5px rgba(255, 0, 0, .7);
+        border-radius: 4px 0 0 4px;
+    }
+    .lightsaber_switch {
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 10px;
+        width: 20%;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .lightsaber_switch:checked+.lightsaber_light {
+        width: 80%;
+        background: #eee;
+        box-shadow: -3px 0 5px 5px rgba(0, 255, 0, .7);
+        border-radius: 4px 0 0 4px;
+    }
+    .lightsaber_grip {
+        position: relative;
+        width: 20%;
+        background: #aaa;
+    }
+    .lightsaber_grip:before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        width: 10px;
+        height: 16px;
+        background: #000;
+    }
+    .lightsaber_grip:after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 50px;
+        width: 50px;
+        height: 10px;
+        background: #000;
+    }
+</style>
+</head>
+<body>
+    <div class="lightsaber">
+        <input class="lightsaber_switch" type="checkbox">
+        <div class="lightsaber_light"></div>
+        <div class="lightsaber_grip"></div>
+    </div>
+</body>
+</html>

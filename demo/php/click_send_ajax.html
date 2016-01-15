@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AAAJAX</title>
+<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <a href="https://www.google.com.tw" target="_blank">Google</a>
+</body>
+<script>
+document.querySelector('a').addEventListener('click', function () {
+    $.ajax({
+        url: 'test.php',
+        type: 'POST',
+        data: {
+            a: 111,
+            b: 'str'
+        },
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+});
+</script>
+</html>
