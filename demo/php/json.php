@@ -1,27 +1,25 @@
 <?php
 // var_dump($_POST['json']);
 // echo $_POST['val'];
-$request = file_get_contents("php://input");
-var_dump($request);
-$data = json_decode($request);
-echo '<br>';
-echo 'data:';
-echo '<br>';
-echo 'User:' . $data->user;
-echo '<br>';
-echo 'Pwd:' . $data->password;
-echo '<br>';
+
+// $request = file_get_contents("php://input");
+// var_dump($request);
+// $data = json_decode($request);
+// echo '<br>';
+// echo 'data:';
+// echo '<br>';
+// echo 'User:' . $data->user;
+// echo '<br>';
+// echo 'Pwd:' . $data->password;
+// echo '<br>';
 var_dump($_POST);
+
+echo $_POST['user'];
 echo '<br>';
-echo $_POST['json'];
-echo '<br>';
-$request_json = json_decode($_POST['json'], true);
-var_dump($request_json);
-echo '<br>';
-echo $request_json['user'];
+echo $_POST['password'];
 // echo phpinfo();
 // echo $GLOBALS['HTTP_RAW_POST_DATA'];
-exit;
+// exit;
 // $json = json_decode($json);
 // var_dump($json);
 ?>
