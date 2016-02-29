@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+<script>
+var scriptEl = document.createElement("script");
+scriptEl.src = "http://tysh310246.blogspot.com/feeds/posts/default?alt=json&callback=myFunction";
+document.getElementsByTagName("head")[0].appendChild(scriptEl);
+// function myFunction (data) {
+//     console.log('run');
+//     go();
+// }
+
+function run () {
+    console.log('run');
+    go();
+}
+run();
+var go = function(argument) {
+    console.log('go');
+};
+</script>
+</html>
