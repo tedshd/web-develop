@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    var obj = {
+        'user': 'ted_shiu',
+        'password': '123456'
+    },
+    jsonData;
+// init XMLHttpRequest
+var xmlHttpRequest = new XMLHttpRequest();
+// build poet method and backend target
+xmlHttpRequest.open('POST', 'json.php');
+// build content type
+xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+// obj to url string
+function formUrlEncode(obj) {
+    var urlData = '';
+    for (var x in obj) {
+        urlData = urlData + x + '=' + obj[x] + '&';
+    }
+    urlData = urlData.substr(0, (urlData.length - 1));
+    return urlData;
+}
+// send request
+xmlHttpRequest.send(formUrlEncode(obj));
+// xmlHttpRequest.send('user=ted_shiu&password=123456');
+// if want ajax get data
+// use xmlHttpRequest.send();
+xmlHttpRequest.onreadystatechange = function() {
+    if (xmlHttpRequest.readyState == 4) {
+        // do something
+        if (xmlHttpRequest.status == 200) {
+            console.log(xmlHttpRequest.responseText);
+            // parse response to object
+            // var data = JSON.parse(xmlHttpRequest.responseText);
+            // console.log(data.status);
+        }
+    }
+}
+</script>
+</html>
