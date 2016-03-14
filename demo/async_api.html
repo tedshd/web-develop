@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Async api</title>
+</head>
+<body>
+
+</body>
+<script>
+function pad(dosomething) {
+   var s = document.createElement('script');
+   s.src = 'http://tedshd.io/geo/?callback=fun';
+   document.querySelectorAll('head')[0].appendChild(s);
+   window.fun = function (data) {
+       var d = document.createElement('div');
+       d.setAttribute('id', 'dom');
+       d.innerHTML = JSON.stringify(data);
+       document.body.appendChild(d);
+   };
+   var c = setInterval(function () {
+       var dom = document.querySelector('#dom');
+       if (dom) {
+           clearInterval(c);
+           handle(dosomething);
+       }
+   }, 300);
+   function handle(dosomething) {
+       var dd = document.querySelector('#dom');
+       var obj = JSON.parse(dd.innerHTML);
+       dosomething(obj);
+   }
+}
+
+// plurk
+var initAd = function(data) {
+   console.log(1, data);
+};
+pad(initAd);
+
+
+// var initAd2 = function(data) {
+//    console.log(2, data);
+//    alert(data.ip);
+// };
+// pad(initAd2);
+</script>
+</html>
