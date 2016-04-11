@@ -8,9 +8,10 @@
 
 header("Access-Control-Allow-Origin: *");
 
+echo 'CORS';
+echo $_SERVER['HTTP_ORIGIN'];
 // var_dump($_GET);
 // var_dump($_POST);
-// echo '<br>';
 // echo $_GET['user'];
 // echo '<br>';
 // echo $_GET['password'];

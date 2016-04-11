@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<link href="" rel="stylesheet">
+</head>
+<body>
+<div id="a"></div>
+<div id="b"></div>
+<div id="c"></div>
+</body>
+<script>
+var obj = {
+  'key': 'value'
+};
+// console.log(obj);
+document.querySelector('#a').innerHTML = JSON.stringify(obj);
+var objC = obj;
+objC['car'] = 'ford';
+// console.log(objC);
+document.querySelector('#b').innerHTML = JSON.stringify(objC);
+// console.log(obj);
+document.querySelector('#c').innerHTML = JSON.stringify(obj);
+</script>
+</html>
