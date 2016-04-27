@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<link href="" rel="stylesheet">
+</head>
+<body>
+<div class="cc aa"></div>
+</body>
+<script>
+    function hasClass(dom, className) {
+    if (dom.classList) {
+        return dom.classList.contains(className);
+    } else {
+        return (dom.className.search(className) === -1)? false: true;
+    }
+}
+console.log(hasClass(document.querySelector('.cc'), 'gfd'))
+</script>
+</html>
