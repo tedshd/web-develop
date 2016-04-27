@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>css sprite</title>
+<style>
+.sprite {
+    background-image: url(feebee_loading.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-01_1x {
+    width: 118px;
+    height: 130px;
+    background-position: 0 0;
+}
+
+.sprite-02_1x {
+    width: 118px;
+    height: 130px;
+    background-position: -118px 0;
+}
+
+.sprite-03_1x {
+    width: 118px;
+    height: 130px;
+    background-position: -236px 0;
+}
+
+.sprite-04_1x {
+    width: 118px;
+    height: 130px;
+    background-position: -354px 0;
+}
+
+.sprite-05_1x {
+    width: 118px;
+    height: 130px;
+    background-position: -472px 0;
+}
+
+.sprite-06_1x {
+    width: 118px;
+    height: 130px;
+    background-position: -590px 0;
+}
+
+</style>
+</head>
+<body>
+<i id="animate" class="sprite sprite-01_1x"></i>
+</body>
+<script>
+    var requestAnimationFrame = window.requestAnimationFrame ||
+                                window.mozRequestAnimationFrame ||
+                                window.webkitRequestAnimationFrame ||
+                                window.msRequestAnimationFrame;
+    window.requestAnimationFrame = requestAnimationFrame;
+    var count = 1;
+        dom = document.querySelector('#animate');
+    function load() {
+        if (count === 7) {
+            count = 1;
+        }
+        dom.setAttribute('class', 'sprite sprite-0' + count + '_1x');
+        count++;
+    }
+    setInterval(function () {
+        window.requestAnimationFrame(load);
+    }, 200);
+</script>
+</html>
