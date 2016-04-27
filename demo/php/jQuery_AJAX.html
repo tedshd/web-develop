@@ -12,12 +12,14 @@
     $.ajax({
         url: 'test.php',
         type: 'POST',
+        datatype: 'json',
         data: {
             a: 111,
             b: 'str'
         },
         success: function(data) {
             console.log(data);
+            console.log(JSON.parse(data));
         },
         error: function(data) {
             console.log(data);
