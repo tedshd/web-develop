@@ -1,0 +1,15 @@
+#!/usr/bin/php -q
+<?php
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2016-03-01 13:55:17
+ * @version $Id$
+*/
+
+// var_dump($argv);
+// echo $argv[1];
+$img = $argv[1];
+print_r(getimagesize($img));
+
+?>
