@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <head>
+    <title>Video.js | HTML5 Video Player</title>
+    <link href="http://vjs.zencdn.net/5.0.2/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/ie8/1.1.0/videojs-ie8.min.js"></script>
+    <script src="http://vjs.zencdn.net/5.0.2/video.js"></script>
+
+  </head>
+
+</head>
+
+<body>
+
+    <!-- <video width="640" height="360" id="player1" preload="none" controls>
+    <source type="application/x-mpegURL" src="http://gamer-cds.cdn.hinet.net/vod/gamer/gamer2_fast-080035ff28e850507deff83a5ba72b4be60866b9/hls-ae-2s/gamer2_fast-080035ff28e850507deff83a5ba72b4be60866b9-video=1812000-audio_eng=128000.m3u8?token=fSvmnX-c5Khem2VHOoncWQ&expires=1466574824" />
+    </video> -->
+<video id=example-video width=960 height=540 class="video-js vjs-default-skin" controls>
+  <source
+     src="http://gamer-cds.cdn.hinet.net/vod/gamer/gamer2_fast-080035ff28e850507deff83a5ba72b4be60866b9/hls-ae-2s/gamer2_fast-080035ff28e850507deff83a5ba72b4be60866b9-video=1812000-audio_eng=128000.m3u8?token=fSvmnX-c5Khem2VHOoncWQ&expires=1466574824"
+     type="application/x-mpegURL">
+</video>
+<script src="http://vjs.zencdn.net/5.10/video.js"></script>
+<script src="https://npmcdn.com/videojs-contrib-hls@3.1.0/dist/videojs-contrib-hls.js"></script>
+<script>
+var player = videojs('example-video');
+player.play();
+</script>
+</body>
+
+</html>
