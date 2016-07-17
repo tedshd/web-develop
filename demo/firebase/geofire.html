@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>geofile</title>
+<meta name="description" content="">
+<link href="" rel="stylesheet">
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+
+<!-- GeoFire -->
+<script src="https://cdn.firebase.com/libs/geofire/4.1.1/geofire.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+<style>
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+h1 {
+    display: inline-block;
+    color: #ddd;
+}
+header {
+    padding: .5em;
+    background: #ccc;
+}
+nav {
+    display: inline-block;
+}
+nav a {
+    position: relative;
+    display: inline-block;
+    color: #aaa;
+    text-decoration: none;
+}
+nav a:hover {
+    color: #ff8800;
+}
+nav a:hover:after {
+    border-bottom: solid #ff8800 1px;
+}
+nav a:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 0;
+    border-bottom: solid #aaa 1px;
+}
+#map-canvas {
+    height: calc(100% - 2em);
+}
+#gps {
+    position: absolute;
+    top: .5em;
+    right: .5em;
+    width: 16px;
+    height: 16px;
+}
+#gps:hover {
+    cursor: pointer;
+}
+#gps.active svg path {
+    fill: #d00;
+}
+#popup section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 320px;
+    height: 240px;
+    padding: .5em;
+    box-sizing: border-box;
+    line-height: 1.5;
+    text-align: center;
+    color: #fff;
+}
+</style>
+</head>
+<body>
+<header>
+    <div id="trans">
+        <input id="address" type="text" placeholder="Address">
+        <button class="btn" onclick="codeAddress()">Get location</button>
+        10 km 的範圍內有
+        <select name="" id=""></select>
+    </div>
+</header>
+<section id="map-canvas"></section>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script src="/service/food/js/markerclusterer.js"></script>
+
+<script>
+// Set the configuration for your app
+var config = {
+    apiKey: "AIzaSyCOBuvRI_TTtlcwj3qPNC8RG5MyEXCk0bk",
+    authDomain: "geofire-56d70.firebaseapp.com",
+    databaseURL: "https://geofire-56d70.firebaseio.com",
+    storageBucket: "geofire-56d70.appspot.com",
+};
+firebase.initializeApp(config);
+
+// Get a reference to the database service
+var database = firebase.database();
+
+// Create a Firebase reference where GeoFire will store its information
+var firebaseRef = firebase.database().ref('food');
+
+// Generate a random Firebase location
+// var firebaseRef = firebase.database().ref('food').push();
+
+// Create a GeoFire index
+var geoFire = new GeoFire(firebaseRef);
+
+function geoQuery(lat, lng, radius) {
+    var geoQuery = geoFire.query({
+        center: [lat, lng],
+        radius: radius
+    });
+    var onKeyEnteredRegistration = geoQuery.on("key_entered", function(key, location) {
+        console.log(key + " entered the query. Hi " + key + "!");
+        initSelectUI(key);
+    });
+    var onKeyExitedRegistration = geoQuery.on("key_exited", function(key, location) {
+        log(key + " migrated out of the query. Bye bye :(");
+    });
+
+    var onKeyMovedRegistration = geoQuery.on("key_moved", function(key, location) {
+        log(key + " moved to somewere else within the query.");
+    });
+}
+
+
+function ajax() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/service/food/food.json');
+    // xhr.open('GET', 'http://opendata.hccg.gov.tw/dataset/056f201e-b4b8-403e-985d-bcb4f9f13b3f/resource/bb065c66-07d4-4064-824a-5f3c0539c476/download/20151116195315864.json');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                for (var i = 0; i < data.length; i++) {
+                    var val = data[i],
+                        name = val['name'],
+                        location = [parseFloat(val['lat'], 10), parseFloat(val['lng'], 10)];
+                    geoFire.set(name, location);
+                }
+            } else {
+                // fail();
+            }
+        } else {
+            // fail();
+        }
+    }
+}
+
+// ajax();
+</script>
+<script>
+var map,
+    geocoder,
+    markerCluster,
+    marker,
+    markerGPS,
+    cityCircle,
+    gpsRun,
+    marks = [],
+    prev_infowindow = false;
+function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(23.69781, 120.96051499999999),
+        mapOptions = {
+            zoom: 7,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    gps();
+}
+function gen() {
+    firebaseRef.on('value', function (snapshot) {
+        console.log(snapshot.key);
+        snapshot.forEach(function(childSnapshot) {
+            var key = childSnapshot.key;
+            var childData = childSnapshot.val();
+            // console.log(key, childData);
+            ui(key, childData);
+        });
+        markerCluster = new MarkerClusterer(map, marks);
+    });
+}
+function ui(key, childData) {
+    var pos = {
+        lat: childData.l[0],
+        lng: childData.l[1]
+    };
+    marker = new google.maps.Marker({
+        icon: '/service/food/ic_food.svg',
+        map: map,
+        draggable: false,
+        position: pos
+    });
+    var content = key;
+    var infowindow = new google.maps.InfoWindow();
+    infowindow.setContent(content);
+    google.maps.event.addListener(
+        marker,
+        'click',
+        (function (marker, content, infowindow) {
+            return function() {
+                if(prev_infowindow) {
+                    prev_infowindow.close();
+                }
+                infowindow.setContent(content);
+                prev_infowindow = infowindow;
+                infowindow.open(map, marker);
+            };
+        })(marker, content, infowindow)
+    );
+    marks.push(marker);
+    marker.setMap(map);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script>
+function setCircle(lat, lng, radius) {
+    cityCircle = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: {lat: lat, lng: lng},
+        radius: radius
+    });
+}
+</script>
+<script>
+
+function gps() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showPositionError);
+
+        function showPosition(position) {
+            var position = position;
+            var latituded4 = position.coords.latitude,
+                longituded4 = position.coords.longitude;
+            console.log(latituded4);
+            console.log(longituded4);
+            map.setZoom(10);
+            map.setCenter({
+                lat: latituded4,
+                lng: longituded4
+            });
+            if (markerGPS) {
+                markerGPS.setMap(null);
+            }
+            markerGPS = new google.maps.Marker({
+                icon: '/service/food/ic_gps.svg',
+                map: map,
+                draggable: false,
+                position: {
+                    lat: latituded4,
+                    lng: longituded4
+                }
+            });
+            setCircle(latituded4, longituded4, 10000);
+            geoQuery(latituded4, longituded4, 10);
+            gen();
+        }
+
+        function showPositionError(error) {
+            document.getElementById('gps').classList.remove('active');
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log('User denied the request for Geolocation.');
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log('Location information is unavailable.');
+                    break;
+                case error.TIMEOUT:
+                    console.log('The request to get user location timed out.');
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log('An unknown error occurred.');
+                    break;
+            }
+        }
+    } else {
+        // google.maps.event.addDomListener(window, 'load', initialize(latituded4, longituded4));
+    }
+}
+</script>
+<script>
+function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode(
+        {
+            'address': address
+        },
+        function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (markerGPS) {
+                    markerGPS.setMap(null);
+                }
+                if (cityCircle) {
+                    cityCircle.setMap(null);
+                }
+                var select = document.querySelector('select');
+                select.innerHTML = '';
+                map.setCenter(results[0].geometry.location);
+                markerGPS = new google.maps.Marker({
+                    icon: '/service/food/ic_gps.svg',
+                    map: map,
+                    draggable: false,
+                    position: results[0].geometry.location
+                });
+                console.log(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+                map.setZoom(10);
+                setCircle(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 10000);
+                geoQuery(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 10);
+                console.log('results', results);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+            // google.maps.event.addListener(marker, 'dragend', function() {
+            //     console.log(marker.getPosition());
+            //     console.log(marker.getPosition().lat());
+            //     console.log(marker.getPosition().lng());
+            // });
+    });
+}
+</script>
+<script>
+function initSelectUI(argument) {
+    var select = document.querySelector('select');
+    var option = document.createElement('option');
+    option.innerHTML = argument;
+    select.appendChild(option);
+
+}
+</script>
+</html>
+
