@@ -5,12 +5,18 @@ module.exports = {
     entry: {
         app: ['./src/lib_b.js', './src/lib_a.js'],
         all: ['./src/lib_a.js', './src/lib_b.js', url + 'cats.js'],
-        mode: [url + 'app.js', url + 'app1.js']
+        mode: [url + 'app.js', url + 'app1.js'],
+        index: ['./src/style.js']
     },
     output: {
         filename: '[name].js',
         path: './built'
     },
+    module: {
+        loaders: [
+            { test: /\.css$/, loader: "style!css" }
+        ]
+    }
     // entry: {
     //     app: './src/lib_a.js',
     //     search: './src/mod.js'
