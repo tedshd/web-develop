@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<link href="" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <form action="./form.php" method="POST">
+        <input id="input_1" name="name_1" type="text" value="value1">
+        <input id="input_2" name="test" type="text">
+        <input type="submit" value="送">
+    </form>
+</body>
+<script>
+var vaild = false;
+$('form').on('submit', function (e) {
+    e.preventDefault();
+    if (!vaild) {
+        $.ajax({
+            url: 'vaild.php',
+            type: 'POST',
+            data: {
+                'id': $('#input_2').val()
+            },
+            success: function(data) {
+                console.log(data);
+                var data = JSON.parse(data);
+                if (data.status === 'ok') {
+                    vaild = true;
+                    $('#input_2').val(data.val);
+                    $('form')[0].submit();
+                } else {
+                    alert('vaild fail');
+                }
+            },
+            error: function(data) {
+                alert('api fail');
+            }
+        });
+    } else {
+        $('form')[0].submit();
+    }
+});
+</script>
+</html>
