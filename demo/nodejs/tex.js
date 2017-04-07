@@ -56,7 +56,7 @@ const keyCode = Buffer.concat(BufferArrayKeyCode, keyCodeLength);
 console.log('L', BufferLength);
 console.log(buff.toString('hex'));
 
-fs.writeFile("./KEYMAP.CYS", buff, function(err) {
+fs.writeFile("./KEYMAP.CYS", BufferArrayKeyCode, function(err) {
     if(err) {
         return console.log(err);
     }
