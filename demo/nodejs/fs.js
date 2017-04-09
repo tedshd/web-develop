@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const buf1 = Buffer.from('CYFI', 'ascii');
 // const buf2 = Buffer.from([0x000]);
-const buf2 = Buffer.from([0x02FE0]);
+const buf2 = Buffer.from([0x023]);
 const arr = new Uint16Array(2);
 
 arr[0] = 0;
@@ -56,7 +56,7 @@ console.log(arrBuf.toString('hex'));
 // Prints: aGVsbG8gd29ybGQ=
 console.log(buf1.toString('base64'));
 
-fs.writeFile("./KEYMAP.CYS", bufA, function(err) {
+fs.writeFile("./KEYMAP.CYS", buf2, function(err) {
     if(err) {
         return console.log(err);
     }
