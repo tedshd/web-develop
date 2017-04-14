@@ -17,7 +17,7 @@ let BufferLength;
 const profileCount = 3;
 let profiles = [];
 const marco = 0;
-const itemCount = 3;
+const itemCount = 4;
 
 const title = Buffer.from('CYFI', 'ascii');
 var rev = new Uint16Array(1);
@@ -67,6 +67,10 @@ var keyChange = [
   {
     'index': 0x02C,
     'data': 0x024,
+  },
+  {
+    'index': 0x12C,
+    'data': 0x04B,
   }
 ];
 
