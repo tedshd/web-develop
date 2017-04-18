@@ -4,12 +4,7 @@
  * @date    2017-03-25 23:15:54
  * @version $Id$
  */
-const keymap = require('./keymap.js');
 
-// console.log(keymap.LAYOUT.yoda.ansi);
-var dataKeyCode = keymap.LAYOUT.yoda.ansi;
-let BufferArrayKeyCode = [];
-let keyCodeLength = 0;
 const fs = require('fs');
 
 let BufferArray = [];
@@ -17,7 +12,7 @@ let BufferLength;
 const profileCount = 3;
 let profiles = [];
 const marco = 0;
-const itemCount = 4;
+const itemCount = 1;
 
 const title = Buffer.from('CYFI', 'ascii');
 var rev = new Uint16Array(1);
@@ -43,7 +38,7 @@ BufferLength = title.length + rev.length + itemSize.length;
 
 for (var x = 0; x < itemCount; x++) {
   var profile = Buffer.from([0]);
-  var profileIndex = Buffer.from([0]);
+  var profileIndex = Buffer.from([x]);
   var profileNull = new Uint16Array(1);
   profileNull[0] = null;
   profileNull = Buffer.from(profileNull.buffer);
@@ -60,18 +55,18 @@ var keyChange = [
     'index': 0x004,
     'data': 0x011,
   },
-  {
-    'index': 0x028,
-    'data': 0x02C,
-  },
-  {
-    'index': 0x02C,
-    'data': 0x024,
-  },
-  {
-    'index': 0x12C,
-    'data': 0x04B,
-  }
+  // {
+  //   'index': 0x028,
+  //   'data': 0x02C,
+  // },
+  // {
+  //   'index': 0x02C,
+  //   'data': 0x024,
+  // },
+  // {
+  //   'index': 0x12C,
+  //   'data': 0x04B,
+  // }
 ];
 
 for (var y = 0; y < itemCount; y++) {
@@ -101,22 +96,11 @@ for (var y = 0; y < itemCount; y++) {
 // BufferLength = BufferLength + key.length + index.length + data.length + len.length;
 
 
-// keycode
-for (var i = 0; i < dataKeyCode.length; i++) {
-  var hex = dataKeyCode[i].hex;
-  keyCodeLength = keyCodeLength + hex.length;
-  for (var j = 0; j < hex.length; j++) {
-    var tmpBuff = Buffer.from([hex[j]]);
-    BufferArrayKeyCode.push(tmpBuff);
-  }
-}
-
-
 
 
 const buff = Buffer.concat(BufferArray, BufferLength);
 
-const keyCode = Buffer.concat(BufferArrayKeyCode, keyCodeLength);
+
 // buff.write('text', profiles[0], 2);
 console.log('L', BufferLength);
 console.log(buff.toString('hex'));
