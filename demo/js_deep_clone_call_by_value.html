@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+
+</body>
+<script>
+var a = 123;
+var b;
+b = a;
+console.log('b:');
+console.log(b);
+
+a = 22;
+console.log('b:');
+console.log(b);
+
+
+var obj = {
+  'o': 12,
+  'r': 23
+};
+var oo = obj.o;
+console.log('oo:');
+console.log(oo);
+
+obj.o = 45;
+console.log('oo:');
+console.log(oo);
+
+console.log('obj:');
+console.log(obj);
+
+var obj2 = obj;
+
+obj2.o = 67;
+console.log('obj2:');
+console.log(obj2);
+console.log('obj:');
+console.log(obj);
+
+var obj3 = {
+  'x': 55,
+  'y': 66
+}
+
+var obj4 = Object.assign({}, obj3);
+
+obj4.x = 99;
+console.log('obj4:');
+console.log(obj4);
+console.log('obj3:');
+console.log(obj3);
+</script>
+</html>
