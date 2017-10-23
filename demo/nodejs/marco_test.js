@@ -1,3 +1,4 @@
+const fs = require('fs');
 /**
  *
  * @authors Your Name (you@example.org)
@@ -10,7 +11,7 @@ let BufferLength = 0;
 const profileCount = 3;
 let profiles = [];
 const marco = 0;
-const itemCount = profileCount;
+const itemCount = 2;
 
 const title = Buffer.from('CYFI', 'ascii');
 var rev = new Uint16Array(1);
@@ -19,8 +20,30 @@ rev = Buffer.from(rev.buffer);
 var itemSize = new Uint16Array(1);
 itemSize[0] = itemCount;
 itemSize = Buffer.from(itemSize.buffer);
-// BufferArray = [title, rev, itemSize];
-// BufferLength = title.length + rev.length + itemSize.length;
+BufferArray = [title, rev, itemSize];
+BufferLength = title.length + rev.length + itemSize.length;
+
+var profile = Buffer.from([0]);
+var profileIndex = Buffer.from([1]);
+var profileNull = new Uint16Array(1);
+    profileNull[0] = null;
+    profileNull = Buffer.from(profileNull.buffer);
+var itemDataShift = new Uint16Array(2);
+itemDataShift[0] = (1 * 8 + 8 + 8);
+itemDataShift = Buffer.from(itemDataShift.buffer);
+BufferArray = BufferArray.concat([profile, profileIndex, profileNull, itemDataShift]);
+BufferLength = BufferLength + profile.length + profileIndex.length + profileNull.length + itemDataShift.length;
+
+var mar = Buffer.from([1]);
+var marIndex = Buffer.from([1]);
+var marNull = new Uint16Array(1);
+    marNull[0] = null;
+    marNull = Buffer.from(marNull.buffer);
+var itemDataShift = new Uint16Array(2);
+itemDataShift[0] = (1 * 8 + 8 + 8 + 8);
+itemDataShift = Buffer.from(itemDataShift.buffer);
+BufferArray = BufferArray.concat([mar, marIndex, marNull, itemDataShift]);
+BufferLength = BufferLength + mar.length + marIndex.length + marNull.length + itemDataShift.length;
 
 
 function marcoData(key, action, time) {
@@ -46,7 +69,7 @@ function marcoData(key, action, time) {
 }
 
 
-// marcoData(224, '100', 10);
+
 
 // var keyPage, keyEvent, delayTime;
 
@@ -75,15 +98,19 @@ function marcoKey(marcoIndex, keycode, type) {
     var index = new Uint16Array(1);
     index[0] = parseInt(marcoIndex, 10);
     index = Buffer.from(index.buffer);
-    var data = Buffer.from([keycode, parseInt(type, 2), 1]);
+    var macroTunes = new Uint16Array(1);
+    macroTunes[0] = 1;
+    macroTunes = Buffer.from(macroTunes.buffer);
+    var data = Buffer.from([keycode, parseInt(type, 2)]);
     var len = Buffer.from([2]);
-    var arr = [len, key, index, data];
-    BufferArray = BufferArray.concat([len, key, index, data]);
+    BufferArray = BufferArray.concat([len, key, index, data, macroTunes]);
 
-    BufferLength = BufferLength + key.length + index.length + data.length + len.length;
+    BufferLength = BufferLength + key.length + index.length + macroTunes.length + data.length + len.length;
 }
 
 marcoKey(0, 41, '001');
+marcoData(224, '100', 2000);
+marcoData(224, '010', 2000);
 
 // var key = Buffer.from([0x18]);
 // var index = new Uint16Array(1);
@@ -104,3 +131,11 @@ marcoKey(0, 41, '001');
 const buff = Buffer.concat(BufferArray, BufferLength);
 
 console.log(buff.toString('hex'));
+
+
+fs.writeFile('./marco.TEX', buff, function(err) {
+    if (err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+});
