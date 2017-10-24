@@ -51,7 +51,7 @@ function marcoData(key, action, time) {
         keyEvent,
         delayTime;
 
-    if (!key || !action || !time) {
+    if (key === undefined || action === undefined || time === undefined) {
         console.error('marcoData not set argument');
         return;
     }
@@ -108,9 +108,11 @@ function marcoKey(marcoIndex, keycode, type) {
     BufferLength = BufferLength + key.length + index.length + macroTunes.length + data.length + len.length;
 }
 
-marcoKey(0, 41, '001');
-marcoData(224, '100', 2000);
-marcoData(224, '010', 2000);
+marcoKey(0, 41, '100');
+marcoData(224, '010', 10);
+marcoData(224, '100', 10);
+
+marcoData(0, '111', 0);
 
 // var key = Buffer.from([0x18]);
 // var index = new Uint16Array(1);
