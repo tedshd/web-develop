@@ -47,7 +47,9 @@ BufferLength = BufferLength + mar.length + marIndex.length + marNull.length + it
 
 
 function marcoData(key, action, time) {
-    var keyPage,
+    var type,
+        keyPage,
+        keyByte,
         keyEvent,
         delayTime;
 
@@ -55,17 +57,21 @@ function marcoData(key, action, time) {
         console.error('marcoData not set argument');
         return;
     }
-    action = parseInt('111' + action, 10);
+    keyPage = '00';
+    type = keyPage + '111' + action;
+    type = type.split('').reverse().join('');
+    action = keyPage + parseInt(type, 10);
     time = time*2;
 
-    keyPage = Buffer.from([key]);
+    keyByte = Buffer.from([key]);
+    // keyPage = Buffer.from([0x00]);
     keyEvent = Buffer.from([parseInt(action, 2)]);
     delayTime = new Uint16Array(1);
     delayTime[0] = time;
     delayTime = Buffer.from(delayTime.buffer);
 
-    BufferArray = BufferArray.concat([keyPage, keyEvent, delayTime]);
-    BufferLength = BufferLength + keyPage.length + keyEvent.length + delayTime.length;
+    BufferArray = BufferArray.concat([keyByte, keyEvent, delayTime]);
+    BufferLength = BufferLength + keyByte.length + keyEvent.length + delayTime.length;
 }
 
 
@@ -109,8 +115,10 @@ function marcoKey(marcoIndex, keycode, type) {
 }
 
 marcoKey(0, 41, '100');
-marcoData(224, '010', 10);
-marcoData(224, '100', 10);
+marcoData(227, '100', 10);
+marcoData(6, '100', 10);
+marcoData(6, '010', 0);
+marcoData(227, '010', 0);
 
 marcoData(0, '111', 0);
 
