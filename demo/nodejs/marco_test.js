@@ -115,12 +115,38 @@ function marcoKey(marcoIndex, keycode, type) {
 }
 
 marcoKey(0, 41, '100');
-marcoData(227, '100', 10);
-marcoData(6, '100', 10);
-marcoData(6, '010', 0);
-marcoData(227, '010', 0);
+// marcoData(227, '100', 10);
+// marcoData(6, '100', 10);
+// marcoData(6, '010', 0);
+// marcoData(227, '010', 0);
 
-marcoData(0, '111', 0);
+// marcoData(0, '111', 0);
+
+function marcoDataGen(marco) {
+    for (var k = 0; k < marco.length; k++) {
+        var l = marco[k].length;
+            helf = l/2;
+        for (var i = 0; i < l; i++) {
+            var tmp = marco[k];
+            if (l === 1) {
+                marcoData(tmp[i], '111', 0);
+                break;
+            }
+            if (helf > i) {
+                marcoData(tmp[i], '100', 10);
+            } else {
+                console.log(tmp[i]);
+                marcoData(tmp[i], '010', 0);
+            }
+        }
+    }
+}
+
+var ma = [
+    [227, 6, 6, 227],
+    [0]
+];
+marcoDataGen(ma);
 
 // var key = Buffer.from([0x18]);
 // var index = new Uint16Array(1);
