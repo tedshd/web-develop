@@ -70,8 +70,105 @@
     }
 
     h1,
-    h2 {
+    h2,
+    h3 {
         text-align: center;
+    }
+    a {
+        text-decoration: none;
+    }
+
+    .orange:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        margin: auto;
+        background: #ea5d4b;
+    }
+
+    .gray:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        margin: auto;
+        background: #b8bfc7;
+    }
+
+    .blue:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        margin: auto;
+        background: #5bb1ce;
+    }
+
+    .purple:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        margin: auto;
+        background: #6a468e;
+    }
+
+    .green:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        margin: auto;
+        background: #359f9f;
+    }
+
+    .yellow:before {
+        z-index: -1;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        margin: auto;
+        background: #ffd555;
+    }
+
+    .vertical_middle:after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+        margin-left: -4px;
     }
 
     .model {
@@ -79,6 +176,17 @@
         float: left;
         width: 300px;
         height: 300px;
+        color: #fff;
+        text-align: center;
+    }
+    .model .icon {
+        margin-top: 20px;
+        height: 220px;
+    }
+
+    .model:hover {
+        /* filter: blur(2px); */
+        opacity: .8;
     }
 
     img {
@@ -121,6 +229,39 @@
             width: 1200px;
         }
     }
+
+.yoda2_panel {
+    position: relative;
+    display: inline-block;
+    width: calc(29px*9);
+    height: calc(12px*9);
+    background: #777;
+    border-radius: 5px;
+    padding-top: 4px;
+    margin: auto;
+    vertical-align: middle;
+}
+.yoda2_key {
+    height: calc(9.5px*9);
+    width: calc(100% - 4px*2);
+    background: #000;
+    margin: 0 auto;
+}
+.yoda2_key_bottom {
+    margin-left: calc(10px*9);
+    width: calc(6.5px*9);
+    height: calc(2px*9);
+    background: #000;
+}
+.yoda2_point {
+    position: absolute;
+    top: calc(5.5px*9);
+    left: calc(13px*9);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: red;
+}
     </style>
 </head>
 
@@ -128,11 +269,15 @@
     <h1>TEX Design Programmable Mechanical Keyboard Models</h1>
     <h2>Select Models</h2>
     <section class="clearfix">
-        <a class="model" href="">
-            <img src="http://via.placeholder.com/280x280" alt="yoda2">
-        </a>
-        <a class="model" href="">
-            <img src="http://via.placeholder.com/280x280" alt="cloud65">
+        <a class="model orange" href="https://yoda2.tex-design.com.tw/#layout">
+            <div class="icon vertical_middle">
+                <div class="yoda2_panel">
+                    <div class="yoda2_key"></div>
+                    <div class="yoda2_key_bottom"></div>
+                    <div class="yoda2_point"></div>
+                </div>
+            </div>
+            <h3>Yoda 2</h3>
         </a>
     </section>
 </body>
