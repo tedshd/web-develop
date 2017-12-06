@@ -389,10 +389,11 @@ marcoKey(1, 41, '100');
 
 // marcoData(0, '111', 0);
 
-function marcoDataGen(marco) {
+function marcoDataGen(marco, timer) {
     for (var k = 0; k < marco.length; k++) {
-        var l = marco[k].length;
-            helf = l/2;
+        var l = marco[k].length,
+            helf = l/2,
+            timer = timer || 10;
         for (var i = 0; i < l; i++) {
             var tmp = marco[k];
             if (l === 1) {
@@ -400,7 +401,7 @@ function marcoDataGen(marco) {
                 break;
             }
             if (helf > i) {
-                marcoData(tmp[i], '100', 10);
+                marcoData(tmp[i], '100', timer);
             } else {
                 marcoData(tmp[i], '010', 0);
             }
@@ -409,8 +410,14 @@ function marcoDataGen(marco) {
 }
 
 var ma = [
-    [227, 6, 6, 227],
-    [0]
+    {
+        key: [227, 6, 6, 227],
+        ts: 10
+    },
+    {
+        key: [0],
+        ts: 0
+    }
 ];
 // var ma = [
 //     [0x009, 0x009],
@@ -430,24 +437,24 @@ var ma = [
 //     [0x01C, 0x01C],
 //     [0]
 // ]; // 15
-var ma = [
-    [0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007],
-    [0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008],
-    [0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013],
-    [0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F],
-    [0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012],
-    [0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C],
-    [0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007],
-    [0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008],
-    [0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013],
-    [0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F],
-    [0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012],
-    [0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C],
-    [0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007],
-    [0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008],
-    [0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013],
-    [0]
-]; // 15
+// var ma = [
+//     [0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007],
+//     [0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008],
+//     [0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013],
+//     [0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F],
+//     [0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012],
+//     [0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C],
+//     [0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007],
+//     [0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008],
+//     [0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013],
+//     [0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F, 0x00F],
+//     [0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012, 0x012],
+//     [0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C, 0x01C],
+//     [0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007, 0x007],
+//     [0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008, 0x008],
+//     [0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013, 0x013],
+//     [0]
+// ]; // 15
 // marcoDataGen(ma);
 
 // var key = Buffer.from([0x18]);
@@ -465,18 +472,20 @@ var ma = [
 // BufferLength = BufferLength + key.length + index.length + data.length + len.length;
 
 function marcoDataGenerate(marco) {
-    for (var profile in postData) {
-        if (Object.keys(postData[profile]['marco']).length) {
-            gen(postData[profile]['marco']);
-        }
-    }
+    // for (var profile in postData) {
+    //     if (Object.keys(postData[profile]['marco']).length) {
+    //         gen(postData[profile]['marco']);
+    //     }
+    // }
+    gen(marco);
     function gen(marcoObj) {
         var marcoLength = 0;
         for (var k = 0; k < marcoObj.length; k++) {
             var l = marcoObj[k].length;
             // console.log(marcoObj[k]);
             for (var i = 0; i < l; i++) {
-                var sticky = marcoObj[k];
+                var sticky = marcoObj[k]['key'],
+                    timer = marcoObj[k]['ts'] || 10;
                 // console.log(tmp[i]);
                 for (var s = 0; s < sticky[i].length; s++) {
                     var stickyLength = sticky[i].length;
@@ -489,7 +498,7 @@ function marcoDataGenerate(marco) {
                         break;
                     }
                     if (helf > s) {
-                        marcoData(tmp, '100', 10);
+                        marcoData(tmp, '100', timer);
                     } else {
                         marcoData(tmp, '010', 0);
                     }
@@ -497,18 +506,18 @@ function marcoDataGenerate(marco) {
             }
             marcoLength = l*2*marcoObj.length
         }
-        if (31*8 > marcoLength) {
-            var diff = 31*8 - marcoLength;
-            for (var i = 0; i < diff; i++) {
-                var diffEmpty = Buffer.from([0xFF]);
-                BufferArray = BufferArray.concat([diffEmpty]);
-                BufferLength = BufferLength + diffEmpty.length;
-            }
-        }
+        // if (31*8 > marcoLength) {
+        //     var diff = 31*8 - marcoLength;
+        //     for (var i = 0; i < diff; i++) {
+        //         var diffEmpty = Buffer.from([0xFF]);
+        //         BufferArray = BufferArray.concat([diffEmpty]);
+        //         BufferLength = BufferLength + diffEmpty.length;
+        //     }
+        // }
     }
 }
 
-marcoDataGenerate();
+marcoDataGenerate(ma);
 
 
 const buff = Buffer.concat(BufferArray, BufferLength);
