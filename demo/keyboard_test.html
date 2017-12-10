@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>keyboard_test_page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <style>
+
+:root {
+  --keyCapSizeS: 52px;
+  --keyCapBorderS: 1px;
+  --keySpaceS: 1px;
+}
+
+
+/*-- keycaps --*/
+.keycap_s_1,
+.keycap_s_1_25,
+.keycap_s_1_5,
+.keycap_s_1_75,
+.keycap_s_2,
+.keycap_s_2_25,
+.keycap_s_2_75,
+.keycap_s_3,
+.keycap_s_5,
+.keycap_s_6,
+.keycap_s_6_25,
+.keycap_s_6_5,
+.keycap_s_7 {
+    height: var(--keyCapSizeS);
+}
+
+.keycap_s_1 {
+    width: calc(var(--keyCapSizeS) * 1);
+}
+.keycap_s_1_25 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*1.25 - var(--keySpaceS));
+}
+.keycap_s_1_5 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*1.5 - var(--keySpaceS));
+}
+.keycap_s_1_75 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*1.75 - var(--keySpaceS));
+}
+.keycap_s_2 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*2 - var(--keySpaceS));
+}
+.keycap_s_2_25 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*2.25 - var(--keySpaceS));
+}
+.keycap_s_2_75 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*2.75 - var(--keySpaceS));
+}
+.keycap_s_3 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*3 - var(--keySpaceS));
+}
+.keycap_s_5 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*5 - var(--keySpaceS));
+}
+.keycap_s_6 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*6 - var(--keySpaceS));
+}
+.keycap_s_6_25 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*6.25 - var(--keySpaceS));
+}
+.keycap_s_6_5 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*6.5 - var(--keySpaceS));
+}
+.keycap_s_7 {
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*7 - var(--keySpaceS));
+}
+.keycaps_s {
+    position: relative;
+    border: solid var(--keyCapBorderS) #aaa;
+    border-right: solid var(--keyCapBorderS) #aaa;
+    border-bottom: solid var(--keyCapBorderS) #aaa;
+    box-sizing: border-box;
+    text-align: center;
+    word-break: break-word;
+    margin: 0 var(--keySpaceS) var(--keySpaceS) 0;
+    vertical-align: top;
+}
+.keycap_s_plus, .keycap_s_enter {
+    width: calc(var(--keyCapSizeS) * 1);
+    height: calc(var(--keyCapSizeS) * 2 + var(--keySpaceS));
+}
+.keycap_s_enter_iso {
+    border-bottom: transparent;
+    width: calc((var(--keyCapSizeS) + var(--keySpaceS))*1.5 - var(--keySpaceS));
+    height: var(--keyCapSizeS);
+}
+.keycap_s_enter_iso:before {
+    content: "";
+    position: absolute;
+    top: calc(52px - (1px * 2));
+    left: 0;
+    width: calc((52px * 1.5) - (52px * 1.25) + 1px);
+    border-left: solid 1px #aaa;
+    border-bottom: solid 1px #aaa;
+}
+.keycap_s_enter_iso:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: calc(52px - 1px);
+    right: -1px;
+    width: calc(52px * 1.25);
+    height: calc(52px + 1px);
+    border: 1px solid #aaa;
+    border-top: transparent;
+    border-right: solid 1px #aaa;
+    border-bottom: solid 1px #aaa;
+    box-sizing: border-box;
+}
+.keycap_s_enter_big {
+    border-top: transparent;
+    width: calc(var(--keyCapSizeS) * 2.25);
+    height: var(--keyCapSizeS);
+}
+.keycap_s_enter_big:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -var(--keyCapBorderS);
+  width: calc((var(--keyCapSizeS) * 2.25) - (var(--keyCapSizeS) * 1.5) + var(--keyCapBorderS));
+  box-sizing: border-box;
+  border-left: solid var(--keyCapBorderS) #aaa;
+  border-top: solid var(--keyCapBorderS) #aaa;
+}
+.keycap_s_enter_big:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -calc(var(--keyCapSizeS) - var(--keyCapBorderS));
+  right: -var(--keyCapBorderS);
+  width: calc(var(--keyCapSizeS) * 1.5);
+  height: var(--keyCapSizeS);
+  border: var(--keyCapBorderS) solid #aaa;
+  border-top: solid var(--keyCapBorderS) #aaa;
+  border-right: solid var(--keyCapBorderS) #aaa;
+  border-bottom: transparent;
+  box-sizing: border-box;
+}
+.keycap_s_blank_1 {
+    width: calc(var(--keyCapSizeS) * 1);
+    height: calc(var(--keyCapSizeS) * 1);
+    border: 7px solid transparent;
+    border-right: solid 7px transparent;
+    border-bottom: solid 7px transparent;
+}
+.keycap_s_blank_1_25 {
+    width: calc(var(--keyCapSizeS) * 1.25);
+    height: calc(var(--keyCapSizeS) * 1);
+    border: 7px solid transparent;
+    border-right: solid 7px transparent;
+    border-bottom: solid 7px transparent;
+}
+
+.keycap_s_blank_0_66 {
+    width: calc(var(--keyCapSizeS) * 0.66);
+    height: calc(var(--keyCapSizeS) * 1);
+    border: 7px solid transparent;
+    border-right: solid 7px transparent;
+    border-bottom: solid 7px transparent;
+}
+    </style>
+    <style>
+    html {
+        width: 1280px;
+    }
+    .flex_center {
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .clearfix:after {
+        display: table;
+        content: "";
+        line-height: 0;
+        clear: both;
+    }
+    header {
+        background: #444;
+    }
+
+    .pure-menu-heading {
+        color: #ccc;
+        font-weight: bold;
+    }
+
+    .pure-menu-link {
+        color: #fff;
+    }
+
+    .pure-menu-active>.pure-menu-link,
+    .pure-menu-link:focus,
+    .pure-menu-link:hover,
+    .pure-menu-selected {
+        background: #777;
+    }
+
+    #lang {
+        background: #999;
+    }
+    #keyboard {
+        position: relative;
+        margin: 10px auto;
+        width: calc(52px*23);
+        height: calc(52px*6);
+        font-size: .85rem;
+    }
+    .keycaps_s {
+        /* transition: all .3s ease; */
+    }
+    .keycaps_s.highlight,
+    .keycap_s_enter_iso.highlight:after {
+        background: #69726b;
+    }
+
+    .row-0,
+    .row-1,
+    .row-2,
+    .row-3,
+    .row-4,
+    .row-5 {
+        position: absolute;
+        width: 100%;
+        left: 0;
+    }
+    .row-0 {
+        top: calc((var(--keyCapSizeS) + var(--keySpaceS))*5);
+    }
+    .row-1 {
+        top: calc((var(--keyCapSizeS) + var(--keySpaceS))*4);
+    }
+    .row-2 {
+        top: calc((var(--keyCapSizeS) + var(--keySpaceS))*3);
+    }
+    .row-3 {
+        top: calc((var(--keyCapSizeS) + var(--keySpaceS))*2);
+    }
+    .row-4 {
+        top: calc((var(--keyCapSizeS) + var(--keySpaceS))*1);
+    }
+    .row-5 {
+        top: calc((var(--keyCapSizeS) + var(--keySpaceS))*0);
+    }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- built files will be auto injected -->
+    <header class="pure-menu pure-menu-horizontal">
+            <h1 class="pure-menu-heading">Keyboard Test Page</h1>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <router-link to="/ansi" id="layout_ansi" class="pure-menu-link">ANSI</router-link>
+                </li>
+                <li class="pure-menu-item">
+                    <router-link to="/iso" id="layout_iso" class="pure-menu-link">ISO</router-link>
+                </li>
+                <li class="pure-menu-item">
+                    <router-link to="/jis" id="layout_jis" class="pure-menu-link">JIS</router-link>
+                </li>
+            </ul>
+        </header>
+
+        <section id="lang" class="pure-menu pure-menu-horizontal">
+            <router-view name="layout_nav"></router-view>
+        </section>
+        <section id="keyboard_container">
+            <section id="keyboard"></section>
+            <router-view name="layout_keyboard"></router-view>
+        </section>
+    </div>
+</body>
+
+<script>
+
+var KEY = {
+    ansi: {
+        mac: [
+            {
+                val: ['Ctrl', 'Option', 'Command', 'Spacebar', 'Command', 'Option', 'Ctrl', 'Left', 'Down', 'Right', '0', '.'],
+                keyCode: ['17_1', '18_1', '91_1', '32_0', '93_2', '18_2', '17_2', '37_0', '40_0', '39_0', '48_3', '110_3'],
+                size: ['1_5', '1_25', '1_5', '6_5', '1_5', '1_25', '1_5', '1', '1', '1', '2', '1']
+            }, {
+                val: ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift', 'Up', '1', '2', '3', 'Enter'],
+                keyCode: ['16_1', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2', '38_0', '49_3', '50_3', '51_3', '13_3'],
+                size: ['2_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_75', '1', '1', '1', '1', 'enter']
+            }, {
+                val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter', '4', '5', '6'],
+                keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '13_0', '52_3', '53_3', '54_3'],
+                size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_25', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\/', 'Delete', 'End', 'Page Down', '7', '8', '9', '+'],
+                keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '220_0', '46_0', '35_0', '34_0', '55_3', '56_3', '57_3', '107_3'],
+                size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1_5', '1', '1', '1', '1', '1', '1', 'plus']
+            }, {
+                val: ['~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Back Space', 'Insert', 'Home', 'Page Up', 'Num Lock', '/', '*', '-'],
+                keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0', '45_0', '36_0', '33_0', '12_0', '111_3', '106_3', '109_3'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Print Screen', 'Scroll Lock', 'Pause Break'],
+                keyCode: ['27_0', '112_0', '113_0', '114_0', '115_0', '116_0', '117_0', '118_0', '119_0', '120_0', '121_0', '122_0', '123_0', '124_0', '145_0', '19_0'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }
+        ],
+        other: [
+            {
+                val: ['Ctrl', 'Win', 'Alt', 'Spacebar', 'Alt', 'Win', 'Menu', 'Ctrl', 'Left', 'Down', 'Right', '0', '.'],
+                keyCode: ['17_1', '91_1', '18_1', '32_0', '18_2', '92_2', '93_0', '17_2', '37_0', '40_0', '39_0', '96_3', '110_3'],
+                size: ['1_25', '1_25', '1_25', '6_25', '1_25', '1_25', '1_25', '1_25', '1', '1', '1', '2', '1']
+            }, {
+                val: ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift', 'Up', '1', '2', '3', 'Enter'],
+                keyCode: ['16_1', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2', '38_0', '97_3', '98_3', '99_3', '13_3'],
+                size: ['2_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_75', '1', '1', '1', '1', 'enter']
+            }, {
+                val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter', '4', '5', '6'],
+                keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '13_0', '100_3', '101_3', '102_3'],
+                size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_25', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\/', 'Delete', 'End', 'Page Down', '7', '8', '9', '+'],
+                keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '220_0', '46_0', '35_0', '34_0', '103_3', '104_3', '105_3', '107_3'],
+                size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1_5', '1', '1', '1', '1', '1', '1', 'plus']
+            }, {
+                val: ['~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Back Space', 'Insert', 'Home', 'Page Up', 'Num Lock', '/', '*', '-'],
+                keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0', '45_0', '36_0', '33_0', '144_0', '111_3', '106_3', '109_3'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Print Screen', 'Scroll Lock', 'Pause Break'],
+                keyCode: ['27_0', '112_0', '113_0', '114_0', '115_0', '116_0', '117_0', '118_0', '119_0', '120_0', '121_0', '122_0', '123_0', '44_0', '145_0', '19_0'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }
+        ]
+    },
+    iso: {
+        mac: [
+            {
+                val: ['Ctrl', 'Option', 'Command', 'Spacebar', 'Command', 'Option', 'Ctrl', 'Left', 'Down', 'Right', '0', '.'],
+                keyCode: ['17_1', '18_1', '91_1', '32_0', '93_2', '18_2', '17_2', '37_0', '40_0', '39_0', '48_3', '110_3'],
+                size: ['1_5', '1_25', '1_5', '6_5', '1_5', '1_25', '1_5', '1', '1', '1', '2', '1']
+            }, {
+                val: ['Shift', '<', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift', 'Up', '1', '2', '3', 'Enter'],
+                keyCode: ['16_1', '192_0', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2', '38_0', '97_3', '98_3', '99_3', '13_3'],
+                size: ['1_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_75', '1', '1', '1', '1', 'enter']
+            }, {
+                val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', '\\', '4', '5', '6'],
+                keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '220_0', '100_3', '101_3', '102_3'],
+                size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'Enter', 'Delete', 'End', 'Page Down', '7', '8', '9', '+'],
+                keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '13_0', '46_0', '35_0', '34_0', '103_3', '104_3', '105_3', '107_3'],
+                size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'enter_iso', '1', '1', '1', '1', '1', '1', 'plus']
+            }, {
+                val: ['~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Back Space', 'Insert', 'Home', 'Page Up', 'Num Lock', '/', '*', '-'],
+                keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0', '45_0', '36_0', '33_0', '144_0', '111_3', '106_3', '109_3'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Print Screen', 'Scroll Lock', 'Pause Break'],
+                keyCode: ['27_0', '112_0', '113_0', '114_0', '115_0', '116_0', '117_0', '118_0', '119_0', '120_0', '121_0', '122_0', '123_0', '44_0', '145_0', '19_0'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }
+        ],
+        other: [
+            {
+                val: ['Ctrl', 'Win', 'Alt', 'Spacebar', 'Alt', 'Win', 'Menu', 'Ctrl', 'Left', 'Down', 'Right', '0', '.'],
+                keyCode: ['17_1', '91_1', '18_1', '32_0', '18_2', '92_2', '93_0', '17_2', '37_0', '40_0', '39_0', '96_3', '110_3'],
+                size: ['1_5', '1_25', '1_5', '6_5', '1_5', '1_25', '1_5', '1', '1', '1', '2', '1']
+            }, {
+                val: ['Shift', '<', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift', 'Up', '1', '2', '3', 'Enter'],
+                keyCode: ['16_1', '192_0', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2', '38_0', '97_3', '98_3', '99_3', '13_3'],
+                size: ['1_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_75', '1', '1', '1', '1', 'enter']
+            }, {
+                val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', '\\', '4', '5', '6'],
+                keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '220_0', '100_3', '101_3', '102_3'],
+                size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'Enter', 'Delete', 'End', 'Page Down', '7', '8', '9', '+'],
+                keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '13_0', '46_0', '35_0', '34_0', '103_3', '104_3', '105_3', '107_3'],
+                size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'enter_iso', '1', '1', '1', '1', '1', '1', 'plus']
+            }, {
+                val: ['~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Back Space', 'Insert', 'Home', 'Page Up', 'Num Lock', '/', '*', '-'],
+                keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0', '45_0', '36_0', '33_0', '144_0', '111_3', '106_3', '109_3'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Print Screen', 'Scroll Lock', 'Pause Break'],
+                keyCode: ['27_0', '112_0', '113_0', '114_0', '115_0', '116_0', '117_0', '118_0', '119_0', '120_0', '121_0', '122_0', '123_0', '44_0', '145_0', '19_0'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }
+        ]
+    },
+    jis: {
+        mac: [
+            {
+                val: ['Control', 'Command', 'Option', '無変換', 'Spacebar', '変換', 'kana', 'Option', 'Command', 'APP', 'Control', 'Left', 'Down', 'Right', '0', '.'],
+                keyCode: ['17_1', '18_1', '91_1', '32_0', '93_2', '18_2', '17_2', '37_0', '40_0', '39_0', '48_3', '110_3'],
+                size: ['1_75', '1_25', '1_25', '1', '3', '1', '1', '1_25', '1_25', '1', '1_25', '1', '1', '1', '2', '1']
+            }, {
+                val: ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', '\'', 'Shift', 'Up', '1', '2', '3', 'Enter'],
+                keyCode: ['16_1', '192_0', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2', '38_0', '97_3', '98_3', '99_3', '13_3'],
+                size: ['2_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1_75', '1', '1', '1', '1', 'enter']
+            }, {
+                val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '+', '*', '}', '4', '5', '6'],
+                keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '220_0', '100_3', '101_3', '102_3'],
+                size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '`', '{', 'Enter', 'Delete', 'End', 'Page Down', '7', '8', '9', '+'],
+                keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '13_0', '46_0', '35_0', '34_0', '103_3', '104_3', '105_3', '107_3'],
+                size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'enter_iso', '1', '1', '1', '1', '1', '1', 'plus']
+            }, {
+                val: ['E / J', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '|', 'Back Space', 'Insert', 'Home', 'Page Up', 'Num Lock', '/', '*', '-'],
+                keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0', '45_0', '36_0', '33_0', '144_0', '111_3', '106_3', '109_3'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }, {
+                val: ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Print Screen', 'Scroll Lock', 'Pause Break'],
+                keyCode: ['27_0', '112_0', '113_0', '114_0', '115_0', '116_0', '117_0', '118_0', '119_0', '120_0', '121_0', '122_0', '123_0', '44_0', '145_0', '19_0'],
+                size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+            }
+        ],
+        other: []
+    }
+};
+
+function ua(needle) {
+    return window.navigator.userAgent.toLowerCase().indexOf(needle) !== -1;
+};
+
+var os;
+if (ua('mac')) {
+    os = 'mac';
+} else {
+    os = 'other';
+}
+
+const Ansi = {
+    template: '<ul class="pure-menu-list">' +
+        '<li class="pure-menu-item"><router-link to="/ansi/en" class="pure-menu-link" data-lang="en">English</router-link></li>' +
+        '<li class="pure-menu-item"><router-link to="/ansi/jp" class="pure-menu-link" data-lang="jp">Japan</router-link></li>' +
+        '<li class="pure-menu-item"><router-link to="/ansi/fr" class="pure-menu-link" data-lang="fr">Franch</router-link></li>' +
+        '<li class="pure-menu-item"><router-link to="/ansi/de" class="pure-menu-link" data-lang="de">Germany</router-link></li>' +
+        '<li class="pure-menu-item"><router-link to="/ansi/ru" class="pure-menu-link" data-lang="ru">Russia</router-link></li>' +
+        '<li class="pure-menu-item"><router-link to="/ansi/ko" class="pure-menu-link" data-lang="ko">Korea</router-link></li>' +
+    '</ul>'
+}
+const Iso = {
+    template: '<ul class="pure-menu-list">' +
+    '<li class="pure-menu-item"><router-link to="/iso/en" class="pure-menu-link" data-lang="en">English</router-link></li>' +
+    '<li class="pure-menu-item"><router-link to="/iso/fr" class="pure-menu-link" data-lang="fr">Franch</router-link></li>' +
+    '<li class="pure-menu-item"><router-link to="/iso/de" class="pure-menu-link" data-lang="de">Germany</router-link></li>' +
+    '</ul>'
+}
+const Jis = {
+    template: '<ul class="pure-menu-list">' +
+    '<li class="pure-menu-item"><router-link to="/jis/en" class="pure-menu-link" data-lang="en">English</router-link></li>' +
+    '<li class="pure-menu-item"><router-link to="/jis/jp" class="pure-menu-link" data-lang="jp">Japan</router-link></li>' +
+    '</ul>'
+}
+
+const Keyboard = {
+    template: '<div>Keyboard</div>'
+}
+
+// 3. 创建 router 实例，然后传 `routes` 配置
+// 你还可以传别的配置参数, 不过先这么简单着吧。
+const router = new VueRouter({
+    routes: [
+        {
+            path: '/ansi',
+            name: 'ansi',
+            // component: Ansi,
+            components: {
+                layout_nav: Ansi
+            },
+            children: [
+                {
+                    path: 'en',
+                    name: 'ansi',
+                },
+                {
+                    path: 'jp',
+                    name: 'ansi',
+                },
+                {
+                    path: 'fr',
+                    name: 'ansi',
+                },
+                {
+                    path: 'de',
+                    name: 'ansi',
+                },
+                {
+                    path: 'ru',
+                    name: 'ansi',
+                },
+                {
+                    path: 'ko',
+                    name: 'ansi',
+                },
+                {
+                    path: '',
+                    name: 'ansi',
+                    redirect: '/ansi/en'
+                },
+                {
+                    path: 'ansi/*',
+                    name: 'ansi',
+                    redirect: '/ansi/en'
+                }
+            ]
+        },
+        {
+            path: '/iso',
+            name: 'iso',
+            // component: Iso,
+            components: {
+                layout_nav: Iso
+            },
+            children: [
+                {
+                    path: 'en',
+                    name: 'iso',
+                },
+                {
+                    path: 'fr',
+                    name: 'iso',
+                },
+                {
+                    path: 'de',
+                    name: 'iso',
+                },
+                {
+                    path: '',
+                    name: 'iso',
+                    redirect: 'en'
+                },
+                {
+                    path: 'iso/*',
+                    name: 'iso',
+                    redirect: 'en'
+                }
+            ]
+        },
+        {
+            path: '/jis',
+            name: 'jis',
+            // component: Jis,
+            components: {
+                layout_nav: Jis
+            },
+            children: [
+                {
+                    path: 'en',
+                    name: 'jis',
+                },
+                {
+                    path: 'jp',
+                    name: 'jis',
+                },
+                {
+                    path: '',
+                    name: 'jis',
+                    redirect: 'en'
+                },
+                {
+                    path: 'jis/*',
+                    name: 'ansi',
+                    redirect: 'en'
+                }
+            ]
+        },
+        {
+            path: '/*',
+            redirect: 'ansi'
+        }
+    ],
+    linkExactActiveClass: 'pure-menu-selected'
+})
+
+// 4. 创建和挂载根实例。
+// 记得要通过 router 配置参数注入路由，
+// 从而让整个应用都有路由功能
+const app = new Vue({
+  router
+}).$mount('#app')
+
+router.beforeEach((to, from, next) => {
+    console.log('to', to);
+    console.log('from', from);
+    console.log('next', next);
+    next();
+})
+router.afterEach((to, from) => {
+    console.log('to', to.name);
+    console.log('from', from);
+    setTimeout(function() {
+        document.querySelector('#layout_' + to.name).classList.add('pure-menu-selected');
+        console.log(router.resolve(location).route.path);
+        var layout = router.resolve(location).route.path.split('/')[1],
+        lang = router.resolve(location).route.path.split('/')[2];
+        initKeyboard(layout, lang);
+    }, 1);
+})
+router.onReady(() => {
+    console.log('onReady', router.resolve(location));
+    var currentRoute = router.resolve(location).route.name;
+    document.querySelector('#layout_' + currentRoute).classList.add('pure-menu-selected');
+    console.log(router.resolve(location).route.path);
+    var layout = router.resolve(location).route.path.split('/')[1],
+        lang = router.resolve(location).route.path.split('/')[2];
+    initKeyboard(layout, lang);
+})
+
+
+function initKeyboard(layout, lang) {
+    console.log(layout);
+    console.log(lang);
+    console.log(KEY[layout][os]);
+    document.querySelector('#keyboard').innerHTML = '';
+    var data = KEY[layout][os],
+        keyboard = document.createElement('div'),
+        rowCount = [
+            data[0]['val'].length,
+            data[1]['val'].length,
+            data[2]['val'].length,
+            data[3]['val'].length,
+            data[4]['val'].length,
+            data[5]['val'].length
+        ];
+    keyboard.setAttribute('class', 'keyboard');
+    for (var i = 6 - 1; i >= 0; i--) {
+        var row = document.createElement('div');
+        row.setAttribute('class', 'clearfix row-' + i);
+        for (var j = 0; j < rowCount[i]; j++) {
+            var keycaps = document.createElement('div');
+            keycaps.setAttribute('class', 'flex_center keycaps_s keycap_s_' + data[i].size[j] + ' code_' + data[i].keyCode[j] + '');
+            keycaps.innerHTML = data[i].val[j];
+            row.appendChild(keycaps);
+        }
+        keyboard.appendChild(row);
+    }
+    document.querySelector('#keyboard').appendChild(keyboard);
+
+    var blankDom = {};
+    switch (layout) {
+        case 'ansi':
+            blankDom = {
+                'dom': [
+                    document.querySelectorAll('.row-1 div')[11],
+                    document.querySelectorAll('.row-1 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-5 div')[0],
+                    document.querySelectorAll('.row-5 div')[4],
+                    document.querySelectorAll('.row-5 div')[8]
+                ],
+                'size': ['1', '1', '1', '1', '1', '0_66', '0_66', '0_66']
+            };
+            break;
+        case 'iso':
+            blankDom = {
+                'dom': [
+                    document.querySelectorAll('.row-1 div')[12],
+                    document.querySelectorAll('.row-1 div')[13],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-5 div')[0],
+                    document.querySelectorAll('.row-5 div')[4],
+                    document.querySelectorAll('.row-5 div')[8]
+                ],
+                'size': ['1', '1', '1_25', '1', '1', '1', '0_66', '0_66', '0_66']
+            }
+            break;
+            case 'jis':
+            blankDom = {
+                'dom': [
+                    document.querySelectorAll('.row-1 div')[12],
+                    document.querySelectorAll('.row-1 div')[13],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-2 div')[12],
+                    document.querySelectorAll('.row-5 div')[0],
+                    document.querySelectorAll('.row-5 div')[4],
+                    document.querySelectorAll('.row-5 div')[8]
+                ],
+                'size': ['1', '1', '1_25', '1', '1', '1', '0_66', '0_66', '0_66']
+            }
+            break;
+    }
+
+    console.log(blankDom);
+    
+    for (var k = 0; k < blankDom['dom'].length; k++) {
+        var blank = document.createElement('div');
+        blank.setAttribute('class', 'keycaps_s flex_center keycap_s_blank_' + blankDom['size'][k]);
+        blankDom['dom'][k].parentNode.insertBefore(blank, blankDom['dom'][k].nextSibling);
+    }
+}
+
+document.onkeydown = function(e) {
+    e.preventDefault();
+    console.log('down', e.keyCode);
+    console.log('down', e.location);
+    document.querySelectorAll('.code_' + e.keyCode + '_' + e.location + '')[0].classList.add('highlight');
+};
+document.onkeypass = function(e) {
+    e.preventDefault();
+    console.log('pass', e.keyCode);
+    console.log('pass', e.location);
+    document.querySelectorAll('.code_' + e.keyCode + '_' + e.location + '')[0].classList.add('highlight');
+};
+document.onkeyup = function(e) {
+    e.preventDefault();
+    console.log('up', e.keyCode);
+    console.log('up', e.location);
+    document.querySelectorAll('.code_' + e.keyCode + '_' + e.location + '')[0].classList.add('highlight');
+    document.querySelectorAll('.code_' + e.keyCode + '_' + e.location + '')[0].classList.remove('highlight');
+    // setTimeout(function () {
+    //     document.querySelectorAll('.code_' + e.keyCode + '_' + e.location + '')[0].classList.remove('highlight');
+    // }, 1);
+};
+</script>
+</html>
