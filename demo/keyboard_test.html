@@ -478,6 +478,7 @@ const Iso = {
     '<li class="pure-menu-item"><router-link to="/iso/de" class="pure-menu-link" data-lang="de">Germany</router-link></li>' +
     '<li class="pure-menu-item"><router-link to="/iso/be" class="pure-menu-link" data-lang="de">Belarusian</router-link></li>' +
     '<li class="pure-menu-item"><router-link to="/iso/sp" class="pure-menu-link" data-lang="de">Spain</router-link></li>' +
+    '<li class="pure-menu-item"><router-link to="/iso/nor" class="pure-menu-link" data-lang="de">Norwegian</router-link></li>' +
     '</ul>'
 }
 const Jis = {
@@ -565,6 +566,10 @@ const router = new VueRouter({
                 },
                 {
                     path: 'sp',
+                    name: 'iso',
+                },
+                {
+                    path: 'nor',
                     name: 'iso',
                 },
                 {
